@@ -12,7 +12,7 @@ template_githubLogin.innerHTML = `
         padding: 5px 0;
         user-select:none;
         border-radius: 50px;
-        background: seagreen;
+        background: #2E8B57;
         box-shadow:  12px 12px 24px #a1a1a1,
                     -12px -12px 24px #ffffff;
     }
