@@ -18,10 +18,16 @@ const Main = `
         .main-component {
             width: 500px;
             margin: auto;
-            padding: 30px;
+            padding: 100px 30px 200px;
         }
         .main-component h1 {
+            margin-bottom: 30px;
             text-align: center;
+            font-size: 4em;
+        }
+        .main-component p {
+            font-size: 18px;
+            margin: 40px 0;
         }
     </style>
 `;

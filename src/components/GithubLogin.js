@@ -9,20 +9,30 @@ template_githubLogin.innerHTML = `
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: seagreen;
+        padding: 5px 0;
         user-select:none;
-        border-radius: 20px;
+        border-radius: 50px;
+        background: seagreen;
+        box-shadow:  12px 12px 24px #a1a1a1,
+                    -12px -12px 24px #ffffff;
     }
     .github-login-container:hover {
         cursor: pointer;
+    }
+    .github-login-container:active{
+        border-radius: 50px;
+        background: #2E8B57;
+        box-shadow: inset 20px 20px 60px #27764a,
+                    inset -20px -20px 60px #35a064;
     }
     img {
         width: 50px;
         object-fit: contain;
     }
     span {
-        color: #FEFEFE;
         font-size: 20px;
+        font-weight: 500;
+        color: #FEFEFE;
     }
 </style>
 `;
