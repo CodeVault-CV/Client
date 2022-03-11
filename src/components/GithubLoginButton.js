@@ -4,7 +4,7 @@ export default class GithubLoginButton extends Component {
     template() {
         return `
         <a class="github-login-container" href="https://github.com/login/oauth/authorize?client_id=e1f73f73ee1f2865bcd5&scope=repo%20user">
-            <img src="./src/images/github.png" />
+            <img src="./images/github.png" />
             <span>Github로 로그인</span>
         </a>
         <style>

@@ -1,6 +1,8 @@
 import Component from "../core/Component.js";
-import Router from "../core/router.js";
+import Router from "../core/Router.js";
+
 import Login from "./Login.js";
+import Main from "./Main.js";
 
 export default class App extends Component {
     template() {
@@ -22,7 +24,10 @@ export default class App extends Component {
         new Router([
             [
                 "/",
-                () => new Login(app)
+                () => {
+                    if(localStorage.getItem("token")) new Main(app);
+                    else new Login(app)
+                }
             ],
             [
                 "/login",
@@ -32,9 +37,11 @@ export default class App extends Component {
                         const response = await fetch(`http://choco-one.iptime.org:8090/api/user/login?code=${code}`);
                         const token = await response.text();
                         console.log(token);
+                        localStorage.setItem("token", token);
                     }
+                    location.replace("/");
                 }
-            ]
+            ],
         ]);
     }
 };
