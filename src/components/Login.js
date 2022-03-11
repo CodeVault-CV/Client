@@ -24,7 +24,9 @@ export default class Login extends Component {
             font-family: 'Viga', sans-serif;
             text-align: center;
             font-size: 4rem;
+            user-select: none;
         }
+
         .logo span {
             color: cornflowerblue;
         }
