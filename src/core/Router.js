@@ -3,6 +3,7 @@ export default class Router {
         this._routes = new Map(routes);
 
         window.addEventListener("popstate", () => {
+            console.log("eh");
             this.render(window.location.pathname);
         });
 
@@ -10,5 +11,9 @@ export default class Router {
     }
     render(path) {
         if(this._routes.has(path)) this._routes.get(path)();
+        else {
+            history.pushState({}, "", "/");
+            this._routes.get("/")();
+        };
     }
 }

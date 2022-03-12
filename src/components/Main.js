@@ -1,21 +1,52 @@
 import Component from "../core/Component.js";
+import Profile from "./Profile.js";
 
 export default class Main extends Component {
     template() {
         return `
         <div id="main-container">
-        
+            <div id="sidebar">
+                <div class="logo">AL<span>GONG</span></div>
+                <div id="profile"></div>
+            </div>
+            <div id="study"></div>
         </div>
         <style>
         #main-container {
-            padding: 10px;
+            display: flex;
             border-radius: 18px;
             background: hsl(0, 0%, 100%);
             max-width: 1200px;
             width: 85%;
-            height: 90%;
+            height: 85%;
+        }
+
+        #sidebar {
+            display: flex;
+            flex-direction: column;
+            padding: 20px 30px;
+            width: 220px;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            font-size: 30px;
+            user-select: none;
+        }
+        .logo span {
+            color: cornflowerblue;
+        }
+        
+        #study {
+            width: 100%;
+            background-color: #F0F0F0;
+            border-radius: 0 18px 18px 0;
         }
         </style>
         `;
+    }
+    mounted() {
+        new Profile(document.getElementById("profile"));
     }
 };

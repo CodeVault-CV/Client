@@ -21,15 +21,16 @@ export default class Login extends Component {
         }
 
         .logo {
-            font-family: 'Viga', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             text-align: center;
             font-size: 4rem;
             user-select: none;
+            font-weight: 700;
         }
-
         .logo span {
             color: cornflowerblue;
         }
+        
         </style>
         `;
     }

@@ -36,7 +36,6 @@ export default class App extends Component {
                     if(code) {
                         const response = await fetch(`http://choco-one.iptime.org:8090/api/user/login?code=${code}`);
                         const token = await response.text();
-                        console.log(token);
                         localStorage.setItem("token", token);
                     }
                     location.replace("/");
