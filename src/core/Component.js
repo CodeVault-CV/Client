@@ -1,6 +1,7 @@
 export default class Component {
-    constructor(target) {
+    constructor(target, props) {
         this._target = target;
+        this._props = props;
         this._state = {};
         this.setup();
         this.setEvent();

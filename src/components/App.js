@@ -25,7 +25,7 @@ export default class App extends Component {
             [
                 "/",
                 () => {
-                    if(localStorage.getItem("token")) new Main(app);
+                    if(localStorage.getItem("user")) new Main(app);
                     else new Login(app)
                 }
             ],
@@ -35,8 +35,8 @@ export default class App extends Component {
                     const code = new URLSearchParams(location.search).get("code");
                     if(code) {
                         const response = await fetch(`http://choco-one.iptime.org:8090/api/user/login?code=${code}`);
-                        const token = await response.text();
-                        localStorage.setItem("token", token);
+                        const userInfo = await response.json();
+                        localStorage.setItem("user", JSON.stringify({ ...userInfo }));
                     }
                     location.replace("/");
                 }

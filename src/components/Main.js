@@ -17,6 +17,7 @@ export default class Main extends Component {
             border-radius: 18px;
             background: hsl(0, 0%, 100%);
             max-width: 1200px;
+            max-height: 1000px;
             width: 85%;
             height: 85%;
         }
@@ -46,7 +47,16 @@ export default class Main extends Component {
         </style>
         `;
     }
-    mounted() {
-        new Profile(document.getElementById("profile"));
+    async mounted() {
+        const userInfo = JSON.parse(localStorage.getItem("user"));
+        
+        let res = await fetch(`http://choco-one.iptime.org:8090/api/user/profile?name=${userInfo.name}`, {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        });
+        let profile = await res.json();
+
+        new Profile(document.getElementById("profile"), { ...profile });
     }
 };

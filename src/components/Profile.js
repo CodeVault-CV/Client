@@ -3,8 +3,8 @@ import Component from "../core/Component.js";
 export default class Profile extends Component {
     template() {
         return `
-            <img class="avatar" src="https://avatars.githubusercontent.com/u/33976823?v=4" alt="../images/github.png" />
-            <div class="username">woong-jae</div>
+            <img class="avatar" src="${this._props.url ? this._props.url : "../images/github.png"}" />
+            <div class="username">${this._props.name}</div>
             <style>
             .avatar {
                 border-radius: 50%;
