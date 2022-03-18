@@ -1,4 +1,5 @@
 import Component from "../core/Component.js";
+import Router from "../core/Router.js";
 import Profile from "./Profile.js";
 
 export default class Main extends Component {
@@ -49,14 +50,21 @@ export default class Main extends Component {
     }
     async mounted() {
         const userInfo = JSON.parse(localStorage.getItem("user"));
-        
-        let res = await fetch(`http://choco-one.iptime.org:8090/api/user/profile?name=${userInfo.name}`, {
-            headers: {
-                Authorization: `Bearer ${userInfo.token}`
-            }
-        });
-        let profile = await res.json();
 
-        new Profile(document.getElementById("profile"), { ...profile });
+        try {
+            let res = await fetch(`http://choco-one.iptime.org:8090/api/user/profile?name=${userInfo.name}`, {
+                headers: {
+                    Authorization: `Bearer ${userInfo.token}`
+                }
+            });
+            if(res.status === 401 ) {
+                localStorage.clear("user");
+                new Router().render("/");
+            }
+            let profile = await res.json();
+            new Profile(document.getElementById("profile"), { ...profile });
+        } catch (error) {
+            console.error(error);
+        }
     }
 };
