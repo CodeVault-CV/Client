@@ -1,16 +1,16 @@
 export default class Router {
-    static instance;
+    static #instance;
     constructor(routes) {
-        if(Router.instance) return Router.instance;
+        if(Router.#instance) return Router.#instance;
 
         this._routes = new Map(routes);
 
         window.addEventListener("popstate", () => {
-            this.render(window.location.pathname);
+            this.render(location.pathname);
         });
 
-        this.render(window.location.pathname);
-        Router.instance = this;
+        this.render(location.pathname);
+        Router.#instance = this;
     }
     render(path) {
         if(this._routes.has(path)) this._routes.get(path)();

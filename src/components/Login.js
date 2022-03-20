@@ -1,34 +1,48 @@
 import Component from "../core/Component.js";
+
 import GithubLoginButton from "./GithubLoginButton.js";
 
 export default class Login extends Component {
     template() {
         return `
-        <div id="login-container">
-            <div class="logo">AL<span>GONG</span></div>
-            <div class="github-login-button"></div>
+        <div id="login-page">
+            <div id="login-widget">
+                <div class="logo">AL<span>GONG</span></div>
+                <div class="github-login-button"></div>
+            </div>
         </div>
         <style>
-        #login-container {
+        #login-page {
+            background-color: #5865f1;
+            background-image: url("../images/background-pattern.png");
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        #login-widget {
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
             padding: 30px;
-            border-radius: 18px;
-            background: hsl(0, 0%, 100%);
-            width: 350px;
-            height: 500px;
+            border-radius: 10px;
+            background: #35393F;
+            width: 600px;
+            height: 400px;
         }
 
         .logo {
             font-family: 'Orbitron', sans-serif;
             text-align: center;
+            color: whitesmoke;
             font-size: 4rem;
             user-select: none;
             font-weight: 700;
         }
         .logo span {
-            color: cornflowerblue;
+            color: #5865f1;
         }
         
         </style>

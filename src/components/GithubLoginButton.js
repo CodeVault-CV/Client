@@ -15,10 +15,10 @@ export default class GithubLoginButton extends Component {
             padding: 5px 0;
             user-select: none;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 10px;
             background: #2E8B57;
         }
-        .github-login-container:active{
+        .github-login-container:hover {
             background: #2E8B57;
             box-shadow: inset 20px 20px 60px #27764a,
                         inset -20px -20px 60px #35a064;
