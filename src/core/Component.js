@@ -5,13 +5,13 @@ export default class Component {
         this.state = {};
         this.setup();
         this.render();
+        this.setEvent();
     }
     template() { return ``; }
     setup() {};
     render() {
         this.target.innerHTML = this.template();
         this.mounted();
-        requestAnimationFrame(() => this.setEvent());
     }
     mounted() {}
     setEvent() {}

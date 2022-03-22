@@ -1,4 +1,5 @@
 import Component from "../core/Component.js";
+import Router from "../core/Router.js";
 
 import modal from "./template/modal.js";
 
@@ -7,9 +8,9 @@ export default class MakeStudyModal extends Component {
         return modal(`
         <div id="make-study-widget">
             <div class="input-title">스터디 이름</div>
-            <input />
+            <input id="study-name"/>
             <div class="input-title">깃허브에 저장될 repository 이름</div>
-            <input />
+            <input id="study-repo-name"/>
             <div class="input-title">스터디원</div>
             <input />
             <button class="make-study-btn">스터디 만들기!</button>
@@ -40,10 +41,30 @@ export default class MakeStudyModal extends Component {
     }
     setEvent() {
         const btn = this.target.querySelector(".make-study-btn");
-        btn.removeEventListener("click", this.makeStudy);
         btn.addEventListener("click", this.makeStudy);
     }
-    makeStudy() {
-        console.log("Hello");
+    async makeStudy() {
+        const userInfo = JSON.parse(localStorage.getItem("user"));
+        try {
+            console.log()
+            let res = await fetch(`http://choco-one.iptime.org:8090/api/study`, {
+                method: "POST",
+                headers: { 
+                    Authorization: `Bearer ${userInfo.token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    repoName: document.getElementById("study-repo-name").value,
+                    studyName: document.getElementById("study-name").value
+                })
+            });
+            if(res.status === 401 ) {
+                localStorage.clear("user");
+                new Router().render("/");
+            }
+            document.querySelector(".modal").style.display = "none";
+        } catch (error) {
+            console.error(error);
+        }
     }
 };
