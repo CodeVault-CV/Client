@@ -1,28 +1,28 @@
 export default class Component {
     constructor(target, props) {
-        this._target = target;
-        this._props = props;
-        this._state = {};
+        this.target = target;
+        this.props = props;
+        this.state = {};
         this.setup();
-        this.setEvent();
         this.render();
     }
     template() { return ``; }
     setup() {};
     render() {
-        this._target.innerHTML = this.template();
+        this.target.innerHTML = this.template();
         this.mounted();
+        requestAnimationFrame(() => this.setEvent());
     }
     mounted() {}
     setEvent() {}
     addEvent(eventType, selector, callback) {
-        this._target.addEventListener(eventType, event => {
-            if(!this._target.contains(event.target.closest(selector))) return false;
+        this.target.addEventListener(eventType, event => {
+            if(!this.target.contains(event.target.closest(selector))) return false;
             callback(event);
         });
     }
     setState(newState) {
-        this._state = { ...this._state, ...newState };
+        this.state = { ...this.state, ...newState };
         this.render();
     }
 };

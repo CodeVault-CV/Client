@@ -2,6 +2,7 @@ import Router from "../core/Router.js";
 import Component from "../core/Component.js";
 
 import Profile from "./Profile.js";
+import StudyList from "./StudyList.js";
 
 export default class Sidebar extends Component {
     template() {
@@ -9,13 +10,15 @@ export default class Sidebar extends Component {
         <nav class="sidebar">
             <div class="logo">AL<span>GONG</span></div>
             <div class="profile-container"></div>
-            <button class="logout">Sign out</button>
+            <div class="study-list-container"></div>
+            <button class="logout">로그아웃</button>
         </nav>
         <style>
         nav {
             background: #1F2225;
             display: flex;
             flex-direction: column;
+            overflow: auto;
             width: 250px;
             height: 100%;
             padding: 0 20px;
@@ -40,11 +43,6 @@ export default class Sidebar extends Component {
 
         .logout {
             background: #ED4245;
-            width: 100%;
-            margin: 5px 0;
-            border: none;
-            border-radius: 10px;
-            padding: 8px 10px;
         }
         
         </style>
@@ -66,6 +64,7 @@ export default class Sidebar extends Component {
         } catch (error) {
             console.error(error);
         }
+        new StudyList(document.querySelector(".study-list-container"));
     }
     setEvent() {
         this.addEvent("click", ".logout", () => {

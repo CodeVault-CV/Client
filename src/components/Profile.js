@@ -4,16 +4,15 @@ export default class Profile extends Component {
     template() {
         return `
         <div class="profile">
-            <img class="avatar" src="${this._props.url ? this._props.url : "../images/github.png"}" />
-            <div class="username">${this._props.name}</div>
+            <img class="avatar" src="${this.props.url ? this.props.url : "../images/github.png"}" />
+            <div class="username">${this.props.name}</div>
         </div>
         <style>
         .avatar {
             display: block;
             border-radius: 50%;
             width: 100%;
-            border: whitesmoke 2px;
-            border-style: inset;
+            border: lightgray 1px solid;
         }
         .username {
             font-size: 25px;

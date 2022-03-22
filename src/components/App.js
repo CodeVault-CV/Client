@@ -3,13 +3,12 @@ import Router from "../core/Router.js";
 
 import Login from "./Login.js";
 import Main from "./Main.js";
-import Loading from "./Loading.js";
+import Loading from "./common/Loading.js";
 
 export default class App extends Component {
     template() {
         return `
-        <div id="app">
-        </div>
+        <div id="app"></div>
         <style>
         #app {
             display: flex;

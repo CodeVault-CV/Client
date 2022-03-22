@@ -1,0 +1,33 @@
+/**
+ * Custom scroll bar
+ */
+
+::-webkit-scrollbar {
+    width: 2px;  /* 스크롤바의 너비 */
+}
+
+::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #5865f1; /* 스크롤바의 색상 */
+    
+    border-radius: 30px;
+}
+
+::-webkit-scrollbar-track {
+    background: #313437;  /*스크롤바 뒷 배경 색상*/
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button {
+    background: #5865f1;
+    color: whitesmoke;
+    width: 100%;
+    margin: 5px 0;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-weight: 600;
+}
