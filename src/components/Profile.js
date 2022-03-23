@@ -4,8 +4,8 @@ export default class Profile extends Component {
     template() {
         return `
         <div class="profile">
-            <img class="avatar" src="${this.props.url ? this.props.url : "../images/github.png"}" />
-            <div class="username">${this.props.name}</div>
+            <img class="avatar" src="${this.state.url ? this.state.url : "../images/github.png"}" />
+            <div class="username">${this.state.name}</div>
         </div>
         <style>
         .avatar {
@@ -20,5 +20,27 @@ export default class Profile extends Component {
         }
         </style>
         `;
+    }
+    setup() {
+        this.state = {
+            url: "../images/github.png",
+            name: "Anonymous"
+        }
+    }
+    async mounted() {
+        const userInfo = JSON.parse(localStorage.getItem("user"));
+        try {
+            let res = await fetch(`http://choco-one.iptime.org:8090/api/user/profile?name=${userInfo.name}`, {
+                headers: { Authorization: `Bearer ${userInfo.token}` }
+            });
+            if(res.status === 401 ) {
+                localStorage.clear("user");
+                new Router().render("/");
+            }
+            let profile = await res.json();
+            this.setState({ ...profile });
+        } catch (error) {
+            console.error(error);
+        }
     }
 }

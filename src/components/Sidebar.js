@@ -1,8 +1,9 @@
-import Router from "../core/Router.js";
 import Component from "../core/Component.js";
+import Router from "../core/Router.js";
 
 import Profile from "./Profile.js";
 import StudyList from "./StudyList.js";
+import MakeStudyModal from "./MakeStudyModal.js";
 
 export default class Sidebar extends Component {
     template() {
@@ -11,6 +12,7 @@ export default class Sidebar extends Component {
             <div class="logo">AL<span>GONG</span></div>
             <div class="profile-container"></div>
             <div class="study-list-container"></div>
+            <button class="make-study"> 새 알고리즘 스터디 만들기</button>
             <button class="logout">로그아웃</button>
         </nav>
         <style>
@@ -44,32 +46,24 @@ export default class Sidebar extends Component {
         .logout {
             background: #ED4245;
         }
-        
+        .make-study {
+            background: #5865f1;
+        }
         </style>
         `
     }
-    async mounted() {
-        const userInfo = JSON.parse(localStorage.getItem("user"));
-
-        try {
-            let res = await fetch(`http://choco-one.iptime.org:8090/api/user/profile?name=${userInfo.name}`, {
-                headers: { Authorization: `Bearer ${userInfo.token}` }
-            });
-            if(res.status === 401 ) {
-                localStorage.clear("user");
-                new Router().render("/");
-            }
-            let profile = await res.json();
-            new Profile(document.querySelector(".profile-container"), { ...profile });
-        } catch (error) {
-            console.error(error);
-        }
-        new StudyList(document.querySelector(".study-list-container"));
+    setup() {
+        this.addEvent("click", ".make-study", () => {
+            new MakeStudyModal(this.target.querySelector("#make-study-modal"));
+        });
     }
-    setEvent() {
+    mounted() {
         this.addEvent("click", ".logout", () => {
             localStorage.clear("user");
             new Router().render("/");
         });
+
+        new Profile(document.querySelector(".profile-container"));
+        new StudyList(document.querySelector(".study-list-container"));
     }
 }

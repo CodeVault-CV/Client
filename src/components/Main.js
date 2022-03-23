@@ -19,7 +19,7 @@ export default class Main extends Component {
         </style>
         `;
     }
-    setEvent() {
+    setup() {
         // 모달 닫기 이벤트
         window.addEventListener("keydown", (event) => {
             if(event.key === "Escape") document.querySelector(".modal").style.display = "none";

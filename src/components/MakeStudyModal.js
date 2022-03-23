@@ -39,7 +39,7 @@ export default class MakeStudyModal extends Component {
     setup() {
         this.state = { studyName: "", repoName: "", members: [] };
     }
-    setEvent() {
+    mounted() {
         const btn = this.target.querySelector(".make-study-btn");
         btn.addEventListener("click", this.makeStudy);
     }
