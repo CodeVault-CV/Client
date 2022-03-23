@@ -1,11 +1,9 @@
 import Component from "../core/Component.js";
 import Router from "../core/Router.js";
 
-import modal from "./template/modal.js";
-
 export default class MakeStudyModal extends Component {
     template() {
-        return modal(`
+        return `
         <div id="make-study-widget">
             <div class="input-title">스터디 이름</div>
             <input id="study-name"/>
@@ -34,7 +32,7 @@ export default class MakeStudyModal extends Component {
             margin: 5px 0 15px;
         }
         </style>
-        `, true);
+        `;
     }
     setup() {
         this.state = { studyName: "", repoName: "", members: [] };

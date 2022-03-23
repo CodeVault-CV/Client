@@ -1,12 +1,17 @@
 let requestingObserver = null;
 
+export const observe = (notify) => {
+  requestingObserver = notify;
+  notify();
+  requestingObserver = null;
+};
+
 export const observable = (object) => {
   const observersPerProps = new Map();
   return new Proxy(object, {
     get(target, prop) {
       if (!observersPerProps.has(prop)) observersPerProps.set(prop, new Set());
-      if (requestingObserver)
-        observersPerProps.get(prop).add(requestingObserver);
+      if (requestingObserver) observersPerProps.get(prop).add(requestingObserver);
       return target[prop];
     },
     set(target, prop, val) {
@@ -17,11 +22,5 @@ export const observable = (object) => {
       return true;
     }
   });
-};
-
-export const observe = (notify) => {
-  requestingObserver = notify;
-  notify();
-  requestingObserver = null;
 };
 

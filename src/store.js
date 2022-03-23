@@ -7,6 +7,9 @@ export const store = new Store({
     mutations: {
         CHANGE_MODAL(state, payload) {
             state.modal = payload;
+        },
+        CLOSE_MODAL(state) {
+            state.modal = null;
         }
     }
 });

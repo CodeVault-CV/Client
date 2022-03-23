@@ -1,9 +1,9 @@
 import Component from "../core/Component.js";
 import Router from "../core/Router.js";
+import { store } from "../store.js";
 
 import Profile from "./Profile.js";
 import StudyList from "./StudyList.js";
-import MakeStudyModal from "./MakeStudyModal.js";
 
 export default class Sidebar extends Component {
     template() {
@@ -54,7 +54,7 @@ export default class Sidebar extends Component {
     }
     setup() {
         this.addEvent("click", ".make-study", () => {
-            new MakeStudyModal(this.target.querySelector("#make-study-modal"));
+            store.commit("CHANGE_MODAL", "create-new-study");
         });
     }
     mounted() {
