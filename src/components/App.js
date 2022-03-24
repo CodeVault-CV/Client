@@ -41,7 +41,7 @@ export default class App extends Component {
                             const userInfo = await response.json();
                             localStorage.setItem("user", JSON.stringify({ ...userInfo }));
                         } catch (error) {
-                            console.log(error);
+                            alert(error);
                         }
                     }
                     location.replace("/");

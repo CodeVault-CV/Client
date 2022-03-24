@@ -16,7 +16,6 @@ export default class Store {
             );
         });
     }
-
     commit(action, payload) {
         this.#mutations[action](this.#state, payload);
     }

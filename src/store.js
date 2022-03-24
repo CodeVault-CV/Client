@@ -2,7 +2,8 @@ import Store from "./core/Store.js";
 
 export const store = new Store({
     state: {
-        modal: null
+        modal: null,
+        studies: []
     },
     mutations: {
         CHANGE_MODAL(state, payload) {
@@ -10,6 +11,9 @@ export const store = new Store({
         },
         CLOSE_MODAL(state) {
             state.modal = null;
+        },
+        ADD_STUDY(state, payload) {
+            state.studies = payload;
         }
     }
 });
