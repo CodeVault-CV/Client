@@ -1,5 +1,7 @@
 import Component from "../core/Component.js";
 
+import { getUserProfile } from "../api/index.js";
+
 export default class Profile extends Component {
     template() {
         return `
@@ -28,19 +30,8 @@ export default class Profile extends Component {
         }
     }
     async mounted() {
-        const userInfo = JSON.parse(localStorage.getItem("user"));
-        try {
-            let res = await fetch(`http://choco-one.iptime.org:8090/api/user/profile?name=${userInfo.name}`, {
-                headers: { Authorization: `Bearer ${userInfo.token}` }
-            });
-            if(res.status === 401 ) {
-                localStorage.clear("user");
-                new Router().render("/");
-            }
-            let profile = await res.json();
-            this.setState({ ...profile });
-        } catch (error) {
-            console.error(error);
-        }
+        const { name, token } = JSON.parse(localStorage.getItem("user"));
+        let profile = await getUserProfile(name, token);
+        this.setState({ ...profile });
     }
 }

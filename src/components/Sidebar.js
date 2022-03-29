@@ -12,7 +12,7 @@ export default class Sidebar extends Component {
             <div class="logo">AL<span>GONG</span></div>
             <div class="profile-container"></div>
             <div class="study-list-container"></div>
-            <button class="make-study"> 새 알고리즘 스터디 만들기</button>
+            <button class="create-study"> 새 알고리즘 스터디 만들기</button>
             <button class="logout">로그아웃</button>
         </nav>
         <style>
@@ -53,8 +53,8 @@ export default class Sidebar extends Component {
         `
     }
     setup() {
-        this.addEvent("click", ".make-study", () => {
-            store.commit("CHANGE_MODAL", "create-new-study");
+        this.addEvent("click", ".create-study", () => {
+            store.commit("CHANGE_MODAL", "CREATE_NEW_STUDY");
         });
     }
     mounted() {

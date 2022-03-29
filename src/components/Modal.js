@@ -1,6 +1,7 @@
 import Component from "../core/Component.js";
 
 import { store } from "../store.js";
+import CreateStudyModal from "./CreateStudyModal.js";
 
 export default class Modal extends Component {
     template() {
@@ -9,7 +10,7 @@ export default class Modal extends Component {
         <style>
         .modal {
             position: absolute;
-            display: ${store.state.modal ? "block" : "none"};
+            display: ${store.state.modal ? "flex" : "none"};
             justify-content: center;
             align-items: center;
             left: 0;
@@ -20,5 +21,15 @@ export default class Modal extends Component {
         }
         </style>
         `;
+    }
+    mounted() {
+        const modal = document.querySelector(".modal");
+        switch(store.state.modal) {
+            case "CREATE_NEW_STUDY":
+                new CreateStudyModal(modal);
+                break;
+            default:
+                break;
+        }
     }
 }

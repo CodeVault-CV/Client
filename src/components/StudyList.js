@@ -6,7 +6,7 @@ export default class StudyList extends Component {
         return `
             <div class="study-list">
                 <div class="my-study">🗂 내 스터디</div>
-                ${store.state.studies.length ? store.state.studies.map(study => {
+                ${store.state.studyList.length ? store.state.studyList.map(study => {
                     return `<div class="study-items study">👉 ${study.name}</div>`
                 }).join("")
                 : 
@@ -26,16 +26,5 @@ export default class StudyList extends Component {
             }
             </style>
         `;
-    }
-    setup() {
-        this.state = { studies: [] };
-    }
-    async mounted() {
-        const userInfo = JSON.parse(localStorage.getItem("user"));
-        let res = await fetch(`http://choco-one.iptime.org:8090/api/study/list`, {
-            headers: { Authorization: `Bearer ${userInfo.token}` }
-        });
-        let studies = await res.json();
-        store.commit("ADD_STUDY", studies);
     }
 }

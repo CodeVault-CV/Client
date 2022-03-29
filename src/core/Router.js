@@ -1,9 +1,10 @@
+
 export default class Router {
     static #instance;
     constructor(routes) {
         if(Router.#instance) return Router.#instance;
 
-        this._routes = new Map(routes);
+        this.routes = new Map(routes);
 
         window.addEventListener("popstate", () => {
             this.render(location.pathname);
@@ -13,10 +14,10 @@ export default class Router {
         Router.#instance = this;
     }
     render(path) {
-        if(this._routes.has(path)) this._routes.get(path)();
+        if(this.routes.has(path)) this.routes.get(path)();
         else {
             history.pushState({}, "", "/");
-            this._routes.get("/")();
+            this.routes.get("/")();
         };
     }
 }

@@ -4,6 +4,8 @@ import { store } from "../store.js";
 import Modal from "./Modal.js";
 import Sidebar from "./Sidebar.js";
 
+import { getStudyList } from "../api/index.js";
+
 export default class Main extends Component {
     template() {
         return `
@@ -32,9 +34,13 @@ export default class Main extends Component {
             if(event.target === modal) store.commit("CLOSE_MODAL");
         });
     }
-    mounted() {
+    async mounted() {
         const main = document.getElementById("main-container");
         new Sidebar(main.querySelector("#sidebar-container"));
         new Modal(main.querySelector("#modal"));
+        
+        const { token } = JSON.parse(localStorage.getItem("user"));
+        let studyList = await getStudyList(token);
+        store.commit("ADD_STUDY", studyList);
     }
 };

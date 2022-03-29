@@ -1,5 +1,3 @@
-import App from "./components/App.js";
+import App from "./App.js";
 
-const root = document.getElementById("root");
-
-window.addEventListener("load", () => new App(root)); 
+new App(document.getElementById("root")); 

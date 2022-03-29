@@ -1,9 +1,10 @@
-import Component from "../core/Component.js";
-import Router from "../core/Router.js";
+import Component from "./core/Component.js";
+import Router from "./core/Router.js";
 
-import Login from "./Login.js";
-import Main from "./Main.js";
-import Loading from "./common/Loading.js";
+import Login from "./components/Login.js";
+import Main from "./components/Main.js";
+import Loading from "./components/common/Loading.js";
+import { loginUser } from "./api/index.js";
 
 export default class App extends Component {
     template() {
@@ -36,13 +37,8 @@ export default class App extends Component {
                     new Loading(app);
                     const code = new URLSearchParams(location.search).get("code");
                     if(code) {
-                        try {
-                            const response = await fetch(`http://choco-one.iptime.org:8090/api/user/login?code=${code}`);
-                            const userInfo = await response.json();
-                            localStorage.setItem("user", JSON.stringify({ ...userInfo }));
-                        } catch (error) {
-                            alert(error);
-                        }
+                        const userInfo = await loginUser(code);
+                        localStorage.setItem("user", JSON.stringify({ ...userInfo }));
                     }
                     location.replace("/");
                 }
