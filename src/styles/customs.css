@@ -20,7 +20,9 @@
 button:hover {
     opacity: 0.8;
 }
-
+button:disabled {
+   background-color: gray;
+}
 button {
     background: #5865f1;
     color: whitesmoke;

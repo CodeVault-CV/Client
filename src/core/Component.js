@@ -25,6 +25,7 @@ export default class Component {
     setState(newState) {
         this.state = { ...this.state, ...newState };
         this.render();
+        this.mounted();
         this.updated();
     }
 };

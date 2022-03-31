@@ -5,31 +5,27 @@ export default class CreateStudyModal extends Component {
     template() {
         return `
         <div id="create-study-widget">
-            <div class="slide">
+            <form class="slide">
                 <ul>
                     <li>
                         <div class="input-title">새로운 스터디의 이름은 무엇인가요?</div>
                         <p>스터디의 정체성이 드러나도록 정해보세요</p>
                         <input id="study-title"/>
-                        <button data-margin="-100%">다음</button>
-                    </li>
-                    <li>
-                        <div class="input-title">새로 생성될 깃허브 리포지토리 이름을 적어주세요</div>
-                        <p>스터디를 진행하면서 올리는 코드와 풀이들이 이 곳에 저장될 거에요</p>
-                        <input id="study-repo"/>
-                        <div style="display: flex;">
-                            <button data-margin="0">이전</button>
-                            <button data-margin="-200%">다음</button>
+                        <div class="button-box">
+                            <button class="title" type="button" data-margin="-100%" disabled>다음</button>
                         </div>
                     </li>
                     <li>
-                        <div class="input-title">스터디원을 추가해보세요</div>
-                        <p>함께 성장해 나갈 스터디원은 누구인가요</p>
-                        <input id="study-one"/>
-                        <button data-margin="-100%">이전</button>
+                        <div class="input-title">새로 생성될 깃허브 리포지토리 이름을 적어주세요</div>
+                        <p>스터디를 진행하면서 올리는 코드와 풀이들이 이곳에 저장될 거에요</p>
+                        <input id="study-repo"/>
+                        <div class="button-box">
+                            <button class="submit-study" disabled>제출</button>
+                            <button type="button" data-margin="0">이전</button>
+                        </div>
                     </li>
                 </ul>
-            </div>
+            </form>
         </div>
         <style>
         #create-study-widget {
@@ -40,6 +36,14 @@ export default class CreateStudyModal extends Component {
             padding: 20px;
             animation-duration: 0.3s;
             animation-name: zoomin;
+        }
+        @keyframes zoomin {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
         }
 
         #create-study-widget .input-title {
@@ -57,13 +61,13 @@ export default class CreateStudyModal extends Component {
             width: 97%;
             margin: 5px 0 15px;
         }
-        @keyframes zoomin {
-            from {
-                transform: scale(0);
-            }
-            to {
-                transform: scale(1);
-            }
+        #create-study-widget button {
+            width: 23%;
+        }
+        #create-study-widget .button-box {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row-reverse;
         }
 
         .slide {
@@ -77,21 +81,36 @@ export default class CreateStudyModal extends Component {
         }
         #create-study-widget ul {
             margin-left: 0;
-            width: calc(100% * 3);
+            width: calc(100% * 2);
             transition: 0.3s;
             display: flex;
         }
         #create-study-widget li {
-            width:calc(100% / 3);
+            width:calc(100% / 2);
         }
         </style>
         `;
     }
     mounted() {
         document.querySelector("#create-study-widget").addEventListener("click", (event) => {
-            if(event.target.nodeName === "BUTTON") {
-                document.querySelector("#create-study-widget ul").style.marginLeft = event.target.dataset.margin;
-            }
+            if(event.target.nodeName === "BUTTON") document.querySelector("#create-study-widget ul").style.marginLeft = event.target.dataset.margin;
+        });
+        document.getElementById("study-title").addEventListener("change", (event) => {
+            const btn = this.target.querySelector("button.title");
+            if(event.target.value.length > 0) btn.disabled = false;
+            else btn.disabled = true;
+        });
+        document.getElementById("study-repo").addEventListener("change", (event) => {
+            const regExp = /^[A-Za-z_-]*$/;
+            const btn = this.target.querySelector("button.submit-study");
+            if(regExp.test(event.target.value)) btn.disabled = false;            
+            else btn.disabled = true;
+        });
+        document.querySelector("#create-study-widget form").addEventListener("submit", (event) => {
+            event.preventDefault();
+            const studyName = event.target.querySelector("#study-title").value;
+            const repoName = event.target.querySelector("#study-repo").value;
+            
         });
     }
     async makeStudy() {
@@ -113,7 +132,6 @@ export default class CreateStudyModal extends Component {
                 localStorage.clear("user");
                 new Router().render("/");
             }
-            document.querySelector(".modal").style.display = "none";
         } catch (error) {
             console.error(error);
         }
