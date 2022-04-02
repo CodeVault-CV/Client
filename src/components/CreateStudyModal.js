@@ -1,5 +1,7 @@
 import Component from "../core/Component.js";
-import Router from "../core/Router.js";
+
+import { createNewStudy, getStudyList } from "../api/index.js";
+import { store } from "../store.js";
 
 export default class CreateStudyModal extends Component {
     template() {
@@ -103,37 +105,21 @@ export default class CreateStudyModal extends Component {
         document.getElementById("study-repo").addEventListener("change", (event) => {
             const regExp = /^[A-Za-z_-]*$/;
             const btn = this.target.querySelector("button.submit-study");
-            if(regExp.test(event.target.value)) btn.disabled = false;            
+            if(regExp.test(event.target.value)) btn.disabled = false;        
             else btn.disabled = true;
         });
         document.querySelector("#create-study-widget form").addEventListener("submit", (event) => {
             event.preventDefault();
             const studyName = event.target.querySelector("#study-title").value;
             const repoName = event.target.querySelector("#study-repo").value;
-            
+            this.makeStudy(studyName, repoName);
+            store.commit("CLOSE_MODAL");
         });
     }
-    async makeStudy() {
+    async makeStudy(studyName, repoName) {
         const userInfo = JSON.parse(localStorage.getItem("user"));
-        try {
-            console.log()
-            let res = await fetch(`http://choco-one.iptime.org:8090/api/study`, {
-                method: "POST",
-                headers: { 
-                    Authorization: `Bearer ${userInfo.token}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    repoName: document.getElementById("study-repo-name").value,
-                    studyName: document.getElementById("study-name").value
-                })
-            });
-            if(res.status === 401 ) {
-                localStorage.clear("user");
-                new Router().render("/");
-            }
-        } catch (error) {
-            console.error(error);
-        }
+        await createNewStudy(studyName, repoName, userInfo.token);
+        let studyList = await getStudyList(token);
+        store.commit("ADD_STUDY", studyList);
     }
 };

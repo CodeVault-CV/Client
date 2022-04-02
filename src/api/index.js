@@ -8,7 +8,8 @@ export const loginUser = async (code) => {
         const userInfo = await response.json();
         return userInfo;
     } catch (error) {
-        alert(error);
+        console.error(error);
+        return false;
     }
 }
 
@@ -27,6 +28,7 @@ export const getUserProfile = async (name, token) => {
         }
     } catch (error) {
         console.error(error);
+        return false;
     }
 }
 
@@ -44,6 +46,31 @@ export const getStudyList = async (token) => {
             return studyList;
         }
     } catch(error) {
-        alert(error);
+        console.error(error);
+        return false;
+    }
+}
+
+export const createNewStudy = async (studyName, repoName, token) => {
+    try {
+        let res = await fetch(baseURL + `/study`, {
+            method: "POST",
+            headers: { 
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                repoName,
+                studyName
+            })
+        });
+        if(res.status === 401 ) {
+            localStorage.clear("user");
+            new Router().render("/");
+        }
+        return true;
+    } catch (error) {
+        console.error(error);
+        return false;
     }
 }
