@@ -1,4 +1,4 @@
-import Component from "../core/Component.js";;
+import Component from "../core/Component.js";
 import { store } from "../store.js";
 
 export default class StudyList extends Component {
@@ -7,7 +7,7 @@ export default class StudyList extends Component {
             <div class="study-list">
                 <div class="my-study">🗂 내 스터디</div>
                 ${store.state.studyList.length ? store.state.studyList.map(study => {
-                    return `<div class="study-items study">👉 ${study.name}</div>`
+                    return `<div class="study-items" id="${study.studyId}">▶ ${study.name}</div>`
                 }).join("")
                 : 
                 "<div class='study-items' style='text-align: center;'>없음</div>"
@@ -22,9 +22,24 @@ export default class StudyList extends Component {
                 border-bottom: 1px solid;
             }
             .study-items {
-                margin: 10px 0;
+                margin: 5px 0;
+                padding: 5px 0;
+                user-select: none;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+            .study-items:hover {
+                background: gray;
             }
             </style>
         `;
+    }
+    mounted() {
+        this.target.querySelector(".study-list").addEventListener("click", event => {
+            if(event.target.className === "study-items") {
+                console.log(event.target.id);
+                store.commit("SELECT_STUDY", event.target.id);
+            }
+        });
     }
 }

@@ -1,6 +1,7 @@
 import Component from "../core/Component.js";
-
 import { store } from "../store.js";
+
+import Loading from "./common/Loading.js";
 import CreateStudyModal from "./CreateStudyModal.js";
 
 export default class Modal extends Component {
@@ -28,6 +29,8 @@ export default class Modal extends Component {
             case "CREATE_NEW_STUDY":
                 new CreateStudyModal(modal);
                 break;
+            case "LOADING":
+                new Loading(modal);
             default:
                 break;
         }

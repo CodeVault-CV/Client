@@ -51,6 +51,25 @@ export const getStudyList = async (token) => {
     }
 }
 
+export const getStudyInfo = async (studyId, token) => {
+    try {
+        const res = await fetch(baseURL + `/study/${studyId}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        if(res.status === 401) {
+            localStorage.clear("user");
+            new Router().render("/");
+        }
+        else {
+            const studyInfo = await res.json();
+            return studyInfo;
+        }
+    } catch(error) {
+        console.error(error);
+        return false;
+    }
+}
+
 export const createNewStudy = async (studyName, repoName, token) => {
     try {
         let res = await fetch(baseURL + `/study`, {

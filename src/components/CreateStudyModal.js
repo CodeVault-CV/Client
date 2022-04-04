@@ -1,7 +1,7 @@
 import Component from "../core/Component.js";
+import { store } from "../store.js";
 
 import { createNewStudy, getStudyList } from "../api/index.js";
-import { store } from "../store.js";
 
 export default class CreateStudyModal extends Component {
     template() {
@@ -97,29 +97,31 @@ export default class CreateStudyModal extends Component {
         document.querySelector("#create-study-widget").addEventListener("click", (event) => {
             if(event.target.nodeName === "BUTTON") document.querySelector("#create-study-widget ul").style.marginLeft = event.target.dataset.margin;
         });
-        document.getElementById("study-title").addEventListener("change", (event) => {
+        document.getElementById("study-title").addEventListener("keyup", (event) => {
             const btn = this.target.querySelector("button.title");
             if(event.target.value.length > 0) btn.disabled = false;
             else btn.disabled = true;
         });
-        document.getElementById("study-repo").addEventListener("change", (event) => {
+        document.getElementById("study-repo").addEventListener("keyup", (event) => {
             const regExp = /^[A-Za-z_-]*$/;
             const btn = this.target.querySelector("button.submit-study");
-            if(regExp.test(event.target.value)) btn.disabled = false;        
+            if(event.target.value && regExp.test(event.target.value)) btn.disabled = false;
             else btn.disabled = true;
         });
         document.querySelector("#create-study-widget form").addEventListener("submit", (event) => {
             event.preventDefault();
             const studyName = event.target.querySelector("#study-title").value;
             const repoName = event.target.querySelector("#study-repo").value;
+            store.commit("CHANGE_MODAL", "LOADING");
             this.makeStudy(studyName, repoName);
-            store.commit("CLOSE_MODAL");
         });
+        
     }
     async makeStudy(studyName, repoName) {
-        const userInfo = JSON.parse(localStorage.getItem("user"));
-        await createNewStudy(studyName, repoName, userInfo.token);
+        const { token } = JSON.parse(localStorage.getItem("user"));
+        await createNewStudy(studyName, repoName, token);
         let studyList = await getStudyList(token);
+        store.commit("CLOSE_MODAL");
         store.commit("ADD_STUDY", studyList);
     }
 };
