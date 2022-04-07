@@ -53,16 +53,15 @@ export default class Sidebar extends Component {
         `
     }
     setup() {
+        this.addEvent("click", ".logout", () => {
+            localStorage.clear("user");
+            new Router().render("/");
+        });
         this.addEvent("click", ".create-study", () => {
             store.commit("CHANGE_MODAL", "CREATE_NEW_STUDY");
         });
     }
     mounted() {
-        this.addEvent("click", ".logout", () => {
-            localStorage.clear("user");
-            new Router().render("/");
-        });
-
         new Profile(document.querySelector(".profile-container"));
         new StudyList(document.querySelector(".study-list-container"));
     }

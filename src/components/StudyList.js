@@ -34,10 +34,9 @@ export default class StudyList extends Component {
             </style>
         `;
     }
-    mounted() {
-        this.target.querySelector(".study-list").addEventListener("click", event => {
+    setup() {
+        this.addEvent("click", ".study-list", event => {
             if(event.target.className === "study-items") {
-                console.log(event.target.id);
                 store.commit("SELECT_STUDY", event.target.id);
             }
         });

@@ -1,6 +1,7 @@
-import { getStudyInfo } from "../api/index.js";
 import Component from "../core/Component.js";
 import { store } from "../store.js";
+
+import { getStudyInfo } from "../api/index.js";
 
 export default class Study extends Component {
     async mounted() {

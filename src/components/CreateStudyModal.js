@@ -114,8 +114,7 @@ export default class CreateStudyModal extends Component {
             const repoName = event.target.querySelector("#study-repo").value;
             store.commit("CHANGE_MODAL", "LOADING");
             this.makeStudy(studyName, repoName);
-        });
-        
+        });     
     }
     async makeStudy(studyName, repoName) {
         const { token } = JSON.parse(localStorage.getItem("user"));
