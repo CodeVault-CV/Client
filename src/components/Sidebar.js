@@ -1,9 +1,10 @@
 import Component from "../core/Component.js";
-import Router from "../core/Router.js";
 import { store } from "../store.js";
 
 import Profile from "./Profile.js";
 import StudyList from "./StudyList.js";
+
+import { logout } from "../controller/user.js";
 
 export default class Sidebar extends Component {
     template() {
@@ -52,16 +53,17 @@ export default class Sidebar extends Component {
         </style>
         `
     }
-    setup() {
-        this.addEvent("click", ".logout", () => {
-            localStorage.clear("user");
-            new Router().render("/");
-        });
-        this.addEvent("click", ".create-study", () => {
-            store.commit("CHANGE_MODAL", "CREATE_NEW_STUDY");
-        });
+    handleCreateStudy = () => {
+        store.commit("CHANGE_MODAL", "CREATE_NEW_STUDY");
     }
-    mounted() {
+    setEvent() {
+        const logoutBtn = this.target.querySelector(".logout");
+        this.addEvent(logoutBtn, "click", logout);
+
+        const createStudyBtn = this.target.querySelector(".create-study");
+        this.addEvent(createStudyBtn, "click", this.handleCreateStudy);
+    }
+    async mounted() {
         new Profile(document.querySelector(".profile-container"));
         new StudyList(document.querySelector(".study-list-container"));
     }

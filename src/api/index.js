@@ -1,95 +1,19 @@
-import Router from "../core/Router.js";
+import { get, post } from "../utils/http.js";
 
 const baseURL = "http://choco-one.iptime.org:8090/api";
-
-export const loginUser = async (code) => {
-    try {
-        const response = await fetch(baseURL + `/user/login?code=${code}`);
-        const userInfo = await response.json();
-        return userInfo;
-    } catch (error) {
-        console.error(error);
-        return false;
+const makeHeader = (params) => { 
+    const header = { ...params };
+    if(localStorage.getItem("user")) {
+        header.Authorization = `Bearer ${JSON.parse(localStorage.getItem("user")).token}`
     }
-}
+    return header;
+};
 
-export const getUserProfile = async (name, token) => {
-    try {
-        let res = await fetch(baseURL + `/user/profile?name=${name}`, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
-        if(res.status === 401) {
-            localStorage.clear("user");
-            new Router().render("/");
-        }
-        else {
-            let profile = await res.json();
-            return profile;
-        }
-    } catch (error) {
-        console.error(error);
-        return false;
-    }
-}
+// 유저 API
+export const loginUser = async (code) => await get(baseURL + `/user/login?code=${code}`);
+export const getUserProfile = async (name) => await get(baseURL + `/user/profile?name=${name}`, makeHeader());
 
-export const getStudyList = async (token) => {
-    try {
-        const res = await fetch(baseURL + `/study/list`, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
-        if(res.status === 401) {
-            localStorage.clear("user");
-            new Router().render("/");
-        }
-        else {
-            const studyList = await res.json();
-            return studyList;
-        }
-    } catch(error) {
-        console.error(error);
-        return false;
-    }
-}
-
-export const getStudyInfo = async (studyId, token) => {
-    try {
-        const res = await fetch(baseURL + `/study/${studyId}`, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
-        if(res.status === 401) {
-            localStorage.clear("user");
-            new Router().render("/");
-        }
-        else {
-            const studyInfo = await res.json();
-            return studyInfo;
-        }
-    } catch(error) {
-        console.error(error);
-        return false;
-    }
-}
-
-export const createNewStudy = async (studyName, repoName, token) => {
-    try {
-        let res = await fetch(baseURL + `/study`, {
-            method: "POST",
-            headers: { 
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                repoName,
-                studyName
-            })
-        });
-        if(res.status === 401 ) {
-            localStorage.clear("user");
-            new Router().render("/");
-        }
-        return true;
-    } catch (error) {
-        console.error(error);
-        return false;
-    }
-}
+// 스터디 API
+export const getStudyList = async () => await get(baseURL + `/study/list`, makeHeader());
+export const getStudyInfo = async (studyId) => await get(baseURL + `/study/${studyId}`, makeHeader());
+export const createStudy = async (data) => await post(baseURL + `/study`, data, makeHeader());

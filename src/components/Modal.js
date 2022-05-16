@@ -23,6 +23,26 @@ export default class Modal extends Component {
         </style>
         `;
     }
+    closeModal = (event) => {
+        switch (event.type) {
+            case "click":
+                if(event.target === document.querySelector(".modal") && store.state.modal !== "LOADING") store.commit("CLOSE_MODAL");
+                break;
+            case "keydown":
+                if(event.key === "Escape" && store.state.modal !== "LOADING") store.commit("CLOSE_MODAL");
+                break;
+            default:
+                break;
+        }
+    }
+    setEvent() {
+        // ESC 입력시 모달 닫기
+        window.removeEventListener("keydown", this.closeModal);
+        window.addEventListener("keydown", this.closeModal);
+        // 모달 바깥쪽 클릭시 모달 닫기
+        const modal = this.target.querySelector(".modal");
+        this.addEvent(modal, "click", this.closeModal);
+    }
     mounted() {
         const modal = document.querySelector(".modal");
         switch(store.state.modal) {

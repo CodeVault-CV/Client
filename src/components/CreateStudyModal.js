@@ -1,8 +1,6 @@
 import Component from "../core/Component.js";
 import { store } from "../store.js";
 
-import { createNewStudy, getStudyList } from "../api/index.js";
-
 export default class CreateStudyModal extends Component {
     template() {
         return `
@@ -93,11 +91,12 @@ export default class CreateStudyModal extends Component {
         </style>
         `;
     }
-    mounted() {
+    setEvent() {
         document.querySelector("#create-study-widget").addEventListener("click", (event) => {
             if(event.target.nodeName === "BUTTON") document.querySelector("#create-study-widget ul").style.marginLeft = event.target.dataset.margin;
         });
         document.getElementById("study-title").addEventListener("keyup", (event) => {
+            console.log("press");
             const btn = this.target.querySelector("button.title");
             if(event.target.value.length > 0) btn.disabled = false;
             else btn.disabled = true;
@@ -117,10 +116,10 @@ export default class CreateStudyModal extends Component {
         });     
     }
     async makeStudy(studyName, repoName) {
-        const { token } = JSON.parse(localStorage.getItem("user"));
-        await createNewStudy(studyName, repoName, token);
-        let studyList = await getStudyList(token);
+        // const { token } = JSON.parse(localStorage.getItem("user"));
+        // await createNewStudy(studyName, repoName, token);
+        // let studyList = await getStudyList(token);
         store.commit("CLOSE_MODAL");
-        store.commit("ADD_STUDY", studyList);
+        // store.commit("ADD_STUDY", studyList);
     }
 };

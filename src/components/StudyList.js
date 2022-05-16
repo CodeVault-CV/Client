@@ -1,6 +1,8 @@
 import Component from "../core/Component.js";
 import { store } from "../store.js";
 
+import { getStudyList } from "../api/index.js";
+
 export default class StudyList extends Component {
     template() {
         return `
@@ -35,10 +37,18 @@ export default class StudyList extends Component {
         `;
     }
     setup() {
-        this.addEvent("click", ".study-list", event => {
-            if(event.target.className === "study-items") {
-                store.commit("SELECT_STUDY", event.target.id);
-            }
-        });
+        requestAnimationFrame(async () => {
+            const studyList = await getStudyList();
+            store.commit("ADD_STUDY", studyList);
+        })
+    }
+    handleStudyClick(event) {
+        if(event.target.className === "study-items") {
+            store.commit("SELECT_STUDY", event.target.id);
+        }
+    }
+    setEvent() {
+        const studyList = this.target.querySelector(".study-list");
+        this.addEvent(studyList, "click", this.handleStudyClick);
     }
 }

@@ -1,7 +1,7 @@
 import Component from "../core/Component.js";
 import { store } from "../store.js";
 
-import { getStudyInfo } from "../api/index.js";
+import { getStudyInfo } from "../controller/study.js";
 
 export default class Study extends Component {
     async mounted() {
@@ -21,8 +21,7 @@ export default class Study extends Component {
         }
         else {
             store.commit("CHANGE_MODAL", "LOADING");
-            const { token } = JSON.parse(localStorage.getItem("user"));
-            const studyInfo = await getStudyInfo(store.state.selected, token);
+            const studyInfo = await getStudyInfo(store.state.selected);
             this.target.innerHTML = `
             <section>
             ${JSON.stringify(studyInfo)}

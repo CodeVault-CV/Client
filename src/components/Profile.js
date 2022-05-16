@@ -1,6 +1,6 @@
 import Component from "../core/Component.js";
 
-import { getUserProfile } from "../api/index.js";
+import { getUserProfile } from "../controller/user.js";
 
 export default class Profile extends Component {
     template() {
@@ -24,14 +24,9 @@ export default class Profile extends Component {
         `;
     }
     setup() {
-        this.state = {
-            url: "../images/github.png",
-            name: "Anonymous"
-        }
-    }
-    async mounted() {
-        const { name, token } = JSON.parse(localStorage.getItem("user"));
-        let profile = await getUserProfile(name, token);
-        this.setState({ ...profile });
+        requestAnimationFrame(async () => {
+            const profileData = await getUserProfile(JSON.parse(localStorage.getItem("user")).name);
+            this.setState({ ...profileData });
+        });
     }
 }
