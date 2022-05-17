@@ -22,9 +22,6 @@ export default class Main extends Component {
         }
         #study-container {
             width: 100%;
-            display: flex;
-            align-content: center;
-            justify-content: center;
         }
         </style>
         `;

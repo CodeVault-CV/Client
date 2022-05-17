@@ -1,14 +1,14 @@
 import Component from "../core/Component.js";
-import { store } from "../store.js";
+import { studyStore, modalStore } from "../stores/store.js";
 
-import { getStudyList } from "../api/index.js";
+import { getStudyList, getStudyInfo } from "../controller/study.js";
 
 export default class StudyList extends Component {
     template() {
         return `
             <div class="study-list">
                 <div class="my-study">🗂 내 스터디</div>
-                ${store.state.studyList.length ? store.state.studyList.map(study => {
+                ${studyStore.state.studyList.length ? studyStore.state.studyList.map(study => {
                     return `<div class="study-items" id="${study.studyId}">▶ ${study.name}</div>`
                 }).join("")
                 : 
@@ -39,12 +39,15 @@ export default class StudyList extends Component {
     setup() {
         requestAnimationFrame(async () => {
             const studyList = await getStudyList();
-            store.commit("ADD_STUDY", studyList);
+            studyStore.commit("ADD_STUDY", studyList);
         })
     }
-    handleStudyClick(event) {
+    async handleStudyClick(event) {
         if(event.target.className === "study-items") {
-            store.commit("SELECT_STUDY", event.target.id);
+            modalStore.commit("CHANGE_MODAL", "LOADING");
+            const studyInfo = await getStudyInfo(event.target.id);
+            studyStore.commit("SELECT_STUDY", studyInfo);
+            modalStore.commit("CLOSE_MODAL");
         }
     }
     setEvent() {

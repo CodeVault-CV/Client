@@ -1,10 +1,8 @@
-import Store from "./core/Store.js";
+import Store from "../core/Store.js";
 
-export const store = new Store({
+export const modalStore = new Store({
     state: {
         modal: null,
-        studyList: [],
-        selected: null
     },
     mutations: {
         CHANGE_MODAL(state, payload) {
@@ -13,11 +11,24 @@ export const store = new Store({
         CLOSE_MODAL(state) {
             state.modal = null;
         },
+    }
+});
+
+export const studyStore = new Store({
+    state: {
+        studyList: [],
+        selected: null,
+        studyInfo: {}
+    },
+    mutations: {
         ADD_STUDY(state, payload) {
             state.studyList = payload;
         },
         SELECT_STUDY(state, payload) {
             state.selected = payload;
+        },
+        SET_STUDY(state, payload) {
+            state.studyInfo = payload;
         }
     }
-});
+})

@@ -1,5 +1,5 @@
 import Component from "../core/Component.js";
-import { store } from "../store.js";
+import { modalStore } from "../stores/store.js";
 
 import Profile from "./Profile.js";
 import StudyList from "./StudyList.js";
@@ -54,7 +54,7 @@ export default class Sidebar extends Component {
         `
     }
     handleCreateStudy = () => {
-        store.commit("CHANGE_MODAL", "CREATE_NEW_STUDY");
+        modalStore.commit("CHANGE_MODAL", "CREATE_NEW_STUDY");
     }
     setEvent() {
         const logoutBtn = this.target.querySelector(".logout");
@@ -63,7 +63,7 @@ export default class Sidebar extends Component {
         const createStudyBtn = this.target.querySelector(".create-study");
         this.addEvent(createStudyBtn, "click", this.handleCreateStudy);
     }
-    async mounted() {
+    mounted() {
         new Profile(document.querySelector(".profile-container"));
         new StudyList(document.querySelector(".study-list-container"));
     }

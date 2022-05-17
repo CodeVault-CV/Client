@@ -11,7 +11,6 @@ export default class Component {
             this.render();
             this.mounted();
         });
-        requestAnimationFrame(() => this.setEvent());
     }
     template() { return ``; }
     setup() {};
@@ -26,15 +25,10 @@ export default class Component {
         for(let i = 0; i < max; i++) {
             applyDiff(oldNode, oldChildren[i], newChildren[i]);
         }
+        requestAnimationFrame(() => this.setEvent());
     }
     mounted() {}
     updated() {}
-    // addEvent(eventType, selector, callback) {
-    //     this.target.addEventListener(eventType, event => {
-    //         if(!this.target.contains(event.target.closest(selector))) return false;
-    //         callback(event);
-    //     });
-    // }
     addEvent(target, eventType, callback) {
         target.removeEventListener(eventType, callback);
         target.addEventListener(eventType, callback);

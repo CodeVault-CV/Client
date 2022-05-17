@@ -1,5 +1,5 @@
 import Component from "../core/Component.js";
-import { store } from "../store.js";
+import { modalStore } from "../stores/store.js";
 
 export default class CreateStudyModal extends Component {
     template() {
@@ -92,11 +92,10 @@ export default class CreateStudyModal extends Component {
         `;
     }
     setEvent() {
-        document.querySelector("#create-study-widget").addEventListener("click", (event) => {
+        document.getElementById("create-study-widget").addEventListener("click", (event) => {
             if(event.target.nodeName === "BUTTON") document.querySelector("#create-study-widget ul").style.marginLeft = event.target.dataset.margin;
         });
         document.getElementById("study-title").addEventListener("keyup", (event) => {
-            console.log("press");
             const btn = this.target.querySelector("button.title");
             if(event.target.value.length > 0) btn.disabled = false;
             else btn.disabled = true;
@@ -111,7 +110,7 @@ export default class CreateStudyModal extends Component {
             event.preventDefault();
             const studyName = event.target.querySelector("#study-title").value;
             const repoName = event.target.querySelector("#study-repo").value;
-            store.commit("CHANGE_MODAL", "LOADING");
+            modalStore.commit("CHANGE_MODAL", "LOADING");
             this.makeStudy(studyName, repoName);
         });     
     }
@@ -119,7 +118,7 @@ export default class CreateStudyModal extends Component {
         // const { token } = JSON.parse(localStorage.getItem("user"));
         // await createNewStudy(studyName, repoName, token);
         // let studyList = await getStudyList(token);
-        store.commit("CLOSE_MODAL");
+        modalStore.commit("CLOSE_MODAL");
         // store.commit("ADD_STUDY", studyList);
     }
 };
