@@ -1,18 +1,13 @@
 {
-  "name": "al-gong",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "type": "module",
+  "name": "algong",
+  "private": true,
+  "version": "0.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "woong-jae",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.3",
-    "nodemon": "^2.0.15"
+  "devDependencies": {
+    "vite": "^2.9.9"
   }
 }

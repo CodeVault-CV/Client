@@ -6,7 +6,7 @@ export default class Profile extends Component {
     template() {
         return `
         <div class="profile">
-            <img class="avatar" src="${this.state.url ? this.state.url : "../images/github.png"}" />
+            <img class="avatar" src="${this.state.url ? this.state.url : "./src/images/github.png"}" />
             <div class="username">${this.state.name}</div>
         </div>
         <style>

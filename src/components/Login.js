@@ -14,7 +14,7 @@ export default class Login extends Component {
         <style>
         #login-page {
             background-color: #5865f1;
-            background-image: url("../images/background-pattern.png");
+            background-image: url("./src/images/background-pattern.png");
             display: flex;
             justify-content: center;
             align-items: center;
