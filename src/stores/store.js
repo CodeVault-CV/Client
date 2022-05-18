@@ -18,7 +18,6 @@ export const studyStore = new Store({
     state: {
         studyList: [],
         selected: null,
-        studyInfo: {}
     },
     mutations: {
         ADD_STUDY(state, payload) {
@@ -27,8 +26,5 @@ export const studyStore = new Store({
         SELECT_STUDY(state, payload) {
             state.selected = payload;
         },
-        SET_STUDY(state, payload) {
-            state.studyInfo = payload;
-        }
     }
 })

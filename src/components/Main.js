@@ -17,11 +17,14 @@ export default class Main extends Component {
         #main-container {
             display: flex;
             width: 100%;
+            min-width: 1000px;
             height: 100%;
             color: whitesmoke;
         }
         #study-container {
             width: 100%;
+            background-color: #35393F;
+            padding: 20px 40px 0;
         }
         </style>
         `;

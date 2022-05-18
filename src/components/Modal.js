@@ -3,6 +3,7 @@ import { modalStore } from "../stores/store.js";
 
 import Loading from "./common/Loading.js";
 import CreateStudyModal from "./CreateStudyModal.js";
+import AddMemberModal from "./AddMemberModal.js";
 
 export default class Modal extends Component {
     template() {
@@ -24,6 +25,7 @@ export default class Modal extends Component {
         `;
     }
     closeModal = (event) => {
+        // 로딩 상태라면 닫을 수 없음
         switch (event.type) {
             case "click":
                 if(event.target === document.querySelector(".modal") && modalStore.state.modal !== "LOADING") modalStore.commit("CLOSE_MODAL");
@@ -49,8 +51,12 @@ export default class Modal extends Component {
             case "CREATE_NEW_STUDY":
                 new CreateStudyModal(modal);
                 break;
+            case "ADD_MEMBER":
+                new AddMemberModal(modal);
+                break;
             case "LOADING":
                 new Loading(modal);
+                break;
             default:
                 break;
         }

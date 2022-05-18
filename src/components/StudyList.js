@@ -46,6 +46,7 @@ export default class StudyList extends Component {
         if(event.target.className === "study-items") {
             modalStore.commit("CHANGE_MODAL", "LOADING");
             const studyInfo = await getStudyInfo(event.target.id);
+            studyInfo.studyId = event.target.id;
             studyStore.commit("SELECT_STUDY", studyInfo);
             modalStore.commit("CLOSE_MODAL");
         }

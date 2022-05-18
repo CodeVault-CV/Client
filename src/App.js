@@ -14,10 +14,8 @@ export default class App extends Component {
         <style>
         #app {
             display: flex;
-            justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #35393F;
         }
         </style>
         `

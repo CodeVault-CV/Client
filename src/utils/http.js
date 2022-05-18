@@ -28,12 +28,12 @@ const request = async ({
 
 const get = async (url, headers) => {
     const response = await request({ method: "GET", url, headers });
-    return response.data;
+    return response;
 }
 
 const post = async (url, body, headers) => {
     const response = await request({ method: "POST", url, body, headers });
-    return response.data;
+    return response;
 }
 
 export { get, post }

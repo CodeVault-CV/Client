@@ -4,7 +4,7 @@ import { modalStore } from "../stores/store.js";
 export default class CreateStudyModal extends Component {
     template() {
         return `
-        <div id="create-study-widget">
+        <div id="create-study-container">
             <form class="slide">
                 <ul>
                     <li>
@@ -28,7 +28,7 @@ export default class CreateStudyModal extends Component {
             </form>
         </div>
         <style>
-        #create-study-widget {
+        #create-study-container {
             background: whitesmoke;
             color: black;
             border-radius: 10px;
@@ -46,25 +46,25 @@ export default class CreateStudyModal extends Component {
             }
         }
 
-        #create-study-widget .input-title {
+        #create-study-container .input-title {
             margin: 5px 0;
             font-weight: 600;
             font-size: 20px;
             text-align: center;
         }
-        #create-study-widget p {
+        #create-study-container p {
             text-align: center;
             color: gray;
         }
-        #create-study-widget input {
+        #create-study-container input {
             display: block;
             width: 97%;
             margin: 5px 0 15px;
         }
-        #create-study-widget button {
+        #create-study-container button {
             width: 23%;
         }
-        #create-study-widget .button-box {
+        #create-study-container .button-box {
             display: flex;
             justify-content: space-between;
             flex-direction: row-reverse;
@@ -74,26 +74,26 @@ export default class CreateStudyModal extends Component {
             position: relative;
             overflow: hidden;
         }
-        #create-study-widget ul,li { 
+        #create-study-container ul,li { 
             margin: 0;
             padding: 0;
             list-style: none;
         }
-        #create-study-widget ul {
+        #create-study-container ul {
             margin-left: 0;
             width: calc(100% * 2);
             transition: 0.3s;
             display: flex;
         }
-        #create-study-widget li {
+        #create-study-container li {
             width:calc(100% / 2);
         }
         </style>
         `;
     }
     setEvent() {
-        document.getElementById("create-study-widget").addEventListener("click", (event) => {
-            if(event.target.nodeName === "BUTTON") document.querySelector("#create-study-widget ul").style.marginLeft = event.target.dataset.margin;
+        document.getElementById("create-study-container").addEventListener("click", (event) => {
+            if(event.target.nodeName === "BUTTON") document.querySelector("#create-study-container ul").style.marginLeft = event.target.dataset.margin;
         });
         document.getElementById("study-title").addEventListener("keyup", (event) => {
             const btn = this.target.querySelector("button.title");
@@ -106,7 +106,7 @@ export default class CreateStudyModal extends Component {
             if(event.target.value && regExp.test(event.target.value)) btn.disabled = false;
             else btn.disabled = true;
         });
-        document.querySelector("#create-study-widget form").addEventListener("submit", (event) => {
+        document.querySelector("#create-study-container form").addEventListener("submit", (event) => {
             event.preventDefault();
             const studyName = event.target.querySelector("#study-title").value;
             const repoName = event.target.querySelector("#study-repo").value;
