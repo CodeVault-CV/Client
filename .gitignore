@@ -2,8 +2,11 @@
 
 # dependencies
 /node_modules
-/.pnp
+.yarn
+.vscode
+/.pnp*
 .pnp.js
+
 
 # testing
 /coverage
