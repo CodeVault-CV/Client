@@ -1,29 +1,31 @@
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 
-import Box from '@mui/material/Box';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import { Box, AppBar, Toolbar, Typography, Button, Link } from "@mui/material";
 
 interface NavProps {
-    auth: boolean
+  auth: boolean;
 }
 
 function Navbar({ auth }: NavProps) {
-    return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        알공
-                    </Typography>
-                    {auth && <Button color="inherit">Studies</Button>}
-                    <Button color="inherit">{auth ? "Logout" : "Login"}</Button>
-                </Toolbar>
-            </AppBar>
-        </Box>
-    )
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <Link href="/" underline="none" sx={{ color: "white" }}>
+            <Typography variant="h5" component="div">
+              algong
+            </Typography>
+          </Link>
+          <Box sx={{ flexGrow: 1 }} />
+          {auth && <Button color="inherit" size="large">스터디</Button>}
+          <Button component={RouterLink} to="/login" color="inherit" size="large">
+            {auth ? "로그아웃" : "로그인"}
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
 }
 
 export default Navbar;
