@@ -2,7 +2,7 @@ import React from "react";
 
 import Navbar from "./Navbar";
 
-export default function NavBarContainer() {
+export default function NavbarContainer() {
     // const handleLogin = () => {
     //     // 1. 이전에 만든 계정이 있는지 확인 후 있다면 바로 로그인
     
