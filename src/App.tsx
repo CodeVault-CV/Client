@@ -1,12 +1,13 @@
-import React from 'react';
-import "./styles/reset.css";
-
-import Navbar from './blocks/Navbar';
+import React from "react";
+import { Outlet } from "react-router-dom";
+import PageTemplate from "./templates/PageTemplate";
 
 function App() {
   return (
-    <Navbar />
-  );
+    <PageTemplate>
+      <Outlet />
+    </PageTemplate>  
+  )
 }
 
 export default App;
