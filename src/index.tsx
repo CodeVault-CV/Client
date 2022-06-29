@@ -9,12 +9,14 @@ import {
 import App from "./App";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import StudyList from "./pages/Study";
 
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -22,6 +24,7 @@ root.render(
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
+          <Route path="study" element={<StudyList />} />
         </Route>
       </Routes>
     </BrowserRouter>
