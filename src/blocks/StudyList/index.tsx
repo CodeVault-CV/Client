@@ -8,7 +8,7 @@ export interface IStudy {
   repositoryUrl?: string;
 }
 
-export default function () {
+export default function StudyListContainer() {
   const data: IStudy[] = [
     {
       studyId: '123456789',

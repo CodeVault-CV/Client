@@ -1,16 +1,13 @@
-import React from 'react';
-import "./styles/reset.css";
-
-import Navbar from './blocks/Navbar';
-import StudyList from './pages/Study/StudyList'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import PageTemplate from "./templates/PageTemplate";
 
 function App() {
   return (
-    <React.Fragment>
-      <Navbar />
-      <StudyList />
-    </React.Fragment>
-  );
+    <PageTemplate>
+      <Outlet />
+    </PageTemplate>  
+  )
 }
 
 export default App;
