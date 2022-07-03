@@ -1,4 +1,4 @@
-import StudyListBlock from "./StudyList";
+import StudyList from "./StudyList";
 
 export interface IStudy {
   studyId?: string;
@@ -33,5 +33,5 @@ export default function StudyListContainer() {
     }
   ];
 
-  return <StudyListBlock studys={data} />;
+  return <StudyList studys={data} />;
 }

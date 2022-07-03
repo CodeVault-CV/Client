@@ -9,7 +9,8 @@ import {
 import App from "./App";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import StudyList from "./pages/Study";
+import StudyList from "./pages/StudyList";
+import StudyInfo from "./pages/StudyInfo";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -24,7 +25,8 @@ root.render(
         <Route path="/" element={<App />}>
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
-          <Route path="study" element={<StudyList />} />
+          <Route path="study-list" element={<StudyList />} />
+          <Route path="study-info" element={<StudyInfo />} />
         </Route>
       </Routes>
     </BrowserRouter>
