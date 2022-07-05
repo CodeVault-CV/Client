@@ -11,7 +11,7 @@ import MenuList from '@mui/material/MenuList';
 
 const options = ['최신순', '오래된순'];
 
-export default function SortButton() {
+export default function SplitButtonBlock() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);

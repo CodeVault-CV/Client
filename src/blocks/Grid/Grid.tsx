@@ -45,7 +45,7 @@ function GridRow() {
   );
 }
 
-export default function StudyInfoGridBlock() {
+export default function GridBlock() {
   return (
     <Wrapper>
       <Box sx={{ flexGrow: 1 }}>
