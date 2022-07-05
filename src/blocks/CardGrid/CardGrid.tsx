@@ -45,7 +45,7 @@ function GridRow() {
   );
 }
 
-export default function GridBlock() {
+export default function CardGridBlock() {
   return (
     <Wrapper>
       <Box sx={{ flexGrow: 1 }}>

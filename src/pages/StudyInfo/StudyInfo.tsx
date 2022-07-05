@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import AvatarGroup from '../../blocks/AvatarGroup/AvatarGroup';
 import SearchTextField from '../../blocks/SearchTextField/SearchTextField';
 import SplitButton from '../../blocks/SplitButton/SplitButton';
-import Grid from '../../blocks/Grid';
+import CardGrid from '../../blocks/CardGrid';
 
 const HeaderWrapper = styled.div`
   background-color: #f3f2f2;
@@ -56,7 +56,7 @@ export default function StudyInfoPage() {
           추가
         </Button>
       </SearchBarWrapper>
-      <Grid />
+      <CardGrid />
     </div>
   );
 }
