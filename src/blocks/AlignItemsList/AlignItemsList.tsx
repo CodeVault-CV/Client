@@ -7,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 
 import { IStudy } from '.';
 
-const StudyList = styled(List)`
+const ListWrapper = styled(List)`
   width: 400px;
   height: 530px;
   margin: 30px 0;
@@ -24,7 +24,7 @@ const StudyList = styled(List)`
   }
 `;
 
-const StudyItem = styled(ListItem)`
+const Item = styled(ListItem)`
   display: flex;
   align-items: center;
   height: 100px;
@@ -39,7 +39,7 @@ const StudyItem = styled(ListItem)`
   }
 `;
 
-const StudyItemText = styled(ListItemText)`
+const ItemText = styled(ListItemText)`
   height: 80%;
   display: flex;
   flex-direction: column;
@@ -50,20 +50,20 @@ interface ListProps {
   studys: IStudy[];
 }
 
-export default function StudyListBlock ({ studys }: ListProps) {
+export default function AlignItemsListBlock ({ studys }: ListProps) {
   return (
-    <StudyList>
+    <ListWrapper>
       {studys.map((study) => (
-        <StudyItem key={study.studyId} alignItems='flex-start'>
+        <Item key={study.studyId} alignItems='flex-start'>
           <ListItemAvatar>
             <Avatar alt={study.name} src='.' />
           </ListItemAvatar>
-          <StudyItemText
+          <ItemText
             primary={study.name}
             secondary={`팀장: ${study.leaderId}`}
           />
-        </StudyItem>
+        </Item>
       ))}
-    </StudyList>
+    </ListWrapper>
   );
 }

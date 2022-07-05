@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import StudyListBlock from '../../blocks/StudyList';
+import AlignItemsList from '../../blocks/AlignItemsList';
 import Button from '@mui/material/Button';
 
 const Container = styled.div`
@@ -27,7 +27,7 @@ export default function StudyLisPage() {
     <Container>
       <ListWrapper>
         <Title>내 스터디 목록</Title>
-        <StudyListBlock />
+        <AlignItemsList />
         <Button variant='outlined'>스터디 생성</Button>
       </ListWrapper>
     </Container>

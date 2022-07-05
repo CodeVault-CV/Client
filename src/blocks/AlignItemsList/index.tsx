@@ -1,4 +1,4 @@
-import StudyListBlock from "./StudyList";
+import AlignItemsList from "./AlignItemsList";
 
 export interface IStudy {
   studyId?: string;
@@ -8,7 +8,7 @@ export interface IStudy {
   repositoryUrl?: string;
 }
 
-export default function StudyListContainer() {
+export default function AlignItemsListContainer() {
   const data: IStudy[] = [
     {
       studyId: '123456789',
@@ -33,5 +33,5 @@ export default function StudyListContainer() {
     }
   ];
 
-  return <StudyListBlock studys={data} />;
+  return <AlignItemsList studys={data} />;
 }
