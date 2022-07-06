@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 
-import ProblemAdder from "../../blocks/ProblemAdder";
+import ProblemAdder from "./ProblemAdder";
 import Wrapper from "../../blocks/Wrapper";
 import ProblemList from "./ProblemList";
 import SessionHeader from "./SessionHeader";

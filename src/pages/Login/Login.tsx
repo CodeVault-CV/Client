@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import LoginBlock from "../../blocks/Login";
+import LoginBlock from "./LoginWidget";
 
 function LoginPage() {
     return (
