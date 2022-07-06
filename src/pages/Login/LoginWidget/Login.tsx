@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import GitHubIcon from '@mui/icons-material/GitHub';
 
@@ -10,7 +9,12 @@ export default function LoginBlock() {
             p: 3
         }}>
             <Stack spacing={3}>
-                <Typography variant="h2" component="div" textAlign="center">algong</Typography>
+                <Typography 
+                    variant="h2" 
+                    component="div" 
+                    textAlign="center"
+                    sx={{ fontWeight: "bold" }}   
+                >Algong</Typography>
                 <Divider />
                 <Button 
                     href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}`} 

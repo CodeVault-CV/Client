@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import StudyList from "./pages/StudyList";
 import StudyInfo from "./pages/StudyInfo";
+import Session from "./pages/Session";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -27,6 +28,7 @@ root.render(
           <Route path="login" element={<Login />} />
           <Route path="study-list" element={<StudyList />} />
           <Route path="study-info" element={<StudyInfo />} />
+          <Route path="session" element={<Session />} />
         </Route>
       </Routes>
     </BrowserRouter>
