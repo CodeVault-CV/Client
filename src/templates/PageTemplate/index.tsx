@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import { Container, Stack, CssBaseline } from "@mui/material";
 
-import Navbar from "../../blocks/Navbar";
+import Navbar from "../../components/Navbar";
 
 function PageTemplate({ children }: PropsWithChildren) {
     return (
