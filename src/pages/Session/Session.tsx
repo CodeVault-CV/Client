@@ -2,20 +2,23 @@ import { Stack } from "@mui/material";
 
 import ProblemAdder from "./ProblemAdder";
 import Wrapper from "../../blocks/Wrapper";
-import ProblemList from "./ProblemList";
+import Problem from "./Problem";
 import SessionHeader from "./SessionHeader";
 
 function Session() {
     return (
         <Stack spacing={3}>
             <Wrapper>
-                <SessionHeader />
+                <SessionHeader/>
             </Wrapper>
             <Wrapper>
-                <ProblemAdder />
+                <ProblemAdder/>
             </Wrapper>
             <Wrapper>
-                <ProblemList />
+                <Problem/>
+            </Wrapper>
+            <Wrapper>
+                
             </Wrapper>
         </Stack>
     )
