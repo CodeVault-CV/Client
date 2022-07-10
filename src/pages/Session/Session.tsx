@@ -4,7 +4,6 @@ import ProblemAdder from "./ProblemAdder";
 import Wrapper from "../../blocks/Wrapper";
 import Problem from "./Problem";
 import SessionHeader from "./SessionHeader";
-import TextEditor from "../../components/TextEditor";
 
 function Session() {
     return (
@@ -19,7 +18,7 @@ function Session() {
                 <Problem/>
             </Wrapper>
             <Wrapper>
-                <TextEditor preview={true}/>
+                
             </Wrapper>
         </Stack>
     )

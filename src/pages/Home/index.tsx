@@ -1,3 +1,5 @@
 export default function HomeContainer() {
-    return <div>Home</div>
+    return (
+        <div>home</div>
+    )
 }
