@@ -3,13 +3,13 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 
-const SearchTextField = styled(TextField)`
+const SearchWrapper = styled(TextField)`
   background-color: white;
 `;
 
-export default function SearchTextFieldBlock() {
+export default function SearchTextField() {
   return (
-    <SearchTextField
+    <SearchWrapper
       id='input-with-icon-textfield'
       placeholder='Search'
       size='small'
