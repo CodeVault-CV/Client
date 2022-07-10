@@ -1,35 +1,45 @@
 import styled from '@emotion/styled';
-
-import AlignItemsList from '../../blocks/AlignItemsList';
+import List from '@mui/material/List';
 import Button from '@mui/material/Button';
+import Wrapper from '../../blocks/Wrapper';
+import StudyListItem from './StudyListItem';
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  height: 100%;
-`;
+import { IStudy } from '.';
 
-const ListWrapper = styled.div`
+const LayoutWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 150px;
-  background-color: #f3f2f2;
+`;
+
+const ListWrapper = styled(List)`
+  width: 400px;
+  & li {
+    margin-bottom: 30px;
+  }
 `;
 
 const Title = styled.p`
-  font-size: 1.5em;
+  font-size: 1.9em;
   font-weight: 700;
 `;
 
-export default function StudyLisPage() {
+interface StudyListProps {
+  studys: IStudy[];
+}
+
+export default function StudyLisPage({ studys }: StudyListProps) {
   return (
-    <Container>
-      <ListWrapper>
+    <Wrapper>
+      <LayoutWrapper>
         <Title>내 스터디 목록</Title>
-        <AlignItemsList />
+        <ListWrapper>
+          {studys.map((study) => (
+            <StudyListItem key={study.studyId} study={study} />
+          ))}
+        </ListWrapper>
         <Button variant='outlined'>스터디 생성</Button>
-      </ListWrapper>
-    </Container>
+      </LayoutWrapper>
+    </Wrapper>
   );
 }

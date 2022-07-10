@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -9,12 +8,13 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 
-const options = ['최신순', '오래된순'];
+import { Fragment, useState, useRef } from 'react';
 
-export default function SplitButtonBlock() {
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLDivElement>(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+export default function SortSplitButton() {
+  const options = ['최신순', '오래된순'];
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef<HTMLDivElement>(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleMenuItemClick = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
@@ -40,7 +40,7 @@ export default function SplitButtonBlock() {
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
       <ButtonGroup
         variant='outlined'
         ref={anchorRef}
@@ -92,6 +92,6 @@ export default function SplitButtonBlock() {
           </Grow>
         )}
       </Popper>
-    </React.Fragment>
+    </Fragment>
   );
 }
