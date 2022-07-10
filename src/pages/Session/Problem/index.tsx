@@ -16,7 +16,7 @@ function LinearProgressWithLabel(props: any) {
     );
 }
 
-export default function ProblemList() {
+export default function Problem() {
     return (
         <div>
             <Accordion>

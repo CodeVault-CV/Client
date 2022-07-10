@@ -1,6 +1,5 @@
-import GitHub from "@mui/icons-material/GitHub";
-import { Box, Button, ButtonGroup, Chip, Stack, Typography } from "@mui/material";
 import { PropsWithChildren } from "react";
+import { Box, Stack, Typography } from "@mui/material";
 
 interface HeaderProps {
     title: string,
