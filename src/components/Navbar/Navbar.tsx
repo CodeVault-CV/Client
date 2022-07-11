@@ -16,7 +16,7 @@ function Navbar({ auth }: NavProps) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar 
-        position="static" 
+        position="static"
         sx={{ boxShadow: 0 }}
       >
         <Toolbar variant="dense" sx={{ justifyContent: "space-between" }}>

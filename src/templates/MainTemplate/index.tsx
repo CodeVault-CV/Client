@@ -1,21 +1,22 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { PropsWithChildren } from "react";
 import { Container, Stack, CssBaseline } from "@mui/material";
 
 import Navbar from "../../components/Navbar";
+import Banner from "./Banner";
 
-function PageTemplate() {
+function MainTemplate({ children }: PropsWithChildren) {
     return (
         <React.Fragment>
-            <CssBaseline />
+            <CssBaseline/>
             <Stack>
-                <Navbar />
+                <Navbar/>
+                <Banner/>
                 <Container maxWidth="md">
-                    <Outlet />
+                    {children}
                 </Container>
             </Stack>
         </React.Fragment>
     )
 }
 
-export default PageTemplate;
+export default MainTemplate;
