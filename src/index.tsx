@@ -1,17 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
 
 import App from "./App";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import StudyList from "./pages/StudyList";
-import StudyInfo from "./pages/StudyInfo";
-import Session from "./pages/Session";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -21,17 +11,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="study-list" element={<StudyList />} />
-          <Route path="study-info" element={<StudyInfo />} />
-          <Route path="session" element={<Session />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <App />
   </React.StrictMode>
 );
 

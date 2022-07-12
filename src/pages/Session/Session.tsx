@@ -17,9 +17,6 @@ function Session() {
             <Wrapper>
                 <Problem/>
             </Wrapper>
-            <Wrapper>
-                
-            </Wrapper>
         </Stack>
     )
 }
