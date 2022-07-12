@@ -1,18 +1,21 @@
 import { useState, createContext, PropsWithChildren, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { getToken } from "../../api";
 
 export const AuthContext = createContext({
     auth: false,
     name: "",
     token: "",
-    checkAuth() {},
     login(code: string) {},
+    logout() {},
 });
 
 export function AuthProvider({ children }: PropsWithChildren) {
     const [auth, setAuth] = useState(false);
     const [name, setName] = useState("");
     const [token, setToken] = useState("");
+    const navigate = useNavigate();
     
 
     const checkAuth = () => {
@@ -22,6 +25,11 @@ export function AuthProvider({ children }: PropsWithChildren) {
             setAuth(true);
             setName(name);
             setToken(token);
+        }
+        else {
+            setAuth(false);
+            setName("");
+            setToken("");
         }
     }
 
@@ -37,6 +45,12 @@ export function AuthProvider({ children }: PropsWithChildren) {
         }
     }
 
+    const logout = () => {
+        localStorage.removeItem("auth");
+        checkAuth();
+        navigate("/", { replace: true });
+    }
+
     useEffect(() => {
         checkAuth();
     }, []);
@@ -45,8 +59,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
         auth,
         name,
         token,
-        checkAuth,
         login,
+        logout,
     }
 
     return <AuthContext.Provider value={initialValue}>{children}</AuthContext.Provider>
