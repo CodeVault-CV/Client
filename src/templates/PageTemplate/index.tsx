@@ -1,12 +1,12 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import { Container, Stack, CssBaseline } from "@mui/material";
 
+import { AuthProvider } from "../../hoc/AuthContext";
 import Navbar from "../../components/Navbar";
 
 function PageTemplate() {
     return (
-        <React.Fragment>
+        <AuthProvider>
             <CssBaseline />
             <Stack>
                 <Navbar />
@@ -14,7 +14,7 @@ function PageTemplate() {
                     <Outlet />
                 </Container>
             </Stack>
-        </React.Fragment>
+        </AuthProvider>
     )
 }
 

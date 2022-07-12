@@ -1,12 +1,12 @@
 import { Container } from "@mui/material";
-import LoginBlock from "./LoginWidget";
+import LoginWidget from "./LoginWidget";
 
-function LoginPage() {
+function Login() {
     return (
         <Container maxWidth="sm">
-            <LoginBlock />
+            <LoginWidget />
         </Container>
     )
 }
 
-export default LoginPage;
+export default Login;

@@ -1,12 +1,9 @@
+import { useContext } from "react";
+
 import Navbar from "./Navbar";
+import { AuthContext } from "../../hoc/AuthContext";
 
 export default function NavbarContainer() {
-    // const handleLogin = () => {
-    //     // 1. 이전에 만든 계정이 있는지 확인 후 있다면 바로 로그인
-    
-    //     // 2. 없다면 깃허브로 redirect
-    //     window.location.assign(`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}`);
-    // }
-    
-    return <Navbar auth={true} />;
+    const { auth, logout } = useContext(AuthContext);
+    return <Navbar auth={auth} logout={logout} />;
 }

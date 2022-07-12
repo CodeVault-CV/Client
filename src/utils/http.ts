@@ -10,12 +10,12 @@ const get = async (url: string, headers = {}) => {
     return response.data;
 }
 
-const post = async (url: string, body: any, headers = {}) {
+const post = async (url: string, body: any, headers = {}) => {
     const response = await API.post(url, body, { headers });
     return response.data;
 }
 
-export default {
+export {
     get,
     post
 };

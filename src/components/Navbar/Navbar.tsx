@@ -1,18 +1,13 @@
 import { Link as RouterLink } from "react-router-dom";
-import styled from "@emotion/styled";
-
 import { Box, AppBar, Toolbar, Typography, Button, Link } from "@mui/material";
+import React from "react";
 
 interface NavProps {
   auth: boolean;
+  logout(): void;
 }
 
-const ButtonGroup = styled.div`
-  display: flex;
-`;
-
-
-function Navbar({ auth }: NavProps) {
+function Navbar({ auth, logout }: NavProps) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar 
@@ -27,12 +22,16 @@ function Navbar({ auth }: NavProps) {
             </Typography>
           </Link>
 
-          <ButtonGroup>
-            {auth && <Button color="inherit" size="large">스터디</Button>}
-            <Button component={RouterLink} to="/login" color="inherit" size="large">
-              {auth ? "로그아웃" : "로그인"}
-            </Button>
-          </ButtonGroup>
+          <Box sx={{ display: "flex" }}>
+            {auth ? 
+              <React.Fragment>
+                <Button color="inherit" size="large">스터디</Button>
+                <Button color="inherit" size="large" onClick={logout}>로그아웃</Button>
+              </React.Fragment>
+            :
+              <Button component={RouterLink} to="/login" color="inherit" size="large">로그인</Button>
+            }
+          </Box>
 
         </Toolbar>
       </AppBar>
