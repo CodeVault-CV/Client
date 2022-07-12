@@ -1,9 +1,7 @@
-import MainTemplate from "../../templates/MainTemplate";
+// import MainTemplate from "../../templates/MainTemplate";
 
 export default function HomeContainer() {
     return (
-        <MainTemplate>
-
-        </MainTemplate>
+        <div>home</div>
     )
 }

@@ -1,7 +1,3 @@
-import axios from "axios";
+import { get } from "../utils/http";
 
-const API = axios.create({
-    baseURL: "http://choco-one.iptime.org:8090/api"
-});
-
-export const loginUser = (code: string) => API.get(`/user/login?code=${code}`);
+export const getToken = (code: string) => get(`/user/login?code=${code}`);
