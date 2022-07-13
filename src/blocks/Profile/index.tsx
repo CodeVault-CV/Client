@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
-import Avatar from '@mui/material/Avatar';
+import styled from "@emotion/styled";
+import Avatar from "@mui/material/Avatar";
 
 const ProfileWrapper = styled.div`
   display: flex;

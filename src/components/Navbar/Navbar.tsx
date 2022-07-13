@@ -10,12 +10,8 @@ interface NavProps {
 function Navbar({ auth, logout }: NavProps) {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar 
-        position="static"
-        sx={{ boxShadow: 0 }}
-      >
+      <AppBar position="static" sx={{ boxShadow: 0 }}>
         <Toolbar variant="dense" sx={{ justifyContent: "space-between" }}>
-
           <Link href="/" underline="none" sx={{ color: "white" }}>
             <Typography variant="h5" component="div" sx={{ fontWeight: "bold" }}>
               Algong
@@ -23,16 +19,21 @@ function Navbar({ auth, logout }: NavProps) {
           </Link>
 
           <Box sx={{ display: "flex" }}>
-            {auth ? 
+            {auth ? (
               <React.Fragment>
-                <Button color="inherit" size="large">스터디</Button>
-                <Button color="inherit" size="large" onClick={logout}>로그아웃</Button>
+                <Button color="inherit" size="large">
+                  스터디
+                </Button>
+                <Button color="inherit" size="large" onClick={logout}>
+                  로그아웃
+                </Button>
               </React.Fragment>
-            :
-              <Button component={RouterLink} to="/login" color="inherit" size="large">로그인</Button>
-            }
+            ) : (
+              <Button component={RouterLink} to="/login" color="inherit" size="large">
+                로그인
+              </Button>
+            )}
           </Box>
-
         </Toolbar>
       </AppBar>
     </Box>

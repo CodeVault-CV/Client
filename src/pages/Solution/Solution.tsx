@@ -5,14 +5,14 @@ import SolutionHeader from "./SolutionHeader";
 import SolutionForm from "./SolutionForm";
 
 export default function Solution() {
-    return (
-        <Stack spacing={2}>
-            <Wrapper>
-                <SolutionHeader/>
-            </Wrapper>
-            <Wrapper>
-                <SolutionForm/>
-            </Wrapper>
-        </Stack>
-    )
+  return (
+    <Stack spacing={2}>
+      <Wrapper>
+        <SolutionHeader />
+      </Wrapper>
+      <Wrapper>
+        <SolutionForm />
+      </Wrapper>
+    </Stack>
+  );
 }

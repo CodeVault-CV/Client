@@ -1,7 +1,5 @@
-import StudyInfo from "./StudyInfo"
+import StudyInfo from "./StudyInfo";
 
 export default function StudyInfoContainer() {
-    return (
-        <StudyInfo />
-    )
+  return <StudyInfo />;
 }

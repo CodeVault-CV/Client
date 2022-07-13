@@ -1,10 +1,10 @@
-import styled from '@emotion/styled';
-import List from '@mui/material/List';
-import Wrapper from '../../blocks/Wrapper';
-import StudyListItem from './StudyListItem';
-import StudyCreationModal from './StudyCreationModal';
+import styled from "@emotion/styled";
+import List from "@mui/material/List";
+import Wrapper from "../../blocks/Wrapper";
+import StudyListItem from "./StudyListItem";
+import StudyCreationModal from "./StudyCreationModal";
 
-import { IStudy } from '.';
+import { IStudy } from ".";
 
 const LayoutWrapper = styled.div`
   display: flex;

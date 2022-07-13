@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { SelectChangeEvent } from '@mui/material/Select';
-import { StreamParser } from '@codemirror/language';
-import { cpp, java, kotlin } from '@codemirror/legacy-modes/mode/clike';
-import { javascript, typescript} from '@codemirror/legacy-modes/mode/javascript';
-import { python } from '@codemirror/legacy-modes/mode/python';
-import { swift } from '@codemirror/legacy-modes/mode/swift';
+import { useState } from "react";
+import { SelectChangeEvent } from "@mui/material/Select";
+import { StreamParser } from "@codemirror/language";
+import { cpp, java, kotlin } from "@codemirror/legacy-modes/mode/clike";
+import { javascript, typescript } from "@codemirror/legacy-modes/mode/javascript";
+import { python } from "@codemirror/legacy-modes/mode/python";
+import { swift } from "@codemirror/legacy-modes/mode/swift";
 
-import CodeViewer from './CodeViewer';
+import CodeViewer from "./CodeViewer";
 
 interface CodeViewerContainerProps {
   value: string;
@@ -14,24 +14,24 @@ interface CodeViewerContainerProps {
 }
 
 export default function CodeViewerContainer({ value, handleChange }: CodeViewerContainerProps) {
-  const [language, setLanguage] = useState('cpp');
+  const [language, setLanguage] = useState("cpp");
   const [codeParser, setCodeParser] = useState(cpp);
 
   const getCodeParser = (language: string): StreamParser<unknown> => {
     switch (language) {
-      case 'cpp':
+      case "cpp":
         return cpp;
-      case 'java':
+      case "java":
         return java;
-      case 'javascript':
+      case "javascript":
         return javascript;
-      case 'kotlin':
+      case "kotlin":
         return kotlin;
-      case 'python':
+      case "python":
         return python;
-      case 'swift':
+      case "swift":
         return swift;
-      case 'typescript':
+      case "typescript":
         return typescript;
       default:
         return cpp;

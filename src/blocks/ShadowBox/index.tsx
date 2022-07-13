@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
-import { PropsWithChildren } from 'react';
+import styled from "@emotion/styled";
+import { PropsWithChildren } from "react";
 
 const Box = styled.div`
   background-color: white;
@@ -14,9 +14,5 @@ const Box = styled.div`
 `;
 
 export default function ShadowBox({ children }: PropsWithChildren) {
-    return (
-        <Box>
-            {children}
-        </Box>
-    )
+  return <Box>{children}</Box>;
 }

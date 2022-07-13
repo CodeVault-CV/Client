@@ -5,18 +5,18 @@ import { AuthContext } from "../../hoc/AuthContext";
 import Login from "./Login";
 
 export default function LoginContainer() {
-    const navigate = useNavigate();
-    const { auth, login } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { auth, login } = useContext(AuthContext);
 
-    useEffect(() => {
-        if(auth) navigate("/", { replace: true });
+  useEffect(() => {
+    if (auth) navigate("/", { replace: true });
 
-        const code = new URLSearchParams(window.location.search).get("code");
-        if(!code) return;
-        
-        login(code);
-        navigate("/", { replace: true });
-    }, [auth, login, navigate]);
+    const code = new URLSearchParams(window.location.search).get("code");
+    if (!code) return;
 
-    return <Login />
+    login(code);
+    navigate("/", { replace: true });
+  }, [auth, login, navigate]);
+
+  return <Login />;
 }
