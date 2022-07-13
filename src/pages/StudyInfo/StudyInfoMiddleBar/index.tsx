@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import Button from '@mui/material/Button';
 import Wrapper from '../../../blocks/Wrapper';
 import SearchTextField from './SearchTextField';
 import SortSplitButton from './SortSplitButton';
+import SessionAdder from './SessionAdder';
 
 const MiddleBarWrapper = styled.div`
   display: flex;
@@ -25,9 +25,7 @@ export default function StudyInfoMiddleBar() {
           <SearchTextField />
           <SortSplitButton />
         </SearchBarWrapper>
-        <Button variant='outlined' color='inherit'>
-          추가
-        </Button>
+        <SessionAdder />
       </MiddleBarWrapper>
     </Wrapper>
   );
