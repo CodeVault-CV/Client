@@ -1,13 +1,19 @@
-import CodeViewer from './CodeViewer';
+import { useState } from 'react';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { StreamParser } from '@codemirror/language';
 import { cpp, java, kotlin } from '@codemirror/legacy-modes/mode/clike';
 import { javascript, typescript} from '@codemirror/legacy-modes/mode/javascript';
 import { python } from '@codemirror/legacy-modes/mode/python';
 import { swift } from '@codemirror/legacy-modes/mode/swift';
-import { useState } from 'react';
 
-export default function CodeViewerContainer() {
+import CodeViewer from './CodeViewer';
+
+interface CodeViewerContainerProps {
+  value: string;
+  handleChange(value: string): void;
+}
+
+export default function CodeViewerContainer({ value, handleChange }: CodeViewerContainerProps) {
   const [language, setLanguage] = useState('cpp');
   const [codeParser, setCodeParser] = useState(cpp);
 
@@ -40,6 +46,8 @@ export default function CodeViewerContainer() {
 
   return (
     <CodeViewer
+      value={value}
+      handleChange={handleChange}
       codeParser={codeParser}
       language={language}
       handleSelectChange={handleSelectChange}

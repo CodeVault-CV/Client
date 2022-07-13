@@ -3,18 +3,29 @@ import CodeViewer from "../../../blocks/CodeViewer";
 import TextEditor from "../../../components/TextEditor";
 
 interface SolutionFormProps {
+    code: string;
+    review: string;
     view: string;
-    handleChange(event: React.MouseEvent<HTMLElement>, newView: string): void;
+    changeCode(value: string): void;
+    changeReview(event: React.ChangeEvent<HTMLInputElement>): void;
+    changeView(event: React.MouseEvent<HTMLElement>, newView: string): void;
 }
 
-export default function SolutionForm({ view, handleChange }: SolutionFormProps) {
+export default function SolutionForm({ 
+    code,
+    review, 
+    view,
+    changeCode, 
+    changeReview, 
+    changeView 
+}: SolutionFormProps) {
     return (
         <Box>
             <Box sx={{ display: "flex", flexDirection: "row-reverse" }}>
                 <ToggleButtonGroup
                     value={view}
                     exclusive
-                    onChange={handleChange}
+                    onChange={changeView}
                     size="small"
                 >
                     <ToggleButton value="code">Code</ToggleButton>
@@ -22,9 +33,9 @@ export default function SolutionForm({ view, handleChange }: SolutionFormProps) 
                 </ToggleButtonGroup>
             </Box>
             {view === "code" ?
-                <CodeViewer/>
+                <CodeViewer value={code} handleChange={changeCode} />
                 :
-                <TextEditor/>
+                <TextEditor value={review} handleChange={changeReview} />
             }
         </Box>
     )

@@ -1,20 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import MarkdownViewer from "./MarkdownViewer";
 
 interface MarkdownViewerContainerProps {
+    value: string;
+    handleChange(event: React.ChangeEvent<HTMLInputElement>): void;
     preview: boolean;
 }
 
-export default function MarkdownViewerContainer({ preview }: MarkdownViewerContainerProps) {
-    const [text, setText] = useState("");
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setText(event.target.value);
-    }
-
+export default function MarkdownViewerContainer({ value, handleChange, preview }: MarkdownViewerContainerProps) {
     return (
         <MarkdownViewer 
-            text={text} 
+            value={value} 
             handleChange={handleChange} 
             preview={preview} 
         />

@@ -5,11 +5,13 @@ import PreviewIcon from '@mui/icons-material/Visibility';
 import MarkdownViewer from "../../blocks/MarkdownViewer";
 
 interface TextEditorProps {
+    value: string;
     view: string;
-    handleChange(event: React.MouseEvent<HTMLElement>, newView: string): void;
+    handleChange(event: React.ChangeEvent<HTMLInputElement>): void;
+    changeView(event: React.MouseEvent<HTMLElement>, newView: string): void;
 }
 
-export default function TextEditor({ view, handleChange }:TextEditorProps) {
+export default function TextEditor({ value, view, handleChange, changeView }:TextEditorProps) {
     return (
         <Stack
             spacing={1}
@@ -17,7 +19,7 @@ export default function TextEditor({ view, handleChange }:TextEditorProps) {
             <ToggleButtonGroup
                 value={view}
                 exclusive
-                onChange={handleChange}
+                onChange={changeView}
                 size="small"
             >
                 <ToggleButton value="edit">
@@ -27,7 +29,7 @@ export default function TextEditor({ view, handleChange }:TextEditorProps) {
                     <PreviewIcon/>
                 </ToggleButton>
             </ToggleButtonGroup>
-            <MarkdownViewer preview={view === "preview"} />
+            <MarkdownViewer value={value} handleChange={handleChange} preview={view === "preview"} />
         </Stack>
     )
 }
