@@ -5,12 +5,20 @@ import CodeMirror from '@uiw/react-codemirror';
 import { StreamParser, StreamLanguage } from '@codemirror/language';
 
 interface CodeViewerProps {
+  value: string;
   codeParser: StreamParser<unknown>;
   language: string;
+  handleChange(value: string): void;
   handleSelectChange(event: SelectChangeEvent): void;
 }
 
-export default function CodeViewerBlock({ codeParser, language, handleSelectChange }: CodeViewerProps) {
+export default function CodeViewerBlock({ 
+  value, 
+  codeParser, 
+  language, 
+  handleChange, 
+  handleSelectChange 
+}: CodeViewerProps) {
   return (
     <div>
       <FormControl sx={{ m: 1, minWidth: 70 }} size='small'>
@@ -29,7 +37,8 @@ export default function CodeViewerBlock({ codeParser, language, handleSelectChan
         </Select>
       </FormControl>
       <CodeMirror
-        height='500px'
+        value={value}
+        onChange={handleChange}
         theme='dark'
         extensions={[StreamLanguage.define(codeParser)]}
       />

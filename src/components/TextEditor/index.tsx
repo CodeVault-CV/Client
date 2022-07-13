@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import useView from "../../hooks/useView";
 import TextEditor from "./TextEditor";
 
-export default function TextEditorContainer() {
-    const [view, setView] = useState("edit");
+interface TextEditorContainerProps {
+    value: string;
+    handleChange(event: React.ChangeEvent<HTMLInputElement>): void;
+}
 
-    const handleChange = (event: React.MouseEvent<HTMLElement>, newView: string) => {
-        setView(newView);
-    }
+export default function TextEditorContainer({ value, handleChange }: TextEditorContainerProps) {
+    const { view, changeView }  = useView("edit");
 
     return (
-        <TextEditor view={view} handleChange={handleChange}/>
+        <TextEditor 
+            value={value} 
+            view={view} 
+            handleChange={handleChange} 
+            changeView={changeView}
+        />
     )
 }

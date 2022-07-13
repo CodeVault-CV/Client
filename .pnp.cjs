@@ -1132,6 +1132,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:17.0.3"\
       ],\
       [\
+        "@types/react-syntax-highlighter",\
+        "npm:15.5.3"\
+      ],\
+      [\
         "@types/react-transition-group",\
         "npm:4.4.5"\
       ],\
@@ -5087,6 +5091,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:16.11.41"],\
             ["@types/react", "npm:18.0.14"],\
             ["@types/react-dom", "npm:18.0.5"],\
+            ["@types/react-syntax-highlighter", "npm:15.5.3"],\
             ["@uiw/react-codemirror", "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:4.11.1"],\
             ["axios", "npm:0.27.2"],\
             ["date-fns", "npm:2.28.0"],\
@@ -10424,6 +10429,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/react-syntax-highlighter", [\
+        ["npm:15.5.3", {\
+          "packageLocation": "./.yarn/cache/@types-react-syntax-highlighter-npm-15.5.3-7c06005201-0aaf7af216.zip/node_modules/@types/react-syntax-highlighter/",\
+          "packageDependencies": [\
+            ["@types/react-syntax-highlighter", "npm:15.5.3"],\
+            ["@types/react", "npm:18.0.14"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/react-transition-group", [\
         ["npm:4.4.5", {\
           "packageLocation": "./.yarn/cache/@types-react-transition-group-npm-4.4.5-8f92107b07-265f1c7406.zip/node_modules/@types/react-transition-group/",\
@@ -11304,6 +11319,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:16.11.41"],\
             ["@types/react", "npm:18.0.14"],\
             ["@types/react-dom", "npm:18.0.5"],\
+            ["@types/react-syntax-highlighter", "npm:15.5.3"],\
             ["@uiw/react-codemirror", "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:4.11.1"],\
             ["axios", "npm:0.27.2"],\
             ["date-fns", "npm:2.28.0"],\
