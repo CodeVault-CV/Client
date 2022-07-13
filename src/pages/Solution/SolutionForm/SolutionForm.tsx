@@ -32,10 +32,11 @@ export default function SolutionForm({
                     <ToggleButton value="review">Review</ToggleButton>
                 </ToggleButtonGroup>
             </Box>
-            {view === "code" ?
+            {view === "code" ? (
                 <CodeViewer value={code} handleChange={changeCode} />
-                :
+            ) : (
                 <TextEditor value={review} handleChange={changeReview} />
+            )
             }
         </Box>
     )
