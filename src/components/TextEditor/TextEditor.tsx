@@ -10,7 +10,6 @@ interface TextEditorProps {
 }
 
 export default function TextEditor({ view, handleChange }:TextEditorProps) {
-
     return (
         <Stack
             spacing={1}
