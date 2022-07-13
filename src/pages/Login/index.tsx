@@ -16,7 +16,7 @@ export default function LoginContainer() {
         
         login(code);
         navigate("/", { replace: true });
-    }, [auth]);
+    }, [auth, login, navigate]);
 
     return <Login />
 }

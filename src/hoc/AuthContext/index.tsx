@@ -15,8 +15,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     const [auth, setAuth] = useState(false);
     const [name, setName] = useState("");
     const [token, setToken] = useState("");
-    const navigate = useNavigate();
-    
+    const navigate = useNavigate();    
 
     const checkAuth = () => {
         const authData = localStorage.getItem("auth");
