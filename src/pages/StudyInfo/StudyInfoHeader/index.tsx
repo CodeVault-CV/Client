@@ -2,10 +2,11 @@ import styled from '@emotion/styled';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import SettingsIcon from '@mui/icons-material/Settings';
+
 import Header from '../../../components/Header';
 import Profile from '../../../blocks/Profile';
 import Wrapper from '../../../blocks/Wrapper';
+import StudySettingMenu from './StudySettingMenu';
 
 const AvatarGroupWrapper = styled.div`
   display: flex;
@@ -30,9 +31,7 @@ function HeaderEndBlock() {
       <Button color='inherit'>
         <GitHubIcon fontSize='large' />
       </Button>
-      <Button color='inherit'>
-        <SettingsIcon fontSize='large' />
-      </Button>
+      <StudySettingMenu />
     </EndBlockWrapper>
   );
 }

@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import List from '@mui/material/List';
-import Button from '@mui/material/Button';
 import Wrapper from '../../blocks/Wrapper';
 import StudyListItem from './StudyListItem';
+import StudyCreationModal from './StudyCreationModal';
 
 import { IStudy } from '.';
 
@@ -38,7 +38,7 @@ export default function StudyLisPage({ studys }: StudyListProps) {
             <StudyListItem key={study.studyId} study={study} />
           ))}
         </ListWrapper>
-        <Button variant='outlined'>스터디 생성</Button>
+        <StudyCreationModal />
       </LayoutWrapper>
     </Wrapper>
   );
