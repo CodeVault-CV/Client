@@ -2,6 +2,7 @@ import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../hoc/AuthContext";
+import Home from "./Home";
 
 export default function HomeContainer() {
   const navigate = useNavigate();
@@ -15,5 +16,5 @@ export default function HomeContainer() {
     }
   }, [auth, login, navigate]);
 
-  return <div>home</div>;
+  return <Home />;
 }
