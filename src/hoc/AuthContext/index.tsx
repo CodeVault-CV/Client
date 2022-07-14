@@ -46,7 +46,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const logout = () => {
     localStorage.removeItem("auth");
     checkAuth();
-    navigate("/", { replace: true });
+    navigate("/");
   };
 
   useEffect(() => {
