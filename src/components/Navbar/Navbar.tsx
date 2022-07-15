@@ -2,13 +2,16 @@ import { Link as RouterLink } from "react-router-dom";
 import { Box, Toolbar, Typography, Button, Container } from "@mui/material";
 import DeviceHubIcon from "@mui/icons-material/DeviceHub";
 import LoginButton from "./LoginButton";
+import StudyButton from "./StudyButton"
+import { IStudy } from "."
 
 interface NavProps {
   auth: boolean;
+  studys: IStudy[];
   logout(): void;
 }
 
-function Navbar({ auth, logout }: NavProps) {
+function Navbar({ auth, studys, logout }: NavProps) {
   return (
     <Box sx={{ flexGrow: 1, borderBottom: 1, borderColor: "divider" }}>
       <Container maxWidth="lg" sx={{ px: 0 }}>
@@ -23,9 +26,7 @@ function Navbar({ auth, logout }: NavProps) {
           <Box sx={{ display: "flex" }}>
             {auth ? (
               <>
-                <Button component={RouterLink} to="/study-list" color="inherit" size="large">
-                  스터디
-                </Button>
+                <StudyButton studys={studys} />
                 <Button color="inherit" size="large" onClick={logout}>
                   로그아웃
                 </Button>

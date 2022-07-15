@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
-import { TextField, Button, Modal } from "@mui/material";
+import { useState, Fragment } from 'react';
 
-import { useState } from "react";
+import styled from '@emotion/styled';
+import { TextField, Button, Modal } from '@mui/material';
 
 const ModalWrapper = styled.div`
   position: absolute;
@@ -28,14 +28,14 @@ const CenterLayoutWrapper = styled.div`
   }
 `;
 
-export default function StudyCreationModal() {
+export default function CreateStudyButton() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
-      <Button variant="outlined" onClick={handleOpen}>
+    <Fragment>
+      <Button onClick={handleOpen} sx={{ width: '100%' }}>
         스터디 생성
       </Button>
       <Modal open={open} onClose={handleClose}>
@@ -43,13 +43,17 @@ export default function StudyCreationModal() {
           <CenterLayoutWrapper>
             <h2>스터디 생성</h2>
           </CenterLayoutWrapper>
-          <TextField id="filled-basic" label="스터디 이름" variant="outlined" />
-          <TextField id="filled-basic" label="Git Repository 이름" variant="outlined" />
+          <TextField id='filled-basic' label='스터디 이름' variant='outlined' />
+          <TextField
+            id='filled-basic'
+            label='Git Repository 이름'
+            variant='outlined'
+          />
           <CenterLayoutWrapper>
-            <Button variant="contained">생성</Button>
+            <Button variant='contained'>생성</Button>
           </CenterLayoutWrapper>
         </ModalWrapper>
       </Modal>
-    </div>
+    </Fragment>
   );
 }
