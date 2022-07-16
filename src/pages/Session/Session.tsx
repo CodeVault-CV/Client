@@ -5,11 +5,19 @@ import Wrapper from "../../blocks/Wrapper";
 import Problem from "./Problem";
 import SessionHeader from "./SessionHeader";
 
-function Session() {
+interface SessionProps {
+  sessionInfo: {
+    name: string;
+    start: Date;
+    end: Date;
+  };
+}
+
+function Session({ sessionInfo }: SessionProps) {
   return (
     <Stack spacing={3}>
       <Wrapper>
-        <SessionHeader />
+        <SessionHeader {...sessionInfo} />
       </Wrapper>
       <Wrapper>
         <ProblemAdder />

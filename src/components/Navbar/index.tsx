@@ -1,9 +1,8 @@
-import { useContext } from "react";
+import { useAuth } from "../../hoc/AuthContext";
 
 import Navbar from "./Navbar";
-import { AuthContext } from "../../hoc/AuthContext";
 
 export default function NavbarContainer() {
-  const { auth, logout } = useContext(AuthContext);
+  const { auth, logout } = useAuth();
   return <Navbar auth={auth} logout={logout} />;
 }
