@@ -14,10 +14,10 @@ const AltTextWrapper = styled.div`
 `;
 
 interface StudyListProps {
-  studys: IStudy[];
+  studies: IStudy[];
 }
 
-export default function StudyButton({ studys }: StudyListProps) {
+export default function StudyButton({ studies }: StudyListProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -39,8 +39,8 @@ export default function StudyButton({ studys }: StudyListProps) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {studys.length ? (
-          studys.map((study) => (
+        {studies.length ? (
+          studies.map((study) => (
             <MenuItem
               key={study.studyId}
               onClick={handleClose}

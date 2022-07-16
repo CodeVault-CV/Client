@@ -1,4 +1,4 @@
-import { useState, createContext, PropsWithChildren, useEffect } from "react";
+import { useState, createContext, PropsWithChildren, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { getToken } from "../../api";
@@ -62,4 +62,12 @@ export function AuthProvider({ children }: PropsWithChildren) {
   };
 
   return <AuthContext.Provider value={initialValue}>{children}</AuthContext.Provider>;
+}
+
+export function useAuth() {
+  const state = useContext(AuthContext);
+  if (!state) {
+    throw new Error("Cannot find AuthProvider");
+  }
+  return state;
 }

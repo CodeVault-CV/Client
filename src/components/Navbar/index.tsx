@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Navbar from './Navbar';
-import { AuthContext } from '../../hoc/AuthContext';
+import { useAuth } from '../../hoc/AuthContext';
 import { getStudyList } from '../../api';
 
 export interface IStudy {
@@ -13,17 +13,17 @@ export interface IStudy {
 }
 
 export default function NavbarContainer() {
-  const { auth, token, logout } = useContext(AuthContext);
-  const [studys, setStudys] = useState<IStudy[]>([]);
+  const { auth, token, logout } = useAuth();
+  const [studies, setStudies] = useState<IStudy[]>([]);
 
   useEffect(() => {
     const requestStudyList = async () => {
       const response = await getStudyList(token);
-      setStudys(response.data);
+      setStudies(response.data);
     };
 
     token && requestStudyList();
   }, [token]);
 
-  return <Navbar auth={auth} logout={logout} studys={studys} />;
+  return <Navbar auth={auth} logout={logout} studies={studies} />;
 }

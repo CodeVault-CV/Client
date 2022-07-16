@@ -7,11 +7,11 @@ import { IStudy } from "."
 
 interface NavProps {
   auth: boolean;
-  studys: IStudy[];
+  studies: IStudy[];
   logout(): void;
 }
 
-function Navbar({ auth, studys, logout }: NavProps) {
+function Navbar({ auth, studies, logout }: NavProps) {
   return (
     <Box sx={{ flexGrow: 1, borderBottom: 1, borderColor: "divider" }}>
       <Container maxWidth="lg" sx={{ px: 0 }}>
@@ -26,7 +26,7 @@ function Navbar({ auth, studys, logout }: NavProps) {
           <Box sx={{ display: "flex" }}>
             {auth ? (
               <>
-                <StudyButton studys={studys} />
+                <StudyButton studies={studies} />
                 <Button color="inherit" size="large" onClick={logout}>
                   로그아웃
                 </Button>
