@@ -1,6 +1,6 @@
 import { rest } from "msw";
 
-const baseURL = "http://choco-one.iptime.org:8090/api";
+const baseURL = process.env.REACT_APP_SERVER_BASE_URL;
 
 export const handlers = [
   rest.get(baseURL + "/session/:sessionId", (req, res, ctx) => {
@@ -10,8 +10,8 @@ export const handlers = [
         data: {
           id: req.params.sessionId,
           name: "BFS 박살",
-          start: new Date(),
-          end: new Date(),
+          start: new Date(2022, 6, 12),
+          end: new Date(2022, 6, 18),
         },
       })
     );

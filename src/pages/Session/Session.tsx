@@ -2,7 +2,6 @@ import { Stack } from "@mui/material";
 
 import ProblemAdder from "./ProblemAdder";
 import Wrapper from "../../blocks/Wrapper";
-import Problem from "./Problem";
 import SessionHeader from "./SessionHeader";
 
 interface SessionProps {
@@ -21,9 +20,6 @@ function Session({ sessionInfo }: SessionProps) {
       </Wrapper>
       <Wrapper>
         <ProblemAdder />
-      </Wrapper>
-      <Wrapper>
-        <Problem />
       </Wrapper>
     </Stack>
   );

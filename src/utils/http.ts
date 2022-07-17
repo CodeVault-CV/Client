@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://choco-one.iptime.org:8090/api",
+  baseURL: process.env.REACT_APP_SERVER_BASE_URL,
 });
 
 const get = async (url: string, headers = {}) => {
