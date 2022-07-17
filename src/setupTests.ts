@@ -9,6 +9,8 @@ import { server } from "./mocks/server";
 beforeAll(() => {
   // Enable the mocking in tests.
   server.listen();
+  // 유저 인증 모킹
+  window.localStorage.setItem("auth", JSON.stringify({ name: "tester", token: "test_token" }));
 });
 
 afterEach(() => {
