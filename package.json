@@ -63,5 +63,8 @@
     "eslint": "^8.18.0",
     "eslint-config-react-app": "^7.0.1",
     "msw": "^0.44.1"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
