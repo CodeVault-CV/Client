@@ -1,4 +1,13 @@
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+} from "@mui/material";
 
 export default function ProblemAdder() {
   return (
@@ -12,7 +21,12 @@ export default function ProblemAdder() {
       <Stack direction="row" spacing={2}>
         <FormControl sx={{ width: 170 }} size="small">
           <InputLabel id="platform-select">Platform</InputLabel>
-          <Select labelId="platform-select-label" id="platform-select" value="programmers" label="Platform">
+          <Select
+            labelId="platform-select-label"
+            id="platform-select"
+            value="programmers"
+            label="Platform"
+          >
             <MenuItem value="programmers">프로그래머스</MenuItem>
             <MenuItem value="baekjoon">백준</MenuItem>
           </Select>
@@ -40,7 +54,9 @@ export default function ProblemAdder() {
           }}
         />
       </Stack>
-      <Button>추가</Button>
+      <Button variant="outlined" color="inherit" sx={{ borderColor: "divider", fontWeight: 700 }}>
+        추가
+      </Button>
     </Box>
   );
 }

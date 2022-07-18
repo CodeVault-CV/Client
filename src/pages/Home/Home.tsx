@@ -14,9 +14,15 @@ export default function Home() {
         }}
       >
         <Typography variant="h2" fontWeight="bold">
-          Solve Problems
+          <Typography variant="h2" color="primary" component="span" fontWeight="bold">
+            Solve
+          </Typography>{" "}
+          Problems
           <br />
-          Solve it together
+          Solve it{" "}
+          <Typography variant="h2" color="primary" component="span" fontWeight="bold">
+            together
+          </Typography>
         </Typography>
         <Box mt={2}>
           <Typography variant="h6" fontWeight="bold">

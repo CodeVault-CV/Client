@@ -18,7 +18,7 @@ export default function LoginButton() {
 
   return (
     <>
-      <Button aria-describedby={id} color="inherit" size="large" onClick={handleClick}>
+      <Button aria-describedby={id} color="inherit" size="large" sx={{ fontWeight: 800 }} onClick={handleClick}>
         로그인
       </Button>
       <Popover
@@ -41,6 +41,7 @@ export default function LoginButton() {
           variant="contained"
           size="large"
           startIcon={<GitHubIcon />}
+          sx={{ fontWeight: 800 }}
         >
           깃허브로 로그인
         </Button>

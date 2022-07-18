@@ -30,7 +30,7 @@ export default function StudyButton({ studies }: StudyListProps) {
 
   return (
     <Fragment>
-      <Button color='inherit' size='large' onClick={handleClick}>
+      <Button size='large' sx={{ fontWeight: 800 }} onClick={handleClick}>
         스터디
       </Button>
       <Menu

@@ -18,7 +18,7 @@ function Layout() {
       <Stack>
         <AuthProvider>
           <Navbar />
-          <Container maxWidth="lg">
+          <Container maxWidth="lg" sx={{ mt: 2 }}>
             <Outlet />
           </Container>
         </AuthProvider>

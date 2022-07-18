@@ -27,7 +27,7 @@ function Navbar({ auth, studies, logout }: NavProps) {
             {auth ? (
               <>
                 <StudyButton studies={studies} />
-                <Button color="inherit" size="large" onClick={logout}>
+                <Button color="inherit" size="large" sx={{ fontWeight: 800 }} onClick={logout}>
                   로그아웃
                 </Button>
               </>
