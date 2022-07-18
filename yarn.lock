@@ -4133,6 +4133,7 @@ __metadata:
     katex: ^0.16.0
     msw: ^0.44.1
     react: ^18.2.0
+    react-card-flip: ^1.1.5
     react-dom: ^18.2.0
     react-markdown: ^8.0.3
     react-router-dom: ^6.3.0
@@ -12304,6 +12305,16 @@ __metadata:
     regenerator-runtime: ^0.13.9
     whatwg-fetch: ^3.6.2
   checksum: 1bb031080af15397d6eb9c69a0c2e93799991f7197a086e4409ba719398f1256b542a3d6c9a34673d516c684eef3e8226c99b335982593851f58f65f6e43571b
+  languageName: node
+  linkType: hard
+
+"react-card-flip@npm:^1.1.5":
+  version: 1.1.5
+  resolution: "react-card-flip@npm:1.1.5"
+  peerDependencies:
+    react: ^17.0.1
+    react-dom: ^17.0.1
+  checksum: f46711bed0ca53ae1eb9f5fe86764a38b3e8959ab27f645a82e059767a8074519fd7c4c54915c03f04381a2ed5ccddf813e047304fc1b4ec6bdbfdae760d894a
   languageName: node
   linkType: hard
 

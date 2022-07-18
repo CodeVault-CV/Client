@@ -4252,6 +4252,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "npm:3.0.0"\
       ],\
       [\
+        "react-card-flip",\
+        "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:1.1.5"\
+      ],\
+      [\
         "react-dev-utils",\
         "npm:12.0.1"\
       ],\
@@ -5301,6 +5305,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["katex", "npm:0.16.0"],\
             ["msw", "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:0.44.1"],\
             ["react", "npm:18.2.0"],\
+            ["react-card-flip", "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:1.1.5"],\
             ["react-dom", "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:18.2.0"],\
             ["react-markdown", "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:8.0.3"],\
             ["react-router-dom", "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:6.3.0"],\
@@ -11613,6 +11618,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["katex", "npm:0.16.0"],\
             ["msw", "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:0.44.1"],\
             ["react", "npm:18.2.0"],\
+            ["react-card-flip", "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:1.1.5"],\
             ["react-dom", "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:18.2.0"],\
             ["react-markdown", "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:8.0.3"],\
             ["react-router-dom", "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:6.3.0"],\
@@ -21992,6 +21998,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["raf", "npm:3.4.1"],\
             ["regenerator-runtime", "npm:0.13.9"],\
             ["whatwg-fetch", "npm:3.6.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-card-flip", [\
+        ["npm:1.1.5", {\
+          "packageLocation": "./.yarn/cache/react-card-flip-npm-1.1.5-161e9b1996-f46711bed0.zip/node_modules/react-card-flip/",\
+          "packageDependencies": [\
+            ["react-card-flip", "npm:1.1.5"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:1.1.5", {\
+          "packageLocation": "./.yarn/__virtual__/react-card-flip-virtual-231cffdefa/0/cache/react-card-flip-npm-1.1.5-161e9b1996-f46711bed0.zip/node_modules/react-card-flip/",\
+          "packageDependencies": [\
+            ["react-card-flip", "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:1.1.5"],\
+            ["@types/react", "npm:18.0.14"],\
+            ["@types/react-dom", "npm:18.0.5"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:4d56ad9263b9c52c106e3f9ce09c1f1dcad5fdb52b737cdfd98ad1267a0a580bb2055d9bff33257f3ae2a7f34da879d65bfaf600762be45c5228dcdd0fa7fb57#npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\

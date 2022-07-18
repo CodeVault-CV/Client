@@ -8,6 +8,8 @@ export default function ProblemList() {
         <ProblemCard />
         <ProblemCard />
         <ProblemCard />
+        <ProblemCard />
+        <ProblemCard />
       </Grid>
     </Box>
   );
