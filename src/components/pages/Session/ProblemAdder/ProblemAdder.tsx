@@ -1,13 +1,5 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-} from "@mui/material";
+import { Box, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
+import Button from "../../../atoms/Button";
 
 export default function ProblemAdder() {
   return (
@@ -54,9 +46,7 @@ export default function ProblemAdder() {
           }}
         />
       </Stack>
-      <Button variant="outlined" color="inherit" sx={{ borderColor: "divider", fontWeight: 700 }}>
-        추가
-      </Button>
+      <Button>추가</Button>
     </Box>
   );
 }

@@ -1,4 +1,3 @@
-import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -9,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 
 import { Fragment, useState, useRef } from 'react';
+import Button from '../../../../atoms/Button';
 
 export default function SortSplitButton() {
   const options = ['최신순', '오래된순'];
