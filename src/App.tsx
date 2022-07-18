@@ -2,10 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Layout from "./hoc/Layout";
 
-import Home from "./pages/Home";
-import StudyInfo from "./pages/StudyInfo";
-import Session from "./pages/Session";
-import Solution from "./pages/Solution";
+import Home from "./components/pages/Home";
+import StudyInfo from "./components/pages/StudyInfo";
+import Session from "./components/pages/Session";
+import Solution from "./components/pages/Solution";
 
 function App() {
   return (

@@ -3,7 +3,7 @@ import { Container, Stack, CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import { AuthProvider } from "../../hoc/AuthContext";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/blocks/Navbar";
 
 const baseTheme = createTheme({
   palette: {
@@ -18,7 +18,7 @@ function Layout() {
       <Stack>
         <AuthProvider>
           <Navbar />
-          <Container maxWidth="lg">
+          <Container maxWidth="lg" sx={{ mt: 2 }}>
             <Outlet />
           </Container>
         </AuthProvider>
