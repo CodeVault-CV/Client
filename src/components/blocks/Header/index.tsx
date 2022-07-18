@@ -8,7 +8,7 @@ interface HeaderProps {
 
 export default function Header({ title, children, endBlock }: PropsWithChildren<HeaderProps>) {
   return (
-    <Stack direction="row" px={2}>
+    <Stack direction="row" pl={2}>
       <Stack spacing={2} sx={{ flexGrow: 1 }}>
         <Typography variant="h3" component="h1" fontWeight={800}>
           {title}

@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
-import { Button, TextField, Menu } from '@mui/material';
+import { TextField, Menu } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import { useState, MouseEvent } from 'react';
+import Button from '../../../../atoms/Button';
 
 const SessionAdderWrapper = styled.div`
   padding: 20px;
@@ -34,7 +35,7 @@ export default function SessionAdder() {
 
   return (
     <div>
-      <Button variant='outlined' color='inherit' onClick={handleClick}>
+      <Button onClick={handleClick}>
         추가
       </Button>
       <Menu

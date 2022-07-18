@@ -1,6 +1,7 @@
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
-import LinearProgressWithLabel from "../../../blocks/LinearProgressWithLabel";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 
+import Button from "../../../atoms/Button";
+import LinearProgressWithLabel from "../../../blocks/LinearProgressWithLabel";
 import Wrapper from "../../../blocks/Wrapper";
 import ProblemLabel from "../ProblemLabel";
 
@@ -17,11 +18,7 @@ export default function ProblemCard() {
             <Box sx={{ flexGrow: 1, height: "fit-content" }}>
               <LinearProgressWithLabel value={75} sx={{ height: 6, borderRadius: 3 }} />
             </Box>
-            <Button
-              variant="outlined"
-              color="inherit"
-              sx={{ borderColor: "divider", fontWeight: 700, ml: 3 }}
-            >
+            <Button sx={{ ml: 3 }}>
               해결하기
             </Button>
           </Box>
