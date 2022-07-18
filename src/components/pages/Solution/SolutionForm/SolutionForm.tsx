@@ -1,6 +1,6 @@
 import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import CodeViewer from "../../../blocks/CodeViewer";
-import TextEditor from "../../../components/TextEditor";
+import TextEditor from "../../../blocks/TextEditor";
 
 interface SolutionFormProps {
   code: string;

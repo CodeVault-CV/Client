@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import useView from "../../../hooks/useView";
+import useView from "../../../../hooks/useView";
 import SolutionForm from "./SolutionForm";
 
 export default function SolutionFormContainer() {

@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { AuthContext } from "../../hoc/AuthContext";
+import { AuthContext } from "../../../hoc/AuthContext";
 import Home from "./Home";
 
 export default function HomeContainer() {

@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, Chip } from "@mui/material";
-import Header from "../../../components/Header";
-import formatDateLabel from "../../../utils/formatDateLabel";
+import Header from "../../../blocks/Header";
+import formatDateLabel from "../../../../utils/formatDateLabel";
 
 interface SessionHeaderProps {
   name: string;

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { getSessionInfo } from "../../api";
-import { useAuth } from "../../hoc/AuthContext";
+import { getSessionInfo } from "../../../api";
+import { useAuth } from "../../../hoc/AuthContext";
 import Session from "./Session";
 
 type SessionData = {

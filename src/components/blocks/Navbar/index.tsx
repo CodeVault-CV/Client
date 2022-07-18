@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import Navbar from './Navbar';
-import { useAuth } from '../../hoc/AuthContext';
-import { getStudyList } from '../../api';
+import { useAuth } from '../../../hoc/AuthContext';
+import { getStudyList } from '../../../api';
 
 export interface IStudy {
   studyId: string;

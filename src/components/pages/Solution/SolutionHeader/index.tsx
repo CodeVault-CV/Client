@@ -1,6 +1,6 @@
 import { Chip, Box } from "@mui/material";
 import Profile from "../../../blocks/Profile";
-import Header from "../../../components/Header";
+import Header from "../../../blocks/Header";
 
 export default function SolutionHeader() {
     return (

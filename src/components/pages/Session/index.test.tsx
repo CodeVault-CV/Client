@@ -1,7 +1,7 @@
 import { screen, waitForElementToBeRemoved } from "@testing-library/react";
 import Session from ".";
-import { AuthProvider } from "../../hoc/AuthContext";
-import { renderWithRouterMatch } from "../../mocks/renderWithRouterMatch";
+import { AuthProvider } from "../../../hoc/AuthContext";
+import { renderWithRouterMatch } from "../../../mocks/renderWithRouterMatch";
 
 test("Session 페이지 렌더시 세션 정보를 화면에 보여야 한다.", async () => {
   // arrange

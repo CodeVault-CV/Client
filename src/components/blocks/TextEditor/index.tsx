@@ -1,4 +1,4 @@
-import useView from "../../hooks/useView";
+import useView from "../../../hooks/useView";
 import TextEditor from "./TextEditor";
 
 interface TextEditorContainerProps {

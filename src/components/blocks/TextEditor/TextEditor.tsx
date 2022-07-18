@@ -2,7 +2,7 @@ import { Stack, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import PreviewIcon from "@mui/icons-material/Visibility";
 
-import MarkdownViewer from "../../blocks/MarkdownViewer";
+import MarkdownViewer from "../MarkdownViewer";
 
 interface TextEditorProps {
   value: string;
