@@ -10,17 +10,17 @@ export interface IStudy {
 }
 
 export default function NavbarContainer() {
-  const { auth, token, logout } = useAuth();
+  const { auth, logout } = useAuth();
   const [studies, setStudies] = useState<IStudy[]>([]);
 
   useEffect(() => {
     const requestStudyList = async () => {
-      const response = await getStudyList(token);
+      const response = await getStudyList();
       setStudies(response.data);
     };
 
-    token && requestStudyList();
-  }, [token]);
+    auth && requestStudyList();
+  }, [auth]);
 
   return <Navbar auth={auth} logout={logout} studies={studies} />;
 }
