@@ -56,10 +56,6 @@ export const handlers = [
     );
   }),
   rest.get(baseURL + "/session/:sessionId", (req, res, ctx) => {
-    if(req?.headers) {
-      console.log(req.headers.get("Authorization"));
-    }
-
     return res(
       ctx.json({
         status: 200,
