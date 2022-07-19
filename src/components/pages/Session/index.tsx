@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { getSessionInfo } from "../../../api";
-import { useAuth } from "../../../hoc/AuthContext";
 import Session from "./Session";
 
 type SessionData = {
@@ -14,7 +13,6 @@ type SessionData = {
 
 export default function SessionContainer() {
   const { sessionId } = useParams();
-  const { token } = useAuth();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<SessionData>({
     id: "",
@@ -24,10 +22,10 @@ export default function SessionContainer() {
   });
 
   const getData = useCallback(
-    async (sessionId: string | undefined, token: string): Promise<SessionData | undefined> => {
-      if (!sessionId || !token) return;
+    async (sessionId: string | undefined): Promise<SessionData | undefined> => {
+      if (!sessionId) return;
       try {
-        const { status, data } = await getSessionInfo(sessionId, token);
+        const { status, data } = await getSessionInfo(sessionId);
         if (status === 200) {
           return data;
         }
@@ -41,14 +39,14 @@ export default function SessionContainer() {
 
   useEffect(() => {
     const fetchSessionData = async () => {
-      const data = await getData(sessionId, token);
+      const data = await getData(sessionId);
       if (data) {
         setData({ ...data, start: new Date(data.start), end: new Date(data.end) });
         setLoading(false);
       }
     };
     fetchSessionData();
-  }, [sessionId, token, getData]);
+  }, [sessionId, getData]);
 
   return <>{loading ? <div>loading</div> : <Session sessionInfo={data} />}</>;
 }

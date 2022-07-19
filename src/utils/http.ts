@@ -1,7 +1,19 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 const API = axios.create({
   baseURL: process.env.REACT_APP_SERVER_BASE_URL,
+});
+
+API.interceptors.request.use((config: AxiosRequestConfig) => {
+  if (!config?.headers) {
+    throw new Error(`Expected 'config' and 'config.headers' not to be undefined`);
+  }
+  
+  const auth = localStorage.getItem("auth");
+  if (auth !== null) {
+    config.headers["Authorization"] = `Bearer ${JSON.parse(auth).token}`;
+  }
+  return config;
 });
 
 const get = async (url: string, headers = {}) => {

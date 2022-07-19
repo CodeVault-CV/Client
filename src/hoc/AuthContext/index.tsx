@@ -6,7 +6,6 @@ import { getToken } from "../../api";
 export const AuthContext = createContext({
   auth: false,
   name: "",
-  token: "",
   login(code: string) {},
   logout() {},
 });
@@ -14,20 +13,17 @@ export const AuthContext = createContext({
 export function AuthProvider({ children }: PropsWithChildren) {
   const [auth, setAuth] = useState(false);
   const [name, setName] = useState("");
-  const [token, setToken] = useState("");
   const navigate = useNavigate();
 
   const checkAuth = () => {
     const authData = localStorage.getItem("auth");
     if (authData !== null) {
-      const { name, token } = JSON.parse(authData);
+      const { name } = JSON.parse(authData);
       setAuth(true);
       setName(name);
-      setToken(token);
     } else {
       setAuth(false);
       setName("");
-      setToken("");
     }
   };
 
@@ -56,7 +52,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const initialValue = {
     auth,
     name,
-    token,
     login,
     logout,
   };
