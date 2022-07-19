@@ -5,11 +5,8 @@ import { useAuth } from '../../../hoc/AuthContext';
 import { getStudyList } from '../../../api';
 
 export interface IStudy {
-  studyId: string;
+  id: string;
   name: string;
-  leaderId: string;
-  repositoryName: string;
-  repositoryUrl: string;
 }
 
 export default function NavbarContainer() {

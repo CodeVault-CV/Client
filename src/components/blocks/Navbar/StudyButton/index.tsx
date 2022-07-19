@@ -42,7 +42,7 @@ export default function StudyButton({ studies }: StudyListProps) {
         {studies.length ? (
           studies.map((study) => (
             <MenuItem
-              key={study.studyId}
+              key={study.id}
               onClick={handleClose}
               sx={{ fontSize: '0.9em' }}
             >
