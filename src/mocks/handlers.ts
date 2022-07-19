@@ -62,11 +62,45 @@ export const handlers = [
         message: "SUCCESS",
         data: {
           id: req.params.sessionId,
-          name: "BFS 박살",
+          name: "1주차",
           start: new Date(2022, 6, 12),
           end: new Date(2022, 6, 18),
         },
       })
     );
   }),
+  rest.get(baseURL + "/problem/list", (req, res, ctx) => {
+    return res(
+      ctx.json({
+        status: 200,
+        message: "SUCCESS",
+        data: [
+          {
+            id: "p1",
+            number: "92342",
+            name: "양궁 대회",
+            platform: "programmers"
+          },
+          {
+            id: "p2",
+            number: "92343",
+            name: "양과 늑대",
+            platform: "programmers"
+          },
+          {
+            id: "p3",
+            number: "92344",
+            name: "파괴되지 않은 건물",
+            platform: "programmers"
+          },
+          {
+            id: "p4",
+            number: "1516",
+            name: "게임 개발",
+            platform: "boj"
+          }
+        ]
+      })
+    )
+  })
 ];
