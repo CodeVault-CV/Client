@@ -1,7 +1,7 @@
-import { useState, Fragment } from 'react';
-
-import styled from '@emotion/styled';
-import { TextField, Button, Modal } from '@mui/material';
+import { useState, Fragment } from "react";
+import { TextField, Modal } from "@mui/material";
+import styled from "@emotion/styled";
+import Button from "../../../../atoms/Button";
 
 const ModalWrapper = styled.div`
   position: absolute;
@@ -35,7 +35,7 @@ export default function CreateStudyButton() {
 
   return (
     <Fragment>
-      <Button onClick={handleOpen} sx={{ width: '100%' }}>
+      <Button variant="text" color="primary" onClick={handleOpen} sx={{ width: "100%" }}>
         스터디 생성
       </Button>
       <Modal open={open} onClose={handleClose}>
@@ -43,14 +43,10 @@ export default function CreateStudyButton() {
           <CenterLayoutWrapper>
             <h2>스터디 생성</h2>
           </CenterLayoutWrapper>
-          <TextField id='filled-basic' label='스터디 이름' variant='outlined' />
-          <TextField
-            id='filled-basic'
-            label='Git Repository 이름'
-            variant='outlined'
-          />
+          <TextField id="filled-basic" label="스터디 이름" variant="outlined" />
+          <TextField id="filled-basic" label="Git Repository 이름" variant="outlined" />
           <CenterLayoutWrapper>
-            <Button variant='contained'>생성</Button>
+            <Button variant="text">생성</Button>
           </CenterLayoutWrapper>
         </ModalWrapper>
       </Modal>
