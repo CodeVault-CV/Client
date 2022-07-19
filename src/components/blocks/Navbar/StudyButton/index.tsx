@@ -1,9 +1,11 @@
-import { useState, Fragment, MouseEvent } from 'react';
+import { useState, Fragment, MouseEvent } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { Menu, MenuItem, Divider, Link } from "@mui/material";
+import styled from "@emotion/styled";
 
-import styled from '@emotion/styled';
-import { Button, Menu, MenuItem, Divider } from '@mui/material';
-import CreateStudyButton from './CreateStudyButton';
-import { IStudy } from '..';
+import CreateStudyButton from "./CreateStudyButton";
+import { IStudy } from "..";
+import Button from "../../../atoms/Button";
 
 const AltTextWrapper = styled.div`
   display: flex;
@@ -30,23 +32,21 @@ export default function StudyButton({ studies }: StudyListProps) {
 
   return (
     <Fragment>
-      <Button size='large' sx={{ fontWeight: 800 }} onClick={handleClick}>
+      <Button variant="text" color="primary" size="large" onClick={handleClick}>
         스터디
       </Button>
-      <Menu
-        elevation={3}
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
+      <Menu elevation={3} anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
         {studies.length ? (
           studies.map((study) => (
-            <MenuItem
-              key={study.studyId}
-              onClick={handleClose}
-              sx={{ fontSize: '0.9em' }}
-            >
-              {study.name}
+            <MenuItem key={study.id} id={study.id} onClick={handleClose}>
+              <Link
+                to={`/study/${study.id}`}
+                component={RouterLink}
+                underline="none"
+                color="inherit"
+              >
+                {study.name}
+              </Link>
             </MenuItem>
           ))
         ) : (

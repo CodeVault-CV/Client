@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Button, Popover } from "@mui/material";
+import { Popover } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import Button from "../../../atoms/Button";
 
 export default function LoginButton() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -18,7 +19,14 @@ export default function LoginButton() {
 
   return (
     <>
-      <Button aria-describedby={id} color="inherit" size="large" sx={{ fontWeight: 800 }} onClick={handleClick}>
+      <Button
+        aria-describedby={id}
+        variant="text"
+        size="large"
+        color="inherit"
+        sx={{ fontWeight: 800 }}
+        onClick={handleClick}
+      >
         로그인
       </Button>
       <Popover
