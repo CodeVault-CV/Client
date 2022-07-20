@@ -8,12 +8,18 @@ import ProblemList from "./ProblemList";
 interface SessionProps {
   sessionInfo: {
     name: string;
-    start: Date;
-    end: Date;
+    start: string;
+    end: string;
   };
+  problemList: {
+    id: number;
+    number: string;
+    name: string;
+    platform: string;
+  } [];
 }
 
-function Session({ sessionInfo }: SessionProps) {
+function Session({ sessionInfo, problemList }: SessionProps) {
   return (
     <Stack spacing={3}>
       <Wrapper>
@@ -23,7 +29,7 @@ function Session({ sessionInfo }: SessionProps) {
         <ProblemAdder />
       </Wrapper>
       <Box>
-        <ProblemList />
+        <ProblemList problemList={problemList} />
       </Box>
     </Stack>
   );
