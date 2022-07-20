@@ -11,15 +11,22 @@ interface IProfile {
   name: string;
 }
 
+interface ProblemCardProps {
+  id: number;
+  number: string;
+  name: string;
+  platform: string;
+}
+
 function Profile({ name }: IProfile) {
   return (
-      <Tooltip title={name} arrow>
-        <Avatar sx={{ width: 60, height: 60 }}>{name.slice(0, 2)}</Avatar>
-      </Tooltip>
+    <Tooltip title={name} arrow>
+      <Avatar sx={{ width: 60, height: 60 }}>{name.slice(0, 2)}</Avatar>
+    </Tooltip>
   );
 }
 
-export default function ProblemCard() {
+export default function ProblemCard({ number, name, platform }: ProblemCardProps) {
   const [flipped, setFlipped] = useState(false);
 
   const handleClick = () => {
@@ -31,9 +38,9 @@ export default function ProblemCard() {
       <ReactCardFlip isFlipped={flipped} containerStyle={{ height: "100%" }}>
         <Wrapper>
           <Stack spacing={1}>
-            <ProblemLabel platform="Programmers" />
+            <ProblemLabel platform={platform} />
             <Typography variant="h5" fontWeight={700}>
-              로또의 최고 순위와 최저 순위
+              {name}
             </Typography>
             <LinearProgressWithLabel value={75} sx={{ height: 6, borderRadius: 3 }} />
             <Stack direction="row" spacing={1}>

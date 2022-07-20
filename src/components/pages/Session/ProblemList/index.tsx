@@ -1,15 +1,22 @@
 import { Box, Grid } from "@mui/material";
 import ProblemCard from "../ProblemCard";
 
-export default function ProblemList() {
+interface ProblemListProps {
+  problemList: {
+    id: number;
+    number: string;
+    name: string;
+    platform: string;
+  }[];
+}
+
+export default function ProblemList({ problemList }: ProblemListProps) {
   return (
     <Box>
       <Grid container spacing={3}>
-        <ProblemCard />
-        <ProblemCard />
-        <ProblemCard />
-        <ProblemCard />
-        <ProblemCard />
+        {problemList.map((problem) => (
+          <ProblemCard key={problem.id} {...problem} />
+        ))}
       </Grid>
     </Box>
   );
