@@ -8,7 +8,7 @@ export default function SolutionHeader() {
             title="#17 - BFS & DFS" 
             endBlock={
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <Profile name="woong-jae"/>
+                    <Profile name="woong-jae" imageUrl="https://avatars.githubusercontent.com/u/33976823?v=4"/>
                 </Box>
             }
         >

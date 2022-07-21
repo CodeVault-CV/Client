@@ -6,7 +6,7 @@ import SessionHeader from "./SessionHeader";
 import ProblemList from "./ProblemList";
 
 interface SessionProps {
-  sessionInfo: {
+  session: {
     name: string;
     start: string;
     end: string;
@@ -19,11 +19,11 @@ interface SessionProps {
   } [];
 }
 
-function Session({ sessionInfo, problemList }: SessionProps) {
+function Session({ session, problemList }: SessionProps) {
   return (
     <Stack spacing={3}>
       <Wrapper>
-        <SessionHeader {...sessionInfo} />
+        <SessionHeader {...session} />
       </Wrapper>
       <Wrapper>
         <ProblemAdder />

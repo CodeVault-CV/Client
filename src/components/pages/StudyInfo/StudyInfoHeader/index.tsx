@@ -40,7 +40,7 @@ export default function StudyInfoHeader() {
   return (
     <Wrapper>
       <Header title="알고리즘 박살" endBlock={<HeaderEndBlock />}>
-        <Stack direction="row" spacing={4} sx={{ marginTop: 3 }}>
+        <Stack direction="row" spacing={4} sx={{ marginTop: 1 }}>
           {["KingDonggyu", "woong-jae", "SeongukBaek", "Go-Jaecheol"].map((name) => (
             <AvatarGroupWrapper key={name}>
               <Profile name={name} />

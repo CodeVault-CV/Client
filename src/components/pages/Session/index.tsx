@@ -1,17 +1,21 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from "@tanstack/react-query";
 
-import { getProblemList, getSessionInfo } from "../../../api";
+import { getProblemList, getSession } from "../../../api";
 import Session from "./Session";
 
 export default function SessionContainer() {
   const { sessionId } = useParams();
-  const { data: sessionInfo } = useQuery(['sessionInfo'], () => 
-    getSessionInfo(sessionId).then(res => res.data)
+  const { isLoading: sessionLoading, data: session } = useQuery(["session"], () =>
+    getSession(sessionId).then((res) => res.data)
   );
-  const { data: problemList } = useQuery(['problemList'], () => 
-    getProblemList(sessionId).then(res => res.data)
+  const { isLoading: problemListLoading, data: problemList } = useQuery(["problemList"], () =>
+    getProblemList(sessionId).then((res) => res.data)
   );
 
-  return <>{(sessionInfo === undefined || sessionInfo === undefined) ? <div>loading</div> : <Session sessionInfo={sessionInfo} problemList={problemList} />}</>;
+  const isLoading = sessionLoading && problemListLoading;
+
+  return (
+    <>{isLoading ? <div>loading</div> : <Session session={session} problemList={problemList} />}</>
+  );
 }

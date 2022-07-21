@@ -1,17 +1,22 @@
 import { Link as RouterLink } from "react-router-dom";
-import { Box, Toolbar, Typography, Button, Container } from "@mui/material";
+import { Box, Toolbar, Typography, Button, Container, Theme, IconButton } from "@mui/material";
 import DeviceHubIcon from "@mui/icons-material/DeviceHub";
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+
 import LoginButton from "./LoginButton";
 import StudyButton from "./StudyButton"
 import { IStudy } from "."
 
 interface NavProps {
+  theme: Theme;
   auth: boolean;
   studies: IStudy[];
   logout(): void;
+  toggleColorMode(): void;
 }
 
-function Navbar({ auth, studies, logout }: NavProps) {
+function Navbar({ theme, auth, studies, logout, toggleColorMode }: NavProps) {
   return (
     <Box sx={{ flexGrow: 1, borderBottom: 1, borderColor: "divider" }}>
       <Container maxWidth="lg" sx={{ px: 0 }}>
@@ -34,6 +39,9 @@ function Navbar({ auth, studies, logout }: NavProps) {
             ) : (
               <LoginButton />
             )}
+            <IconButton onClick={toggleColorMode} color="inherit">
+              {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
           </Box>
         </Toolbar>
       </Container>

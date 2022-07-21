@@ -1,19 +1,13 @@
 import { Outlet } from "react-router-dom";
 import { Container, Stack, CssBaseline } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import { AuthProvider } from "../../hoc/AuthContext";
 import Navbar from "../../components/blocks/Navbar";
-
-const baseTheme = createTheme({
-  palette: {
-    mode: "light",
-  },
-});
+import { ColorModeProvider } from "../ColorModeContext";
 
 function Layout() {
   return (
-    <ThemeProvider theme={baseTheme}>
+    <ColorModeProvider>
       <CssBaseline />
       <Stack>
         <AuthProvider>
@@ -23,7 +17,7 @@ function Layout() {
           </Container>
         </AuthProvider>
       </Stack>
-    </ThemeProvider>
+    </ColorModeProvider>
   );
 }
 
