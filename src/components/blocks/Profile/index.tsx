@@ -1,26 +1,27 @@
-import styled from "@emotion/styled";
-import Avatar from "@mui/material/Avatar";
-
-const ProfileWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  & p {
-    font-size: 0.7em;
-    margin-bottom: 0;
-  }
-`;
+import { Tooltip, Avatar, IconButton } from "@mui/material";
+import Button from "../../atoms/Button";
 
 interface ProfileProps {
   name: string;
-  // image
+  imageUrl?: string;
+  disabled?: boolean;
 }
 
-export default function Profile({ name }: ProfileProps) {
+export default function Profile({ name, imageUrl, disabled = false }: ProfileProps) {
   return (
-    <ProfileWrapper>
-      <Avatar />
-      <p>{name}</p>
-    </ProfileWrapper>
+    <Tooltip title={name} arrow>
+      <span>
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={disabled}
+          sx={{ p: 1, borderRadius: "50%" }}
+        >
+          <Avatar src={imageUrl} sx={{ width: 60, height: 60 }}>
+            {name.slice(0, 2)}
+          </Avatar>
+        </Button>
+      </span>
+    </Tooltip>
   );
 }

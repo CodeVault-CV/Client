@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import Navbar from './Navbar';
-import { useAuth } from '../../../hoc/AuthContext';
-import { getStudyList } from '../../../api';
+import Navbar from "./Navbar";
+import { useAuth } from "../../../hoc/AuthContext";
+import { getStudyList } from "../../../api";
+import { useTheme } from "@mui/material/styles";
+import { useColorMode } from "../../../hoc/ColorModeContext";
 
 export interface IStudy {
   id: string;
@@ -10,6 +12,8 @@ export interface IStudy {
 }
 
 export default function NavbarContainer() {
+  const theme = useTheme();
+  const colorMode = useColorMode();
   const { auth, logout } = useAuth();
   const [studies, setStudies] = useState<IStudy[]>([]);
 
@@ -22,5 +26,13 @@ export default function NavbarContainer() {
     auth && requestStudyList();
   }, [auth]);
 
-  return <Navbar auth={auth} logout={logout} studies={studies} />;
+  return (
+    <Navbar
+      theme={theme}
+      toggleColorMode={colorMode.toggleColorMode}
+      auth={auth}
+      logout={logout}
+      studies={studies}
+    />
+  );
 }
