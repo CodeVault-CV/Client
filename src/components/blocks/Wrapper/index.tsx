@@ -1,4 +1,4 @@
-import { Box, Card, SxProps } from "@mui/material";
+import { Card, SxProps } from "@mui/material";
 import { PropsWithChildren } from "react";
 
 export default function Wrapper({ children, ...sxProps }: PropsWithChildren<SxProps>) {

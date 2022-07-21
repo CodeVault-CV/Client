@@ -1,4 +1,4 @@
-import { Tooltip, Avatar, IconButton } from "@mui/material";
+import { Tooltip, Avatar } from "@mui/material";
 import Button from "../../atoms/Button";
 
 interface ProfileProps {
@@ -15,9 +15,25 @@ export default function Profile({ name, imageUrl, disabled = false }: ProfilePro
           variant="contained"
           color="primary"
           disabled={disabled}
-          sx={{ p: 1, borderRadius: "50%" }}
+          sx={{
+            p: 1,
+            borderRadius: "50%",
+            boxShadow: 0,
+            ":hover": {
+              boxShadow: 0,
+            },
+          }}
         >
-          <Avatar src={imageUrl} sx={{ width: 60, height: 60 }}>
+          <Avatar
+            src={imageUrl}
+            sx={{
+              width: 60,
+              height: 60,
+              img: {
+                filter: `grayscale(${disabled ? "80%" : "0"})`,
+              },
+            }}
+          >
             {name.slice(0, 2)}
           </Avatar>
         </Button>
