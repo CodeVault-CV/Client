@@ -15,11 +15,11 @@ const EndBlockWrapper = styled.div`
   justify-content: space-around;
 `;
 
-interface HeaderEndBlock {
+interface HeaderEndBlockProps {
   url: string;
 }
 
-function HeaderEndBlock({ url }: HeaderEndBlock) {
+function HeaderEndBlock({ url }: HeaderEndBlockProps) {
   return (
     <EndBlockWrapper>
       <Button href={url} color="inherit">

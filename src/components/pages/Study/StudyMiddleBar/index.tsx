@@ -1,32 +1,14 @@
-import styled from '@emotion/styled';
-import Wrapper from '../../../blocks/Wrapper';
-import SearchTextField from './SearchTextField';
-import SortSplitButton from './SortSplitButton';
-import SessionAdder from './SessionAdder';
-
-const MiddleBarWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const SearchBarWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-`;
+import { Stack } from "@mui/material";
+import SearchTextField from "./SearchTextField";
+import SortSplitButton from "./SortSplitButton";
+import SessionAdder from "./SessionAdder";
 
 export default function StudyMiddleBar() {
   return (
-    <Wrapper>
-      <MiddleBarWrapper>
-        <SearchBarWrapper>
-          <SearchTextField />
-          <SortSplitButton />
-        </SearchBarWrapper>
-        <SessionAdder />
-      </MiddleBarWrapper>
-    </Wrapper>
+    <Stack direction="row" spacing={2}>
+      <SearchTextField />
+      <SortSplitButton />
+      <SessionAdder />
+    </Stack>
   );
 }

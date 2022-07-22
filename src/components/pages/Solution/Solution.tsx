@@ -6,7 +6,7 @@ import SolutionForm from "./SolutionForm";
 
 export default function Solution() {
   return (
-    <Stack spacing={2}>
+    <Stack spacing={3}>
       <Wrapper>
         <SolutionHeader />
       </Wrapper>

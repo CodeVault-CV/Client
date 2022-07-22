@@ -34,9 +34,9 @@ export default function SessionAdder() {
   };
 
   return (
-    <div>
+    <>
       <Button onClick={handleClick}>
-        추가
+        세션 추가
       </Button>
       <Menu
         anchorEl={anchorEl}
@@ -77,6 +77,6 @@ export default function SessionAdder() {
           <Button variant='contained'>완료</Button>
         </SessionAdderWrapper>
       </Menu>
-    </div>
+    </>
   );
 }

@@ -1,30 +1,29 @@
-import styled from "@emotion/styled";
+import { Stack } from "@mui/material";
 import StudyHeader from "./StudyHeader";
 import StudyMiddleBar from "./StudyMiddleBar";
 import SessionGrid from "./SessionGrid";
 
-const StudyInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-bottom: 30px;
-`;
-
 interface StudyProps {
   study: {
-    id: string,
-    members: { id: string, name: string, imageUrl: string, githubUrl: string } [],
-    name: string,
-    url: string
-  }
+    id: string;
+    members: { id: string; name: string; imageUrl: string; githubUrl: string }[];
+    name: string;
+    url: string;
+  };
+  sessionList: {
+    id: number;
+    name: string;
+    start: Date;
+    end: Date;
+  }[];
 }
 
-export default function Study({ study }: StudyProps) {
+export default function Study({ study, sessionList }: StudyProps) {
   return (
-    <StudyInfoWrapper>
+    <Stack spacing={3}>
       <StudyHeader {...study} />
       <StudyMiddleBar />
-      <SessionGrid />
-    </StudyInfoWrapper>
+      <SessionGrid sessionList={sessionList} />
+    </Stack>
   );
 }

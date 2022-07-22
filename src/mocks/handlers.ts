@@ -62,9 +62,32 @@ export const handlers = [
       })
     );
   }),
+  rest.get(baseURL + "/session/list/:problemId", (req, res, ctx) => {
+    return res(
+      ctx.delay(1000),
+      ctx.json({
+        status: 200,
+        message: "SUCCESS",
+        data: [
+          {
+            id: 1234,
+            name: "1주차",
+            start: new Date(2022, 6, 12),
+            end: new Date(2022, 6, 18),
+          },
+          {
+            id: 4321,
+            name: "2주차",
+            start: new Date(2022, 6, 19),
+            end: new Date(2022, 6, 26),
+          }
+        ],
+      })
+    );
+  }),
   rest.get(baseURL + "/session/:sessionId", (req, res, ctx) => {
     return res(
-      ctx.delay(2500),
+      ctx.delay(1000),
       ctx.json({
         status: 200,
         message: "SUCCESS",

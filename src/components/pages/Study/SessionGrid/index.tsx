@@ -1,41 +1,41 @@
-import styled from "@emotion/styled";
-import Grid from "@mui/material/Grid";
-import ShadowBox from "../../../blocks/ShadowBox";
+import { Box, Chip, Grid, Stack, Typography } from "@mui/material";
+import formatDateLabel from "../../../../utils/formatDateLabel";
+import Wrapper from "../../../blocks/Wrapper";
 
-const GridWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+interface SessionProps {
+  id: number;
+  name: string;
+  start: Date;
+  end: Date;
+}
 
-function GridItem() {
+function GridItem({ id, name, start, end }: SessionProps) {
   return (
-    <Grid item xs={4}>
-      <ShadowBox>
-        <div style={{ padding: "5px 20px" }}>
-          <h3>#1 - BFS & DFS</h3>
-          {[
-            "[백준] 가나다라마사바",
-            "[프로그래머스] 가나다라",
-            "[프로그래머스] 가나다라",
-            "[프로그래머스] 가나다라",
-            "[프로그래머스] 가나다라",
-          ].map((problem, i) => (
-            <p key={i}>{problem}</p>
-          ))}
-        </div>
-      </ShadowBox>
+    <Grid item md={3} xs={6}>
+      <Wrapper>
+        <Stack spacing={1}>
+          <Typography variant="h4" fontWeight={600}>
+            {name}
+          </Typography>
+          <Chip label={formatDateLabel(new Date(start), new Date(end))} variant="outlined" />
+        </Stack>
+      </Wrapper>
     </Grid>
   );
 }
 
-export default function SessionGrid() {
+interface SessionGridProps {
+  sessionList: SessionProps[];
+}
+
+export default function SessionGrid({ sessionList }: SessionGridProps) {
   return (
-    <GridWrapper>
-      <Grid container spacing={3} columns={{ xs: 8, md: 12 }}>
-        {[1, 2, 3, 4].map((i) => (
-          <GridItem key={i} />
+    <Box>
+      <Grid container spacing={3}>
+        {sessionList.map((sessionProps) => (
+          <GridItem {...sessionProps} />
         ))}
       </Grid>
-    </GridWrapper>
+    </Box>
   );
 }
