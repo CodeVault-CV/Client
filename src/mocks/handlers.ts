@@ -31,23 +31,31 @@ export const handlers = [
         data: {
           id,
           name: id === "test1" ? "알고리즘 박살" : "카카오 문제 박살내기",
-          url: "www.github.com",
+          url: "https://github.com",
           members: [
             {
+              id: "1",
               name: "woong-jae",
               imageUrl: "https://avatars.githubusercontent.com/u/33976823?v=4",
+              githubUrl: "https://github.com/woong-jae"
             },
             {
+              id: "2",
               name: "Kingdonggyu",
               imageUrl: "https://avatars.githubusercontent.com/u/33220404?v=4",
+              githubUrl: "https://github.com/Kingdonggyu"
             },
             {
+              id: "3",
               name: "SeongukBaek",
               imageUrl: "https://avatars.githubusercontent.com/u/33208303?v=4",
+              githubUrl: "https://github.com/SeungukBaek"
             },
             {
+              id: "4",
               name: "Go-Jaecheol",
               imageUrl: "https://avatars.githubusercontent.com/u/33208246?v=4",
+              githubUrl: "https://github.com/Go-Jaecheol"
             },
           ],
         },

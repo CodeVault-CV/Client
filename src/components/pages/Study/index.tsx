@@ -2,11 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { getStudy } from "../../../api";
 import Loading from "../../blocks/Loading";
-import StudyInfo from "./StudyInfo";
+import Study from "./Study";
 
-export default function StudyInfoContainer() {
+export default function StudyContainer() {
   const { studyId } = useParams();
-  const { isLoading, data } = useQuery(["study", studyId], () =>
+  const { isLoading, data: study } = useQuery(["study", studyId], () =>
     getStudy(studyId).then((res) => res.data)
   );
 
@@ -14,5 +14,5 @@ export default function StudyInfoContainer() {
     return <Loading />;
   }
 
-  return <StudyInfo />;
+  return <Study study={study} />;
 }

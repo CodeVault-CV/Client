@@ -16,5 +16,7 @@ export default function SessionContainer() {
 
   const isLoading = sessionLoading || problemListLoading;
 
-  return <>{isLoading ? <Loading /> : <Session session={session} problemList={problemList} />}</>;
+  if(isLoading) return <Loading />;
+
+  return <Session session={session} problemList={problemList} />;
 }
