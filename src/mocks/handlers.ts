@@ -35,19 +35,19 @@ export const handlers = [
           members: [
             {
               name: "woong-jae",
-              image: "https://avatars.githubusercontent.com/u/33976823?v=4",
+              imageUrl: "https://avatars.githubusercontent.com/u/33976823?v=4",
             },
             {
               name: "Kingdonggyu",
-              image: "https://avatars.githubusercontent.com/u/33220404?v=4",
+              imageUrl: "https://avatars.githubusercontent.com/u/33220404?v=4",
             },
             {
               name: "SeongukBaek",
-              image: "https://avatars.githubusercontent.com/u/33208303?v=4",
+              imageUrl: "https://avatars.githubusercontent.com/u/33208303?v=4",
             },
             {
               name: "Go-Jaecheol",
-              image: "https://avatars.githubusercontent.com/u/33208246?v=4",
+              imageUrl: "https://avatars.githubusercontent.com/u/33208246?v=4",
             },
           ],
         },
@@ -56,6 +56,7 @@ export const handlers = [
   }),
   rest.get(baseURL + "/session/:sessionId", (req, res, ctx) => {
     return res(
+      ctx.delay(2500),
       ctx.json({
         status: 200,
         message: "SUCCESS",

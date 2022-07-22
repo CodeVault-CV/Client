@@ -31,7 +31,7 @@ function getProblemLink(platform: string, number: string) {
 export default function ProblemCard({ id, number, name, platform }: ProblemCardProps) {
   const [flipped, setFlipped] = useState(false);
   const { isLoading, data: solutionList } = useQuery(
-    [`solutionList/${id}`],
+    [`solutionList`, id],
     () => getSolutionList(id).then((res) => res.data),
     {
       refetchOnMount: false,
@@ -91,7 +91,16 @@ export default function ProblemCard({ id, number, name, platform }: ProblemCardP
           >
             <Box width="100%" sx={{ overflow: "auto" }}>
               <Stack direction="row" spacing={2}>
-                {!isLoading &&
+                {isLoading ? (
+                  <>
+                    <Skeleton variant="circular">
+                      <Profile name="unknown" />
+                    </Skeleton>
+                    <Skeleton variant="circular">
+                      <Profile name="unknown" />
+                    </Skeleton>
+                  </>
+                ) : (
                   solutionList.map(
                     ({
                       name,
@@ -102,9 +111,12 @@ export default function ProblemCard({ id, number, name, platform }: ProblemCardP
                       imageUrl: string;
                       solve: boolean;
                     }) => {
-                      return <Profile key={name} name={name} imageUrl={imageUrl} disabled={!solve} />;
+                      return (
+                        <Profile key={name} name={name} imageUrl={imageUrl} disabled={!solve} />
+                      );
                     }
-                  )}
+                  )
+                )}
               </Stack>
             </Box>
             <Button onClick={handleClick}>이전으로</Button>

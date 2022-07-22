@@ -25,9 +25,9 @@ function Session({ session, problemList }: SessionProps) {
       <Wrapper>
         <SessionHeader {...session} />
       </Wrapper>
-      <Wrapper>
+      <Box>
         <ProblemAdder />
-      </Wrapper>
+      </Box>
       <Box>
         <ProblemList problemList={problemList} />
       </Box>

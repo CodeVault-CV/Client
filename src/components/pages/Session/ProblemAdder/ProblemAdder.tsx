@@ -1,52 +1,29 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
+import { Box, Modal } from "@mui/material";
+import { useState } from "react";
 import Button from "../../../atoms/Button";
+import Wrapper from "../../../blocks/Wrapper";
 
 export default function ProblemAdder() {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
-    <Box
-      autoCorrect="off"
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-      }}
-    >
-      <Stack direction="row" spacing={2}>
-        <FormControl sx={{ width: 170 }} size="small">
-          <InputLabel id="platform-select">Platform</InputLabel>
-          <Select
-            labelId="platform-select-label"
-            id="platform-select"
-            value="programmers"
-            label="Platform"
-          >
-            <MenuItem value="programmers">프로그래머스</MenuItem>
-            <MenuItem value="baekjoon">백준</MenuItem>
-          </Select>
-        </FormControl>
-        <TextField
-          required
-          label="문제번호"
-          type="number"
-          size="small"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          sx={{ width: 150 }}
-        />
-        <TextField
-          required
-          label="문제이름"
-          size="small"
-          InputLabelProps={{
-            shrink: true,
-          }}
+    <Box>
+      <Button onClick={handleOpen}>문제 추가하기</Button>
+      <Modal open={open} onClose={handleClose}>
+        <Box
           sx={{
-            width: 1,
-            maxWidth: 250,
+            width: "100%",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
-        />
-      </Stack>
-      <Button>추가</Button>
+        >
+          <Wrapper>씨발</Wrapper>
+        </Box>
+      </Modal>
     </Box>
   );
 }

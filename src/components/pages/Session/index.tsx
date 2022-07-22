@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getProblemList, getSession } from "../../../api";
 import Session from "./Session";
+import Loading from "../../blocks/Loading";
 
 export default function SessionContainer() {
   const { sessionId } = useParams();
@@ -13,9 +14,7 @@ export default function SessionContainer() {
     getProblemList(sessionId).then((res) => res.data)
   );
 
-  const isLoading = sessionLoading && problemListLoading;
+  const isLoading = sessionLoading || problemListLoading;
 
-  return (
-    <>{isLoading ? <div>loading</div> : <Session session={session} problemList={problemList} />}</>
-  );
+  return <>{isLoading ? <Loading /> : <Session session={session} problemList={problemList} />}</>;
 }
