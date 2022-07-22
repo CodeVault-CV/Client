@@ -5,9 +5,11 @@ interface ProfileProps {
   name: string;
   imageUrl?: string;
   disabled?: boolean;
+  href?: string;
+  handleClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export default function Profile({ name, imageUrl, disabled = false }: ProfileProps) {
+export default function Profile({ name, imageUrl, disabled, ...buttonProps }: ProfileProps) {
   return (
     <Tooltip title={name} arrow>
       <span>
@@ -15,6 +17,7 @@ export default function Profile({ name, imageUrl, disabled = false }: ProfilePro
           variant="contained"
           color="primary"
           disabled={disabled}
+          {...buttonProps}
           sx={{
             p: 1,
             borderRadius: "50%",

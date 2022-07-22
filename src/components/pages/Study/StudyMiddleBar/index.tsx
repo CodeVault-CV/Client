@@ -17,7 +17,7 @@ const SearchBarWrapper = styled.div`
   gap: 10px;
 `;
 
-export default function StudyInfoMiddleBar() {
+export default function StudyMiddleBar() {
   return (
     <Wrapper>
       <MiddleBarWrapper>

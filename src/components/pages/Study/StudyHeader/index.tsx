@@ -8,16 +8,6 @@ import Profile from "../../../blocks/Profile";
 import Wrapper from "../../../blocks/Wrapper";
 import StudySettingMenu from "./StudySettingMenu";
 
-const AvatarGroupWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  & p {
-    font-size: 0.7em;
-    font-weight: 700;
-  }
-`;
-
 const EndBlockWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,10 +15,14 @@ const EndBlockWrapper = styled.div`
   justify-content: space-around;
 `;
 
-function HeaderEndBlock() {
+interface HeaderEndBlock {
+  url: string;
+}
+
+function HeaderEndBlock({ url }: HeaderEndBlock) {
   return (
     <EndBlockWrapper>
-      <Button color="inherit">
+      <Button href={url} color="inherit">
         <GitHubIcon fontSize="large" />
       </Button>
       <StudySettingMenu />
@@ -36,15 +30,19 @@ function HeaderEndBlock() {
   );
 }
 
-export default function StudyInfoHeader() {
+interface StudyHeaderProps {
+  members: { id: string, name: string, imageUrl: string, githubUrl: string }[];
+  name: string;
+  url: string;
+}
+
+export default function StudyHeader({ name, members, url }: StudyHeaderProps) {
   return (
     <Wrapper>
-      <Header title="알고리즘 박살" endBlock={<HeaderEndBlock />}>
+      <Header title={name} endBlock={<HeaderEndBlock url={url} />}>
         <Stack direction="row" spacing={4} sx={{ marginTop: 1 }}>
-          {["KingDonggyu", "woong-jae", "SeongukBaek", "Go-Jaecheol"].map((name) => (
-            <AvatarGroupWrapper key={name}>
-              <Profile name={name} />
-            </AvatarGroupWrapper>
+          {members.map(({ id, name, imageUrl, githubUrl }) => (
+            <Profile key={id} name={name} imageUrl={imageUrl} href={githubUrl} />
           ))}
         </Stack>
       </Header>
