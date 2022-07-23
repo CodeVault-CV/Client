@@ -1,4 +1,4 @@
-import { get } from "../utils/http";
+import { get, post } from "../utils/http";
 
 // GET
 export const getToken = (code: string) => get(`/user/login?code=${code}`);
@@ -12,3 +12,7 @@ export const getSessionList = (studyId: string | undefined) => get(`/session/lis
 export const getProblemList = (sessionId: string | undefined) => get(`/problem/list?${sessionId}`);
 
 export const getSolutionList = (problemId: number) => get(`/solution/list/${problemId}`);
+
+// POST
+export const createStudy = (studyName: string, repoName: string) => 
+    post(`/study`, { studyName: studyName, repoName: repoName })
