@@ -25,7 +25,6 @@ const theme = {
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 export function ColorModeProvider({ children }: PropsWithChildren) {
-  console.log(ThemeStorage.get());
   const [mode, setMode] = useState<"light" | "dark">(ThemeStorage.get() || "light");
 
   const colorMode = useMemo(

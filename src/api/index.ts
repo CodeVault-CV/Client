@@ -14,5 +14,5 @@ export const getProblemList = (sessionId: string | undefined) => get(`/problem/l
 export const getSolutionList = (problemId: number) => get(`/solution/list/${problemId}`);
 
 // POST
-export const createStudy = (studyName: string, repoName: string) => 
-    post(`/study`, { studyName: studyName, repoName: repoName })
+export const createStudy = (studyName: string, repoName: string) =>
+  post(`/study`, { studyName: studyName, repoName: repoName });
