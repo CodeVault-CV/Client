@@ -8,8 +8,6 @@ export interface IName {
 }
 
 export default function CreateStudyButtonContainer() {
-  const [repoName, setRepoName] = useState<string | null>(null);
-  const [studyName, setStudyName] = useState<string | null>(null);
   const [input, setInput] = useState<IName>({ studyName: '', repoName: '' });
   const [errorMessage, setErrorMessage] = useState<IName>({
     studyName: '',

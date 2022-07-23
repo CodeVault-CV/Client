@@ -1,7 +1,6 @@
 import { useState, Fragment, ChangeEvent } from 'react';
 import { TextField, Button, Modal, Box, Typography } from '@mui/material';
 import { IName } from '.';
-import { FamilyRestroomTwoTone } from '@mui/icons-material';
 
 const ModalStyle = {
   display: 'flex',
