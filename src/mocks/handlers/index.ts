@@ -1,67 +1,10 @@
 import { rest } from "msw";
+import studyHandler from "./study";
 
 const baseURL = process.env.REACT_APP_SERVER_BASE_URL;
 
 export const handlers = [
-  // GET
-  rest.get(baseURL + "/study/list", (req, res, ctx) => {
-    return res(
-      ctx.json({
-        status: 200,
-        message: "SUCCESS",
-        data: [
-          {
-            id: "test1",
-            name: "알고리즘 박살",
-          },
-          {
-            id: "test2",
-            name: "카카오 문제 박살내기",
-          },
-        ],
-      })
-    );
-  }),
-  rest.get(baseURL + "/study/:studyId", (req, res, ctx) => {
-    const id = req.params.studyId;
-    return res(
-      ctx.json({
-        status: 200,
-        message: "SUCCESS",
-        data: {
-          id,
-          name: id === "test1" ? "알고리즘 박살" : "카카오 문제 박살내기",
-          url: "https://github.com",
-          members: [
-            {
-              id: "1",
-              name: "woong-jae",
-              imageUrl: "https://avatars.githubusercontent.com/u/33976823?v=4",
-              githubUrl: "https://github.com/woong-jae"
-            },
-            {
-              id: "2",
-              name: "Kingdonggyu",
-              imageUrl: "https://avatars.githubusercontent.com/u/33220404?v=4",
-              githubUrl: "https://github.com/Kingdonggyu"
-            },
-            {
-              id: "3",
-              name: "SeongukBaek",
-              imageUrl: "https://avatars.githubusercontent.com/u/33208303?v=4",
-              githubUrl: "https://github.com/SeungukBaek"
-            },
-            {
-              id: "4",
-              name: "Go-Jaecheol",
-              imageUrl: "https://avatars.githubusercontent.com/u/33208246?v=4",
-              githubUrl: "https://github.com/Go-Jaecheol"
-            },
-          ],
-        },
-      })
-    );
-  }),
+  ...studyHandler,
   rest.get(baseURL + "/session/list/:problemId", (req, res, ctx) => {
     return res(
       ctx.delay(1000),
@@ -80,7 +23,7 @@ export const handlers = [
             name: "2주차",
             start: new Date(2022, 6, 19),
             end: new Date(2022, 6, 26),
-          }
+          },
         ],
       })
     );
@@ -149,22 +92,22 @@ export const handlers = [
           {
             name: "woong-jae",
             imageUrl: "https://avatars.githubusercontent.com/u/33976823?v=4",
-            solve: getRandomBoolean()
+            solve: getRandomBoolean(),
           },
           {
             name: "Kingdonggyu",
             imageUrl: "https://avatars.githubusercontent.com/u/33220404?v=4",
-            solve: getRandomBoolean()
+            solve: getRandomBoolean(),
           },
           {
             name: "SeongukBaek",
             imageUrl: "https://avatars.githubusercontent.com/u/33208303?v=4",
-            solve: getRandomBoolean()
+            solve: getRandomBoolean(),
           },
           {
             name: "Go-Jaecheol",
             imageUrl: "https://avatars.githubusercontent.com/u/33208246?v=4",
-            solve: getRandomBoolean()
+            solve: getRandomBoolean(),
           },
         ],
       })
