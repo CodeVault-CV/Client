@@ -9,6 +9,7 @@ import Home from "./components/pages/Home";
 import Study from "./components/pages/Study";
 import Session from "./components/pages/Session";
 import Solution from "./components/pages/Solution";
+import NotFound from './components/pages/NotFound';
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="study/:studyId" element={<Study />} />
             <Route path="session/:sessionId" element={<Session />} />
             <Route path="solution" element={<Solution />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>
