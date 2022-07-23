@@ -1,43 +1,37 @@
-import { useState, Fragment, Dispatch, SetStateAction } from 'react';
+import { useState, Fragment, Dispatch, SetStateAction, ChangeEvent } from 'react';
+import { TextField, Button, Modal, Box, Typography } from '@mui/material';
+import { IErrorMessage } from '.';
 
-import styled from '@emotion/styled';
-import { TextField, Button, Modal } from '@mui/material';
-
-const ModalWrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 500px;
-  height: 350px;
-  transform: translate(-50%, -50%);
-  border-radius: 15px;
-  background-color: white;
-  box-shadow: rgb(0 0 0 / 8%) 2px 4px 12px;
-  transition: all 0.3s cubic-bezier(0, 0, 0.5, 1) 0s;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 30px;
-`;
-
-const CenterLayoutWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  & h2 {
-    margin: 0;
-  }
-`;
+const ModalStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 500,
+  height: 350,
+  bgcolor: 'background.paper',
+  borderRadius: '15px',
+  boxShadow: 'rgb(0 0 0 / 8%) 2px 4px 12px',
+  p: 4,
+};
 
 interface CreateStudyButtonProps {
   setRepoName: Dispatch<SetStateAction<string | null>>;
   setStudyName: Dispatch<SetStateAction<string | null>>;
+  errorMessage: IErrorMessage;
   handleClick: () => void;
+  handleChange: (target: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 export default function CreateStudyButtonBlock({
   setRepoName,
   setStudyName,
+  errorMessage,
   handleClick,
+  handleChange,
 }: CreateStudyButtonProps) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -49,28 +43,32 @@ export default function CreateStudyButtonBlock({
         스터디 생성
       </Button>
       <Modal open={open} onClose={handleClose}>
-        <ModalWrapper>
-          <CenterLayoutWrapper>
-            <h2>스터디 생성</h2>
-          </CenterLayoutWrapper>
+        <Box sx={ModalStyle}>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Typography variant='h5'>스터디 생성</Typography>
+          </Box>
           <TextField
-            id='filled-basic'
+            name='studyName'
             label='스터디 이름'
             variant='outlined'
-            onChange={(e) => setStudyName(e.target.value)}
+            helperText={errorMessage.studyName}
+            error={errorMessage.studyName ? true: false}
+            onChange={(e) => handleChange(e)}
           />
           <TextField
-            id='filled-basic'
+            name='repoName'
             label='Git Repository 이름'
             variant='outlined'
+            helperText={errorMessage.repoName}
+            error={errorMessage.repoName ? true: false}
             onChange={(e) => setRepoName(e.target.value)}
           />
-          <CenterLayoutWrapper>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button variant='contained' onClick={handleClick}>
-              생성
+              완료
             </Button>
-          </CenterLayoutWrapper>
-        </ModalWrapper>
+          </Box>
+        </Box>
       </Modal>
     </Fragment>
   );
