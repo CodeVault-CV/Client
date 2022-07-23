@@ -32,8 +32,8 @@ export default function SessionGrid({ sessionList }: SessionGridProps) {
   return (
     <Box>
       <Grid container spacing={3}>
-        {sessionList.map((sessionProps) => (
-          <GridItem {...sessionProps} />
+        {sessionList.map(({id, ...sessionProps}) => (
+          <GridItem key={id} id={id} {...sessionProps} />
         ))}
       </Grid>
     </Box>
