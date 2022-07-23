@@ -1,6 +1,7 @@
-import { useState, Fragment, Dispatch, SetStateAction, ChangeEvent } from 'react';
+import { useState, Fragment, ChangeEvent } from 'react';
 import { TextField, Button, Modal, Box, Typography } from '@mui/material';
-import { IErrorMessage } from '.';
+import { IName } from '.';
+import { FamilyRestroomTwoTone } from '@mui/icons-material';
 
 const ModalStyle = {
   display: 'flex',
@@ -19,16 +20,14 @@ const ModalStyle = {
 };
 
 interface CreateStudyButtonProps {
-  setRepoName: Dispatch<SetStateAction<string | null>>;
-  setStudyName: Dispatch<SetStateAction<string | null>>;
-  errorMessage: IErrorMessage;
+  input: IName;
+  errorMessage: IName;
   handleClick: () => void;
   handleChange: (target: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 export default function CreateStudyButtonBlock({
-  setRepoName,
-  setStudyName,
+  input,
   errorMessage,
   handleClick,
   handleChange,
@@ -51,20 +50,32 @@ export default function CreateStudyButtonBlock({
             name='studyName'
             label='스터디 이름'
             variant='outlined'
+            value={input.studyName}
             helperText={errorMessage.studyName}
-            error={errorMessage.studyName ? true: false}
+            error={errorMessage.studyName ? true : false}
             onChange={(e) => handleChange(e)}
           />
           <TextField
             name='repoName'
             label='Git Repository 이름'
             variant='outlined'
+            value={input.repoName}
             helperText={errorMessage.repoName}
-            error={errorMessage.repoName ? true: false}
-            onChange={(e) => setRepoName(e.target.value)}
+            error={errorMessage.repoName ? true : false}
+            onChange={(e) => handleChange(e)}
           />
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Button variant='contained' onClick={handleClick}>
+            <Button
+              variant='contained'
+              onClick={handleClick}
+              disabled={
+                input.studyName &&
+                input.repoName &&
+                !errorMessage.studyName &&
+                !errorMessage.repoName
+                ? false : true
+              }
+            >
               완료
             </Button>
           </Box>
