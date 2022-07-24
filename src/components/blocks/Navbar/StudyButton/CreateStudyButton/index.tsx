@@ -1,4 +1,5 @@
 import { useState, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom'
 import { createStudy } from '../../../../../api';
 import debounce from '../../../../../utils/debounce';
 import CreateStudyButton from './CreateStudyButton';
@@ -73,8 +74,11 @@ export default function CreateStudyButtonContainer() {
     checkRepoName(value);
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = async () => {
     const response = await createStudy(studyName, repoName);
+    navigate(`/study/${response.data}`)
   };
 
   return (
