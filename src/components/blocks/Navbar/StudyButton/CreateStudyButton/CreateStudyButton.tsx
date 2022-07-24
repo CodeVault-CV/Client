@@ -1,6 +1,6 @@
 import { useState, Fragment, ChangeEvent } from 'react';
 import { TextField, Button, Modal, Box, Typography } from '@mui/material';
-import { IName } from '.';
+import { IErrorMessage } from '.';
 
 const ModalStyle = {
   display: 'flex',
@@ -19,16 +19,16 @@ const ModalStyle = {
 };
 
 interface CreateStudyButtonProps {
-  input: IName;
-  errorMessage: IName;
+  studyName: string | null;
+  repoName: string | null;
+  errorMessage: IErrorMessage;
   handleClick: () => void;
-  handleChange: (
-    target: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
+  handleChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 export default function CreateStudyButtonBlock({
-  input,
+  studyName,
+  repoName,
   errorMessage,
   handleClick,
   handleChange,
@@ -38,8 +38,8 @@ export default function CreateStudyButtonBlock({
   const handleClose = () => setOpen(false);
 
   const disabled = 
-    input.studyName && input.repoName && 
-    !errorMessage.studyName && !errorMessage.repoName 
+    studyName && repoName && 
+    !errorMessage.studyNameMessage && !errorMessage.repoNameMessage 
     ? false : true;
 
   return (
@@ -56,18 +56,18 @@ export default function CreateStudyButtonBlock({
             name='studyName'
             label='스터디 이름'
             variant='outlined'
-            value={input.studyName}
-            helperText={errorMessage.studyName}
-            error={errorMessage.studyName ? true : false}
+            value={studyName}
+            helperText={errorMessage.studyNameMessage}
+            error={errorMessage.studyNameMessage ? true : false}
             onChange={(e) => handleChange(e)}
           />
           <TextField
             name='repoName'
             label='Git Repository 이름'
             variant='outlined'
-            value={input.repoName}
-            helperText={errorMessage.repoName}
-            error={errorMessage.repoName ? true : false}
+            value={repoName}
+            helperText={errorMessage.repoNameMessage}
+            error={errorMessage.repoNameMessage ? true : false}
             onChange={(e) => handleChange(e)}
           />
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>

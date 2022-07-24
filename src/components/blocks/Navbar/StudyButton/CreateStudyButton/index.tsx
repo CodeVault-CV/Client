@@ -1,88 +1,87 @@
 import { useState, ChangeEvent } from 'react';
-import CreateStudyButton from './CreateStudyButton';
 import { createStudy } from '../../../../../api';
+import debounce from '../../../../../utils/debounce';
+import CreateStudyButton from './CreateStudyButton';
 
-export interface IName {
-  studyName: string;
-  repoName: string;
+export interface IErrorMessage {
+  studyNameMessage: string;
+  repoNameMessage: string;
 }
 
 export default function CreateStudyButtonContainer() {
-  const [input, setInput] = useState<IName>({ studyName: '', repoName: '' });
-  const [errorMessage, setErrorMessage] = useState<IName>({
-    studyName: '',
-    repoName: '',
+  const [studyName, setStudyName] = useState<string>('');
+  const [repoName, setRepoName] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<IErrorMessage>({
+    studyNameMessage: '',
+    repoNameMessage: '',
   });
 
-  const checkStudyName = (value: string) => {
-    if (!value || value.length < 2 || value.length > 10) {
+  const checkStudyName = debounce((name: string) => {
+    const message = '스터디 이름은 2~10자로 되어야 합니다.';
+    
+    if (name.length < 2 || name.length > 10) {
       setErrorMessage({
         ...errorMessage,
-        studyName: '스터디 이름은 2~10자로 되어야 합니다.',
+        studyNameMessage: message
       });
       return;
     }
 
     setErrorMessage({
       ...errorMessage,
-      studyName: '',
+      studyNameMessage: '',
     });
-  };
+  })
 
-  const checkRepoName = (value: string) => {
+  const checkRepoName = debounce((name: string) => {
     const message1 = '저장소 이름은 1자 이상으로 되어야 합니다.';
     const message2 = '저장소 이름은 영문 대소문자와 _, - 특수문자로 되어야 합니다.';
     const pattern = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣~!@#$%^&*()+|<>?:{}]/;
-
-    if (!value) {
+    
+    if (!name) {
       setErrorMessage({
         ...errorMessage,
-        repoName: message1,
+        repoNameMessage: message1,
       });
       return;
     }
 
-    if (pattern.test(value)) {
+    if (pattern.test(name)) {
       setErrorMessage({
         ...errorMessage,
-        repoName: message2
+        repoNameMessage: message2
       });
       return;
     }
 
     setErrorMessage({
       ...errorMessage,
-      repoName: '',
+      repoNameMessage: '',
     });
-  };
+  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
     if (name === 'studyName') {
-      setInput({
-        ...input,
-        studyName: value,
-      });
+      setStudyName(value);
       checkStudyName(value);
       return;
     }
-
-    setInput({
-      ...input,
-      repoName: value.trim(),
-    });
+    
+    setRepoName(value.trim());
     checkRepoName(value);
   };
 
   const handleClick = async () => {
-    const response = await createStudy(input.studyName, input.repoName);
+    const response = await createStudy(studyName, repoName);
     console.log(response);
   };
 
   return (
     <CreateStudyButton
-      input={input}
+      studyName={studyName}
+      repoName={repoName}
       errorMessage={errorMessage}
       handleClick={handleClick}
       handleChange={handleChange}
