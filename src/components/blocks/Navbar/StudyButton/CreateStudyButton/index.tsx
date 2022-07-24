@@ -14,67 +14,65 @@ export default function CreateStudyButtonContainer() {
     repoName: '',
   });
 
-  const handleValidation = (name: string, value: string): boolean => {
-    // 스터디 이름 유효성 검사
-    if (name === 'studyName') {
-      if (!value || value.length < 2 || value.length > 10) {
-        setErrorMessage({
-          ...errorMessage,
-          studyName: '스터디 이름은 2~10자로 되어야 합니다.',
-        });
-        return false;
-      }
-
+  const checkStudyName = (value: string) => {
+    if (!value || value.length < 2 || value.length > 10) {
       setErrorMessage({
         ...errorMessage,
-        studyName: '',
+        studyName: '스터디 이름은 2~10자로 되어야 합니다.',
       });
-      return true;
+      return;
     }
 
-    // 저장소 이름 유효성 검사
+    setErrorMessage({
+      ...errorMessage,
+      studyName: '',
+    });
+  };
+
+  const checkRepoName = (value: string) => {
+    const message1 = '저장소 이름은 1자 이상으로 되어야 합니다.';
+    const message2 = '저장소 이름은 영문 대소문자와 _, - 특수문자로 되어야 합니다.';
+    const pattern = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣~!@#$%^&*()+|<>?:{}]/;
+
     if (!value) {
       setErrorMessage({
         ...errorMessage,
-        repoName: '저장소 이름은 1자 이상으로 되어야 합니다.',
+        repoName: message1,
       });
-      return false;
+      return;
     }
-
-    const pattern = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣~!@#$%^&*()+|<>?:{}]/;
 
     if (pattern.test(value)) {
       setErrorMessage({
         ...errorMessage,
-        repoName:
-          '저장소 이름은 영문 대소문자와 _, - 특수문자로 되어야 합니다.',
+        repoName: message2
       });
-      return false;
+      return;
     }
 
     setErrorMessage({
       ...errorMessage,
       repoName: '',
     });
-    return true;
   };
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
-    name === 'studyName'
-      ? setInput({
-          ...input,
-          studyName: value,
-        })
-      : setInput({
-          ...input,
-          repoName: value.trim(),
-        });
+    if (name === 'studyName') {
+      setInput({
+        ...input,
+        studyName: value,
+      });
+      checkStudyName(value);
+      return;
+    }
 
-    handleValidation(name, value);
+    setInput({
+      ...input,
+      repoName: value.trim(),
+    });
+    checkRepoName(value);
   };
 
   const handleClick = async () => {

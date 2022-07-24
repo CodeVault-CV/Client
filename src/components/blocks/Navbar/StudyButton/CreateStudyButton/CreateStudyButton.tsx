@@ -22,7 +22,9 @@ interface CreateStudyButtonProps {
   input: IName;
   errorMessage: IName;
   handleClick: () => void;
-  handleChange: (target: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  handleChange: (
+    target: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
 }
 
 export default function CreateStudyButtonBlock({
@@ -34,6 +36,11 @@ export default function CreateStudyButtonBlock({
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const disabled = 
+    input.studyName && input.repoName && 
+    !errorMessage.studyName && !errorMessage.repoName 
+    ? false : true;
 
   return (
     <Fragment>
@@ -67,13 +74,7 @@ export default function CreateStudyButtonBlock({
             <Button
               variant='contained'
               onClick={handleClick}
-              disabled={
-                input.studyName &&
-                input.repoName &&
-                !errorMessage.studyName &&
-                !errorMessage.repoName
-                ? false : true
-              }
+              disabled={disabled}
             >
               완료
             </Button>
