@@ -73,9 +73,8 @@ export default function CreateStudyButtonContainer() {
     checkRepoName(value);
   };
 
-  const handleClick = async () => {
+  const handleSubmit = async () => {
     const response = await createStudy(studyName, repoName);
-    console.log(response);
   };
 
   return (
@@ -83,7 +82,7 @@ export default function CreateStudyButtonContainer() {
       studyName={studyName}
       repoName={repoName}
       errorMessage={errorMessage}
-      handleClick={handleClick}
+      handleSubmit={handleSubmit}
       handleChange={handleChange}
     />
   );

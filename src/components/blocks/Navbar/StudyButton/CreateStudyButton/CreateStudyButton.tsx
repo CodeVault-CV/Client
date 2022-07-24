@@ -1,54 +1,52 @@
 import { useState, Fragment, ChangeEvent } from 'react';
-import { TextField, Button, Modal, Box, Typography } from '@mui/material';
+import { TextField, Box, Stack, Typography } from '@mui/material';
 import { IErrorMessage } from '.';
-
-const ModalStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 500,
-  height: 350,
-  bgcolor: 'background.paper',
-  borderRadius: '15px',
-  boxShadow: 'rgb(0 0 0 / 8%) 2px 4px 12px',
-  p: 4,
-};
+import Modal from '../../../Modal';
+import Button from '../../../../atoms/Button';
 
 interface CreateStudyButtonProps {
   studyName: string | null;
   repoName: string | null;
   errorMessage: IErrorMessage;
-  handleClick: () => void;
-  handleChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  handleSubmit: () => void;
+  handleChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
 }
 
 export default function CreateStudyButtonBlock({
   studyName,
   repoName,
   errorMessage,
-  handleClick,
+  handleSubmit,
   handleChange,
 }: CreateStudyButtonProps) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const disabled = 
-    studyName && repoName && 
-    !errorMessage.studyNameMessage && !errorMessage.repoNameMessage 
-    ? false : true;
+  const handleClick = () => {
+    handleClose();
+    handleSubmit();
+  };
+
+  const { studyNameMessage, repoNameMessage } = errorMessage;
+  const disabled =
+    studyName && repoName && !studyNameMessage && !repoNameMessage
+      ? false : true;
 
   return (
     <Fragment>
-      <Button onClick={handleOpen} sx={{ width: '100%' }}>
+      <Button
+        variant='text'
+        color='primary'
+        onClick={handleOpen}
+        sx={{ width: '100%' }}
+      >
         스터디 생성
       </Button>
       <Modal open={open} onClose={handleClose}>
-        <Box sx={ModalStyle}>
+        <Stack width={400} spacing={3}>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Typography variant='h5'>스터디 생성</Typography>
           </Box>
@@ -57,8 +55,8 @@ export default function CreateStudyButtonBlock({
             label='스터디 이름'
             variant='outlined'
             value={studyName}
-            helperText={errorMessage.studyNameMessage}
-            error={errorMessage.studyNameMessage ? true : false}
+            helperText={studyNameMessage}
+            error={studyNameMessage ? true : false}
             onChange={(e) => handleChange(e)}
           />
           <TextField
@@ -66,12 +64,13 @@ export default function CreateStudyButtonBlock({
             label='Git Repository 이름'
             variant='outlined'
             value={repoName}
-            helperText={errorMessage.repoNameMessage}
-            error={errorMessage.repoNameMessage ? true : false}
+            helperText={repoNameMessage}
+            error={repoNameMessage ? true : false}
             onChange={(e) => handleChange(e)}
           />
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <Button
+              color='primary'
               variant='contained'
               onClick={handleClick}
               disabled={disabled}
@@ -79,7 +78,7 @@ export default function CreateStudyButtonBlock({
               완료
             </Button>
           </Box>
-        </Box>
+        </Stack>
       </Modal>
     </Fragment>
   );
