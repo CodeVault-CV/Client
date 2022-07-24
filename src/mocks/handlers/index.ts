@@ -1,48 +1,12 @@
 import { rest } from "msw";
 import studyHandler from "./study";
+import sessionHandler from "./session";
 
 const baseURL = process.env.REACT_APP_SERVER_BASE_URL;
 
 export const handlers = [
   ...studyHandler,
-  rest.get(baseURL + "/session/list/:problemId", (req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.json({
-        status: 200,
-        message: "SUCCESS",
-        data: [
-          {
-            id: 1234,
-            name: "1주차",
-            start: new Date(2022, 6, 12),
-            end: new Date(2022, 6, 18),
-          },
-          {
-            id: 4321,
-            name: "2주차",
-            start: new Date(2022, 6, 19),
-            end: new Date(2022, 6, 26),
-          },
-        ],
-      })
-    );
-  }),
-  rest.get(baseURL + "/session/:sessionId", (req, res, ctx) => {
-    return res(
-      ctx.delay(1000),
-      ctx.json({
-        status: 200,
-        message: "SUCCESS",
-        data: {
-          id: req.params.sessionId,
-          name: "1주차",
-          start: new Date(2022, 6, 12),
-          end: new Date(2022, 6, 18),
-        },
-      })
-    );
-  }),
+  ...sessionHandler,
   rest.get(baseURL + "/problem/list", (req, res, ctx) => {
     return res(
       ctx.json({

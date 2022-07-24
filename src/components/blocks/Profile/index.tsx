@@ -19,7 +19,7 @@ export default function Profile({ name, imageUrl, disabled, ...buttonProps }: Pr
           disabled={disabled}
           {...buttonProps}
           sx={{
-            p: 1,
+            p: 0.5,
             borderRadius: "50%",
             boxShadow: 0,
             ":hover": {

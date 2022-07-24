@@ -3,6 +3,7 @@ import cat from "../../../assets/Lazy_Cat_with_fishes_transparent_by_Icons8.gif"
 export default function Loading() {
   return (
     <Box
+      py={7}
       sx={{
         display: "flex",
         flexDirection: "column",

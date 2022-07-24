@@ -59,19 +59,31 @@ const handlers = [
     );
   }),
   rest.get(baseURL + "/study/:studyId", (req, res, ctx) => {
-
     const { studyId } = req.params;
+    const studyMap = new Map(getStudy());
+    const study = studyMap.get(studyId);
+
+    if(!study) {
+      return res(
+        ctx.status(404),
+        ctx.json({
+          status: 404,
+          message: "존재하지 않는 스터디입니다",
+        })
+      )
+    }
+
     return res(
       ctx.json({
         status: 200,
         message: "SUCCESS",
-        data: new Map(getStudy()).get(studyId),
+        data: study
       })
     );
   }),
   rest.post(baseURL + "/study", async (req, res, ctx) => {
     const { studyName, repoName } = await req.json();
-    const study = getStudy();
+    const studyList = getStudy();
 
     const newStudy = {
       id: `test${study.length + 1}`,
@@ -88,8 +100,8 @@ const handlers = [
       ],
     }
 
-    study.push([newStudy.id, newStudy]);
-    setStudy(study);
+    studyList.push([newStudy.id, newStudy]);
+    setStudy(studyList);
 
     return res(
       ctx.json({
