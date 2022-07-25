@@ -7,6 +7,7 @@ import ProblemList from "./ProblemList";
 
 interface SessionProps {
   session: {
+    id: number;
     name: string;
     start: string;
     end: string;

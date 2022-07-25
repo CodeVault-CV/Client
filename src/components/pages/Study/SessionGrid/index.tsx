@@ -1,5 +1,5 @@
-import { Box, Chip, Grid, Stack, Typography } from "@mui/material";
-import formatDateLabel from "../../../../utils/formatDateLabel";
+import { Box, Grid, Stack, Typography } from "@mui/material";
+import DateLabel from "../../../atoms/DateLabel";
 import Wrapper from "../../../blocks/Wrapper";
 
 interface SessionProps {
@@ -17,7 +17,7 @@ function GridItem({ id, name, start, end }: SessionProps) {
           <Typography variant="h4" fontWeight={600}>
             {name}
           </Typography>
-          <Chip label={formatDateLabel(new Date(start), new Date(end))} variant="outlined" />
+          <DateLabel start={new Date(start)} end={new Date(end)} />
         </Stack>
       </Wrapper>
     </Grid>

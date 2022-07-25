@@ -26,4 +26,9 @@ const post = async (url: string, body: any, headers = {}) => {
   return response.data;
 };
 
-export { get, post };
+const put = async (url: string, body: any, headers = {}) => {
+  const response = await API.put(url, body, { headers });
+  return response.data;
+}
+
+export { get, post, put };
