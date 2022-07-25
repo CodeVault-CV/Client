@@ -107,7 +107,7 @@ const handlers = [
       ctx.json({
         status: 200,
         message: "SUCCESS",
-        data: studyName
+        data: newStudy.id
       })
     )
   })
