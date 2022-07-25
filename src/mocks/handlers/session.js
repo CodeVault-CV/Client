@@ -66,7 +66,6 @@ const handlers = [
   }),
   rest.put(baseURL + "/session", async (req, res, ctx) => {
     const session = await req.json();
-    console.log(session);
     const sessionMap = new Map(getSession());
     sessionMap.set(+session.id, { ...session });
     setSession(Array.from(sessionMap));
@@ -75,6 +74,20 @@ const handlers = [
       ctx.json({
         status: 200,
         message: "SUCCESS"
+      })
+    )
+  }),
+  rest.delete(baseURL + `/session/:sessionId`, (req, res, ctx) => {
+    const { sessionId } = req.params;
+
+    const sessionMap = new Map(getSession());
+    sessionMap.delete(+sessionId);
+    setSession(Array.from(sessionMap));
+
+    return res(
+      ctx.json({
+        status: 200,
+        message: "SUCCESS",
       })
     )
   })
