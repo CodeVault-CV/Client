@@ -45,12 +45,12 @@ const handlers = [
     const sessionMap = new Map(getSession());
     const session = sessionMap.get(+sessionId);
 
-    if(!session) {
+    if (!session) {
       return res(
         ctx.status(404),
         ctx.json({
           status: 404,
-          message: "존재하지 않는 스터디입니다",
+          message: "존재하지 않는 세션입니다",
         })
       )
     }
@@ -64,6 +64,20 @@ const handlers = [
       })
     );
   }),
+  rest.put(baseURL + "/session", async (req, res, ctx) => {
+    const session = await req.json();
+    console.log(session);
+    const sessionMap = new Map(getSession());
+    sessionMap.set(+session.id, { ...session });
+    setSession(Array.from(sessionMap));
+
+    return res(
+      ctx.json({
+        status: 200,
+        message: "SUCCESS"
+      })
+    )
+  })
 ];
 
 export default handlers;

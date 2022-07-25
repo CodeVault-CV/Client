@@ -32,10 +32,7 @@ export default function ProblemCard({ id, number, name, platform }: ProblemCardP
   const [flipped, setFlipped] = useState(false);
   const { isLoading, data: solutionList } = useQuery(
     [`solutionList`, id],
-    () => getSolutionList(id).then((res) => res.data),
-    {
-      refetchOnMount: false,
-    }
+    () => getSolutionList(id).then((res) => res.data)
   );
 
   const handleClick = () => {
