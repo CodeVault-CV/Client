@@ -86,7 +86,7 @@ const handlers = [
     const studyList = getStudy();
 
     const newStudy = {
-      id: `test${study.length + 1}`,
+      id: `test${studyList.length + 1}`,
       name: studyName,
       url: `https://github.com/woong-jae/${repoName}`,
       leader: "woong-jae",
