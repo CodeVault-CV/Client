@@ -1,4 +1,4 @@
-import { get, post, put } from "../utils/http";
+import { deleteRequest, get, post, put } from "../utils/http";
 
 // GET
 export const getToken = (code: string) => get(`/user/login?code=${code}`);
@@ -25,3 +25,6 @@ export const updateSession = (session: {
   start: Date,
   end: Date
 }) => put("/session", session);
+
+// DELETE
+export const deleteSession = (sessionId: number) => deleteRequest(`/session/${sessionId}`);

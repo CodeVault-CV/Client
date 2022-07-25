@@ -104,6 +104,7 @@ const handlers = [
     setStudy(studyList);
 
     return res(
+      ctx.delay(3000),
       ctx.json({
         status: 200,
         message: "SUCCESS",

@@ -31,4 +31,9 @@ const put = async (url: string, body: any, headers = {}) => {
   return response.data;
 }
 
-export { get, post, put };
+const deleteRequest = async (url: string, headers = {}) => {
+  const response = await API.delete(url, { headers });
+  return response.data;
+}
+
+export { get, post, put, deleteRequest };
