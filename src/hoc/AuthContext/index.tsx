@@ -2,6 +2,14 @@ import { useState, createContext, PropsWithChildren, useEffect, useContext } fro
 import { useNavigate } from "react-router-dom";
 
 import { getToken } from "../../api";
+import TypeStorage from "../../utils/TypeStorage";
+
+type Auth = {
+  name: string,
+  token: string
+};
+
+const AuthStorage = new TypeStorage<Auth>("auth", localStorage);
 
 export const AuthContext = createContext({
   auth: false,
@@ -16,9 +24,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const navigate = useNavigate();
 
   const checkAuth = () => {
-    const authData = localStorage.getItem("auth");
+    const authData = AuthStorage.get();
     if (authData !== null) {
-      const { name } = JSON.parse(authData);
+      const { name } = authData;
       setAuth(true);
       setName(name);
     } else {
@@ -31,7 +39,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     try {
       const { status, data } = await getToken(code);
       if (status === 200) {
-        localStorage.setItem("auth", JSON.stringify(data));
+        AuthStorage.set(data);
         checkAuth();
       }
     } catch (error) {
@@ -40,7 +48,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   };
 
   const logout = () => {
-    localStorage.removeItem("auth");
+    AuthStorage.remove();
     checkAuth();
     navigate("/");
   };

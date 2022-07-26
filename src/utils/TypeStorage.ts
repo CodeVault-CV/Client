@@ -1,39 +1,21 @@
-export class WebStorage {
-  constructor(
-    private storage: any
-  ) {}
-  get(key: string) {
-    return this.storage.getItem(key);
-  }
-  set(key: string, value: string) {
-    this.storage.setItem(key, value);
-  }
-  remove(key: string) {
-    this.storage.removeItem(key);
-  }
-}
-
-export interface IStorageMapper<T> {
-  toJson(target: T): any;
-  fromJson(json: any): T;
-}
+const key_prefix = "ALGONG_";
 
 export default class TypeStorage<T> {
-  constructor(
-    private key: string,
-    private mapper: IStorageMapper<T>,
-    private storage: WebStorage
-  ) {}
-
-  get(): T {
-    return this.mapper.fromJson(this.storage.get(this.key));
+  constructor(private key: string, private storage: Storage) {
+    this.key = key_prefix + key;
   }
 
-  set(target: T) {
-    this.storage.set(this.key, this.mapper.toJson(target));
+  get(): T | null {
+    const json = this.storage.getItem(this.key);
+    if(!json) return null;
+    return JSON.parse(json);
+  }
+
+  set(data: T) {
+    this.storage.setItem(this.key, JSON.stringify(data));
   }
 
   remove() {
-    this.storage.remove(this.key);
+    this.storage.removeItem(this.key);
   }
 }

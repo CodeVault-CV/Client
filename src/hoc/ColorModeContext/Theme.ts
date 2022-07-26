@@ -1,36 +1,27 @@
-import TypeStorage, { IStorageMapper, WebStorage } from "../../utils/TypeStorage";
+import TypeStorage from "../../utils/TypeStorage";
 
 export enum Mode {
   LIGHT = "light",
   DARK = "dark",
 }
 
-class ThemeMapper implements IStorageMapper<Mode> {
-  toJson(target: Mode) {
-    return target;
-  }
-  fromJson(json: any): Mode {
-    return json;
-  }
-}
+const ModeStorage = new TypeStorage<Mode>("theme", localStorage);
 
 class Theme {
-  constructor(private modeStorage: TypeStorage<Mode>) {}
+  constructor(private storage: TypeStorage<Mode>) {}
   getMode() {
-    let mode = this.modeStorage.get();
+    let mode = this.storage.get();
     if (mode === null) {
       mode = Mode.LIGHT;
-      this.modeStorage.set(mode);
+      this.storage.set(mode);
     }
     return mode;
   }
   toggleMode() {
-    const mode = this.modeStorage.get() === Mode.LIGHT ? Mode.DARK : Mode.LIGHT;
-    this.modeStorage.set(mode);
+    const mode = this.storage.get() === Mode.LIGHT ? Mode.DARK : Mode.LIGHT;
+    this.storage.set(mode);
     return mode;
   }
 }
 
-const themeStorage = new TypeStorage("theme", new ThemeMapper(), new WebStorage(localStorage));
-
-export default new Theme(themeStorage);
+export default new Theme(ModeStorage);
