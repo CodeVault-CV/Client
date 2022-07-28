@@ -18,7 +18,7 @@ export interface ProblemCardProps {
 }
 
 function getProblemLink(platform: string, number: string) {
-  switch (platform) {
+  switch (platform.toLocaleLowerCase()) {
     case "programmers":
       return `https://school.programmers.co.kr/learn/courses/30/lessons/${number}`;
     case "boj":

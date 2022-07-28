@@ -7,7 +7,7 @@ const baseURL = process.env.REACT_APP_SERVER_BASE_URL;
 export const handlers = [
   ...studyHandler,
   ...sessionHandler,
-  rest.get(baseURL + "/problem/list", (req, res, ctx) => {
+  rest.get(baseURL + "/problem/list/:sessionId", (req, res, ctx) => {
     return res(
       ctx.json({
         status: 200,

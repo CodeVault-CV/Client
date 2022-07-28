@@ -40,7 +40,7 @@ export default function StudyButton() {
         ) : studyList.length ? (
           studyList.map((study) => (
             <MenuItem key={study.id} id={study.id} onClick={handleClose} sx={{ p: 0 }}>
-              <LinkButton to={`/study/${study.id}`} variant="text">
+              <LinkButton to={`/study/${study.id}`} variant="text" sx={{ width: "100%" }}>
                 {study.name}
               </LinkButton>
             </MenuItem>

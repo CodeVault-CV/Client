@@ -16,19 +16,13 @@ export default function ProblemList({ sessionId }: ProblemListProps) {
         {isLoading ? (
           <>
             <Grid item xs={12} md={6} alignItems="stretch">
-              <Skeleton width="100%">
-                <ProblemCard id={0} number={""} name={""} platform={""} />
-              </Skeleton>
+              <Skeleton width="100%" height={200} />
             </Grid>
             <Grid item xs={12} md={6} alignItems="stretch">
-              <Skeleton width="100%">
-                <ProblemCard id={0} number={""} name={""} platform={""} />
-              </Skeleton>
+              <Skeleton width="100%" height={200} />
             </Grid>
             <Grid item xs={12} md={6} alignItems="stretch">
-              <Skeleton width="100%">
-                <ProblemCard id={0} number={""} name={""} platform={""} />
-              </Skeleton>
+              <Skeleton width="100%" height={200} />
             </Grid>
           </>
         ) : (
