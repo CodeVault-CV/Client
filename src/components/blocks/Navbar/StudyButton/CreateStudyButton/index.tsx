@@ -1,44 +1,60 @@
-import { useState, ChangeEvent } from 'react';
-import { useNavigate } from 'react-router-dom'
-import { createStudy } from '../../../../../api';
-import debounce from '../../../../../utils/debounce';
-import CreateStudyButton from './CreateStudyButton';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState, ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { createStudy } from "../../../../../api";
+import debounce from "../../../../../utils/debounce";
+import CreateStudyButton from "./CreateStudyButton";
 
 export interface IErrorMessage {
   studyNameMessage: string;
   repoNameMessage: string;
 }
 
+type CreateStudyProps = {
+  studyName: string;
+  repoName: string;
+};
+
 export default function CreateStudyButtonContainer() {
-  const [studyName, setStudyName] = useState<string>('');
-  const [repoName, setRepoName] = useState<string>('');
+  const queryClient = useQueryClient();
+  const mutation = useMutation(
+    ({ studyName, repoName }: CreateStudyProps) => createStudy(studyName, repoName),
+    {
+      onSuccess: (res) => {
+        queryClient.invalidateQueries(["studyList"]);
+        navigate(`/study/${res.data.id}`);
+      },
+    }
+  );
+  const [studyName, setStudyName] = useState<string>("");
+  const [repoName, setRepoName] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<IErrorMessage>({
-    studyNameMessage: '',
-    repoNameMessage: '',
+    studyNameMessage: "",
+    repoNameMessage: "",
   });
 
   const checkStudyName = debounce((name: string) => {
-    const message = '스터디 이름은 2~10자로 되어야 합니다.';
-    
+    const message = "스터디 이름은 2~10자로 되어야 합니다.";
+
     if (name.length < 2 || name.length > 10) {
       setErrorMessage({
         ...errorMessage,
-        studyNameMessage: message
+        studyNameMessage: message,
       });
       return;
     }
 
     setErrorMessage({
       ...errorMessage,
-      studyNameMessage: '',
+      studyNameMessage: "",
     });
-  })
+  });
 
   const checkRepoName = debounce((name: string) => {
-    const message1 = '저장소 이름은 1자 이상으로 되어야 합니다.';
-    const message2 = '저장소 이름은 영문 대소문자와 _, - 특수문자로 되어야 합니다.';
+    const message1 = "저장소 이름은 1자 이상으로 되어야 합니다.";
+    const message2 = "저장소 이름은 영문 대소문자와 _, - 특수문자로 되어야 합니다.";
     const pattern = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣~!@#$%^&*()+|<>?:{}]/;
-    
+
     if (!name) {
       setErrorMessage({
         ...errorMessage,
@@ -50,26 +66,26 @@ export default function CreateStudyButtonContainer() {
     if (pattern.test(name)) {
       setErrorMessage({
         ...errorMessage,
-        repoNameMessage: message2
+        repoNameMessage: message2,
       });
       return;
     }
 
     setErrorMessage({
       ...errorMessage,
-      repoNameMessage: '',
+      repoNameMessage: "",
     });
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
-    if (name === 'studyName') {
+    if (name === "studyName") {
       setStudyName(value);
       checkStudyName(value);
       return;
     }
-    
+
     setRepoName(value.trim());
     checkRepoName(value);
   };
@@ -77,8 +93,7 @@ export default function CreateStudyButtonContainer() {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    const response = await createStudy(studyName, repoName);
-    navigate(`/study/${response.data}`)
+    mutation.mutate({ studyName, repoName });
   };
 
   return (
