@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { AuthStorage } from "../hoc/AuthContext";
 
 const API = axios.create({
   baseURL: process.env.REACT_APP_SERVER_BASE_URL,
@@ -9,9 +10,9 @@ API.interceptors.request.use((config: AxiosRequestConfig) => {
     throw new Error(`Expected 'config' and 'config.headers' not to be undefined`);
   }
   
-  const auth = localStorage.getItem("auth");
+  const auth = AuthStorage.get();
   if (auth !== null) {
-    config.headers["Authorization"] = `Bearer ${JSON.parse(auth).token}`;
+    config.headers["Authorization"] = `Bearer ${auth.token}`;
   }
   return config;
 });

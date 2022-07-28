@@ -9,7 +9,7 @@ export const getStudyList = () => get(`/study/list`);
 export const getSession = (sessionId: number) => get(`/session/${sessionId}`);
 export const getSessionList = (studyId: string) => get(`/session/list/${studyId}`);
 
-export const getProblemList = (sessionId: number) => get(`/problem/list?${sessionId}`);
+export const getProblemList = (sessionId: number) => get(`/problem/list/${sessionId}`);
 
 export const getSolutionList = (problemId: number) => get(`/solution/list/${problemId}`);
 

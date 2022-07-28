@@ -9,7 +9,7 @@ type Auth = {
   token: string
 };
 
-const AuthStorage = new TypeStorage<Auth>("auth", localStorage);
+export const AuthStorage = new TypeStorage<Auth>("auth", localStorage);
 
 export const AuthContext = createContext({
   auth: false,

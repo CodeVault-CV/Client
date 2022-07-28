@@ -19,7 +19,7 @@ export default function Session({ sessionId }: SessionProps) {
         <ProblemAdder />
       </Box>
       <Box>
-        <ProblemList sessionId={sessionId} />
+        {/* <ProblemList sessionId={sessionId} /> */}
       </Box>
     </Stack>
   );

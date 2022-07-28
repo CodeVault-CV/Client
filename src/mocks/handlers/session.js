@@ -9,7 +9,7 @@ const session = [
       id: 1,
       name: "1주차",
       start: new Date(2022, 6, 12),
-      end: new Date(2022, 6, 18),
+      end: new Date(2022, 7, 30),
     }
   ],
   [

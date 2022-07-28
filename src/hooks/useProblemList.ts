@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getProblemList } from "../api";
+import Problem from "../types/Problem";
 
 export default function useProblemList(sessionId: number) {
   const { isLoading, isError, data } = useQuery(["problemList"], () =>
@@ -9,6 +10,6 @@ export default function useProblemList(sessionId: number) {
   return {
     isLoading,
     isError,
-    problemList: data,
+    problemList: data as Problem[],
   };
 }
