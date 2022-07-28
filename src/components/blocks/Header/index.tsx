@@ -1,9 +1,20 @@
 import { PropsWithChildren } from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Skeleton, Stack, Typography } from "@mui/material";
 
 interface HeaderProps {
   title: string;
   endBlock?: React.ReactNode;
+}
+
+export function LoadingHeader() {
+  return (
+    <Stack direction="column" spacing={2}>
+      <Skeleton>
+        <Typography variant="h3">Loading</Typography>
+      </Skeleton>
+      <Skeleton variant="rectangular" />
+    </Stack>
+  );
 }
 
 export default function Header({ title, children, endBlock }: PropsWithChildren<HeaderProps>) {

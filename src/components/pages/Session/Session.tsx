@@ -5,35 +5,22 @@ import Wrapper from "../../blocks/Wrapper";
 import SessionHeader from "./SessionHeader";
 import ProblemList from "./ProblemList";
 
-interface SessionProps {
-  session: {
-    id: number;
-    name: string;
-    start: string;
-    end: string;
-  };
-  problemList: {
-    id: number;
-    number: string;
-    name: string;
-    platform: string;
-  } [];
+type SessionProps = {
+  sessionId: number,
 }
 
-function Session({ session, problemList }: SessionProps) {
+export default function Session({ sessionId }: SessionProps) {
   return (
     <Stack spacing={3}>
       <Wrapper>
-        <SessionHeader {...session} />
+        <SessionHeader sessionId={sessionId} />
       </Wrapper>
       <Box>
         <ProblemAdder />
       </Box>
       <Box>
-        <ProblemList problemList={problemList} />
+        <ProblemList sessionId={sessionId} />
       </Box>
     </Stack>
   );
 }
-
-export default Session;
