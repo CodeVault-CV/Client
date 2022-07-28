@@ -1,11 +1,11 @@
 import { useState, Fragment, MouseEvent } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { Menu, MenuItem, Divider, Link } from "@mui/material";
+import { Menu, MenuItem, Divider } from "@mui/material";
 import styled from "@emotion/styled";
 
 import CreateStudyButton from "./CreateStudyButton";
 import { IStudy } from "..";
 import Button from "../../../atoms/Button";
+import LinkButton from "../../../atoms/LinkButton";
 
 const AltTextWrapper = styled.div`
   display: flex;
@@ -38,15 +38,10 @@ export default function StudyButton({ studies }: StudyListProps) {
       <Menu elevation={3} anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
         {studies.length ? (
           studies.map((study) => (
-            <MenuItem key={study.id} id={study.id} onClick={handleClose}>
-              <Link
-                to={`/study/${study.id}`}
-                component={RouterLink}
-                underline="none"
-                color="inherit"
-              >
+            <MenuItem key={study.id} id={study.id} onClick={handleClose} sx={{ p: 0 }}>
+              <LinkButton to={`/study/${study.id}`} variant="text">
                 {study.name}
-              </Link>
+              </LinkButton>
             </MenuItem>
           ))
         ) : (

@@ -17,7 +17,7 @@ export default function Study({ study, studyId }: StudyProps) {
   return (
     <Stack spacing={3}>
       <StudyHeader {...study} />
-      <StudyMiddleBar />
+      <StudyMiddleBar studyId={studyId} />
       <SessionGrid studyId={studyId} />
     </Stack>
   );

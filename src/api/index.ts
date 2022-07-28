@@ -17,14 +17,17 @@ export const getSolutionList = (problemId: number) => get(`/solution/list/${prob
 export const createStudy = (studyName: string, repoName: string) =>
   post(`/study`, { studyName: studyName, repoName: repoName });
 
+export const createSession = (studyId: string, name: string, start: Date, end: Date) =>
+  post(`/session`, {
+    studyId,
+    name,
+    start,
+    end,
+  });
 
 // PUT
-export const updateSession = (session: {
-  id: number,
-  name: string,
-  start: Date,
-  end: Date
-}) => put("/session", session);
+export const updateSession = (session: { id: number; name: string; start: Date; end: Date }) =>
+  put("/session", session);
 
 // DELETE
 export const deleteSession = (sessionId: number) => deleteRequest(`/session/${sessionId}`);

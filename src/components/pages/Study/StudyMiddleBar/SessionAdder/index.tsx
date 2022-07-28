@@ -1,74 +1,34 @@
-import { useState, MouseEvent, ChangeEvent } from "react";
-import { TextField, Popover, Stack } from "@mui/material";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import Button from "../../../../atoms/Button";
-import Wrapper from "../../../../blocks/Wrapper";
+import { createSession } from "../../../../../api";
+import SessionEditor from "../../../../blocks/SessionEditor";
+import Session from "../../../../../types/Session";
 
-export default function SessionAdder() {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [title, setTitle] = useState("");
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const open = Boolean(anchorEl);
+type SessionAdderContainerProps = {
+  studyId: string;
+};
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-  }
+export default function SessionAdderContainer({ studyId }: SessionAdderContainerProps) {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(
+    ({ name, start, end }: Omit<Session, "id">) => createSession(studyId, name, start, end),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["sessionList"]);
+      },
+    }
+  );
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleSubmit = (name: string, start: Date, end: Date) => {
+    mutation.mutate({
+      name,
+      start,
+      end,
+    });
   };
 
   return (
-    <>
-      <Button onClick={handleClick}>세션 추가</Button>
-      <Popover
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        open={open}
-        onClose={handleClose}
-      >
-        <Wrapper>
-          <Stack spacing={1}>
-            <TextField label="제목" variant="outlined" size="small" onChange={handleChange} />
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker
-                label="시작 날짜"
-                value={startDate}
-                onChange={(newValue) => {
-                  setStartDate(newValue);
-                  setEndDate(null);
-                }}
-                renderInput={(params) => <TextField size="small" {...params} />}
-              />
-              <DatePicker
-                label="종료 날짜"
-                value={endDate}
-                minDate={startDate}
-                onChange={(newValue) => {
-                  setEndDate(newValue);
-                }}
-                renderInput={(params) => <TextField size="small" {...params} />}
-              />
-            </LocalizationProvider>
-            <Button>완료</Button>
-          </Stack>
-        </Wrapper>
-      </Popover>
-    </>
+    <SessionEditor icon={<AddCircleIcon />} label="세션 생성하기" handleSubmit={handleSubmit} />
   );
 }

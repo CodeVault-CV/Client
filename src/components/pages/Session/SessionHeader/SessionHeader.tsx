@@ -4,7 +4,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 import DateLabel from "../../../atoms/DateLabel";
 import Header from "../../../blocks/Header";
-import SessionEditor from "./SessionEditor";
+import SessionUpdate from "./SessionUpdate";
 
 import Session from "../../../../types/Session";
 
@@ -20,7 +20,7 @@ export default function SessionHeader({ session, handleDelete }: SessionHeaderPr
     <Header title={name}>
       <DateLabel start={new Date(start)} end={end} />
       <Box sx={{ display: "flex" }}>
-        <SessionEditor id={id} name={name} start={start} end={end} />
+        <SessionUpdate id={id} name={name} start={start} end={end} />
         <Tooltip title="세션 삭제하기" arrow>
           <IconButton onClick={handleDelete}>
             <DeleteForeverIcon />

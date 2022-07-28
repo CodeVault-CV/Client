@@ -3,12 +3,16 @@ import SearchTextField from "./SearchTextField";
 import SortSplitButton from "./SortSplitButton";
 import SessionAdder from "./SessionAdder";
 
-export default function StudyMiddleBar() {
+type StudyMiddleBarProps = {
+  studyId: string,
+}
+
+export default function StudyMiddleBar({ studyId }: StudyMiddleBarProps) {
   return (
     <Stack direction="row" spacing={2}>
       <SearchTextField />
       <SortSplitButton />
-      <SessionAdder />
+      <SessionAdder studyId={studyId} />
     </Stack>
   );
 }

@@ -1,41 +1,34 @@
-import { TextField, Popover, Stack, IconButton, Tooltip } from "@mui/material";
+import { useState, ChangeEvent, MouseEvent } from "react";
+import { Tooltip, IconButton, Popover, Stack, TextField } from "@mui/material";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import EditIcon from "@mui/icons-material/Edit";
 
-import { useState, MouseEvent, ChangeEvent } from "react";
-import Button from "../../../../atoms/Button";
-import Wrapper from "../../../../blocks/Wrapper";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateSession } from "../../../../../api";
+import Button from "../../atoms/Button";
+import Wrapper from "../../blocks/Wrapper";
 
-interface SessionAdderProps {
-  id: number;
-  name: string;
-  start: Date;
-  end: Date;
-}
+type SessionEditorProps = {
+  icon: JSX.Element;
+  label: string;
+  name?: string;
+  start?: Date;
+  end?: Date;
+  handleSubmit(title: string, startDate: Date, endDate: Date): void;
+};
 
-export default function SessionAdder({ id, name, start, end }: SessionAdderProps) {
-  const queryClient = useQueryClient();
-  const mutation = useMutation(
-    (updatedSession: SessionAdderProps) => updateSession(updatedSession),
-    {
-      onSuccess: () => {
-        queryClient.setQueryData(["session"], {
-          id,
-          name: title,
-          start: startDate,
-          end: endDate,
-        });
-      },
-    }
-  );
+type EditorDate = Date | null;
+
+export default function SessionEditor({
+  icon,
+  label,
+  name = "",
+  start = new Date(),
+  end = new Date(),
+  handleSubmit,
+}: SessionEditorProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [title, setTitle] = useState(name);
-  const [startDate, setStartDate] = useState<Date | null>(start);
-  const [endDate, setEndDate] = useState<Date | null>(end);
+  const [title, setTitle] = useState<string>(name);
+  const [startDate, setStartDate] = useState<EditorDate>(start);
+  const [endDate, setEndDate] = useState<EditorDate>(end);
   const open = Boolean(anchorEl);
   const disabled = !Boolean(title && startDate && endDate);
 
@@ -54,25 +47,20 @@ export default function SessionAdder({ id, name, start, end }: SessionAdderProps
     setEndDate(end);
   };
 
-  const handleSubmit = (event: MouseEvent<HTMLButtonElement>) => {
-    if(startDate === null || endDate === null) return;
-    mutation.mutate({
-      id,
-      name: title,
-      start: startDate,
-      end: endDate,
-    });
+  const submitWrapper = (event: MouseEvent<HTMLButtonElement>) => {
+    if (!title || !startDate || !endDate) return;
+    handleSubmit(title, startDate, endDate);
     setAnchorEl(null);
-    setTitle(title);
+    setTitle(name);
     setStartDate(startDate);
     setEndDate(endDate);
   };
 
   return (
     <>
-      <Tooltip title="세션 수정하기" arrow>
+      <Tooltip title={label} arrow>
         <IconButton onClick={handleClick}>
-          <EditIcon />
+          {icon}
         </IconButton>
       </Tooltip>
       <Popover
@@ -117,7 +105,7 @@ export default function SessionAdder({ id, name, start, end }: SessionAdderProps
                 renderInput={(params) => <TextField size="small" {...params} />}
               />
             </LocalizationProvider>
-            <Button color="success" onClick={handleSubmit} disabled={disabled}>
+            <Button color="success" onClick={submitWrapper} disabled={disabled}>
               완료
             </Button>
           </Stack>
