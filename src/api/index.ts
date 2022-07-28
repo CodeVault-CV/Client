@@ -7,7 +7,7 @@ export const getStudy = (studyId: string | undefined) => get(`/study/${studyId}`
 export const getStudyList = () => get(`/study/list`);
 
 export const getSession = (sessionId: number) => get(`/session/${sessionId}`);
-export const getSessionList = (studyId: string | undefined) => get(`/session/list/${studyId}`);
+export const getSessionList = (studyId: string) => get(`/session/list/${studyId}`);
 
 export const getProblemList = (sessionId: number) => get(`/problem/list?${sessionId}`);
 

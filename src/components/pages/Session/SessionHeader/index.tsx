@@ -12,7 +12,7 @@ type SessionHeaderProps = {
 };
 
 export default function SessionHeaderContainer({ sessionId }: SessionHeaderProps) {
-  const { isLoading, data } = useSession(sessionId);
+  const { isLoading, session } = useSession(sessionId);
   const { studyId } = useParams();
   const navigate = useNavigate();
   const mutation = useMutation((sessionId: number) => deleteSession(sessionId), {
@@ -27,5 +27,5 @@ export default function SessionHeaderContainer({ sessionId }: SessionHeaderProps
 
   if (isLoading) return <LoadingHeader />;
 
-  return <SessionHeader session={data} handleDelete={handleDelete} />;
+  return <SessionHeader session={session} handleDelete={handleDelete} />;
 }

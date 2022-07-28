@@ -4,26 +4,21 @@ import StudyMiddleBar from "./StudyMiddleBar";
 import SessionGrid from "./SessionGrid";
 
 interface StudyProps {
+  studyId: string;
   study: {
     id: string;
     members: { id: string; name: string; imageUrl: string; githubUrl: string }[];
     name: string;
     url: string;
   };
-  sessionList: {
-    id: number;
-    name: string;
-    start: Date;
-    end: Date;
-  }[];
 }
 
-export default function Study({ study, sessionList }: StudyProps) {
+export default function Study({ study, studyId }: StudyProps) {
   return (
     <Stack spacing={3}>
       <StudyHeader {...study} />
       <StudyMiddleBar />
-      <SessionGrid sessionList={sessionList} />
+      <SessionGrid studyId={studyId} />
     </Stack>
   );
 }

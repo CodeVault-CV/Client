@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getSession } from "../api";
+import Session from "../types/Session";
 
 
 
@@ -15,6 +16,6 @@ export default function useSession(sessionId: number) {
   return {
     isLoading,
     isError,
-    data,
+    session: data as Session,
   };
 }
