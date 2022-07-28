@@ -49,6 +49,7 @@ export default function SessionEditor({
 
   const submitWrapper = (event: MouseEvent<HTMLButtonElement>) => {
     if (!title || !startDate || !endDate) return;
+    endDate.setHours(23, 59, 59);
     handleSubmit(title, startDate, endDate);
     setAnchorEl(null);
     setTitle(name);

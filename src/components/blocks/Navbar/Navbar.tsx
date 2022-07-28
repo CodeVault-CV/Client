@@ -6,17 +6,15 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 import LoginButton from "./LoginButton";
 import StudyButton from "./StudyButton"
-import { IStudy } from "."
 
 interface NavProps {
   theme: Theme;
   auth: boolean;
-  studies: IStudy[];
   logout(): void;
   toggleColorMode(): void;
 }
 
-function Navbar({ theme, auth, studies, logout, toggleColorMode }: NavProps) {
+function Navbar({ theme, auth, logout, toggleColorMode }: NavProps) {
   return (
     <Box sx={{ flexGrow: 1, borderBottom: 1, borderColor: "divider" }}>
       <Container maxWidth="lg" sx={{ px: 0 }}>
@@ -31,7 +29,7 @@ function Navbar({ theme, auth, studies, logout, toggleColorMode }: NavProps) {
           <Box sx={{ display: "flex" }}>
             {auth ? (
               <>
-                <StudyButton studies={studies} />
+                <StudyButton />
                 <Button color="inherit" size="large" sx={{ fontWeight: 800 }} onClick={logout}>
                   로그아웃
                 </Button>

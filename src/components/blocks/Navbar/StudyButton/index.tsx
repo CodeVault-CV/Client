@@ -1,11 +1,11 @@
 import { useState, Fragment, MouseEvent } from "react";
-import { Menu, MenuItem, Divider } from "@mui/material";
+import { Menu, MenuItem, Divider, Skeleton } from "@mui/material";
 import styled from "@emotion/styled";
 
 import CreateStudyButton from "./CreateStudyButton";
-import { IStudy } from "..";
 import Button from "../../../atoms/Button";
 import LinkButton from "../../../atoms/LinkButton";
+import useStudyList from "../../../../hooks/useStudyList";
 
 const AltTextWrapper = styled.div`
   display: flex;
@@ -15,11 +15,8 @@ const AltTextWrapper = styled.div`
   font-size: 0.9em;
 `;
 
-interface StudyListProps {
-  studies: IStudy[];
-}
-
-export default function StudyButton({ studies }: StudyListProps) {
+export default function StudyButton() {
+  const { isLoading, studyList } = useStudyList();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -36,8 +33,12 @@ export default function StudyButton({ studies }: StudyListProps) {
         스터디
       </Button>
       <Menu elevation={3} anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-        {studies.length ? (
-          studies.map((study) => (
+        {isLoading ? (
+          <MenuItem>
+            <Skeleton variant="rectangular" />
+          </MenuItem>
+        ) : studyList.length ? (
+          studyList.map((study) => (
             <MenuItem key={study.id} id={study.id} onClick={handleClose} sx={{ p: 0 }}>
               <LinkButton to={`/study/${study.id}`} variant="text">
                 {study.name}
