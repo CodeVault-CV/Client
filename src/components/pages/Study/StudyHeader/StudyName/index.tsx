@@ -14,8 +14,7 @@ export default function StudyNameContainer({ id, name }: StudyNameProps) {
   const mutation = useMutation(
     ({ id, name }: StudyNameProps) => updateStudy({ id, name }),
     {
-      onSuccess: (res) => {
-        console.log(res);
+      onSuccess: () => {
         queryClient.invalidateQueries(["study"]);
       },
     }

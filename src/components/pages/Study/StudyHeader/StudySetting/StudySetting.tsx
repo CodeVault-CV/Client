@@ -16,25 +16,33 @@ const MemberAdderWrapper = styled.div`
   border-bottom: 1px solid lightgray;
 `;
 
-export default function StudySettingBlock() {
+interface StudySettingProps {
+  handleDelete: () => void;
+}
+
+export default function StudySettingBlock({ handleDelete }: StudySettingProps) {
+  const [openModal, setOpenModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const openMenu = Boolean(anchorEl);
 
-  const [openModal, setOpenModal] = useState(false);
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleOpenMenu = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
-  const handleClose = () => {
+  const handleCloseMenu = () => {
     setAnchorEl(null);
   };
 
+  const handleClick = () => {
+    handleDelete();
+    handleCloseModal();
+  }
+
   return (
     <div>
-      <Button variant='text' color='inherit' onClick={handleClick}>
+      <Button variant='text' color='inherit' onClick={handleOpenMenu}>
         <Settings fontSize='large' />
       </Button>
       <Menu
@@ -48,7 +56,7 @@ export default function StudySettingBlock() {
           horizontal: 'right',
         }}
         open={openMenu}
-        onClose={handleClose}
+        onClose={handleCloseMenu}
       >
         <MemberAdderWrapper>
           <TextField label='Github Email' variant='outlined' size='small' />
@@ -75,7 +83,9 @@ export default function StudySettingBlock() {
           </Typography>
           <Typography>스터디를 정말로 삭제하시겠습니까?</Typography>
           <Typography>삭제한 데이터는 복구할 수 없습니다.</Typography>
-          <Button variant='contained' color='error'>삭제</Button>
+          <Button variant='contained' color='error' onClick={handleClick}>
+            삭제
+          </Button>
         </Stack>
       </Modal>
     </div>

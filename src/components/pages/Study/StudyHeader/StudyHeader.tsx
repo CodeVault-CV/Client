@@ -17,16 +17,17 @@ const EndBlockWrapper = styled.div`
 `;
 
 interface HeaderEndBlockProps {
+  id: string;
   url: string;
 }
 
-function HeaderEndBlock({ url }: HeaderEndBlockProps) {
+function HeaderEndBlock({ id, url }: HeaderEndBlockProps) {
   return (
     <EndBlockWrapper>
       <Button href={url} color="inherit">
         <GitHub fontSize="large" />
       </Button>
-      <StudySetting />
+      <StudySetting id={id} />
     </EndBlockWrapper>
   );
 }
@@ -36,7 +37,7 @@ export default function StudyHeaderBlock({ id, name, members, url }: StudyHeader
     <Wrapper>
       <Header 
         title={<StudyName id={id} name={name} />} 
-        endBlock={<HeaderEndBlock url={url} />}
+        endBlock={<HeaderEndBlock id={id} url={url} />}
       >
         <Stack direction="row" spacing={4} sx={{ marginTop: 1 }}>
           {members.map(({ id, name, imageUrl, githubUrl }) => (

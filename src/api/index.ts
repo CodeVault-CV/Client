@@ -33,3 +33,5 @@ export const updateStudy = (study: { id: string, name: string }) => put("/study"
 
 // DELETE
 export const deleteSession = (sessionId: number) => deleteRequest(`/session/${sessionId}`);
+
+export const deleteStudy = (studyId: string) => deleteRequest(`/study/${studyId}`);
