@@ -1,37 +1,46 @@
 import { Fragment } from 'react';
 import { Stack, Button, IconButton, TextField } from '@mui/material';
-import { Edit } from '@mui/icons-material';
+import { Edit, CheckCircle } from '@mui/icons-material';
 
 interface StudyHeaderTitleProps {
-  title: string;
+  studyName: string;
   isTextFiled: boolean;
-  setTitle: React.Dispatch<React.SetStateAction<string>>;
+  errorMessage: string;
   handleClick: (event: React.MouseEvent<HTMLElement>) => void;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
 }
 
-export default function StudyHeaderTitleBlock(props: StudyHeaderTitleProps) {
-  const { title, isTextFiled, setTitle, handleClick } = props;
+export default function StudyHeaderTitleBlock({
+  studyName,
+  isTextFiled,
+  errorMessage,
+  handleClick,
+  handleChange,
+}: StudyHeaderTitleProps) {
   return (
     <Fragment>
       {isTextFiled ? (
-        <Stack direction='row'>
+        <Stack direction='row' spacing={1} alignItems='flex-start'>
           <TextField
             size='small'
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={studyName}
+            helperText={errorMessage}
+            error={errorMessage ? true : false}
+            onChange={(e) => handleChange(e)}
           />
-          <Button
-            variant='contained'
+          <IconButton
             color='success'
-            sx={{ marginLeft: 1 }}
             onClick={handleClick}
+            disabled={errorMessage ? true : false}
           >
-            저장
-          </Button>
+            <CheckCircle />
+          </IconButton>
         </Stack>
       ) : (
         <Fragment>
-          {title}
+          {studyName}
           <IconButton sx={{ marginLeft: 1 }} onClick={handleClick}>
             <Edit />
           </IconButton>
