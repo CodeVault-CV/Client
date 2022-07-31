@@ -31,11 +31,11 @@ function HeaderEndBlock({ url }: HeaderEndBlockProps) {
   );
 }
 
-export default function StudyHeaderBlock({ name, members, url }: StudyHeaderProps) {
+export default function StudyHeaderBlock({ id, name, members, url }: StudyHeaderProps) {
   return (
     <Wrapper>
       <Header 
-        title={<StudyName name={name} />} 
+        title={<StudyName id={id} name={name} />} 
         endBlock={<HeaderEndBlock url={url} />}
       >
         <Stack direction="row" spacing={4} sx={{ marginTop: 1 }}>

@@ -1,12 +1,25 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from 'react';
 import StudyName from './StudyName';
 import debounce from '../../../../../utils/debounce';
+import { updateStudy } from '../../../../../api'
 
-interface StudyHeaderTitleProps {
+interface StudyNameProps {
+  id: string;
   name: string;
 }
 
-export default function HeaderTitleContainer({ name }: StudyHeaderTitleProps) {
+export default function StudyNameContainer({ id, name }: StudyNameProps) {
+  const queryClient = useQueryClient();
+  const mutation = useMutation(
+    ({ id, name }: StudyNameProps) => updateStudy({ id, name }),
+    {
+      onSuccess: (res) => {
+        console.log(res);
+        queryClient.invalidateQueries(["study"]);
+      },
+    }
+  );
   const [studyName, setStudyName] = useState<string>(name);
   const [isTextFiled, setTextFiled] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -25,11 +38,10 @@ export default function HeaderTitleContainer({ name }: StudyHeaderTitleProps) {
     checkStudyName(e.target.value);
   }
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (isTextFiled && name !== studyName) {
-      
+      mutation.mutate({ id, name: studyName })
     }
-
     setTextFiled(!isTextFiled);
   };
 

@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { Stack, Button, IconButton, TextField } from '@mui/material';
+import { Stack, IconButton, TextField } from '@mui/material';
 import { Edit, CheckCircle } from '@mui/icons-material';
 
 interface StudyHeaderTitleProps {
