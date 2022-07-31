@@ -1,13 +1,11 @@
 import styled from "@emotion/styled";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import IconButton from '@mui/material/IconButton';
-import GitHubIcon from "@mui/icons-material/GitHub";
-import EditIcon from '@mui/icons-material/Edit';
+import { Stack, Button } from '@mui/material';
+import { GitHub } from '@mui/icons-material';
 
 import Header from "../../../blocks/Header";
 import Profile from "../../../blocks/Profile";
 import Wrapper from "../../../blocks/Wrapper";
+import StudyHeaderTitle from "./StudyHeaderTitle";
 import StudySettingMenu from "./StudySettingMenu";
 import { StudyHeaderProps } from ".";
 
@@ -25,28 +23,19 @@ interface HeaderEndBlockProps {
 function HeaderEndBlock({ url }: HeaderEndBlockProps) {
   return (
     <EndBlockWrapper>
-      <EditTitleButton />
       <Button href={url} color="inherit">
-        <GitHubIcon fontSize="large" />
+        <GitHub fontSize="large" />
       </Button>
       <StudySettingMenu />
     </EndBlockWrapper>
   );
 }
 
-function EditTitleButton() {
-  return (
-    <IconButton>
-      <EditIcon fontSize="small" />
-    </IconButton>
-  )
-}
-
 export default function StudyHeaderBlock({ name, members, url }: StudyHeaderProps) {
   return (
     <Wrapper>
       <Header 
-        title={name} 
+        title={<StudyHeaderTitle name={name} />} 
         endBlock={<HeaderEndBlock url={url} />}
       >
         <Stack direction="row" spacing={4} sx={{ marginTop: 1 }}>

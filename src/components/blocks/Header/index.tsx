@@ -2,7 +2,7 @@ import { PropsWithChildren } from "react";
 import { Box, Skeleton, Stack, Typography } from "@mui/material";
 
 interface HeaderProps {
-  title: string;
+  title: any;
   endBlock?: React.ReactNode;
 }
 
