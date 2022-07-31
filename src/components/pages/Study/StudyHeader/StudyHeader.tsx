@@ -5,7 +5,7 @@ import { GitHub } from '@mui/icons-material';
 import Header from "../../../blocks/Header";
 import Profile from "../../../blocks/Profile";
 import Wrapper from "../../../blocks/Wrapper";
-import StudyHeaderTitle from "./StudyHeaderTitle";
+import StudyName from "./StudyName";
 import StudySettingMenu from "./StudySettingMenu";
 import { StudyHeaderProps } from ".";
 
@@ -35,7 +35,7 @@ export default function StudyHeaderBlock({ name, members, url }: StudyHeaderProp
   return (
     <Wrapper>
       <Header 
-        title={<StudyHeaderTitle name={name} />} 
+        title={<StudyName name={name} />} 
         endBlock={<HeaderEndBlock url={url} />}
       >
         <Stack direction="row" spacing={4} sx={{ marginTop: 1 }}>

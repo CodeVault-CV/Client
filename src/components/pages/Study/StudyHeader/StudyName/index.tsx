@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import StudyHeaderTitle from './StudyHeaderTitle';
+import StudyName from './StudyName';
 
 export interface StudyHeaderTitleProps {
   name: string;
@@ -18,7 +18,7 @@ export default function HeaderTitleContainer({ name }: StudyHeaderTitleProps) {
   };
 
   return (
-    <StudyHeaderTitle
+    <StudyName
       title={title}
       isTextFiled={isTextFiled}
       setTitle={setTitle}
