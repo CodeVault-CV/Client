@@ -6,7 +6,7 @@ import Header from "../../../blocks/Header";
 import Profile from "../../../blocks/Profile";
 import Wrapper from "../../../blocks/Wrapper";
 import StudyName from "./StudyName";
-import StudySettingMenu from "./StudySettingMenu";
+import StudySetting from "./StudySetting";
 import { StudyHeaderProps } from ".";
 
 const EndBlockWrapper = styled.div`
@@ -26,7 +26,7 @@ function HeaderEndBlock({ url }: HeaderEndBlockProps) {
       <Button href={url} color="inherit">
         <GitHub fontSize="large" />
       </Button>
-      <StudySettingMenu />
+      <StudySetting />
     </EndBlockWrapper>
   );
 }

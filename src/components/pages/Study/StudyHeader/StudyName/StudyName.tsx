@@ -12,7 +12,7 @@ interface StudyHeaderTitleProps {
   ) => void;
 }
 
-export default function StudyHeaderTitleBlock({
+export default function StudyNameBlock({
   studyName,
   isTextFiled,
   errorMessage,
