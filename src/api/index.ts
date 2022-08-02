@@ -29,5 +29,9 @@ export const createSession = (studyId: string, name: string, start: Date, end: D
 export const updateSession = (session: { id: number; name: string; start: Date; end: Date }) =>
   put("/session", session);
 
+export const updateStudy = (study: { id: string, name: string }) => put("/study", study)
+
 // DELETE
 export const deleteSession = (sessionId: number) => deleteRequest(`/session/${sessionId}`);
+
+export const deleteStudy = (studyId: string) => deleteRequest(`/study/${studyId}`);

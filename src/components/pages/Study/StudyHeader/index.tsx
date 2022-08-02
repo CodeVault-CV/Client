@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import GitHubIcon from "@mui/icons-material/GitHub";
+import { Stack, Button } from '@mui/material';
+import { GitHub } from '@mui/icons-material';
 
 import Header from "../../../blocks/Header";
 import Profile from "../../../blocks/Profile";
 import Wrapper from "../../../blocks/Wrapper";
-import StudySettingMenu from "./StudySettingMenu";
+import StudyName from "./StudyName";
+import StudySetting from "./StudySetting";
 
 const EndBlockWrapper = styled.div`
   display: flex;
@@ -16,30 +16,35 @@ const EndBlockWrapper = styled.div`
 `;
 
 interface HeaderEndBlockProps {
+  id: string;
   url: string;
 }
 
-function HeaderEndBlock({ url }: HeaderEndBlockProps) {
+function HeaderEndBlock({ id, url }: HeaderEndBlockProps) {
   return (
     <EndBlockWrapper>
       <Button href={url} color="inherit">
-        <GitHubIcon fontSize="large" />
+        <GitHub fontSize="large" />
       </Button>
-      <StudySettingMenu />
+      <StudySetting id={id} />
     </EndBlockWrapper>
   );
 }
 
-interface StudyHeaderProps {
+export interface StudyHeaderProps {
+  id: string;
   members: { id: string, name: string, imageUrl: string, githubUrl: string }[];
   name: string;
   url: string;
 }
 
-export default function StudyHeader({ name, members, url }: StudyHeaderProps) {
+export default function StudyHeader({ id, name, members, url }: StudyHeaderProps) {
   return (
     <Wrapper>
-      <Header title={name} endBlock={<HeaderEndBlock url={url} />}>
+      <Header 
+        title={<StudyName id={id} name={name} />} 
+        endBlock={<HeaderEndBlock id={id} url={url} />}
+      >
         <Stack direction="row" spacing={4} sx={{ marginTop: 1 }}>
           {members.map(({ id, name, imageUrl, githubUrl }) => (
             <Profile key={id} name={name} imageUrl={imageUrl} href={githubUrl} />
