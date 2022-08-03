@@ -7,7 +7,7 @@ const ModalStyle = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   bgcolor: 'background.paper',
-  borderRadius: '15px',
+  borderRadius: 2,
   boxShadow: 'rgb(0 0 0 / 8%) 2px 4px 12px',
   p: 4,
 };

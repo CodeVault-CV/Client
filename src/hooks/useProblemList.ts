@@ -3,7 +3,7 @@ import { getProblemList } from "../api";
 import Problem from "../types/Problem";
 
 export default function useProblemList(sessionId: number) {
-  const { isLoading, isError, data } = useQuery(["problemList"], () =>
+  const { isLoading, isError, data } = useQuery(["problemList", sessionId], () =>
     getProblemList(sessionId).then((res) => res.data)
   );
 

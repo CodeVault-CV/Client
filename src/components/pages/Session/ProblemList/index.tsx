@@ -1,32 +1,40 @@
-import { Box, Grid, Skeleton } from "@mui/material";
+import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
+import { useState } from "react";
+
 import useProblemList from "../../../../hooks/useProblemList";
-import Problem from "../../../../types/Problem";
-import ProblemCard from "./ProblemCard";
+import ProblemEdit from "./ProblemEdit";
+import ProblemItems from "./ProblemItems";
+import ProblemListSkeleton from "./ProblemListSkeleton";
 
 type ProblemListProps = {
   sessionId: number;
 };
 
-export default function ProblemList({ sessionId }: ProblemListProps) {
+export default function ProblemListContainer({ sessionId }: ProblemListProps) {
   const { isLoading, problemList } = useProblemList(sessionId);
+  const [editMode, setEditMode] = useState(false);
+
+  const toggleMode = () => {
+    setEditMode((prev) => !prev);
+  };
 
   return (
     <Box>
+      <Box sx={{ mb: 2 }}>
+        <Stack direction="row" spacing={1}>
+          <Typography variant="caption" color="text.secondary" ml={1} fontSize={18}>
+            Problem List
+          </Typography>
+        </Stack>
+        <Divider />
+      </Box>
       <Grid container spacing={3}>
         {isLoading ? (
-          <>
-            <Grid item xs={12} md={6} alignItems="stretch">
-              <Skeleton width="100%" height={200} />
-            </Grid>
-            <Grid item xs={12} md={6} alignItems="stretch">
-              <Skeleton width="100%" height={200} />
-            </Grid>
-            <Grid item xs={12} md={6} alignItems="stretch">
-              <Skeleton width="100%" height={200} />
-            </Grid>
-          </>
+          <ProblemListSkeleton />
+        ) : editMode ? (
+          <ProblemEdit sessionId={sessionId} problemList={problemList} toggleMode={toggleMode} />
         ) : (
-          problemList.map((problem: Problem) => <ProblemCard key={problem.id} {...problem} />)
+          <ProblemItems problemList={problemList} toggleMode={toggleMode} />
         )}
       </Grid>
     </Box>

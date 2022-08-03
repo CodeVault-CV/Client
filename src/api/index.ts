@@ -25,13 +25,23 @@ export const createSession = (studyId: string, name: string, start: Date, end: D
     end,
   });
 
+export const createProblem = (sessionId: number, name: string, number: number, platform: string) =>
+  post(`/problem`, {
+    sessionId,
+    name,
+    number,
+    platform,
+  });
+
 // PUT
 export const updateSession = (session: { id: number; name: string; start: Date; end: Date }) =>
   put("/session", session);
 
-export const updateStudy = (study: { id: string, name: string }) => put("/study", study)
+export const updateStudy = (study: { id: string; name: string }) => put("/study", study);
 
 // DELETE
 export const deleteSession = (sessionId: number) => deleteRequest(`/session/${sessionId}`);
 
 export const deleteStudy = (studyId: string) => deleteRequest(`/study/${studyId}`);
+
+export const deleteProblem = (problemId: number) => deleteRequest(`/problem/${String(problemId)}`);

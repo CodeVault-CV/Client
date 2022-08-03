@@ -1,6 +1,5 @@
 import { Box, Stack } from "@mui/material";
 
-import ProblemAdder from "./ProblemAdder";
 import Wrapper from "../../blocks/Wrapper";
 import SessionHeader from "./SessionHeader";
 import ProblemList from "./ProblemList";
@@ -15,9 +14,6 @@ export default function Session({ sessionId }: SessionProps) {
       <Wrapper>
         <SessionHeader sessionId={sessionId} />
       </Wrapper>
-      <Box>
-        <ProblemAdder />
-      </Box>
       <Box>
         <ProblemList sessionId={sessionId} />
       </Box>

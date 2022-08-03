@@ -6,7 +6,10 @@ import DateLabel from "../../../../atoms/DateLabel";
 import Wrapper from "../../../../blocks/Wrapper";
 import LinkButton from "../../../../atoms/LinkButton";
 
-function getHourMinSeconds(date: Date) {
+function formatTime(date: Date) {
+  const leftDate = Math.floor(date.getTime() / 3600000 / 24);
+  if(leftDate > 0) return "D - " + String(leftDate);
+
   const hour = String(date.getHours()).padStart(2, "0");
   const min = String(date.getMinutes()).padStart(2, "0");
   const sec = String(date.getSeconds()).padStart(2, "0");
@@ -49,7 +52,7 @@ export default function SessionCard({ id, name, start, end }: Session) {
               color="primary"
               to={String(id)}
             >
-              {getHourMinSeconds(new Date(time))}
+              {formatTime(new Date(time))}
             </LinkButton>
           )}
         </Stack>

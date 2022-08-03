@@ -1,46 +1,14 @@
 import { rest } from "msw";
 import studyHandler from "./study";
 import sessionHandler from "./session";
+import problemHandler from "./problem";
 
 const baseURL = process.env.REACT_APP_SERVER_BASE_URL;
 
 export const handlers = [
   ...studyHandler,
   ...sessionHandler,
-  rest.get(baseURL + "/problem/list/:sessionId", (req, res, ctx) => {
-    return res(
-      ctx.json({
-        status: 200,
-        message: "SUCCESS",
-        data: [
-          {
-            id: "p1",
-            number: "92342",
-            name: "양궁 대회",
-            platform: "programmers",
-          },
-          {
-            id: "p2",
-            number: "92343",
-            name: "양과 늑대",
-            platform: "programmers",
-          },
-          {
-            id: "p3",
-            number: "92344",
-            name: "파괴되지 않은 건물",
-            platform: "programmers",
-          },
-          {
-            id: "p4",
-            number: "1516",
-            name: "게임 개발",
-            platform: "boj",
-          },
-        ],
-      })
-    );
-  }),
+  ...problemHandler,
   rest.get(baseURL + "/solution/list/:problemId", (req, res, ctx) => {
     const getRandomBoolean = () => {
       let num = Math.random() * 2;

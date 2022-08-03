@@ -2,13 +2,13 @@ import { Box, Grid, Skeleton, Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import ReactCardFlip from "react-card-flip";
-import { getSolutionList } from "../../../../../api";
+import { getSolutionList } from "../../../../../../api";
 
-import Button from "../../../../atoms/Button";
-import LinearProgressWithLabel from "../../../../blocks/LinearProgressWithLabel";
-import Profile from "../../../../blocks/Profile";
-import Wrapper from "../../../../blocks/Wrapper";
-import ProblemLabel from "../ProblemLabel";
+import Button from "../../../../../atoms/Button";
+import LinearProgressWithLabel from "../../../../../blocks/LinearProgressWithLabel";
+import Profile from "../../../../../blocks/Profile";
+import Wrapper from "../../../../../blocks/Wrapper";
+import ProblemLabel from "../../ProblemLabel";
 
 export interface ProblemCardProps {
   id: number;
