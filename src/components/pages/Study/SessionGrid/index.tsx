@@ -1,5 +1,5 @@
 import { Box, Grid, Skeleton, Stack, Typography } from "@mui/material";
-import useSessionList from "../../../../hooks/useSessionList";
+import useSessionList from "../../../../hooks/Session/useSessionList";
 import Wrapper from "../../../blocks/Wrapper";
 import SessionCard from "./SessionCard";
 

@@ -1,20 +1,15 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import EditIcon from "@mui/icons-material/Edit";
 
-import { updateSession } from "../../../../../api";
 import Session from "../../../../../types/Session";
 import SessionEditor from "../../../../blocks/SessionEditor";
+import useSessionUpdate from "../../../../../hooks/Session/useSessionUpdate";
+import Loading from "../../../../blocks/Loading";
 
-export default function SessionUpdateContainer({ id, ...sessionProps}: Session) {
-  const queryClient = useQueryClient();
-  const mutation = useMutation((updatedSession: Session) => updateSession(updatedSession), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(["session"]);
-    },
-  });
+export default function SessionUpdateContainer({ id, ...sessionProps }: Session) {
+  const { isLoading, update } = useSessionUpdate(id);
 
   const handleSubmit = (title: string, startDate: Date, endDate: Date) => {
-    mutation.mutate({
+    update({
       id,
       name: title,
       start: startDate,
@@ -22,5 +17,15 @@ export default function SessionUpdateContainer({ id, ...sessionProps}: Session) 
     });
   };
 
-  return <SessionEditor icon={<EditIcon />} label="세션 수정하기" {...sessionProps} handleSubmit={handleSubmit} />;
+  return (
+    <>
+      <SessionEditor
+        icon={<EditIcon />}
+        label="세션 수정하기"
+        {...sessionProps}
+        handleSubmit={handleSubmit}
+      />
+      {isLoading && <Loading />}
+    </>
+  );
 }

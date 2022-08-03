@@ -22,7 +22,7 @@ export default function SessionCard({ id, name, start, end }: Session) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (time < 0) {
+      if (time < 0 || time / 3600000 /24 > 0) {
         clearInterval(interval);
         return;
       }

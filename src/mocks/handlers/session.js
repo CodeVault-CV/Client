@@ -64,6 +64,20 @@ const handlers = [
       })
     );
   }),
+  rest.post(baseURL + "/session", async (req, res, ctx) => {
+    const { name, start, end } = await req.json();
+    const old_sessions = getSession();
+    const new_session = { id: old_sessions.length + 2, name, start, end }
+    setSession([[new_session.id, new_session], ...old_sessions]);
+
+    return res(
+      ctx.json({
+        status: 200,
+        message: "SUCCESS",
+        data: new_session
+      })
+    )
+  }),
   rest.put(baseURL + "/session", async (req, res, ctx) => {
     const session = await req.json();
     const sessionMap = new Map(getSession());

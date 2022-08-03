@@ -1,10 +1,10 @@
 import { Box, Grid, SelectChangeEvent } from "@mui/material";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState, ChangeEvent, MouseEvent } from "react";
-import { createProblem, deleteProblem } from "../../../../../api";
+import useProblemEdit from "../../../../../hooks/useProblemEdit";
 
 import Problem from "../../../../../types/Problem";
 import Button from "../../../../atoms/Button";
+import Loading from "../../../../blocks/Loading";
 import ProblemAddForm from "./ProblemAddForm";
 import ProblemEditCard from "./ProblemEditCard";
 
@@ -21,27 +21,7 @@ export interface FormState {
 }
 
 export default function ProblemEdit({ sessionId, problemList, toggleMode }: ProblemEditProps) {
-  const queryClient = useQueryClient();
-  const mutation = useMutation(
-    (problems: (Problem & { isNew: boolean })[]) => {
-      const new_id_set = new Set(problems.map(({ id }) => id));
-      const new_problems = problems.filter(({ isNew }) => isNew);
-      const deleted_problems = problemList.filter(({ id }) => !new_id_set.has(id));
-
-      return Promise.all([
-        ...deleted_problems.map(({ id }) => deleteProblem(id)),
-        ...new_problems.map(({ name, number, platform }) =>
-          createProblem(sessionId, name, +number, platform)
-        ),
-      ]);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["problemList", sessionId]);
-        toggleMode();
-      },
-    }
-  );
+  const { isLoading, edit } = useProblemEdit(sessionId, problemList, () => toggleMode());
   const [problems, setProblems] = useState(
     problemList.map((problem) => ({ ...problem, isNew: false }))
   );
@@ -61,7 +41,6 @@ export default function ProblemEdit({ sessionId, problemList, toggleMode }: Prob
 
   const handleSubmit = (event: MouseEvent<HTMLButtonElement>) => {
     const pid = Number(`${new Date().getTime()}${problem.number}`);
-    console.log(pid);
     setProblems((prev) => [{ id: pid, ...problem, isNew: true }, ...prev]);
     setProblem({
       platform: "programmers",
@@ -75,7 +54,7 @@ export default function ProblemEdit({ sessionId, problemList, toggleMode }: Prob
   };
 
   const handleCommit = (event: MouseEvent<HTMLButtonElement>) => {
-    mutation.mutate(problems);
+    edit(problems);
   };
 
   return (
@@ -101,6 +80,7 @@ export default function ProblemEdit({ sessionId, problemList, toggleMode }: Prob
           </Button>
         </Box>
       </Grid>
+      {isLoading && <Loading />}
     </>
   );
 }

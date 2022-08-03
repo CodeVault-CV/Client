@@ -1,31 +1,36 @@
 import { MouseEvent } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
-import { deleteSession } from "../../../../api";
 import SessionHeader from "./SessionHeader";
 import { LoadingHeader } from "../../../blocks/Header";
-import useSession from "../../../../hooks/useSession";
+import useSession from "../../../../hooks/Session/useSession";
+import { useSessionDelete } from "../../../../hooks/Session/useSessionDelete";
+import Loading from "../../../blocks/Loading";
 
 type SessionHeaderProps = {
   sessionId: number;
 };
 
 export default function SessionHeaderContainer({ sessionId }: SessionHeaderProps) {
-  const { isLoading, session } = useSession(sessionId);
   const { studyId } = useParams();
-  const navigate = useNavigate();
-  const mutation = useMutation((sessionId: number) => deleteSession(sessionId), {
-    onSuccess: () => navigate(`/study/${studyId}`),
-  });
+  const { isLoading, session } = useSession(sessionId);
+  const { isLoading: deleteLoading, deleteRequest } = useSessionDelete(
+    studyId as string,
+    sessionId
+  );
 
   const handleDelete = async (event: MouseEvent<HTMLButtonElement>) => {
     const willDelete = window.confirm("세션을 삭제하겠습니까?");
     if (!willDelete) return;
-    mutation.mutate(sessionId);
+    deleteRequest();
   };
 
   if (isLoading) return <LoadingHeader />;
 
-  return <SessionHeader session={session} handleDelete={handleDelete} />;
+  return (
+    <>
+      <SessionHeader session={session} handleDelete={handleDelete} />
+      {deleteLoading && <Loading />}
+    </>
+  );
 }

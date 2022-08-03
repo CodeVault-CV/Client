@@ -6,6 +6,7 @@ import CreateStudyButton from "./CreateStudyButton";
 import Button from "../../../atoms/Button";
 import LinkButton from "../../../atoms/LinkButton";
 import useStudyList from "../../../../hooks/useStudyList";
+import { useAuth } from "../../../../hoc/AuthContext";
 
 const AltTextWrapper = styled.div`
   display: flex;
@@ -16,8 +17,9 @@ const AltTextWrapper = styled.div`
 `;
 
 export default function StudyButton() {
-  const { isLoading, studyList } = useStudyList();
+  const { isLoading, isError, error, studyList } = useStudyList();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { logout } = useAuth();
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -26,6 +28,14 @@ export default function StudyButton() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  if(isError) {
+    const { status, message } = error;
+    alert(message);
+    if(status === 401) {
+      logout();
+    }
+  }
 
   return (
     <Fragment>

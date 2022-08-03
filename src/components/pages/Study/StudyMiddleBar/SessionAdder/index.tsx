@@ -1,5 +1,5 @@
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 import { createSession } from "../../../../../api";
 import SessionEditor from "../../../../blocks/SessionEditor";
