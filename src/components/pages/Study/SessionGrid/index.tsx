@@ -23,7 +23,7 @@ type SessionGridProps = {
 };
 
 export default function SessionGrid({ studyId }: SessionGridProps) {
-  const { isLoading, sessionList } = useSessionList(studyId);
+  const { isLoading, sessionList = [] } = useSessionList(studyId);
 
   return (
     <Box>

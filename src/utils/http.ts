@@ -9,7 +9,7 @@ API.interceptors.request.use((config: AxiosRequestConfig) => {
   if (!config?.headers) {
     throw new Error(`Expected 'config' and 'config.headers' not to be undefined`);
   }
-  
+
   const auth = AuthStorage.get();
   if (auth !== null) {
     config.headers["Authorization"] = `Bearer ${auth.token}`;
@@ -30,11 +30,11 @@ const post = async (url: string, body: any, headers = {}) => {
 const put = async (url: string, body: any, headers = {}) => {
   const response = await API.put(url, body, { headers });
   return response.data;
-}
+};
 
 const deleteRequest = async (url: string, headers = {}) => {
   const response = await API.delete(url, { headers });
   return response.data;
-}
+};
 
 export { get, post, put, deleteRequest };

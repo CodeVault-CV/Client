@@ -33,11 +33,16 @@ const handlers = [
   rest.get(baseURL + "/session/list/:studyId", (req, res, ctx) => {
     return res(
       ctx.delay(1000),
-      ctx.json({
-        status: 200,
-        message: "SUCCESS",
-        data: getSession().map(([_, session]) => session)
-      })
+      // ctx.json({
+      //   status: 200,
+      //   message: "SUCCESS",
+      //   data: getSession().map(([_, session]) => session)
+      // })
+      ctx.status(401),
+      ctx.body({
+        status: 401,
+        message: "유효하지 않은 토큰입니다"
+      }),
     );
   }),
   rest.get(baseURL + "/session/:sessionId", (req, res, ctx) => {

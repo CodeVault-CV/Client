@@ -1,7 +1,7 @@
 import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 
-import useProblemList from "../../../../hooks/useProblemList";
+import useProblemList from "../../../../hooks/Problem/useProblemList";
 import ProblemEdit from "./ProblemEdit";
 import ProblemItems from "./ProblemItems";
 import ProblemListSkeleton from "./ProblemListSkeleton";

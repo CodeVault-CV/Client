@@ -9,7 +9,7 @@ export default function StudyContainer() {
   const { isLoading, data: study } = useQuery(["study", studyId], () =>
     getStudy(studyId).then((res) => res.data)
   );
-  if(studyId === undefined) {
+  if (studyId === undefined) {
     return <Navigate to="/notfound" replace={true} />;
   }
 

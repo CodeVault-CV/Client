@@ -8,7 +8,7 @@ import LinkButton from "../../../../atoms/LinkButton";
 
 function formatTime(date: Date) {
   const leftDate = Math.floor(date.getTime() / 3600000 / 24);
-  if(leftDate > 0) return "D - " + String(leftDate);
+  if (leftDate > 0) return "D - " + String(leftDate);
 
   const hour = String(date.getHours()).padStart(2, "0");
   const min = String(date.getMinutes()).padStart(2, "0");
@@ -20,9 +20,11 @@ function formatTime(date: Date) {
 export default function SessionCard({ id, name, start, end }: Session) {
   const [time, setTime] = useState(end.getTime() - new Date().getTime());
 
+  const lessThan24 = time < 0 || time / 3600000 / 24 > 0;
+
   useEffect(() => {
     const interval = setInterval(() => {
-      if (time < 0 || time / 3600000 /24 > 0) {
+      if (!lessThan24) {
         clearInterval(interval);
         return;
       }
@@ -31,7 +33,7 @@ export default function SessionCard({ id, name, start, end }: Session) {
     return () => {
       clearInterval(interval);
     };
-  }, [end]);
+  }, [end, lessThan24]);
 
   return (
     <Grid item md={3} xs={6}>
@@ -42,16 +44,9 @@ export default function SessionCard({ id, name, start, end }: Session) {
           </Typography>
           <DateLabel start={new Date(start)} end={new Date(end)} />
           {time < 0 ? (
-            <LinkButton
-              to={String(id)}
-            >
-              기간 종료
-            </LinkButton>
+            <LinkButton to={String(id)}>기간 종료</LinkButton>
           ) : (
-            <LinkButton
-              color="primary"
-              to={String(id)}
-            >
+            <LinkButton color="primary" to={String(id)}>
               {formatTime(new Date(time))}
             </LinkButton>
           )}

@@ -1,6 +1,6 @@
 import { Box, Grid, SelectChangeEvent } from "@mui/material";
 import { useState, ChangeEvent, MouseEvent } from "react";
-import useProblemEdit from "../../../../../hooks/useProblemEdit";
+import useProblemEdit from "../../../../../hooks/Problem/useProblemEdit";
 
 import Problem from "../../../../../types/Problem";
 import Button from "../../../../atoms/Button";

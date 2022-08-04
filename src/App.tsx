@@ -1,7 +1,4 @@
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Layout from "./hoc/Layout";
@@ -9,7 +6,7 @@ import Home from "./components/pages/Home";
 import Study from "./components/pages/Study";
 import Session from "./components/pages/Session";
 import Solution from "./components/pages/Solution";
-import NotFound from './components/pages/NotFound';
+import NotFound from "./components/pages/NotFound";
 
 const queryClient = new QueryClient();
 

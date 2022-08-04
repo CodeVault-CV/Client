@@ -1,12 +1,18 @@
-import { useState, createContext, PropsWithChildren, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import {
+  useState,
+  createContext,
+  PropsWithChildren,
+  useEffect,
+  useContext,
+  useCallback,
+} from "react";
 
 import { getToken } from "../../api";
 import TypeStorage from "../../utils/TypeStorage";
 
 type Auth = {
-  name: string,
-  token: string
+  name: string;
+  token: string;
 };
 
 export const AuthStorage = new TypeStorage<Auth>("auth", localStorage);
@@ -21,7 +27,6 @@ export const AuthContext = createContext({
 export function AuthProvider({ children }: PropsWithChildren) {
   const [auth, setAuth] = useState(false);
   const [name, setName] = useState("");
-  const navigate = useNavigate();
 
   const checkAuth = () => {
     const authData = AuthStorage.get();
@@ -35,7 +40,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
   };
 
-  const login = async (code: string) => {
+  const login = useCallback(async (code: string) => {
     try {
       const { status, data } = await getToken(code);
       if (status === 200) {
@@ -45,13 +50,12 @@ export function AuthProvider({ children }: PropsWithChildren) {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     AuthStorage.remove();
     checkAuth();
-    navigate("/");
-  };
+  }, []);
 
   useEffect(() => {
     checkAuth();

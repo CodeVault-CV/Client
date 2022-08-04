@@ -9,6 +9,18 @@ export const handlers = [
   ...studyHandler,
   ...sessionHandler,
   ...problemHandler,
+  rest.get(baseURL + "/user/login", (req, res, ctx) => {
+    return res(
+      ctx.json({
+        status: 200,
+        message: "SUCCESS",
+        data: {
+          name: "woong-jae",
+          token: "mock-token"
+        }
+      })
+    )
+  }),
   rest.get(baseURL + "/solution/list/:problemId", (req, res, ctx) => {
     const getRandomBoolean = () => {
       let num = Math.random() * 2;

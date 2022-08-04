@@ -51,6 +51,11 @@ const handlers = [
   rest.get(baseURL + "/study/list", (req, res, ctx) => {
     const study = getStudy();
     return res(
+      // ctx.status(401),
+      // ctx.json({
+      //   status: 401,
+      //   message: "유효하지 않은 토큰입니다"
+      // })
       ctx.json({
         status: 200,
         message: "SUCCESS",

@@ -10,11 +10,11 @@ import StudyButton from "./StudyButton"
 interface NavProps {
   theme: Theme;
   auth: boolean;
-  logout(): void;
-  toggleColorMode(): void;
+  onLogoutClick(): void;
+  onThemeClick(): void;
 }
 
-function Navbar({ theme, auth, logout, toggleColorMode }: NavProps) {
+function Navbar({ theme, auth, onLogoutClick, onThemeClick }: NavProps) {
   return (
     <Box sx={{ flexGrow: 1, borderBottom: 1, borderColor: "divider" }}>
       <Container maxWidth="lg" sx={{ px: 0 }}>
@@ -30,14 +30,14 @@ function Navbar({ theme, auth, logout, toggleColorMode }: NavProps) {
             {auth ? (
               <>
                 <StudyButton />
-                <Button color="inherit" size="large" sx={{ fontWeight: 800 }} onClick={logout}>
+                <Button color="inherit" size="large" sx={{ fontWeight: 800 }} onClick={onLogoutClick}>
                   로그아웃
                 </Button>
               </>
             ) : (
               <LoginButton />
             )}
-            <IconButton onClick={toggleColorMode} color="inherit">
+            <IconButton onClick={onThemeClick} color="inherit">
               {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
           </Box>
