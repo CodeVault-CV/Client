@@ -20,11 +20,11 @@ function formatTime(date: Date) {
 export default function SessionCard({ id, name, start, end }: Session) {
   const [time, setTime] = useState(end.getTime() - new Date().getTime());
 
-  const lessThan24 = time < 0 || time / 3600000 / 24 > 0;
+  const between24 = !(time < 0 || time / 3600000 / 24 > 0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!lessThan24) {
+      if (!between24) {
         clearInterval(interval);
         return;
       }
@@ -33,7 +33,7 @@ export default function SessionCard({ id, name, start, end }: Session) {
     return () => {
       clearInterval(interval);
     };
-  }, [end, lessThan24]);
+  }, [end, between24]);
 
   return (
     <Grid item md={3} xs={6}>

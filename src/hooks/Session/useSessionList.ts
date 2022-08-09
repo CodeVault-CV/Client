@@ -16,6 +16,7 @@ export default function useSessionList(problemId: string) {
       }),
     {
       retry: false,
+      suspense: true
     }
   );
 
