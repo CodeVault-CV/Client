@@ -2,7 +2,7 @@ import { Box, Stack } from "@mui/material";
 
 import Wrapper from "../../blocks/Wrapper";
 import SessionHeader from "./SessionHeader";
-import ProblemList from "./ProblemList";
+import ProblemGrid from "./ProblemGrid";
 
 type SessionProps = {
   sessionId: number,
@@ -15,7 +15,7 @@ export default function Session({ sessionId }: SessionProps) {
         <SessionHeader sessionId={sessionId} />
       </Wrapper>
       <Box>
-        <ProblemList sessionId={sessionId} />
+        <ProblemGrid sessionId={sessionId} />
       </Box>
     </Stack>
   );
