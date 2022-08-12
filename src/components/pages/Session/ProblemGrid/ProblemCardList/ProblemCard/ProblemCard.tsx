@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Grid, Stack, Typography, Skeleton, Box } from "@mui/material";
+import { Grid, Stack, Typography, Skeleton, Box, Tooltip } from "@mui/material";
 
 import Button from "../../../../../atoms/Button";
 import LinearProgressWithLabel from "../../../../../blocks/LinearProgressWithLabel";
@@ -9,6 +9,7 @@ import ProblemLabel from "../../ProblemLabel";
 import Solved from "../../../../../../types/Solved";
 
 type ProblemCardProps = {
+  id: number;
   name: string;
   platform: string;
   solved: Solved;
@@ -18,6 +19,7 @@ type ProblemCardProps = {
 };
 
 export default function ProblemCard({
+  id,
   name,
   platform,
   problemLink,
@@ -43,9 +45,9 @@ export default function ProblemCard({
 
   return (
     <Grid item xs={12} md={6} alignItems="stretch">
-      {/* 앞면 */}
-      {!flipped ? (
-        <Wrapper>
+      <Wrapper>
+        {/* 앞면 */}
+        {!flipped ? (
           <Stack spacing={1}>
             <ProblemLabel platform={platform} />
             <Typography variant="h5" fontWeight={700}>
@@ -66,9 +68,7 @@ export default function ProblemCard({
               <Button onClick={handleClick}>리뷰하기</Button>
             </Stack>
           </Stack>
-        </Wrapper>
-      ) : (
-        <Wrapper minHeight={188} height="100%">
+        ) : (
           <Stack spacing={2}>
             <Box width="100%" sx={{ overflow: "auto" }}>
               <Box
@@ -110,12 +110,17 @@ export default function ProblemCard({
                         name={solved.name}
                         imageUrl={solved.imageUrl}
                         color={solved.solve ? "primary" : "warning"}
+                        href={!solved.solve ? `/solve/${id}` : undefined}
                       />
                     </Box>
                     {solvedList.map(({ name, imageUrl, solve }) => {
                       return (
                         <Box key={name} sx={{ p: 1 }}>
-                          <Profile name={name} imageUrl={imageUrl} disabled={!solve} />
+                          <Tooltip title={name} arrow>
+                            <Box>
+                              <Profile name={name} imageUrl={imageUrl} disabled={!solve} />
+                            </Box>
+                          </Tooltip>
                         </Box>
                       );
                     })}
@@ -127,9 +132,9 @@ export default function ProblemCard({
               <Button onClick={handleClick}>이전으로</Button>
             </Box>
           </Stack>
-        </Wrapper>
-      )}
-      {/* 뒷면 */}
+        )}
+        {/* 뒷면 */}
+      </Wrapper>
     </Grid>
   );
 }

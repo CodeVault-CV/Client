@@ -17,9 +17,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path=":studyId" element={<Study />} />
-            <Route path=":studyId/:sessionId" element={<Session />} />
-            <Route path="solution" element={<Solution />} />
+            <Route path="/study/:studyId" element={<Study />} />
+            <Route path="/study/:studyId/:sessionId" element={<Session />} />
+            <Route path="/solve/:problemId" element={<Solution />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

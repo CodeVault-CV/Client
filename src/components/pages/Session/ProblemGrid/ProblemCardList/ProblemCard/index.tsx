@@ -35,6 +35,7 @@ export default function ProblemCardContainer({
 
   return (
     <ProblemCard
+      id={id}
       name={name}
       platform={platform}
       solved={solvedList.find(({ name }: Solved) => name === username)}
