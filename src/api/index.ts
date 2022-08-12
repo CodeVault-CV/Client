@@ -33,6 +33,9 @@ export const createProblem = (sessionId: number, name: string, number: number, p
     platform,
   });
 
+export const createSolution = (problemId: number, code: string, readMe: string, language: string) =>
+  post(`/solution/create`, { problemId, code, readMe, language });
+
 // PUT
 export const updateSession = (session: { id: number; name: string; start: Date; end: Date }) =>
   put("/session", session);

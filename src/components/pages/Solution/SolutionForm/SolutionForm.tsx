@@ -1,30 +1,64 @@
-import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { Stack, Box, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import MDEditor from "@uiw/react-md-editor";
+
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
+
 import CodeViewer from "../../../blocks/CodeViewer";
-import TextEditor from "../../../blocks/TextEditor";
+import Button from "../../../atoms/Button";
 
 interface SolutionFormProps {
   code: string;
   review: string;
   view: string;
-  changeCode(value: string): void;
-  changeReview(event: React.ChangeEvent<HTMLInputElement>): void;
-  changeView(event: React.MouseEvent<HTMLElement>, newView: string): void;
+  language: string;
+  handleLanguage(language: string): void;
+  handleCode(value: string): void;
+  handleReview(input: string | undefined): void;
+  handleView(event: React.MouseEvent<HTMLElement>, newView: string): void;
+  handleSubmit(event: React.MouseEvent<HTMLElement>): void;
 }
 
-export default function SolutionForm({ code, review, view, changeCode, changeReview, changeView }: SolutionFormProps) {
+export default function SolutionForm({
+  code,
+  review,
+  view,
+  language,
+  handleLanguage,
+  handleCode,
+  handleReview,
+  handleView,
+  handleSubmit,
+}: SolutionFormProps) {
   return (
-    <Box>
+    <Stack spacing={2}>
       <Box sx={{ display: "flex", flexDirection: "row-reverse" }}>
-        <ToggleButtonGroup value={view} exclusive onChange={changeView} size="small">
-          <ToggleButton value="code">Code</ToggleButton>
-          <ToggleButton value="review">Review</ToggleButton>
+        <ToggleButtonGroup value={view} exclusive onChange={handleView} size="small">
+          <ToggleButton value="code">
+            <Typography px={1} fontWeight={800}>
+              코드
+            </Typography>
+          </ToggleButton>
+          <ToggleButton value="review">
+            <Typography px={1} fontWeight={800}>
+              리뷰
+            </Typography>
+          </ToggleButton>
         </ToggleButtonGroup>
       </Box>
       {view === "code" ? (
-        <CodeViewer value={code} handleChange={changeCode} />
+        <CodeViewer
+          value={code}
+          language={language}
+          handleChange={handleCode}
+          handleSelect={handleLanguage}
+        />
       ) : (
-        <TextEditor value={review} handleChange={changeReview} />
+        <MDEditor height={530} value={review} onChange={handleReview} />
       )}
-    </Box>
+      <Box>
+        <Button onClick={handleSubmit}>제출하기</Button>
+      </Box>
+    </Stack>
   );
 }
