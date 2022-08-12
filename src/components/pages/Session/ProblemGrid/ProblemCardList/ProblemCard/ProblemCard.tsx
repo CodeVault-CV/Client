@@ -18,6 +18,14 @@ type ProblemCardProps = {
   isLoading: boolean;
 };
 
+const calcSolvedPercentage = (solvedList: Solved[]) => {
+  return (
+    (solvedList.reduce((acc: number, cur: { solve: boolean }) => acc + (cur.solve ? 1 : 0), 0) /
+      solvedList.length) *
+    100
+  );
+};
+
 export default function ProblemCard({
   id,
   name,
@@ -32,16 +40,6 @@ export default function ProblemCard({
   const handleClick = () => {
     setFlipped(!flipped);
   };
-
-  const solvedPercentage =
-    solvedList === undefined
-      ? 0
-      : (solvedList.reduce(
-          (prev: number, cur: { solve: boolean }) => prev + (cur.solve ? 1 : 0),
-          0
-        ) /
-          solvedList.length) *
-        100;
 
   return (
     <Grid item xs={12} md={6} alignItems="stretch">
@@ -59,7 +57,7 @@ export default function ProblemCard({
               </Skeleton>
             ) : (
               <LinearProgressWithLabel
-                value={solvedPercentage}
+                value={calcSolvedPercentage(solvedList.concat([solved]))}
                 sx={{ height: 6, borderRadius: 3 }}
               />
             )}
