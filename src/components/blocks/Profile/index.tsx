@@ -1,4 +1,4 @@
-import { Tooltip, Avatar } from "@mui/material";
+import { Tooltip, Avatar, ButtonProps } from "@mui/material";
 import Button from "../../atoms/Button";
 
 interface ProfileProps {
@@ -9,7 +9,7 @@ interface ProfileProps {
   handleClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export default function Profile({ name, imageUrl, disabled, ...buttonProps }: ProfileProps) {
+export default function Profile({ name, imageUrl, disabled, ...buttonProps }: ProfileProps & ButtonProps) {
   return (
     <Tooltip title={name} arrow>
       <span>

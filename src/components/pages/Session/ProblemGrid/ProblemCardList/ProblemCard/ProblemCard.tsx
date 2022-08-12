@@ -9,19 +9,19 @@ import ProblemLabel from "../../ProblemLabel";
 import Solved from "../../../../../../types/Solved";
 
 type ProblemCardProps = {
-  username: string;
   name: string;
   platform: string;
+  solved: Solved;
   solvedList: Solved[];
   problemLink: string;
   isLoading: boolean;
 };
 
 export default function ProblemCard({
-  username,
   name,
   platform,
   problemLink,
+  solved,
   solvedList,
   isLoading,
 }: ProblemCardProps) {
@@ -30,18 +30,6 @@ export default function ProblemCard({
   const handleClick = () => {
     setFlipped(!flipped);
   };
-
-  const [userSolved, teamSolved] = solvedList.reduce(
-    (acc, cur) => {
-      if (cur.name === username) {
-        acc[0] = cur;
-      } else {
-        acc[1].push(cur);
-      }
-      return acc;
-    },
-    [null, []] as [null | Solved, Solved[]]
-  );
 
   const solvedPercentage =
     solvedList === undefined
@@ -92,12 +80,21 @@ export default function ProblemCard({
               >
                 {isLoading ? (
                   <>
-                    <Skeleton variant="circular">
-                      <Profile name="unknown" />
-                    </Skeleton>
-                    <Skeleton variant="circular">
-                      <Profile name="unknown" />
-                    </Skeleton>
+                    <Box sx={{ p: 1 }}>
+                      <Skeleton variant="circular">
+                        <Profile name="unknown" />
+                      </Skeleton>
+                    </Box>
+                    <Box sx={{ p: 1 }}>
+                      <Skeleton variant="circular">
+                        <Profile name="unknown" />
+                      </Skeleton>
+                    </Box>
+                    <Box sx={{ p: 1 }}>
+                      <Skeleton variant="circular">
+                        <Profile name="unknown" />
+                      </Skeleton>
+                    </Box>
                   </>
                 ) : (
                   <>
@@ -105,20 +102,20 @@ export default function ProblemCard({
                       sx={{
                         border: 1,
                         borderRadius: 1,
-                        borderColor: "primary.main",
+                        borderColor: solved.solve ? "primary.main" : "warning.main",
                         p: 1,
                       }}
                     >
                       <Profile
-                        name={userSolved?.name ?? ""}
-                        imageUrl={userSolved?.imageUrl}
-                        disabled={!userSolved?.solve}
+                        name={solved.name}
+                        imageUrl={solved.imageUrl}
+                        color={solved.solve ? "primary" : "warning"}
                       />
                     </Box>
-                    {teamSolved.map(({ name, imageUrl, solve }: Solved) => {
+                    {solvedList.map(({ name, imageUrl, solve }) => {
                       return (
-                        <Box sx={{ p: 1 }}>
-                          <Profile key={name} name={name} imageUrl={imageUrl} disabled={!solve} />
+                        <Box key={name} sx={{ p: 1 }}>
+                          <Profile name={name} imageUrl={imageUrl} disabled={!solve} />
                         </Box>
                       );
                     })}
