@@ -5,7 +5,7 @@ import Layout from "./hoc/Layout";
 import Home from "./components/pages/Home";
 import Study from "./components/pages/Study";
 import Session from "./components/pages/Session";
-import Solution from "./components/pages/Solution";
+import Solve from "./components/pages/Solve";
 import NotFound from "./components/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,7 +19,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/study/:studyId" element={<Study />} />
             <Route path="/study/:studyId/:sessionId" element={<Session />} />
-            <Route path="/solve/:problemId" element={<Solution />} />
+            <Route path="/solve/:problemId" element={<Solve />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

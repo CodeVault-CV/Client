@@ -8,18 +8,12 @@ import SessionGridSkeleton from "./SessionGrid/SessionGridSkeleton";
 
 interface StudyProps {
   studyId: string;
-  study: {
-    id: string;
-    members: { id: string; name: string; imageUrl: string; githubUrl: string }[];
-    name: string;
-    url: string;
-  };
 }
 
-export default function Study({ study, studyId }: StudyProps) {
+export default function Study({ studyId }: StudyProps) {
   return (
     <Stack spacing={3}>
-      <StudyHeader {...study} />
+      <StudyHeader studyId={studyId} />
       <StudyMiddleBar studyId={studyId} />
       <Suspense fallback={<SessionGridSkeleton />}>
         <SessionGrid studyId={studyId} />

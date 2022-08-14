@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 import { useParams } from "react-router-dom";
 
 import SessionHeader from "./SessionHeader";
-import { LoadingHeader } from "../../../blocks/Header";
+import { HeaderSkeleton } from "../../../blocks/Header";
 import useSession from "../../../../hooks/Session/useSession";
 import { useSessionDelete } from "../../../../hooks/Session/useSessionDelete";
 import Loading from "../../../blocks/Loading";
@@ -25,7 +25,7 @@ export default function SessionHeaderContainer({ sessionId }: SessionHeaderProps
     deleteRequest();
   };
 
-  if (isLoading) return <LoadingHeader />;
+  if (isLoading) return <HeaderSkeleton />;
 
   return (
     <>

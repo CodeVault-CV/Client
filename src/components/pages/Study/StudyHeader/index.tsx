@@ -1,12 +1,15 @@
 import styled from "@emotion/styled";
-import { Stack, Button } from '@mui/material';
-import { GitHub } from '@mui/icons-material';
+import { Stack, Button } from "@mui/material";
+import { GitHub } from "@mui/icons-material";
 
-import Header from "../../../blocks/Header";
+import Header, { HeaderSkeleton } from "../../../blocks/Header";
 import Profile from "../../../blocks/Profile";
 import Wrapper from "../../../blocks/Wrapper";
 import StudyName from "./StudyName";
 import StudySetting from "./StudySetting";
+import { useQuery } from "@tanstack/react-query";
+import { getStudy } from "../../../../api";
+import { StudyInfo } from "../../../../types/Study";
 
 const EndBlockWrapper = styled.div`
   display: flex;
@@ -31,26 +34,31 @@ function HeaderEndBlock({ id, url }: HeaderEndBlockProps) {
   );
 }
 
-export interface StudyHeaderProps {
-  id: string;
-  members: { id: string, name: string, imageUrl: string, githubUrl: string }[];
-  name: string;
-  url: string;
-}
+type StudyHeaderProps = {
+  studyId: string;
+};
 
-export default function StudyHeader({ id, name, members, url }: StudyHeaderProps) {
+export default function StudyHeader({ studyId }: StudyHeaderProps) {
+  const { isLoading, data: study } = useQuery(["study", studyId], () =>
+    getStudy(studyId).then((res) => res.data as StudyInfo)
+  );
+
   return (
     <Wrapper>
-      <Header 
-        title={<StudyName id={id} name={name} />} 
-        endBlock={<HeaderEndBlock id={id} url={url} />}
-      >
-        <Stack direction="row" spacing={4} sx={{ marginTop: 1 }}>
-          {members.map(({ id, name, imageUrl, githubUrl }) => (
-            <Profile key={id} name={name} imageUrl={imageUrl} href={githubUrl} />
-          ))}
-        </Stack>
-      </Header>
+      {isLoading ? (
+        <HeaderSkeleton />
+      ) : (
+        <Header
+          title={<StudyName id={studyId} name={study?.name ?? "unknown"} />}
+          endBlock={<HeaderEndBlock id={studyId} url={study?.url ?? "unknown"} />}
+        >
+          <Stack direction="row" spacing={4} sx={{ marginTop: 1 }}>
+            {study?.members.map(({ id, name, imageUrl, githubUrl }) => (
+              <Profile key={id} name={name} imageUrl={imageUrl} href={githubUrl} />
+            ))}
+          </Stack>
+        </Header>
+      )}
     </Wrapper>
   );
 }

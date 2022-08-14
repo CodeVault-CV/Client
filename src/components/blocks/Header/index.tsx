@@ -6,7 +6,7 @@ interface HeaderProps {
   endBlock?: React.ReactNode;
 }
 
-export function LoadingHeader() {
+export function HeaderSkeleton() {
   return (
     <Stack direction="column" spacing={2}>
       <Skeleton>
