@@ -1,24 +1,18 @@
-import { deleteRequest, get, post, put } from "../utils/http";
+import HTTP from "../core/infra/http";
 
 // GET
-export const getToken = (code: string) => get(`/user/login?code=${code}`);
+export const getToken = (code: string) => HTTP.get(`/user/login?code=${code}`);
 
-export const getStudy = (studyId: string | undefined) => get(`/study/${studyId}`);
-export const getStudyList = () => get(`/study/list`);
+export const getSession = (sessionId: number) => HTTP.get(`/session/${sessionId}`);
+export const getSessionList = (studyId: string) => HTTP.get(`/session/list/${studyId}`);
 
-export const getSession = (sessionId: number) => get(`/session/${sessionId}`);
-export const getSessionList = (studyId: string) => get(`/session/list/${studyId}`);
+export const getProblemList = (sessionId: number) => HTTP.get(`/problem/list/${sessionId}`);
 
-export const getProblemList = (sessionId: number) => get(`/problem/list/${sessionId}`);
-
-export const getSolutionList = (problemId: number) => get(`/solution/list/${problemId}`);
-
+export const getSolutionList = (problemId: number) => HTTP.get(`/solution/list/${problemId}`);
 // POST
-export const createStudy = (studyName: string, repoName: string) =>
-  post(`/study`, { studyName: studyName, repoName: repoName });
 
 export const createSession = (studyId: string, name: string, start: Date, end: Date) =>
-  post(`/session`, {
+  HTTP.post(`/session`, {
     studyId,
     name,
     start,
@@ -26,7 +20,7 @@ export const createSession = (studyId: string, name: string, start: Date, end: D
   });
 
 export const createProblem = (sessionId: number, name: string, number: number, platform: string) =>
-  post(`/problem`, {
+  HTTP.post(`/problem`, {
     sessionId,
     name,
     number,
@@ -34,17 +28,14 @@ export const createProblem = (sessionId: number, name: string, number: number, p
   });
 
 export const createSolution = (problemId: number, code: string, readMe: string, language: string) =>
-  post(`/solution/create`, { problemId, code, readMe, language });
+  HTTP.post(`/solution`, { problemId, code, readMe, language });
 
 // PUT
 export const updateSession = (session: { id: number; name: string; start: Date; end: Date }) =>
-  put("/session", session);
-
-export const updateStudy = (study: { id: string; name: string }) => put("/study", study);
+  HTTP.put("/session", session);
 
 // DELETE
-export const deleteSession = (sessionId: number) => deleteRequest(`/session/${sessionId}`);
+export const deleteSession = (sessionId: number) => HTTP.deleteRequest(`/session/${sessionId}`);
 
-export const deleteStudy = (studyId: string) => deleteRequest(`/study/${studyId}`);
-
-export const deleteProblem = (problemId: number) => deleteRequest(`/problem/${String(problemId)}`);
+export const deleteProblem = (problemId: number) =>
+  HTTP.deleteRequest(`/problem/${String(problemId)}`);

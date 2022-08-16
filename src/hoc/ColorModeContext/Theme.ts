@@ -1,4 +1,4 @@
-import TypeStorage from "../../utils/TypeStorage";
+import TypeStorage from "../../core/infra/TypeStorage";
 
 export enum Mode {
   LIGHT = "light",

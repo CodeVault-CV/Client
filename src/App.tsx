@@ -18,8 +18,8 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="/study/:studyId" element={<Study />} />
-            <Route path="/study/:studyId/:sessionId" element={<Session />} />
-            <Route path="/solve/:problemId" element={<Solve />} />
+            <Route path="/study/:studyId/session/:sessionId" element={<Session />} />
+            <Route path="/study/:studyId/session/:sessionId/solve/:problemId" element={<Solve />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

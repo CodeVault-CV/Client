@@ -1,12 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState, MouseEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { createSolution } from "../../../../api";
 
 import useView from "../../../../hooks/useView";
+import Loading from "../../../blocks/Loading";
 import SolutionForm from "./SolutionForm";
 
 export default function SolutionFormContainer({ id }: { id: number }) {
-  const { mutate } = useMutation(
+  const navigate = useNavigate();
+  const { isLoading, mutate } = useMutation(
     ({
       id,
       code,
@@ -20,7 +23,7 @@ export default function SolutionFormContainer({ id }: { id: number }) {
     }) => createSolution(id, code, review, language),
     {
       onSuccess: (data) => {
-        console.log(data);
+        navigate("./../../", { replace: true });
       },
     }
   );
@@ -43,21 +46,23 @@ export default function SolutionFormContainer({ id }: { id: number }) {
   };
 
   const handleSubmit = (event: MouseEvent<HTMLButtonElement>) => {
-    console.log(id, language, code, review);
     mutate({ id, language, code, review });
   };
 
   return (
-    <SolutionForm
-      code={code}
-      review={review}
-      view={view}
-      language={language}
-      handleCode={handleCode}
-      handleReview={handleReview}
-      handleView={changeView}
-      handleLanguage={handleLanguage}
-      handleSubmit={handleSubmit}
-    />
+    <>
+      <SolutionForm
+        code={code}
+        review={review}
+        view={view}
+        language={language}
+        handleCode={handleCode}
+        handleReview={handleReview}
+        handleView={changeView}
+        handleLanguage={handleLanguage}
+        handleSubmit={handleSubmit}
+      />
+      {isLoading && <Loading />}
+    </>
   );
 }

@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { deleteStudy } from '../../../../../api';
 import StudySetting from './StudySetting';
+import StudyUseCase from "../../../../../core/useCases/Study";
 
 interface StudySettingProps {
   id: string;
@@ -9,7 +9,7 @@ interface StudySettingProps {
 
 export default function StudySettingContainer({ id }: StudySettingProps) {
   const navigate = useNavigate();
-  const mutation = useMutation((id: string) => deleteStudy(id), {
+  const mutation = useMutation((id: string) => StudyUseCase.deleteStudy(id), {
     onSuccess: () => navigate('/'),
   });
 

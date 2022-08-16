@@ -45,9 +45,9 @@ export default function SessionCard({ id, name, start, end }: Session) {
           </Typography>
           <DateLabel start={new Date(start)} end={new Date(end)} />
           {time < 0 ? (
-            <LinkButton to={String(id)}>기간 종료</LinkButton>
+            <LinkButton to={`./session/${id}`}>기간 종료</LinkButton>
           ) : (
-            <LinkButton color="primary" to={String(id)}>
+            <LinkButton color="primary" to={`./session/${id}`}>
               {formatTime(new Date(time))}
             </LinkButton>
           )}

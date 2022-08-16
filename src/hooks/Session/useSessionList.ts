@@ -8,7 +8,7 @@ export default function useSessionList(problemId: string) {
     () =>
       getSessionList(problemId).then((res) => {
         const sessionList: Session[] = res.data;
-        return sessionList.map((session) => ({
+        return sessionList.reverse().map((session) => ({
           ...session,
           start: new Date(session.start),
           end: new Date(session.end),
