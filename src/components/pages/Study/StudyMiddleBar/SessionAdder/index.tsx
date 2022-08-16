@@ -3,7 +3,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 import { createSession } from "../../../../../api";
 import SessionEditor from "../../../../blocks/SessionEditor";
-import Session from "../../../../../types/Session";
+import Session from "../../../../../core/types/Session";
 
 type SessionAdderContainerProps = {
   studyId: string;

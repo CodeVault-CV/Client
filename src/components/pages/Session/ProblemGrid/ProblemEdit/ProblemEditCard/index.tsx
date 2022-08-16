@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 import { Grid, Box, IconButton, Stack, Typography } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-import Problem from "../../../../../../types/Problem";
+import Problem from "../../../../../../core/types/Problem";
 import Wrapper from "../../../../../blocks/Wrapper";
 import ProblemLabel from "../../ProblemLabel";
 

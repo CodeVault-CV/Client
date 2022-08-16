@@ -1,6 +1,6 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { deleteProblem, createProblem } from "../../api";
-import Problem from "../../types/Problem";
+import Problem from "../../core/types/Problem";
 
 export default function useProblemEdit(
   sessionId: number,

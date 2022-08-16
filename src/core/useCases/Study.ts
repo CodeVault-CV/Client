@@ -1,13 +1,6 @@
-import Study, { StudyListItem } from "../../types/Study";
-import HTTP from "../infra/http";
-
-interface IStudyUseCase {
-  createStudy(studyName: string, repoName: string): Promise<Study>;
-  updateStudy(study: { id: string; name: string }): Promise<Study>;
-  getStudy(studyId: string): Promise<Study>;
-  getStudyList(): Promise<StudyListItem[]>;
-  deleteStudy(studyId: string): Promise<boolean>;
-}
+import Study, { StudyListItem } from "../types/Study";
+import IStudyUseCase from "./interfaces/iStudy";
+import HTTP from "../../data/infra/http";
 
 class StudyUseCase implements IStudyUseCase {
   async createStudy(studyName: string, repoName: string): Promise<Study> {
@@ -29,4 +22,4 @@ class StudyUseCase implements IStudyUseCase {
   }
 }
 
-export default new StudyUseCase();
+export default StudyUseCase;

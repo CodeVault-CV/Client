@@ -1,6 +1,6 @@
 import EditIcon from "@mui/icons-material/Edit";
 
-import Session from "../../../../../types/Session";
+import Session from "../../../../../core/types/Session";
 import SessionEditor from "../../../../blocks/SessionEditor";
 import useSessionUpdate from "../../../../../hooks/Session/useSessionUpdate";
 import Loading from "../../../../blocks/Loading";

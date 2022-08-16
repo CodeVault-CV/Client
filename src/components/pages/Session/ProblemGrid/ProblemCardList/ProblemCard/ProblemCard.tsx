@@ -6,7 +6,7 @@ import LinearProgressWithLabel from "../../../../../blocks/LinearProgressWithLab
 import Profile from "../../../../../blocks/Profile";
 import Wrapper from "../../../../../blocks/Wrapper";
 import ProblemLabel from "../../ProblemLabel";
-import { SolutionListItem } from "../../../../../../types/Solved";
+import { SolutionListItem } from "../../../../../../core/types/Solved";
 import { useNavigate } from "react-router-dom";
 
 type ProblemCardProps = {

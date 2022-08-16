@@ -8,7 +8,7 @@ import {
 } from "react";
 
 import { getToken } from "../../api";
-import TypeStorage from "../../core/infra/TypeStorage";
+import TypeStorage from "../../data/infra/TypeStorage";
 
 type Auth = {
   id: string;

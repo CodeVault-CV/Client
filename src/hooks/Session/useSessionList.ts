@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getSessionList } from "../../api";
-import Session from "../../types/Session";
+import Session from "../../core/types/Session";
 
 export default function useSessionList(problemId: string) {
   const { isLoading, isError, data } = useQuery<Session[]>(

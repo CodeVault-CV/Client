@@ -6,7 +6,7 @@ import DateLabel from "../../../atoms/DateLabel";
 import Header from "../../../blocks/Header";
 import SessionUpdate from "./SessionUpdate";
 
-import Session from "../../../../types/Session";
+import Session from "../../../../core/types/Session";
 
 type SessionHeaderProps = {
   session: Session,

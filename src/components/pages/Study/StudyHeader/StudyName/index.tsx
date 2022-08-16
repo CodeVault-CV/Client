@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from 'react';
 import StudyName from './StudyName';
 import debounce from '../../../../../utils/debounce';
-import StudyUseCase from "../../../../../core/useCases/Study";
+import Study from "../../../../../di/Study";
 
 interface StudyNameProps {
   id: string;
@@ -12,7 +12,7 @@ interface StudyNameProps {
 export default function StudyNameContainer({ id, name }: StudyNameProps) {
   const queryClient = useQueryClient();
   const mutation = useMutation(
-    ({ id, name }: StudyNameProps) => StudyUseCase.updateStudy({ id, name }),
+    ({ id, name }: StudyNameProps) => Study.updateStudy({ id, name }),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["study"]);

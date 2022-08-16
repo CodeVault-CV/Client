@@ -1,4 +1,4 @@
-import HTTP from "../core/infra/http";
+import HTTP from "../data/infra/http";
 
 // GET
 export const getToken = (code: string) => HTTP.get(`/user/login?code=${code}`);

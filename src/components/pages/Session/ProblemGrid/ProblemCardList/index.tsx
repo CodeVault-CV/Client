@@ -1,6 +1,6 @@
 import { Box, Grid } from "@mui/material";
 
-import Problem from "../../../../../types/Problem";
+import Problem from "../../../../../core/types/Problem";
 import Button from "../../../../atoms/Button";
 import ProblemCard from "./ProblemCard";
 

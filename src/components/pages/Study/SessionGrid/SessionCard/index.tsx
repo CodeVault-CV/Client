@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Grid, Stack, Typography } from "@mui/material";
 
-import Session from "../../../../../types/Session";
+import Session from "../../../../../core/types/Session";
 import DateLabel from "../../../../atoms/DateLabel";
 import Wrapper from "../../../../blocks/Wrapper";
 import LinkButton from "../../../../atoms/LinkButton";

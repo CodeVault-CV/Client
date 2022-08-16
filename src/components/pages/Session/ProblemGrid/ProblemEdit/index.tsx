@@ -2,7 +2,7 @@ import { Box, Grid, SelectChangeEvent } from "@mui/material";
 import { useState, ChangeEvent, MouseEvent } from "react";
 import useProblemEdit from "../../../../../hooks/Problem/useProblemEdit";
 
-import Problem from "../../../../../types/Problem";
+import Problem from "../../../../../core/types/Problem";
 import Button from "../../../../atoms/Button";
 import Loading from "../../../../blocks/Loading";
 import ProblemAddForm from "./ProblemAddForm";

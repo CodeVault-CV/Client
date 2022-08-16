@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getSolutionList } from "../../../../../../api";
 import { useAuth } from "../../../../../../hoc/AuthContext";
-import { SolutionListItem } from "../../../../../../types/Solved";
+import { SolutionListItem } from "../../../../../../core/types/Solved";
 import ProblemCard from "./ProblemCard";
 
 export interface ProblemCardContainerProps {

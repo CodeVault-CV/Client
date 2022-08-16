@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import Study from "../../../../../di/Study";
 import debounce from "../../../../../utils/debounce";
 import CreateStudyButton from "./CreateStudyButton";
-import StudyUseCase from "../../../../../core/useCases/Study";
 
 export interface IErrorMessage {
   studyNameMessage: string;
@@ -18,7 +18,7 @@ type CreateStudyProps = {
 export default function CreateStudyButtonContainer() {
   const queryClient = useQueryClient();
   const mutation = useMutation(
-    ({ studyName, repoName }: CreateStudyProps) => StudyUseCase.createStudy(studyName, repoName),
+    ({ studyName, repoName }: CreateStudyProps) => Study.createStudy(studyName, repoName),
     {
       onSuccess: (data) => {
         queryClient.invalidateQueries(["studyList"]);

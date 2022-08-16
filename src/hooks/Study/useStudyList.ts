@@ -2,12 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hoc/AuthContext";
 
-import StudyUseCase from "../../core/useCases/Study";
+import Study from "../../di/Study";
 
 export default function useStudyList() {
   const { logout } = useAuth();
   const navigate = useNavigate();
-  const { isLoading, data } = useQuery(["studyList"], () => StudyUseCase.getStudyList(), {
+  const { isLoading, data } = useQuery(["studyList"], () => Study.getStudyList(), {
     retry: false,
     onError: (status) => {
       if (status === 401) {

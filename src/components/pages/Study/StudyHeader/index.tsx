@@ -8,7 +8,7 @@ import Wrapper from "../../../blocks/Wrapper";
 import StudyName from "./StudyName";
 import StudySetting from "./StudySetting";
 import { useQuery } from "@tanstack/react-query";
-import StudyUseCase from "../../../../core/useCases/Study";
+import Study from "../../../../di/Study";
 
 const EndBlockWrapper = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ type StudyHeaderProps = {
 
 export default function StudyHeader({ studyId }: StudyHeaderProps) {
   const { isLoading, data: study } = useQuery(["study", studyId], () =>
-    StudyUseCase.getStudy(studyId)
+    Study.getStudy(studyId)
   );
 
   return (
