@@ -1,6 +1,6 @@
 import { useState, MouseEvent } from 'react';
 import styled from '@emotion/styled';
-import { TextField, Menu, Stack, Box, Typography } from '@mui/material';
+import { TextField, Menu, Stack, Typography } from '@mui/material';
 import { Settings, PersonAdd, Error } from '@mui/icons-material';
 
 import Button from '../../../../atoms/Button';
