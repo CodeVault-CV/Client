@@ -8,14 +8,6 @@ export const getProblemList = (sessionId: number) => HTTP.get(`/problem/list/${s
 export const getSolutionList = (problemId: number) => HTTP.get(`/solution/list/${problemId}`);
 // POST
 
-export const createSession = (studyId: string, name: string, start: Date, end: Date) =>
-  HTTP.post(`/session`, {
-    studyId,
-    name,
-    start,
-    end,
-  });
-
 export const createProblem = (sessionId: number, name: string, number: number, platform: string) =>
   HTTP.post(`/problem`, {
     sessionId,
