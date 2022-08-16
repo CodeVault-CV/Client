@@ -1,23 +1,32 @@
+import HTTP from "../../data/infra/http";
 import Session from "../types/Session";
 import ISessionUseCase from "./interfaces/iSession";
 
-class SessionUseCases implements ISessionUseCase {
-  createSession(studyId: string, name: string, start: Date, end: Date): Promise<Session> {
-    throw new Error("Method not implemented.");
+class SessionUseCase implements ISessionUseCase {
+  async createSession(studyId: string, name: string, start: Date, end: Date): Promise<Session> {
+    return await HTTP.post(`/session`, {
+      studyId,
+      name,
+      start,
+      end,
+    }).then(({ data }) => data as Session);
   }
-  updateSession(session: Session): Promise<Session> {
-    throw new Error("Method not implemented.");
+  async updateSession(session: Session): Promise<Session> {
+    return await HTTP.put("/session", session).then(({ data }) => data as Session);
   }
-  getSession(sessionId: number): Promise<Session> {
-    throw new Error("Method not implemented.");
+  async getSession(sessionId: number): Promise<Session> {
+    return await HTTP.get(`/session/${sessionId}`).then(({ data }) => ({
+      ...data,
+      start: new Date(data.start),
+      end: new Date(data.end),
+    }));
   }
-  getSessionList(studyId: string): Promise<Session[]> {
-    throw new Error("Method not implemented.");
+  async getSessionList(studyId: string): Promise<Session[]> {
+    return await HTTP.get(`/session/list/${studyId}`).then(({ data }) => data as Session[]);
   }
-  deleteSession(sessionId: number): Promise<boolean> {
-    throw new Error("Method not implemented.");
+  async deleteSession(sessionId: number): Promise<boolean> {
+    return await HTTP.deleteRequest(`/session/${sessionId}`).then(({ status }) => status === 200);
   }
-
 }
 
-export default SessionUseCases;
+export default SessionUseCase;

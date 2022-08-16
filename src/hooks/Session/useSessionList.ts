@@ -1,14 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getSessionList } from "../../api";
-import Session from "../../core/types/Session";
+import Session from "../../di/Session";
 
 export default function useSessionList(problemId: string) {
-  const { isLoading, isError, data } = useQuery<Session[]>(
+  const { isLoading, isError, data } = useQuery(
     ["sessionList", problemId],
     () =>
-      getSessionList(problemId).then((res) => {
-        const sessionList: Session[] = res.data;
-        return sessionList.reverse().map((session) => ({
+      Session.getSessionList(problemId).then((data) => {
+        return data.reverse().map((session) => ({
           ...session,
           start: new Date(session.start),
           end: new Date(session.end),
@@ -16,7 +14,7 @@ export default function useSessionList(problemId: string) {
       }),
     {
       retry: false,
-      suspense: true
+      suspense: true,
     }
   );
 

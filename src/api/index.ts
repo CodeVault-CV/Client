@@ -3,9 +3,6 @@ import HTTP from "../data/infra/http";
 // GET
 export const getToken = (code: string) => HTTP.get(`/user/login?code=${code}`);
 
-export const getSession = (sessionId: number) => HTTP.get(`/session/${sessionId}`);
-export const getSessionList = (studyId: string) => HTTP.get(`/session/list/${studyId}`);
-
 export const getProblemList = (sessionId: number) => HTTP.get(`/problem/list/${sessionId}`);
 
 export const getSolutionList = (problemId: number) => HTTP.get(`/solution/list/${problemId}`);
@@ -30,12 +27,7 @@ export const createProblem = (sessionId: number, name: string, number: number, p
 export const createSolution = (problemId: number, code: string, readMe: string, language: string) =>
   HTTP.post(`/solution`, { problemId, code, readMe, language });
 
-// PUT
-export const updateSession = (session: { id: number; name: string; start: Date; end: Date }) =>
-  HTTP.put("/session", session);
-
 // DELETE
-export const deleteSession = (sessionId: number) => HTTP.deleteRequest(`/session/${sessionId}`);
 
 export const deleteProblem = (problemId: number) =>
   HTTP.deleteRequest(`/problem/${String(problemId)}`);

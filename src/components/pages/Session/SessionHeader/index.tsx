@@ -11,6 +11,13 @@ type SessionHeaderProps = {
   sessionId: number;
 };
 
+const defaultSession = {
+  id: 0,
+  name: "Uknown",
+  start: new Date(0),
+  end: new Date(0),
+};
+
 export default function SessionHeaderContainer({ sessionId }: SessionHeaderProps) {
   const { studyId } = useParams();
   const { isLoading, session } = useSession(sessionId);
@@ -29,7 +36,7 @@ export default function SessionHeaderContainer({ sessionId }: SessionHeaderProps
 
   return (
     <>
-      <SessionHeader session={session} handleDelete={handleDelete} />
+      <SessionHeader session={session ?? defaultSession} handleDelete={handleDelete} />
       {deleteLoading && <Loading />}
     </>
   );

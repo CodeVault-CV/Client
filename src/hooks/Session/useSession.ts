@@ -1,19 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { getSession } from "../../api";
-import Session from "../../core/types/Session";
+import Session from "../../di/Session";
 
 export default function useSession(sessionId: number) {
-  const { isLoading, isError, data } = useQuery(["session", sessionId], () =>
-    getSession(sessionId).then(({ data }) => ({
-      ...data,
-      start: new Date(data.start),
-      end: new Date(data.end),
-    }))
-  );
+  const { isLoading, data } = useQuery(["session", sessionId], () => Session.getSession(sessionId));
 
   return {
     isLoading,
-    isError,
-    session: data as Session,
+    session: data,
   };
 }

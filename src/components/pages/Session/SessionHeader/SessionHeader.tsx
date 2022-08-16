@@ -14,13 +14,12 @@ type SessionHeaderProps = {
 };
 
 export default function SessionHeader({ session, handleDelete }: SessionHeaderProps) {
-  let { id, name, start, end } = session;
-
+  
   return (
-    <Header title={name}>
-      <DateLabel start={new Date(start)} end={end} />
+    <Header title={session.name}>
+      <DateLabel start={new Date(session.start)} end={session.end} />
       <Box sx={{ display: "flex" }}>
-        <SessionUpdate id={id} name={name} start={start} end={end} />
+        <SessionUpdate id={session.id} name={session.name} start={session.start} end={session.end} />
         <Tooltip title="세션 삭제하기" arrow>
           <IconButton onClick={handleDelete}>
             <DeleteForeverIcon />

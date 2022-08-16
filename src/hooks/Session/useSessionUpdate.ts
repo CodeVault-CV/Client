@@ -1,11 +1,11 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { updateSession } from "../../api";
-import Session from "../../core/types/Session";
+import Session from "../../di/Session";
 
 export default function useSessionUpdate(sessionId: number) {
   const queryClient = useQueryClient();
   const { isLoading, mutate } = useMutation(
-    (updatedSession: Session) => updateSession(updatedSession),
+    (updatedSession: { id: number; name: string; start: Date; end: Date }) =>
+      Session.updateSession(updatedSession),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["session", sessionId]);
