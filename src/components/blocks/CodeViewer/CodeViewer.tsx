@@ -6,6 +6,7 @@ import { StreamParser, StreamLanguage } from "@codemirror/language";
 
 interface CodeViewerProps {
   value: string;
+  isMine: boolean;
   codeParser: StreamParser<unknown>;
   language: string;
   handleChange(value: string): void;
@@ -14,6 +15,7 @@ interface CodeViewerProps {
 
 export default function CodeViewerBlock({
   value,
+  isMine,
   codeParser,
   language,
   handleChange,
@@ -32,7 +34,14 @@ export default function CodeViewerBlock({
           <MenuItem value="typeScript">TypeScript</MenuItem>
         </Select>
       </FormControl>
-      <CodeMirror value={value} onChange={handleChange} theme="dark" extensions={[StreamLanguage.define(codeParser)]} />
+      <CodeMirror 
+        value={value} 
+        onChange={handleChange}
+        theme="dark" 
+        extensions={[StreamLanguage.define(codeParser)]} 
+        readOnly={!isMine}
+        onFocus={(e) => !isMine && e.target.blur()}
+      />
     </div>
   );
 }

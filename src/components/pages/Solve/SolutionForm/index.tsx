@@ -24,12 +24,12 @@ export default function SolutionFormContainer({ id }: { id: number }) {
       },
     }
   );
-
+  
   const { view, changeView } = useView("code");
   const [code, setCode] = useState("");
   const [review, setReview] = useState("");
   const [language, setLanguage] = useState("cpp");
-
+    
   const handleLanguage = (language: string) => {
     setLanguage(language);
   };
@@ -50,6 +50,7 @@ export default function SolutionFormContainer({ id }: { id: number }) {
   return (
     <SolutionForm
       code={code}
+      isMine={false}
       review={review}
       view={view}
       language={language}

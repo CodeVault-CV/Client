@@ -12,6 +12,7 @@ interface SolutionFormProps {
   review: string;
   view: string;
   language: string;
+  isMine: boolean;
   handleLanguage(language: string): void;
   handleCode(value: string): void;
   handleReview(input: string | undefined): void;
@@ -24,6 +25,7 @@ export default function SolutionForm({
   review,
   view,
   language,
+  isMine,
   handleLanguage,
   handleCode,
   handleReview,
@@ -49,6 +51,7 @@ export default function SolutionForm({
       {view === "code" ? (
         <CodeViewer
           value={code}
+          isMine={isMine}
           language={language}
           handleChange={handleCode}
           handleSelect={handleLanguage}

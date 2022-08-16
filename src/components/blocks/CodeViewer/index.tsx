@@ -9,6 +9,7 @@ import CodeViewer from "./CodeViewer";
 
 interface CodeViewerContainerProps {
   value: string;
+  isMine: boolean;
   language: string;
   handleChange(value: string): void;
   handleSelect(value: string): void;
@@ -37,6 +38,7 @@ const getCodeParser = (language: string): StreamParser<unknown> => {
 
 export default function CodeViewerContainer({
   value,
+  isMine,
   language,
   handleChange,
   handleSelect
@@ -49,6 +51,7 @@ export default function CodeViewerContainer({
   return (
     <CodeViewer
       value={value}
+      isMine={isMine}
       handleChange={handleChange}
       codeParser={getCodeParser(language)}
       language={language}
