@@ -9,7 +9,7 @@ interface CodeViewerProps {
   isMine: boolean;
   codeParser: StreamParser<unknown>;
   language: string;
-  handleChange(value: string): void;
+  handleChange?(value: string): void;
   handleSelectChange(event: SelectChangeEvent): void;
 }
 

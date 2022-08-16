@@ -57,7 +57,7 @@ export default function SolutionForm({
           handleSelect={handleLanguage}
         />
       ) : (
-        <MDEditor height={530} value={review} fullscreen={false} onChange={handleReview} />
+        <MDEditor height={520} value={review} fullscreen={false} onChange={handleReview} />
       )}
       <Box>
         <Button onClick={handleSubmit}>제출하기</Button>

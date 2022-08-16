@@ -6,19 +6,20 @@ import LinearProgressWithLabel from "../../../../../blocks/LinearProgressWithLab
 import Profile from "../../../../../blocks/Profile";
 import Wrapper from "../../../../../blocks/Wrapper";
 import ProblemLabel from "../../ProblemLabel";
-import Solved from "../../../../../../types/Solved";
+import { SolutionListItem } from "../../../../../../types/Solved";
+import { useNavigate } from "react-router-dom";
 
 type ProblemCardProps = {
   id: number;
   name: string;
   platform: string;
-  solved: Solved;
-  solvedList: Solved[];
+  solved: SolutionListItem;
+  solvedList: SolutionListItem[];
   problemLink: string;
   isLoading: boolean;
 };
 
-const calcSolvedPercentage = (solvedList: Solved[]) => {
+const calcSolvedPercentage = (solvedList: SolutionListItem[]) => {
   return (
     (solvedList.reduce((acc: number, cur: { solve: boolean }) => acc + (cur.solve ? 1 : 0), 0) /
       solvedList.length) *
@@ -36,6 +37,7 @@ export default function ProblemCard({
   isLoading,
 }: ProblemCardProps) {
   const [flipped, setFlipped] = useState(false);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setFlipped(!flipped);
@@ -108,7 +110,7 @@ export default function ProblemCard({
                         name={solved.name}
                         imageUrl={solved.imageUrl}
                         color={solved.solve ? "primary" : "warning"}
-                        href={!solved.solve ? `/solve/${id}` : undefined}
+                        onClick={ () => !solved.solve && navigate(`./solve/${id}`)}
                       />
                     </Box>
                     {solvedList.map(({ name, imageUrl, solve }) => {

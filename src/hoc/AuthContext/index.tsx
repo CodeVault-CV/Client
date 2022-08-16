@@ -8,10 +8,10 @@ import {
 } from "react";
 
 import { getToken } from "../../api";
-import TypeStorage from "../../utils/TypeStorage";
+import TypeStorage from "../../core/infra/TypeStorage";
 
 type Auth = {
-  name: string;
+  id: string;
   token: string;
 };
 
@@ -19,24 +19,24 @@ export const AuthStorage = new TypeStorage<Auth>("auth", localStorage);
 
 export const AuthContext = createContext({
   auth: false,
-  name: "",
+  userId: "",
   login(code: string) {},
   logout() {},
 });
 
 export function AuthProvider({ children }: PropsWithChildren) {
   const [auth, setAuth] = useState(false);
-  const [name, setName] = useState("");
+  const [userId, setUserId] = useState("");
 
   const checkAuth = () => {
     const authData = AuthStorage.get();
     if (authData !== null) {
-      const { name } = authData;
+      const { id } = authData;
       setAuth(true);
-      setName(name);
+      setUserId(id);
     } else {
       setAuth(false);
-      setName("");
+      setUserId("");
     }
   };
 
@@ -63,7 +63,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const initialValue = {
     auth,
-    name,
+    userId,
     login,
     logout,
   };

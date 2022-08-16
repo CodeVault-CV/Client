@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { AuthStorage } from "../hoc/AuthContext";
+import { AuthStorage } from "../../hoc/AuthContext";
 
 const API = axios.create({
   baseURL: process.env.REACT_APP_SERVER_BASE_URL,
@@ -37,4 +37,11 @@ const deleteRequest = async (url: string, headers = {}) => {
   return response.data;
 };
 
-export { get, post, put, deleteRequest };
+const HTTP = {
+  get,
+  post,
+  put,
+  deleteRequest,
+};
+
+export default HTTP;
