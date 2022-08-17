@@ -20,6 +20,9 @@ class StudyPresenter implements IStudyPresenter {
   async deleteStudy(studyId: string): Promise<boolean> {
     return await this.useCase.deleteStudy(studyId);
   }
+  async checkStudyLeader(studyId: string): Promise<boolean> {
+    return await this.useCase.checkStudyLeader(studyId);
+  }
 }
 
 export default StudyPresenter;

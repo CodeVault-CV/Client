@@ -4,6 +4,7 @@ import { Edit, CheckCircle } from '@mui/icons-material';
 
 interface StudyHeaderTitleProps {
   studyName: string;
+  isLeader: boolean;
   isTextFiled: boolean;
   errorMessage: string;
   handleClick: (event: React.MouseEvent<HTMLElement>) => void;
@@ -14,6 +15,7 @@ interface StudyHeaderTitleProps {
 
 export default function StudyNameBlock({
   studyName,
+  isLeader,
   isTextFiled,
   errorMessage,
   handleClick,
@@ -41,9 +43,11 @@ export default function StudyNameBlock({
       ) : (
         <Fragment>
           {studyName}
-          <IconButton sx={{ marginLeft: 1 }} onClick={handleClick}>
-            <Edit />
-          </IconButton>
+          {isLeader &&
+            <IconButton sx={{ marginLeft: 1 }} onClick={handleClick}>
+              <Edit />
+            </IconButton>
+          }
         </Fragment>
       )}
     </Fragment>

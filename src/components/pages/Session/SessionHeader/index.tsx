@@ -5,6 +5,7 @@ import SessionHeader from "./SessionHeader";
 import { HeaderSkeleton } from "../../../blocks/Header";
 import useSession from "../../../../hooks/Session/useSession";
 import { useSessionDelete } from "../../../../hooks/Session/useSessionDelete";
+import useStudyLeader from "../../../../hooks/Study/useStudyLeader";
 import Loading from "../../../blocks/Loading";
 
 type SessionHeaderProps = {
@@ -20,6 +21,7 @@ const defaultSession = {
 
 export default function SessionHeaderContainer({ sessionId }: SessionHeaderProps) {
   const { studyId } = useParams();
+  const isLeader = useStudyLeader();
   const { isLoading, session } = useSession(sessionId);
   const { isLoading: deleteLoading, deleteRequest } = useSessionDelete(
     studyId as string,
@@ -36,7 +38,7 @@ export default function SessionHeaderContainer({ sessionId }: SessionHeaderProps
 
   return (
     <>
-      <SessionHeader session={session ?? defaultSession} handleDelete={handleDelete} />
+      <SessionHeader session={session ?? defaultSession} isLeader={isLeader} handleDelete={handleDelete} />
       {deleteLoading && <Loading />}
     </>
   );

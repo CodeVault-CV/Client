@@ -3,6 +3,7 @@ import { Box, Grid } from "@mui/material";
 import Problem from "../../../../../core/types/Problem";
 import Button from "../../../../atoms/Button";
 import ProblemCard from "./ProblemCard";
+import useStudyLeader from "../../../../../hooks/Study/useStudyLeader"
 
 type ProblemCardListProps = {
   problemList: Problem[];
@@ -15,11 +16,13 @@ export default function ProblemCardList({ problemList, toggleMode }: ProblemCard
       {problemList.map((problem: Problem) => (
         <ProblemCard key={problem.id} {...problem} />
       ))}
-      <Grid item xs={12}>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Button onClick={toggleMode}>편집하기</Button>
-        </Box>
-      </Grid>
+      {useStudyLeader() &&
+        <Grid item xs={12}>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Button onClick={toggleMode}>편집하기</Button>
+          </Box>
+        </Grid>
+      }
     </>
   );
 }

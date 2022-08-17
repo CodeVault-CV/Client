@@ -9,6 +9,7 @@ import StudyName from "./StudyName";
 import StudySetting from "./StudySetting";
 import { useQuery } from "@tanstack/react-query";
 import Study from "../../../../di/Study";
+import useStudyLeader from "../../../../hooks/Study/useStudyLeader";
 
 const EndBlockWrapper = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ function HeaderEndBlock({ id, url }: HeaderEndBlockProps) {
       <Button href={url} color="inherit">
         <GitHub fontSize="large" />
       </Button>
-      <StudySetting id={id} />
+      {useStudyLeader() && <StudySetting id={id} />}
     </EndBlockWrapper>
   );
 }
