@@ -1,7 +1,7 @@
 import { IAuthEntity } from "../../core/entities/interfaces/iAuth";
 import IAuthRepository from "../../core/useCases/repository-interfaces/iAuth";
-import HTTP from "../infra/http";
 import iStorage from "../infra/interfaces/iStorage";
+import HTTP from "../infra/http";
 
 export default class AuthRepository implements IAuthRepository {
   constructor(private readonly storage: iStorage) {}

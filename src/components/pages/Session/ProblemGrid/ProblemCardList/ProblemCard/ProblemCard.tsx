@@ -1,25 +1,25 @@
 import { useState } from "react";
 import { Grid, Stack, Typography, Skeleton, Box, Tooltip } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import Button from "../../../../../atoms/Button";
 import LinearProgressWithLabel from "../../../../../blocks/LinearProgressWithLabel";
 import Profile from "../../../../../blocks/Profile";
 import Wrapper from "../../../../../blocks/Wrapper";
 import ProblemLabel from "../../ProblemLabel";
-import { SolutionListItem } from "../../../../../../core/types/Solved";
-import { useNavigate } from "react-router-dom";
+import { ISolutionDataEntity } from "../../../../../../core/entities/interfaces/iSolution";
 
 type ProblemCardProps = {
   id: number;
   name: string;
   platform: string;
-  solved: SolutionListItem;
-  solvedList: SolutionListItem[];
+  solved?: ISolutionDataEntity;
+  solvedList: ISolutionDataEntity[];
   problemLink: string;
   isLoading: boolean;
 };
 
-const calcSolvedPercentage = (solvedList: SolutionListItem[]) => {
+const calcSolvedPercentage = (solvedList: ISolutionDataEntity[]) => {
   return (
     (solvedList.reduce((acc: number, cur: { solve: boolean }) => acc + (cur.solve ? 1 : 0), 0) /
       solvedList.length) *
@@ -59,7 +59,7 @@ export default function ProblemCard({
               </Skeleton>
             ) : (
               <LinearProgressWithLabel
-                value={calcSolvedPercentage(solvedList.concat([solved]))}
+                value={solved ? calcSolvedPercentage(solvedList.concat([solved])) : 0}
                 sx={{ height: 6, borderRadius: 3 }}
               />
             )}
@@ -102,15 +102,15 @@ export default function ProblemCard({
                       sx={{
                         border: 1,
                         borderRadius: 1,
-                        borderColor: solved.solve ? "primary.main" : "warning.main",
+                        borderColor: solved?.solve ? "primary.main" : "warning.main",
                         p: 1,
                       }}
                     >
                       <Profile
-                        name={solved.name}
-                        imageUrl={solved.imageUrl}
-                        color={solved.solve ? "primary" : "warning"}
-                        onClick={ () => !solved.solve && navigate(`./solve/${id}`)}
+                        name={solved?.name || "unknown"}
+                        imageUrl={solved?.imageUrl}
+                        color={solved?.solve ? "primary" : "warning"}
+                        onClick={ () => !solved?.solve && navigate(`./solve/${id}`)}
                       />
                     </Box>
                     {solvedList.map(({ name, imageUrl, solve }) => {

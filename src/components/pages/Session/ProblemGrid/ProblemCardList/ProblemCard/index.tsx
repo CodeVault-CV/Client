@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { getSolutionList } from "../../../../../../api";
 import { useAuth } from "../../../../../../hoc/AuthContext";
-import { SolutionListItem } from "../../../../../../core/types/Solved";
 import ProblemCard from "./ProblemCard";
+import Solution from "../../../../../../di/Solution";
+import { ISolutionDataEntity } from "../../../../../../core/entities/interfaces/iSolution";
 
 export interface ProblemCardContainerProps {
   id: number;
@@ -30,7 +30,7 @@ export default function ProblemCardContainer({
 }: ProblemCardContainerProps) {
   const { userId } = useAuth();
   const { isLoading, data: solvedList = [] } = useQuery([`solutionList`, id], () =>
-    getSolutionList(id).then((res) => res.data)
+    Solution.getSolutionList(id)
   );
 
   return (
@@ -38,8 +38,8 @@ export default function ProblemCardContainer({
       id={id}
       name={name}
       platform={platform}
-      solved={solvedList.find(({ userId: id }: SolutionListItem) => id === userId)}
-      solvedList={solvedList.filter(({ userId: id }: SolutionListItem ) => id !== userId)}
+      solved={solvedList.find(({ userId: id }: ISolutionDataEntity) => id === userId)}
+      solvedList={solvedList.filter(({ userId: id }: ISolutionDataEntity) => id !== userId)}
       problemLink={getProblemLink(platform, number)}
       isLoading={isLoading}
     />
