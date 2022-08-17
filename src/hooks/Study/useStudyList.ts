@@ -9,8 +9,8 @@ export default function useStudyList() {
   const navigate = useNavigate();
   const { isLoading, data } = useQuery(["studyList"], () => Study.getStudyList(), {
     retry: false,
-    onError: (status) => {
-      if (status === 401) {
+    onError: ({ response }) => {
+      if (response.status === 401) {
         alert("로그인이 만료됐습니다. 다시 로그인 해주세요.");
         logout();
         navigate("/");

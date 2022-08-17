@@ -8,15 +8,19 @@ class StudyUseCase implements IStudyUseCase {
       ({ data }) => data as Study
     );
   }
+
   async updateStudy(study: { id: string; name: string }): Promise<Study> {
     return await HTTP.put("/study", study).then(({ data }) => data as Study);
   }
+
   async getStudy(studyId: string): Promise<Study> {
     return await HTTP.get(`/study/${studyId}`).then(({ data }) => data as Study);
   }
+
   async getStudyList(): Promise<StudyListItem[]> {
     return await HTTP.get(`/study/list`).then(({ data }) => data as StudyListItem[]);
   }
+
   async deleteStudy(studyId: string): Promise<boolean> {
     return await HTTP.deleteRequest(`/study/${studyId}`).then(({ status }) => status === 200);
   }

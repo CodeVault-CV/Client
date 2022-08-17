@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProblemList } from "../../api";
-import Problem from "../../core/types/Problem";
+import Problem from "../../di/Problem";
 
 export default function useProblemList(sessionId: number) {
-  const { isLoading, isError, data = [] } = useQuery<Problem[]>(["problemList", sessionId], () =>
-    getProblemList(sessionId).then((res) => res.data)
-  );
+  const {
+    isLoading,
+    isError,
+    data = [],
+  } = useQuery(["problemList", sessionId], () => Problem.getProblemList(sessionId));
 
   return {
     isLoading,

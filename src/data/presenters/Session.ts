@@ -5,20 +5,24 @@ import ISessionPresenter from "./interfaces/iSession";
 class SessionPresenter implements ISessionPresenter {
   constructor(private readonly useCase: ISessionUseCase) {}
 
-  createSession(studyId: string, name: string, start: Date, end: Date): Promise<Session> {
-    return this.useCase.createSession(studyId, name, start, end);
+  async createSession(studyId: string, name: string, start: Date, end: Date): Promise<Session> {
+    return await this.useCase.createSession(studyId, name, start, end);
   }
-  updateSession(session: Session): Promise<Session> {
-    return this.useCase.updateSession(session);
+
+  async updateSession(session: Session): Promise<Session> {
+    return await this.useCase.updateSession(session);
   }
-  getSession(sessionId: number): Promise<Session> {
-    return this.useCase.getSession(sessionId);
+
+  async getSession(sessionId: number): Promise<Session> {
+    return await this.useCase.getSession(sessionId);
   }
-  getSessionList(studyId: string): Promise<Session[]> {
-    return this.useCase.getSessionList(studyId);
+
+  async getSessionList(studyId: string): Promise<Session[]> {
+    return await this.useCase.getSessionList(studyId);
   }
-  deleteSession(sessionId: number): Promise<boolean> {
-    return this.useCase.deleteSession(sessionId);
+
+  async deleteSession(sessionId: number): Promise<boolean> {
+    return await this.useCase.deleteSession(sessionId);
   }
 }
 

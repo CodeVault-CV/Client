@@ -1,4 +1,4 @@
-type Problem = {
+interface Problem {
   id: number;
   number: string;
   name: string;
