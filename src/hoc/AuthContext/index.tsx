@@ -6,16 +6,7 @@ import {
   useContext,
   useCallback,
 } from "react";
-
-import { getToken } from "../../api";
-import TypeStorage from "../../data/infra/TypeStorage";
-
-type Auth = {
-  id: string;
-  token: string;
-};
-
-export const AuthStorage = new TypeStorage<Auth>("auth", localStorage);
+import Auth from "../../di/Auth";
 
 export const AuthContext = createContext({
   auth: false,
@@ -29,9 +20,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const [userId, setUserId] = useState("");
 
   const checkAuth = () => {
-    const authData = AuthStorage.get();
-    if (authData !== null) {
-      const { id } = authData;
+    const id = Auth.getId();
+    if (id !== null) {
       setAuth(true);
       setUserId(id);
     } else {
@@ -42,18 +32,15 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const login = useCallback(async (code: string) => {
     try {
-      const { status, data } = await getToken(code);
-      if (status === 200) {
-        AuthStorage.set(data);
-        checkAuth();
-      }
+      await Auth.login(code);
+      checkAuth();
     } catch (error) {
       console.log(error);
     }
   }, []);
 
   const logout = useCallback(() => {
-    AuthStorage.remove();
+    Auth.logout();
     checkAuth();
   }, []);
 

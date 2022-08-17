@@ -1,13 +1,15 @@
+import iStorage from "./interfaces/iStorage";
+
 const key_prefix = "ALGONG_";
 
-export default class TypeStorage<T> {
+export default class TypeStorage<T> implements iStorage {
   constructor(private key: string, private storage: Storage) {
     this.key = key_prefix + key;
   }
 
   get(): T | null {
     const json = this.storage.getItem(this.key);
-    if(!json) return null;
+    if (!json) return null;
     return JSON.parse(json);
   }
 
