@@ -110,7 +110,7 @@ export default function ProblemCard({
                         name={solved?.name || "unknown"}
                         imageUrl={solved?.imageUrl}
                         color={solved?.solve ? "primary" : "warning"}
-                        onClick={ () => !solved?.solve && navigate(`./solve/${id}`)}
+                        onClick={ () => navigate(!solved?.solve ? `./solve/${id}` : `./solution/${solved.solutionId}`)}
                       />
                     </Box>
                     {solvedList.map(({ name, imageUrl, solve }) => {

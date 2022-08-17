@@ -4,14 +4,15 @@ import MDEditor from "@uiw/react-md-editor";
 
 import CodeViewer from "../../blocks/CodeViewer";
 import Wrapper from "../../blocks/Wrapper";
+import { useQuery } from "@tanstack/react-query";
+import Solution from "../../../di/Solution";
 
 interface SolutionProps {
-  code: string;
-  language: string;
-  readMe: string;
+  id: number;
 }
 
-export default function SolutionViewer({ code, readMe, language }: SolutionProps) {
+export default function SolutionViewer({ id }: SolutionProps) {
+  const { data } = useQuery(["solution", id], () => Solution.getSolution(id));
   const { view, changeView } = useView("code");
 
   return (
@@ -32,14 +33,16 @@ export default function SolutionViewer({ code, readMe, language }: SolutionProps
       </Box>
       {view === "code" ? (
         <CodeViewer
-          value={code}
-          language={language}
+          value={data?.code ?? ""}
+          language={data?.language ?? "cpp"}
           isMine={false}
           handleChange={(value: string) => {}}
           handleSelect={(value: string) => {}}
         />
       ) : (
-        <MDEditor.Markdown source={readMe} />
+        <Box pb={5}>
+          <MDEditor.Markdown source={data?.readMe} />
+        </Box>
       )}
     </Wrapper>
   );
