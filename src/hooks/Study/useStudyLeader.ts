@@ -11,15 +11,19 @@ export default function useStudyLeader(): boolean {
 }
 
 const helper = (function () {
-  let cache: [string, boolean] = ['', false];
+  const cache = new Map<string, boolean>();
 
   return function (studyId: string | undefined, setIsLeader: any) {
-    if (!studyId || cache[0] === studyId) {
-      return cache[1];
+    if (!studyId) {
+      return false;
     }
 
-    Study.checkStudyLeader(studyId).then((data) => {
-      cache = [studyId, data];
+    if (cache.has(studyId)) {
+      return cache.get(studyId);
+    }
+
+    Study.checkStudyLeader(studyId).then((data) => {     
+      cache.set(studyId, data);
       setIsLeader(data);
     });
   };
