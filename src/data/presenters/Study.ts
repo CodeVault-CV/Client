@@ -1,6 +1,7 @@
 import Study, { StudyListItem } from "../../core/types/Study";
 import IStudyPresenter from "./interfaces/iStudy";
 import IStudyUseCase from "../../core/useCases/interfaces/iStudy";
+import IUserEntity from "../../core/entities/interfaces/iUser";
 
 class StudyPresenter implements IStudyPresenter {
   constructor(private readonly useCase: IStudyUseCase) {}
@@ -19,6 +20,9 @@ class StudyPresenter implements IStudyPresenter {
   }
   async deleteStudy(studyId: string): Promise<boolean> {
     return await this.useCase.deleteStudy(studyId);
+  }
+  async searchStudyMember(studyId: string, userName: string): Promise<[IUserEntity]> {
+    return await this.useCase.searchStudyMember(studyId, userName);
   }
 }
 
