@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Grid, Stack, Typography } from "@mui/material";
 
-import Session from "../../../../../core/types/Session";
 import DateLabel from "../../../../atoms/DateLabel";
 import Wrapper from "../../../../blocks/Wrapper";
 import LinkButton from "../../../../atoms/LinkButton";
+import ISessionEntity from "../../../../../core/entities/interfaces/iSession";
 
 function formatTime(date: Date) {
   const leftDate = Math.floor(date.getTime() / 3600000 / 24);
@@ -21,7 +21,7 @@ function isLessThanDay(time: number) {
   return (0 <= time && time / 3600000 / 24 < 1);
 }
 
-export default function SessionCard({ id, name, start, end }: Session) {
+export default function SessionCard({ id, name, start, end }: ISessionEntity) {
   const [time, setTime] = useState(end.getTime() - new Date().getTime());
 
   useEffect(() => {

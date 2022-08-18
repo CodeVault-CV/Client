@@ -5,12 +5,11 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import DateLabel from "../../../atoms/DateLabel";
 import Header from "../../../blocks/Header";
 import SessionUpdate from "./SessionUpdate";
-
-import Session from "../../../../core/types/Session";
 import Wrapper from "../../../blocks/Wrapper";
+import ISessionEntity from "../../../../core/entities/interfaces/iSession";
 
 type SessionHeaderProps = {
-  session: Session;
+  session: ISessionEntity;
   handleDelete(event: MouseEvent<HTMLButtonElement>): void;
 };
 
