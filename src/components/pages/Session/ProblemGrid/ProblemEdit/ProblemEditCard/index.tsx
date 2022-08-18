@@ -2,16 +2,16 @@ import { MouseEvent } from "react";
 import { Grid, Box, IconButton, Stack, Typography } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-import Problem from "../../../../../../core/types/Problem";
 import Wrapper from "../../../../../blocks/Wrapper";
 import ProblemLabel from "../../ProblemLabel";
+import IProblemEntity from "../../../../../../core/entities/interfaces/iProblem";
 
 export default function ProblemEditCard({
   name,
   number,
   platform,
   onClick,
-}: Problem & {
+}: IProblemEntity & {
   onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }) {
   return (
@@ -34,13 +34,15 @@ export default function ProblemEditCard({
                 fontWeight: 600,
                 borderRadius: 6,
                 backgroundColor: "#303030",
-                color: "whitesmoke"
+                color: "whitesmoke",
               }}
             >
               {number}
             </Box>
           </Stack>
-          <Typography fontSize={18} fontWeight={700}>{name}</Typography>
+          <Typography fontSize={18} fontWeight={700}>
+            {name}
+          </Typography>
         </Stack>
       </Wrapper>
     </Grid>

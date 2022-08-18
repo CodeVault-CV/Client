@@ -1,18 +1,18 @@
 import { Box, Grid } from "@mui/material";
+import IProblemEntity from "../../../../../core/entities/interfaces/iProblem";
 
-import Problem from "../../../../../core/types/Problem";
 import Button from "../../../../atoms/Button";
 import ProblemCard from "./ProblemCard";
 
 type ProblemCardListProps = {
-  problemList: Problem[];
+  problemList: IProblemEntity[];
   toggleMode: () => void;
 };
 
 export default function ProblemCardList({ problemList, toggleMode }: ProblemCardListProps) {
   return (
     <>
-      {problemList.map((problem: Problem) => (
+      {problemList.map((problem) => (
         <ProblemCard key={problem.id} {...problem} />
       ))}
       <Grid item xs={12}>
