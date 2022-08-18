@@ -1,14 +1,14 @@
-import { IAuthEntity } from "../../core/entities/interfaces/iAuth";
 import IAuthRepository from "../../core/useCases/repository-interfaces/iAuth";
 import iStorage from "../infra/interfaces/iStorage";
 import HTTP from "../infra/http";
+import AuthDTO, { IAuthDTO } from "../../core/dto/AuthDTO";
 
 export default class AuthRepository implements IAuthRepository {
   constructor(private readonly storage: iStorage) {}
 
-  async login(code: string): Promise<IAuthEntity> {
+  async login(code: string): Promise<IAuthDTO> {
     const authEntity = await HTTP.get(`/user/login?code=${code}`).then(
-      ({ data }) => data as IAuthEntity
+      ({ data }) => new AuthDTO(data)
     );
 
     this.storage.set(authEntity);
