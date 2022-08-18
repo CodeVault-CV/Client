@@ -1,18 +1,16 @@
 import { Box, ToggleButtonGroup, ToggleButton, Typography } from "@mui/material";
-import useView from "../../../hooks/useView";
+import useView from "../../../../hooks/useView";
 import MDEditor from "@uiw/react-md-editor";
 
-import CodeViewer from "../../blocks/CodeViewer";
-import Wrapper from "../../blocks/Wrapper";
-import { useQuery } from "@tanstack/react-query";
-import Solution from "../../../di/Solution";
+import CodeViewer from "../../../blocks/CodeViewer";
+import Wrapper from "../../../blocks/Wrapper";
+import { ISolutionEntity } from "../../../../core/entities/interfaces/iSolution";
 
-interface SolutionProps {
-  id: number;
+interface SolutionViewerProps {
+  solution?: ISolutionEntity;
 }
 
-export default function SolutionViewer({ id }: SolutionProps) {
-  const { data } = useQuery(["solution", id], () => Solution.getSolution(id));
+export default function SolutionViewer({ solution }: SolutionViewerProps) {
   const { view, changeView } = useView("code");
 
   return (
@@ -33,15 +31,15 @@ export default function SolutionViewer({ id }: SolutionProps) {
       </Box>
       {view === "code" ? (
         <CodeViewer
-          value={data?.code ?? ""}
-          language={data?.language ?? "cpp"}
+          value={solution?.code ?? ""}
+          language={solution?.language ?? "cpp"}
           isMine={false}
           handleChange={(value: string) => {}}
           handleSelect={(value: string) => {}}
         />
       ) : (
-        <Box px={2} pb={5}>
-          <MDEditor.Markdown source={data?.readMe} />
+        <Box px={2} pb={2}>
+          <MDEditor.Markdown source={solution?.readMe} />
         </Box>
       )}
     </Wrapper>
