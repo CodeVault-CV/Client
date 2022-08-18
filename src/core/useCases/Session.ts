@@ -1,35 +1,28 @@
-import HTTP from "../../data/infra/http";
-import Session from "../types/Session";
+import ISessionEntity from "../entities/interfaces/iSession";
 import ISessionUseCase from "./interfaces/iSession";
+import ISessionRepository from "./repository-interfaces/iSession";
 
 class SessionUseCase implements ISessionUseCase {
-  async createSession(studyId: string, name: string, start: Date, end: Date): Promise<Session> {
-    return await HTTP.post(`/session`, {
-      studyId,
-      name,
-      start,
-      end,
-    }).then(({ data }) => data as Session);
+  constructor(private readonly sessionRepo: ISessionRepository) {}
+
+  async createSession(studyId: string, name: string, start: Date, end: Date): Promise<ISessionEntity> {
+    return await this.sessionRepo.createSession(studyId, name, start, end);
   }
 
-  async updateSession(session: Session): Promise<Session> {
-    return await HTTP.put("/session", session).then(({ data }) => data as Session);
+  async updateSession(session: ISessionEntity): Promise<ISessionEntity> {
+    return await this.sessionRepo.updateSession(session);
   }
 
-  async getSession(sessionId: number): Promise<Session> {
-    return await HTTP.get(`/session/${sessionId}`).then(({ data }) => ({
-      ...data,
-      start: new Date(data.start),
-      end: new Date(data.end),
-    }));
+  async getSession(sessionId: number): Promise<ISessionEntity> {
+    return await this.sessionRepo.getSession(sessionId);
   }
 
-  async getSessionList(studyId: string): Promise<Session[]> {
-    return await HTTP.get(`/session/list/${studyId}`).then(({ data }) => data as Session[]);
+  async getSessionList(studyId: string): Promise<ISessionEntity[]> {
+    return await this.sessionRepo.getSessionList(studyId);
   }
 
   async deleteSession(sessionId: number): Promise<boolean> {
-    return await HTTP.deleteRequest(`/session/${sessionId}`).then(({ status }) => status === 200);
+    return await this.sessionRepo.deleteSession(sessionId);
   }
 }
 

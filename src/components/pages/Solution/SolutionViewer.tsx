@@ -40,7 +40,7 @@ export default function SolutionViewer({ id }: SolutionProps) {
           handleSelect={(value: string) => {}}
         />
       ) : (
-        <Box pb={5}>
+        <Box px={2} pb={5}>
           <MDEditor.Markdown source={data?.readMe} />
         </Box>
       )}
