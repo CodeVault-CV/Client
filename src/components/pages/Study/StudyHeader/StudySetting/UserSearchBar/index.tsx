@@ -10,11 +10,16 @@ interface UserSearchBarProps {
 export default function UserSearchBar({ userName, searched, handleChange }: UserSearchBarProps) {
   return (
     <Autocomplete
+      freeSolo
       autoHighlight
       options={searched}
-      getOptionLabel={(option) => option.name}
-      onChange={(_, value: IUserEntity | null) => {
-        value ? handleChange(value.name) : handleChange('');
+      getOptionLabel={(option) => 
+        typeof option === 'string' ? option : option.name
+      }
+      onChange={(_, value: IUserEntity | string | null) => {
+        value 
+          ? handleChange(typeof value === 'string' ? value : value.name) 
+          : handleChange('');
       }}
       renderOption={(props, option) => (
         <Box
