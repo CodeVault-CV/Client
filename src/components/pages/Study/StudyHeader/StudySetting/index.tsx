@@ -40,11 +40,9 @@ export default function StudySettingContainer({ id }: StudySettingProps) {
 
   const handleAddMember = () => {
     Study.addStudyMember(id, userName).then(({ status, message }) => {
-      if (status === 200) {
-        alert(`${userName} 님에게 초대 메일을 전송했습니다.`)
-        return;
-      }
-      alert(message);
+      status === 200
+        ? alert(`${userName} 님에게 초대 메일을 전송했습니다.`)
+        : alert(message);
     });
   }
 
