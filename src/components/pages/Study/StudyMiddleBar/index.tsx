@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import SearchTextField from "./SearchTextField";
+// import SearchTextField from "./SearchTextField";
 import SortSplitButton from "./SortSplitButton";
 import SessionAdder from "./SessionAdder";
 
@@ -10,7 +10,7 @@ type StudyMiddleBarProps = {
 export default function StudyMiddleBar({ studyId }: StudyMiddleBarProps) {
   return (
     <Stack direction="row" spacing={2}>
-      <SearchTextField />
+      {/* <SearchTextField /> */}
       <SortSplitButton />
       <SessionAdder studyId={studyId} />
     </Stack>

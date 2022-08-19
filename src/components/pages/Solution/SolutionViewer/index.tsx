@@ -1,6 +1,8 @@
 import { Stack } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+
+import { useAuth } from "../../../../hoc/AuthContext";
 import Solution from "../../../../di/Solution";
 import Button from "../../../atoms/Button";
 import Loading from "../../../blocks/Loading";
@@ -11,6 +13,7 @@ type SolutionViewerContainerProps = {
 };
 
 export default function SolutionViewerContainer({ solutionId }: SolutionViewerContainerProps) {
+  const { userId } = useAuth();
   const { data } = useQuery(["solution", solutionId], () => Solution.getSolution(solutionId));
 
   const navigate = useNavigate();
@@ -30,10 +33,12 @@ export default function SolutionViewerContainer({ solutionId }: SolutionViewerCo
   return (
     <>
       <SolutionViewer solution={data} />
-      <Stack direction="row-reverse" spacing={1}>
-        <Button onClick={handleDelete}>삭제하기</Button>
-        {/* <Button>수정하기</Button> */}
-      </Stack>
+      {data?.id === userId && (
+        <Stack direction="row-reverse" spacing={1}>
+          <Button onClick={handleDelete}>삭제하기</Button>
+          {/* <Button>수정하기</Button> */}
+        </Stack>
+      )}
       {isLoading && <Loading />}
     </>
   );

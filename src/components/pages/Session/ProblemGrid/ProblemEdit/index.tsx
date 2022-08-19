@@ -39,7 +39,7 @@ export default function ProblemEdit({ sessionId, problemList, toggleMode }: Prob
 
   const handleSubmit = (event: MouseEvent<HTMLButtonElement>) => {
     const pid = -Number(`${new Date().getTime()}${problem.number}`);
-    setProblems((prev) => [{ id: pid, ...problem }, ...prev]);
+    setProblems((prev) => [...prev, { id: pid, ...problem }]);
     setProblem({
       platform: "programmers",
       number: "",

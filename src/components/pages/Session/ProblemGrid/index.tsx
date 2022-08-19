@@ -23,7 +23,7 @@ export default function ProblemGridContainer({ sessionId }: ProblemGridProps) {
       <Box sx={{ mb: 2 }}>
         <Stack direction="row" spacing={1}>
           <Typography variant="caption" color="text.secondary" ml={1} fontSize={18}>
-            Problem List
+            Problems
           </Typography>
         </Stack>
         <Divider />

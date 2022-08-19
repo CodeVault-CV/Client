@@ -28,7 +28,7 @@ export default class SolutionRepository implements ISolutionRepository {
     readMe: string,
     language: string
   ): Promise<ISolutionEntity> {
-    return await HTTP.put(`/solution/${String(problemId)}`, {
+    return await HTTP.put(`/solution/${problemId}`, {
       problemId,
       code,
       readMe,

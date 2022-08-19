@@ -60,19 +60,17 @@ export default function SessionEditor({
   return (
     <>
       <Tooltip title={label} arrow>
-        <IconButton onClick={handleClick}>
-          {icon}
-        </IconButton>
+        <IconButton onClick={handleClick}>{icon}</IconButton>
       </Tooltip>
       <Popover
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "right",
+          horizontal: "center",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "right",
+          horizontal: "center",
         }}
         open={open}
         onClose={handleClose}
