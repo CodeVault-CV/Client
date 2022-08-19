@@ -24,6 +24,9 @@ class StudyPresenter implements IStudyPresenter {
   async searchStudyMember(studyId: string, userName: string): Promise<[IUserEntity]> {
     return await this.useCase.searchStudyMember(studyId, userName);
   }
+  async addStudyMember(studyId: string, userName: string):  Promise<{ status: number, message: string }> {
+    return await this.useCase.addStudyMember(studyId, userName);
+  }
 }
 
 export default StudyPresenter;

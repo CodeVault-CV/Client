@@ -25,14 +25,18 @@ export default function StudySettingContainer({ id }: StudySettingProps) {
     })
   }))
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setUserName(e.target.value);
-    searchUser(e.target.value);
+  const handleChange = (value: string) => {
+    setUserName(value);
+    searchUser(value);
   }
 
   const handleDelete = () => {
     mutation.mutate(id);
   };
+
+  const handleAddMember = () => {
+    Study.addStudyMember(id, userName);
+  }
 
   return (
     <StudySetting
@@ -40,6 +44,7 @@ export default function StudySettingContainer({ id }: StudySettingProps) {
       searched={searched}
       handleChange={handleChange}
       handleDelete={handleDelete}
+      handleAddMember={handleAddMember}
     />
   );
 }

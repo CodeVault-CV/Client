@@ -8,4 +8,5 @@ export default interface IStudyUseCase {
   getStudyList(): Promise<StudyListItem[]>;
   deleteStudy(studyId: string): Promise<boolean>;
   searchStudyMember(studyId: string, userName: string): Promise<[IUserEntity]>;
+  addStudyMember(studyId: string, userName: string): Promise<{ status: number, message: string }>;
 }

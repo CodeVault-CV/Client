@@ -21,10 +21,9 @@ const MemberAdderWrapper = styled.div`
 interface StudySettingProps {
   userName: string;
   searched: [IUserEntity] | [];
-  handleChange: (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
+  handleChange: (value: string) => void;
   handleDelete: () => void;
+  handleAddMember: () => void;
 }
 
 export default function StudySettingBlock({
@@ -32,6 +31,7 @@ export default function StudySettingBlock({
   searched,
   handleChange,
   handleDelete,
+  handleAddMember,
 }: StudySettingProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const openMenu = Boolean(anchorEl);
@@ -67,7 +67,7 @@ export default function StudySettingBlock({
             searched={searched}
             handleChange={handleChange}
           />
-          <Button variant='contained' color='success'>
+          <Button variant='contained' color='success' onClick={handleAddMember}>
             <PersonAdd sx={{ marginRight: '10px' }} />
             스터디원 초대
           </Button>

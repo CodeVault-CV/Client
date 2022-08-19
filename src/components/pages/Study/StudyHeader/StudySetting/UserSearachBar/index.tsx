@@ -5,9 +5,7 @@ import { TextField, Autocomplete, Box } from '@mui/material';
 interface UserSearchBarProps {
   userName: string;
   searched: IUserEntity[];
-  handleChange: (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
+  handleChange: (value: string) => void;
 }
 
 export default function UserSearchBar({
@@ -20,6 +18,9 @@ export default function UserSearchBar({
       autoHighlight
       options={searched}
       getOptionLabel={(option) => option.name}
+      onChange={(_, option: IUserEntity | null) => {
+        option ? handleChange(option.name) : handleChange('');
+      }}
       renderOption={(props, option) => (
         <Box
           component='li'
@@ -43,7 +44,7 @@ export default function UserSearchBar({
           variant='outlined'
           size='small'
           value={userName}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => handleChange(e.target.value)}
         />
       )}
     />
