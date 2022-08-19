@@ -1,5 +1,5 @@
 import IMemberEntity from "./interfaces/iMember";
-import ISessionEntity from "./interfaces/iSession";
+import { ISessionData } from "./interfaces/iSession";
 import IStudyEntity, { IStudyData } from "./interfaces/iStudy";
 
 export default class Study implements IStudyEntity {
@@ -8,7 +8,7 @@ export default class Study implements IStudyEntity {
   private readonly _leader: string;
   private readonly _name: string;
   private readonly _url: string;
-  private _sessions: ISessionEntity[];
+  private _sessions: ISessionData[];
 
   constructor(params: IStudyData) {
     this._id = params.id;
@@ -19,7 +19,7 @@ export default class Study implements IStudyEntity {
     this._sessions = [];
   }
 
-  pushSessions(sessions: ISessionEntity[]) {
+  pushSessions(sessions: ISessionData[]) {
     this._sessions = this._sessions.concat(sessions);
     return this;
   }

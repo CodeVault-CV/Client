@@ -2,10 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import Session from "../../di/Session";
 
 export default function useSession(sessionId: number) {
-  const { isLoading, data } = useQuery(["session", sessionId], () => Session.getSession(sessionId));
+  const { data } = useQuery(["session", sessionId], () => Session.getSession(sessionId), {
+    refetchOnMount: false,
+    suspense: true,
+  });
 
   return {
-    isLoading,
     session: data,
   };
 }

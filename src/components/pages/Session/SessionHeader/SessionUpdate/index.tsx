@@ -5,7 +5,10 @@ import useSessionUpdate from "../../../../../hooks/Session/useSessionUpdate";
 import Loading from "../../../../blocks/Loading";
 import ISessionEntity from "../../../../../core/entities/interfaces/iSession";
 
-export default function SessionUpdateContainer({ id, ...sessionProps }: ISessionEntity) {
+export default function SessionUpdateContainer({
+  id,
+  ...sessionProps
+}: Omit<ISessionEntity, "problems">) {
   const { isLoading, update } = useSessionUpdate(id);
 
   const handleSubmit = (title: string, startDate: Date, endDate: Date) => {

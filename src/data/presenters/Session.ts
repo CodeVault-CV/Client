@@ -23,9 +23,6 @@ class SessionPresenter implements ISessionPresenter {
   async getSession(sessionId: number): Promise<ISessionEntity> {
     return await this.useCase.getSession(sessionId);
   }
-  async getSessionList(studyId: string): Promise<ISessionEntity[]> {
-    return await this.useCase.getSessionList(studyId);
-  }
   async deleteSession(sessionId: number): Promise<boolean> {
     return await this.useCase.deleteSession(sessionId);
   }

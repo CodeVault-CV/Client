@@ -6,15 +6,15 @@ import ProblemCard from "./ProblemCard";
 import useStudyLeader from "../../../../../hooks/Study/useStudyLeader";
 
 type ProblemCardListProps = {
-  problemList: IProblemEntity[];
+  problems?: IProblemEntity[];
   toggleMode: () => void;
 };
 
-export default function ProblemCardList({ problemList, toggleMode }: ProblemCardListProps) {
+export default function ProblemCardList({ problems = [], toggleMode }: ProblemCardListProps) {
   return (
     <>
-      {problemList.length ? (
-        problemList.map((problem) => <ProblemCard key={problem.id} {...problem} />)
+      {problems.length ? (
+        problems.map((problem) => <ProblemCard key={problem.id} {...problem} />)
       ) : (
         <Box
           display="flex"
@@ -25,7 +25,9 @@ export default function ProblemCardList({ problemList, toggleMode }: ProblemCard
             height: 200,
           }}
         >
-          <Typography fontSize={24} fontWeight={600}>스터디장님! 문제를 추가해주세요</Typography>
+          <Typography fontSize={24} fontWeight={600}>
+            스터디장님! 문제를 추가해주세요
+          </Typography>
         </Box>
       )}
       {useStudyLeader() && (

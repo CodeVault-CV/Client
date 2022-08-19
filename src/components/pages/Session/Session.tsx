@@ -2,6 +2,9 @@ import { Box, Stack } from "@mui/material";
 
 import SessionHeader from "./SessionHeader";
 import ProblemGrid from "./ProblemGrid";
+import { Suspense } from "react";
+import { HeaderSkeleton } from "../../blocks/Header";
+import ProblemGridSkeleton from "./ProblemGrid/ProblemGridSkeleton";
 
 type SessionProps = {
   sessionId: number;
@@ -10,9 +13,13 @@ type SessionProps = {
 export default function Session({ sessionId }: SessionProps) {
   return (
     <Stack spacing={3}>
-      <SessionHeader sessionId={sessionId} />
+      <Suspense fallback={<HeaderSkeleton />}>
+        <SessionHeader sessionId={sessionId} />
+      </Suspense>
       <Box>
-        <ProblemGrid sessionId={sessionId} />
+        <Suspense fallback={<ProblemGridSkeleton />}>
+          <ProblemGrid sessionId={sessionId} />
+        </Suspense>
       </Box>
     </Stack>
   );

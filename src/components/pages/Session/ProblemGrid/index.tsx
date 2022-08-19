@@ -1,17 +1,16 @@
 import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 
-import useProblemList from "../../../../hooks/Problem/useProblemList";
 import ProblemEdit from "./ProblemEdit";
 import ProblemCardList from "./ProblemCardList";
-import ProblemGridSkeleton from "./ProblemGridSkeleton";
+import useSession from "../../../../hooks/Session/useSession";
 
 type ProblemGridProps = {
   sessionId: number;
 };
 
 export default function ProblemGridContainer({ sessionId }: ProblemGridProps) {
-  const { isLoading, problemList } = useProblemList(sessionId);
+  const { session } = useSession(sessionId);
   const [editMode, setEditMode] = useState(false);
 
   const toggleMode = () => {
@@ -29,12 +28,14 @@ export default function ProblemGridContainer({ sessionId }: ProblemGridProps) {
         <Divider />
       </Box>
       <Grid container spacing={3}>
-        {isLoading ? (
-          <ProblemGridSkeleton />
-        ) : editMode ? (
-          <ProblemEdit sessionId={sessionId} problemList={problemList} toggleMode={toggleMode} />
+        {editMode ? (
+          <ProblemEdit
+            sessionId={sessionId}
+            prevProblems={session?.problems}
+            toggleMode={toggleMode}
+          />
         ) : (
-          <ProblemCardList problemList={problemList} toggleMode={toggleMode} />
+          <ProblemCardList problems={session?.problems} toggleMode={toggleMode} />
         )}
       </Grid>
     </Box>

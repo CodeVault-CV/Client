@@ -1,5 +1,6 @@
 import IProblemEntity from "../entities/interfaces/iProblem";
 import ISessionEntity from "../entities/interfaces/iSession";
+import Session, { ISessionData } from "../entities/Session";
 import ISessionUseCase from "./interfaces/iSession";
 import IProblemRepository from "./repository-interfaces/iProblem";
 import ISessionRepository from "./repository-interfaces/iSession";
@@ -37,17 +38,30 @@ class SessionUseCase implements ISessionUseCase {
     start: Date,
     end: Date
   ): Promise<ISessionEntity> {
-    return await this.sessionRepo.createSession(studyId, name, start, end);
+    const sessionDTO = await this.sessionRepo.createSession(studyId, name, start, end);
+    return new Session(sessionDTO);
   }
-  async updateSession(session: ISessionEntity): Promise<ISessionEntity> {
-    return await this.sessionRepo.updateSession(session);
+  
+  async updateSession(session: ISessionData): Promise<ISessionEntity> {
+    const [sessionDTO, problemDTOList] = await Promise.all([
+      this.sessionRepo.updateSession(session),
+      this.problemRepo.getProblemList(session.id),
+    ]);
+
+    const sessionEntity = new Session(sessionDTO).pushProblems(problemDTOList);
+    return sessionEntity;
   }
+
   async getSession(sessionId: number): Promise<ISessionEntity> {
-    return await this.sessionRepo.getSession(sessionId);
+    const [sessionDTO, problemDTOList] = await Promise.all([
+      this.sessionRepo.getSession(sessionId),
+      this.problemRepo.getProblemList(sessionId),
+    ]);
+
+    const sessionEntity = new Session(sessionDTO).pushProblems(problemDTOList);
+    return sessionEntity;
   }
-  async getSessionList(studyId: string): Promise<ISessionEntity[]> {
-    return await this.sessionRepo.getSessionList(studyId);
-  }
+
   async deleteSession(sessionId: number): Promise<boolean> {
     return await this.sessionRepo.deleteSession(sessionId);
   }

@@ -21,7 +21,7 @@ function isLessThanDay(time: number) {
   return 0 <= time && time / 3600000 / 24 < 1;
 }
 
-export default function SessionCard({ id, name, start, end }: ISessionEntity) {
+export default function SessionCard({ id, name, start, end }: Omit<ISessionEntity, "problems">) {
   const [time, setTime] = useState(end.getTime() - new Date().getTime());
 
   useEffect(() => {

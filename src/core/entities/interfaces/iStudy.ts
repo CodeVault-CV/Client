@@ -1,5 +1,5 @@
 import IMemberEntity from "./iMember";
-import ISessionEntity from "./iSession";
+import { ISessionData } from "./iSession";
 
 export interface IStudyData {
   id: string;
@@ -11,7 +11,7 @@ export interface IStudyData {
 
 export interface IStudyPreviewEntity {
   id: string;
-  name: string; 
+  name: string;
 }
 
 export default interface IStudyEntity {
@@ -20,5 +20,5 @@ export default interface IStudyEntity {
   leader: string;
   name: string;
   url: string;
-  sessions: ISessionEntity[];
+  sessions: ISessionData[];
 }

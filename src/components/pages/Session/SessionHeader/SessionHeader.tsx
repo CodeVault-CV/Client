@@ -9,17 +9,29 @@ import Wrapper from "../../../blocks/Wrapper";
 import ISessionEntity from "../../../../core/entities/interfaces/iSession";
 
 type SessionHeaderProps = {
-  session: ISessionEntity;
+  session?: ISessionEntity;
   isLeader: boolean;
   handleDelete(event: MouseEvent<HTMLButtonElement>): void;
 };
 
-export default function SessionHeader({ session, isLeader, handleDelete }: SessionHeaderProps) {
+const defaultSession = {
+  id: 0,
+  name: "Unknown",
+  start: new Date(0),
+  end: new Date(0),
+  problems: []
+};
+
+export default function SessionHeader({
+  session = defaultSession,
+  isLeader,
+  handleDelete,
+}: SessionHeaderProps) {
   return (
     <Wrapper>
       <Header title={session.name}>
         <DateLabel start={new Date(session.start)} end={session.end} />
-        {isLeader && 
+        {isLeader && (
           <Box sx={{ display: "flex" }}>
             <SessionUpdate
               id={session.id}
@@ -33,7 +45,7 @@ export default function SessionHeader({ session, isLeader, handleDelete }: Sessi
               </IconButton>
             </Tooltip>
           </Box>
-        }
+        )}
       </Header>
     </Wrapper>
   );
