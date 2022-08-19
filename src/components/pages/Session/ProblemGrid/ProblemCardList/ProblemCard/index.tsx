@@ -32,8 +32,6 @@ export default function ProblemCardContainer({
     Solution.getSolutionList(id)
   );
 
-  console.log(solvedList);
-
   return (
     <ProblemCard
       id={id}

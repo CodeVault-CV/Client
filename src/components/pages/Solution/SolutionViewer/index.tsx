@@ -30,8 +30,6 @@ export default function SolutionViewerContainer({ solutionId }: SolutionViewerCo
     }
   };
 
-  console.log(data, userId);
-
   return (
     <>
       <SolutionViewer solution={data} />

@@ -64,7 +64,7 @@ export default function ProblemCard({
               />
             )}
             <Stack direction="row" spacing={1}>
-              <Button href={problemLink}>도전하기</Button>
+              <Button href={problemLink}>풀러가기</Button>
               <Button onClick={handleClick}>리뷰하기</Button>
             </Stack>
           </Stack>
