@@ -1,4 +1,5 @@
-import { ISolutionEntity, ISolutionDataEntity } from "../../../core/entities/interfaces/iSolution";
+import { ISolvedDTO } from "../../../core/dto/SolvedDTO";
+import { ISolutionEntity } from "../../../core/entities/interfaces/iSolution";
 
 export default interface ISolutionPresenter {
   createSolution(
@@ -8,7 +9,7 @@ export default interface ISolutionPresenter {
     language: string
   ): Promise<ISolutionEntity>;
 
-  getSolutionList(problemId: number): Promise<ISolutionDataEntity[]>;
+  getSolutionList(problemId: number): Promise<ISolvedDTO[]>;
   getSolution(problemId: number): Promise<ISolutionEntity>;
 
   updateSolution(

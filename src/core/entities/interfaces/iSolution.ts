@@ -1,17 +1,18 @@
-export interface ISolutionDataEntity {
+export interface ISolvedEntity {
   solve: boolean;
-  solutionId: number;
+  id: number;
   userId: string;
-  name: string;
+  userName: string;
   imageUrl: string;
   language: string;
 }
 
 export interface ISolutionEntity {
+  id: number;
   code: string;
   readMe: string;
   date: Date;
-  id: string;
-  name: string;
+  userId: string;
+  userName: string;
   language: string;
 }

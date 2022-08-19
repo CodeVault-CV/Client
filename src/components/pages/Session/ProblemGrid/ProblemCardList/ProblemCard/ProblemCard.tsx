@@ -7,19 +7,19 @@ import LinearProgressWithLabel from "../../../../../blocks/LinearProgressWithLab
 import Profile from "../../../../../blocks/Profile";
 import Wrapper from "../../../../../blocks/Wrapper";
 import ProblemLabel from "../../ProblemLabel";
-import { ISolutionDataEntity } from "../../../../../../core/entities/interfaces/iSolution";
+import { ISolvedEntity } from "../../../../../../core/entities/interfaces/iSolution";
 
 type ProblemCardProps = {
   id: number;
   name: string;
   platform: string;
-  solved?: ISolutionDataEntity;
-  solvedList: ISolutionDataEntity[];
+  solved?: ISolvedEntity;
+  solvedList: ISolvedEntity[];
   problemLink: string;
   isLoading: boolean;
 };
 
-const calcSolvedPercentage = (solvedList: ISolutionDataEntity[]) => {
+const calcSolvedPercentage = (solvedList: ISolvedEntity[]) => {
   return (
     (solvedList.reduce((acc: number, cur: { solve: boolean }) => acc + (cur.solve ? 1 : 0), 0) /
       solvedList.length) *
@@ -107,18 +107,27 @@ export default function ProblemCard({
                       }}
                     >
                       <Profile
-                        name={solved?.name || "unknown"}
+                        name={solved?.userName || "unknown"}
                         imageUrl={solved?.imageUrl}
                         color={solved?.solve ? "primary" : "warning"}
-                        onClick={ () => navigate(!solved?.solve ? `./solve/${id}` : `./solution/${solved.solutionId}`)}
+                        onClick={() =>
+                          navigate(
+                            !solved?.solve ? `./solve/${id}` : `./solution/${solved.id}`
+                          )
+                        }
                       />
                     </Box>
-                    {solvedList.map(({ name, imageUrl, solve }) => {
+                    {solvedList.map(({ userName, imageUrl, solve, id }) => {
                       return (
-                        <Box key={name} sx={{ p: 1 }}>
-                          <Tooltip title={name} arrow>
+                        <Box key={userName} sx={{ p: 1 }}>
+                          <Tooltip title={userName} arrow>
                             <Box>
-                              <Profile name={name} imageUrl={imageUrl} disabled={!solve} />
+                              <Profile
+                                name={userName}
+                                imageUrl={imageUrl}
+                                disabled={!solve}
+                                onClick={() => navigate(`./solution/${id}`)}
+                              />
                             </Box>
                           </Tooltip>
                         </Box>

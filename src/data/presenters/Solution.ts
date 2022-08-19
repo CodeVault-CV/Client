@@ -1,4 +1,4 @@
-import { ISolutionEntity, ISolutionDataEntity } from "../../core/entities/interfaces/iSolution";
+import { ISolutionEntity, ISolvedEntity } from "../../core/entities/interfaces/iSolution";
 import ISolutionUseCase from "../../core/useCases/interfaces/iSolution";
 import ISolutionPresenter from "./interfaces/iSolution";
 
@@ -14,7 +14,7 @@ export default class SolutionPresenter implements ISolutionPresenter {
     return await this.useCase.createSolution(problemId, code, readMe, language);
   }
 
-  async getSolutionList(problemId: number): Promise<ISolutionDataEntity[]> {
+  async getSolutionList(problemId: number): Promise<ISolvedEntity[]> {
     return await this.useCase.getSolutionList(problemId);
   }
 

@@ -1,34 +1,34 @@
 export interface ISolvedParams {
   solve: boolean;
-  solutionId: number;
+  id: number;
   userId: string;
-  name: string;
+  userName: string;
   imageUrl: string;
   language: string;
 }
 
 export interface ISolvedDTO {
   solve: boolean;
-  solutionId: number;
+  id: number;
   userId: string;
-  name: string;
+  userName: string;
   imageUrl: string;
   language: string;
 }
 
-export default class SolutionDTO implements ISolvedDTO {
+export default class SolvedDTO implements ISolvedDTO {
   readonly solve: boolean;
-  readonly solutionId: number;
+  readonly id: number;
   readonly userId: string;
-  readonly name: string;
+  readonly userName: string;
   readonly imageUrl: string;
   readonly language: string;
 
   constructor(params: ISolvedParams) {
     this.solve = params.solve;
-    this.solutionId = params.solutionId;
+    this.id = params.id;
     this.userId = params.userId;
-    this.name = params.name;
+    this.userName = params.userName;
     this.imageUrl = params.imageUrl;
     this.language = params.language;
   }

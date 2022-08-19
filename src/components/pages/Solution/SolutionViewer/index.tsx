@@ -30,10 +30,12 @@ export default function SolutionViewerContainer({ solutionId }: SolutionViewerCo
     }
   };
 
+  console.log(data, userId);
+
   return (
     <>
       <SolutionViewer solution={data} />
-      {data?.id === userId && (
+      {data?.userId === userId && (
         <Stack direction="row-reverse" spacing={1}>
           <Button onClick={handleDelete}>삭제하기</Button>
           {/* <Button>수정하기</Button> */}

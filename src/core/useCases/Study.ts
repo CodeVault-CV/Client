@@ -2,7 +2,6 @@ import Study, { StudyListItem } from "../types/Study";
 import IStudyUseCase from "./interfaces/iStudy";
 import IUserEntity from "../entities/interfaces/iUser";
 import HTTP from "../../data/infra/http";
-import { Http } from "@mui/icons-material";
 
 class StudyUseCase implements IStudyUseCase {
   async createStudy(studyName: string, repoName: string): Promise<Study> {

@@ -1,4 +1,6 @@
-import { ISolutionEntity, ISolutionDataEntity } from "../../core/entities/interfaces/iSolution";
+import SolutionDTO from "../../core/dto/SolutionDTO";
+import SolvedDTO, { ISolvedDTO, ISolvedParams } from "../../core/dto/SolvedDTO";
+import { ISolutionEntity } from "../../core/entities/interfaces/iSolution";
 import ISolutionRepository from "../../core/useCases/repository-interfaces/iSolution";
 import HTTP from "../infra/http";
 
@@ -10,16 +12,18 @@ export default class SolutionRepository implements ISolutionRepository {
     language: string
   ): Promise<ISolutionEntity> {
     return await HTTP.post(`/solution`, { problemId, code, readMe, language }).then(
-      ({ data }) => data
+      ({ data }) => new SolutionDTO(data)
     );
   }
 
-  async getSolutionList(problemId: number): Promise<ISolutionDataEntity[]> {
-    return await HTTP.get(`/solution/list/${problemId}`).then(({ data }) => data);
+  async getSolutionList(problemId: number): Promise<ISolvedDTO[]> {
+    return await HTTP.get(`/solution/list/${problemId}`).then(({ data }) =>
+      data.map((el: ISolvedParams) => new SolvedDTO(el))
+    );
   }
 
   async getSolution(problemId: number): Promise<ISolutionEntity> {
-    return await HTTP.get(`/solution/${problemId}`).then(({ data }) => data);
+    return await HTTP.get(`/solution/${problemId}`).then(({ data }) => new SolutionDTO(data));
   }
 
   async updateSolution(

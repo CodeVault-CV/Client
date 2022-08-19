@@ -13,7 +13,9 @@ export default class SessionRepository implements ISessionRepository {
   }
 
   async updateSession(session: ISessionParams): Promise<ISessionDTO> {
-    return await HTTP.put(`/session/${session.id}`, session).then(({ data }) => new SessionDTO(data));
+    return await HTTP.put(`/session/${session.id}`, session).then(
+      ({ data }) => new SessionDTO(data)
+    );
   }
 
   async getSession(sessionId: number): Promise<ISessionDTO> {
