@@ -1,4 +1,4 @@
-import { useState, MouseEvent, ChangeEvent } from 'react';
+import { useState, MouseEvent } from 'react';
 import styled from '@emotion/styled';
 import { Menu } from '@mui/material';
 import { Settings, PersonAdd } from '@mui/icons-material';

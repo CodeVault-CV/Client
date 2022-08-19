@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import StudySetting from './StudySetting';
@@ -20,6 +20,10 @@ export default function StudySettingContainer({ id }: StudySettingProps) {
   const [searched, setSearched] = useState<[IUserEntity] | []>([]);
 
   const searchUser = (debounce((name: string) => {
+    if (!name) {
+      setSearched([]);
+      return;
+    }
     Study.searchStudyMember(id, name).then((data) => {
       setSearched(data)
     })
@@ -35,7 +39,13 @@ export default function StudySettingContainer({ id }: StudySettingProps) {
   };
 
   const handleAddMember = () => {
-    Study.addStudyMember(id, userName);
+    Study.addStudyMember(id, userName).then(({ status, message }) => {
+      if (status === 200) {
+        alert(`${userName} 님에게 초대 메일을 전송했습니다.`)
+        return;
+      }
+      alert(message);
+    });
   }
 
   return (

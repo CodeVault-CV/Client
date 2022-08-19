@@ -1,4 +1,3 @@
-import { ChangeEvent } from 'react';
 import IUserEntity from '../../../../../../core/entities/interfaces/iUser';
 import { TextField, Autocomplete, Box } from '@mui/material';
 
@@ -8,11 +7,7 @@ interface UserSearchBarProps {
   handleChange: (value: string) => void;
 }
 
-export default function UserSearchBar({
-  userName,
-  searched,
-  handleChange,
-}: UserSearchBarProps) {
+export default function UserSearchBar({ userName, searched, handleChange }: UserSearchBarProps) {
   return (
     <Autocomplete
       autoHighlight
