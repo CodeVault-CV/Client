@@ -2,15 +2,15 @@ import { Box, Grid, SelectChangeEvent } from "@mui/material";
 import { useState, ChangeEvent, MouseEvent } from "react";
 import useProblemEdit from "../../../../../hooks/Problem/useProblemEdit";
 
-import Problem from "../../../../../core/types/Problem";
 import Button from "../../../../atoms/Button";
 import Loading from "../../../../blocks/Loading";
 import ProblemAddForm from "./ProblemAddForm";
 import ProblemEditCard from "./ProblemEditCard";
+import IProblemEntity from "../../../../../core/entities/interfaces/iProblem";
 
 type ProblemEditProps = {
   sessionId: number;
-  problemList: Problem[];
+  problemList: IProblemEntity[];
   toggleMode: () => void;
 };
 
@@ -22,9 +22,7 @@ export interface FormState {
 
 export default function ProblemEdit({ sessionId, problemList, toggleMode }: ProblemEditProps) {
   const { isLoading, edit } = useProblemEdit(sessionId, problemList, () => toggleMode());
-  const [problems, setProblems] = useState(
-    problemList.map((problem) => ({ ...problem, isNew: false }))
-  );
+  const [problems, setProblems] = useState([...problemList]);
   const [problem, setProblem] = useState<FormState>({
     platform: "programmers",
     number: "",
@@ -40,8 +38,8 @@ export default function ProblemEdit({ sessionId, problemList, toggleMode }: Prob
   };
 
   const handleSubmit = (event: MouseEvent<HTMLButtonElement>) => {
-    const pid = Number(`${new Date().getTime()}${problem.number}`);
-    setProblems((prev) => [{ id: pid, ...problem, isNew: true }, ...prev]);
+    const pid = -Number(`${new Date().getTime()}${problem.number}`);
+    setProblems((prev) => [...prev, { id: pid, ...problem }]);
     setProblem({
       platform: "programmers",
       number: "",

@@ -1,11 +1,11 @@
 import EditIcon from "@mui/icons-material/Edit";
 
-import Session from "../../../../../core/types/Session";
 import SessionEditor from "../../../../blocks/SessionEditor";
 import useSessionUpdate from "../../../../../hooks/Session/useSessionUpdate";
 import Loading from "../../../../blocks/Loading";
+import ISessionEntity from "../../../../../core/entities/interfaces/iSession";
 
-export default function SessionUpdateContainer({ id, ...sessionProps }: Session) {
+export default function SessionUpdateContainer({ id, ...sessionProps }: ISessionEntity) {
   const { isLoading, update } = useSessionUpdate(id);
 
   const handleSubmit = (title: string, startDate: Date, endDate: Date) => {

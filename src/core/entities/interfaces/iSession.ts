@@ -1,4 +1,4 @@
-export default interface Session {
+export default interface ISessionEntity {
   id: number;
   name: string;
   start: Date;

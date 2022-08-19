@@ -1,11 +1,11 @@
 import { Navigate, useParams } from "react-router-dom";
-import SolutionViewer from "./SolutionViewer";
+import SolutionPage from "./Solution";
 
-export default function SolutionContainer() {
+export default function SolutionPageContainer() {
   const { solutionId } = useParams();
   if (solutionId === undefined) {
     return <Navigate to="/notfound" replace={true} />;
   }
 
-  return <SolutionViewer id={+solutionId}/>;
+  return <SolutionPage solutionId={+solutionId}/>;
 }

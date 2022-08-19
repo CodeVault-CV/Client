@@ -14,6 +14,12 @@ API.interceptors.request.use((config: AxiosRequestConfig) => {
   if (token !== null) {
     config.headers["Authorization"] = `Bearer ${token}`;
   }
+
+  const studyId = new URL(window.location.href).pathname.split("/")[2];
+  if (studyId) {
+    config.headers["Study"] = studyId;
+  }
+
   return config;
 });
 
