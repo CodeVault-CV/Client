@@ -17,7 +17,7 @@ export default function StudySettingContainer({ id }: StudySettingProps) {
   });
 
   const [userName, setUserName] = useState<string>('');
-  const [searched, setSearched] = useState<[IUserEntity] | []>([]);
+  const [searched, setSearched] = useState<IUserEntity[]>([]);
 
   const searchUser = (debounce((name: string) => {
     if (!name) {
@@ -25,7 +25,7 @@ export default function StudySettingContainer({ id }: StudySettingProps) {
       return;
     }
     Study.searchStudyMember(id, name).then((data) => {
-      setSearched(data)
+      setSearched(data);
     })
   }))
 

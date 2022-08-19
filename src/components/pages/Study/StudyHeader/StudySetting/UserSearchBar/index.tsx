@@ -13,8 +13,8 @@ export default function UserSearchBar({ userName, searched, handleChange }: User
       autoHighlight
       options={searched}
       getOptionLabel={(option) => option.name}
-      onChange={(_, option: IUserEntity | null) => {
-        option ? handleChange(option.name) : handleChange('');
+      onChange={(_, value: IUserEntity | null) => {
+        value ? handleChange(value.name) : handleChange('');
       }}
       renderOption={(props, option) => (
         <Box

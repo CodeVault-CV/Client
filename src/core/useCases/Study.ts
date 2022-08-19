@@ -27,7 +27,7 @@ class StudyUseCase implements IStudyUseCase {
     return await HTTP.deleteRequest(`/study/${studyId}`).then(({ status }) => status === 200);
   }
 
-  async searchStudyMember(studyId: string, userName: string): Promise<[IUserEntity]> {
+  async searchStudyMember(studyId: string, userName: string): Promise<IUserEntity[]> {
     return await HTTP.get(`/study/member/list?name=${userName}&id=${studyId}`).then(({ data }) => data);
   }
 
