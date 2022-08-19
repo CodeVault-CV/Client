@@ -21,6 +21,9 @@ class StudyPresenter implements IStudyPresenter {
   async deleteStudy(studyId: string): Promise<boolean> {
     return await this.useCase.deleteStudy(studyId);
   }
+  async checkStudyLeader(studyId: string): Promise<boolean> {
+    return await this.useCase.checkStudyLeader(studyId);
+  }
   async searchStudyMember(studyId: string, userName: string): Promise<IUserEntity[]> {
     return await this.useCase.searchStudyMember(studyId, userName);
   }

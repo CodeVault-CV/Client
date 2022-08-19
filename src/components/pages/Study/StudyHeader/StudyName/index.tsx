@@ -3,6 +3,7 @@ import { useState } from 'react';
 import StudyName from './StudyName';
 import debounce from '../../../../../utils/debounce';
 import Study from "../../../../../di/Study";
+import useStudyLeader from "../../../../../hooks/Study/useStudyLeader"
 
 interface StudyNameProps {
   id: string;
@@ -47,6 +48,7 @@ export default function StudyNameContainer({ id, name }: StudyNameProps) {
   return (
     <StudyName
       studyName={studyName}
+      isLeader={useStudyLeader()}
       isTextFiled={isTextFiled}
       errorMessage={errorMessage}
       handleChange={handleChange}

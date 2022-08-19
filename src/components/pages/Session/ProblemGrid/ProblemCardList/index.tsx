@@ -3,6 +3,7 @@ import IProblemEntity from "../../../../../core/entities/interfaces/iProblem";
 
 import Button from "../../../../atoms/Button";
 import ProblemCard from "./ProblemCard";
+import useStudyLeader from "../../../../../hooks/Study/useStudyLeader"
 
 type ProblemCardListProps = {
   problemList: IProblemEntity[];
@@ -15,11 +16,13 @@ export default function ProblemCardList({ problemList, toggleMode }: ProblemCard
       {problemList.map((problem) => (
         <ProblemCard key={problem.id} {...problem} />
       ))}
-      <Grid item xs={12}>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Button onClick={toggleMode}>편집하기</Button>
-        </Box>
-      </Grid>
+      {useStudyLeader() &&
+        <Grid item xs={12}>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Button onClick={toggleMode}>편집하기</Button>
+          </Box>
+        </Grid>
+      }
     </>
   );
 }
