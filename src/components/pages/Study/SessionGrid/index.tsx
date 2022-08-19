@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 import useSessionList from "../../../../hooks/Session/useSessionList";
 import SessionCard from "./SessionCard";
 import SessionGrid from "./SessionGrid";
@@ -11,9 +12,25 @@ export default function SessionGridContainer({ studyId }: SessionGridProps) {
 
   return (
     <SessionGrid>
-      {sessionList.map(({ id, ...sessionProps }) => (
-        <SessionCard key={id} id={id} {...sessionProps} />
-      ))}
+      {sessionList.length ? (
+        sessionList.map(({ id, ...sessionProps }) => (
+          <SessionCard key={id} id={id} {...sessionProps} />
+        ))
+      ) : (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          sx={{
+            width: "100%",
+            height: 200,
+          }}
+        >
+          <Typography fontSize={24} fontWeight={600}>
+            스터디장님! 세션을 추가해주세요
+          </Typography>
+        </Box>
+      )}
     </SessionGrid>
   );
 }
