@@ -1,4 +1,4 @@
-export default interface IUserEntity {
+export default interface IMemberEntity {
   id: string;
   name: string;
   imageUrl: string;

@@ -6,7 +6,7 @@ import { Settings, PersonAdd } from '@mui/icons-material';
 import Button from '../../../../atoms/Button';
 import UserSearchBar from './UserSearchBar';
 import StudyDeleteModal from './StudyDeleteModal';
-import IUserEntity from '../../../../../core/entities/interfaces/iUser';
+import IMemberEntity from '../../../../../core/entities/interfaces/iMember';
 
 const MemberAdderWrapper = styled.div`
   padding: 10px 20px;
@@ -20,7 +20,7 @@ const MemberAdderWrapper = styled.div`
 
 interface StudySettingProps {
   userName: string;
-  searched: IUserEntity[];
+  searched: IMemberEntity[];
   handleChange: (value: string) => void;
   handleDelete: () => void;
   handleAddMember: () => void;

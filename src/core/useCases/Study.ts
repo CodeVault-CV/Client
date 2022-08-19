@@ -1,41 +1,63 @@
-import Study, { StudyListItem } from "../types/Study";
 import IStudyUseCase from "./interfaces/iStudy";
-import IUserEntity from "../entities/interfaces/iUser";
-import HTTP from "../../data/infra/http";
+import IMemberEntity from "../entities/interfaces/iMember";
+import IStudyRepository from "./repository-interfaces/iStudy";
+import IStudyEntity, { IStudyPreviewEntity } from "../entities/interfaces/iStudy";
+import ISessionRepository from "./repository-interfaces/iSession";
+import Study from "../entities/Study";
 
 class StudyUseCase implements IStudyUseCase {
-  async createStudy(studyName: string, repoName: string): Promise<Study> {
-    return await HTTP.post(`/study`, { studyName: studyName, repoName: repoName }).then(
-      ({ data }) => data as Study
-    );
+  constructor(
+    private readonly studyRepo: IStudyRepository,
+    private readonly sessionRepo: ISessionRepository
+  ) {}
+
+  async createStudy(studyName: string, repoName: string): Promise<IStudyEntity> {
+    const studyDTO = await this.studyRepo.createStudy(studyName, repoName);
+    const studyEntity = new Study(studyDTO);
+    return studyEntity;
   }
 
-  async updateStudy(study: { id: string; name: string }): Promise<Study> {
-    return await HTTP.put("/study", study).then(({ data }) => data as Study);
+  async updateStudy(study: { id: string; name: string }): Promise<IStudyEntity> {
+    const [studyDTO, sessionDTOList] = await Promise.all([
+      this.studyRepo.updateStudy(study),
+      this.sessionRepo.getSessionList(study.id),
+    ]);
+
+    const studyEntity = new Study(studyDTO).pushSessions(sessionDTOList);
+    return studyEntity;
   }
 
-  async getStudy(studyId: string): Promise<Study> {
-    return await HTTP.get(`/study/${studyId}`).then(({ data }) => data as Study);
+  async getStudy(studyId: string): Promise<IStudyEntity> {
+    const [studyDTO, sessionDTOList] = await Promise.all([
+      this.studyRepo.getStudy(studyId),
+      this.sessionRepo.getSessionList(studyId),
+    ]);
+
+    const studyEntity = new Study(studyDTO).pushSessions(sessionDTOList);
+    return studyEntity;
   }
 
-  async getStudyList(): Promise<StudyListItem[]> {
-    return await HTTP.get(`/study/list`).then(({ data }) => data as StudyListItem[]);
+  async getStudyList(): Promise<IStudyPreviewEntity[]> {
+    return await this.studyRepo.getStudyList();
   }
 
   async deleteStudy(studyId: string): Promise<boolean> {
-    return await HTTP.deleteRequest(`/study/${studyId}`).then(({ status }) => status === 200);
+    return await this.studyRepo.deleteStudy(studyId);
   }
 
   async checkStudyLeader(studyId: string): Promise<boolean> {
-    return await HTTP.get(`/study/leader/${studyId}`).then(({ data }) => data);
+    return await this.studyRepo.checkStudyLeader(studyId);
   }
 
-  async searchStudyMember(studyId: string, userName: string): Promise<IUserEntity[]> {
-    return await HTTP.get(`/study/member/list?name=${userName}&id=${studyId}`).then(({ data }) => data);
+  async searchStudyMember(studyId: string, userName: string): Promise<IMemberEntity[]> {
+    return await this.studyRepo.searchStudyMember(studyId, userName);
   }
 
-  async addStudyMember(studyId: string, userName: string):  Promise<{ status: number, message: string }> {
-    return await HTTP.post(`/study/member`, { studyId: studyId, member: userName });
+  async addStudyMember(
+    studyId: string,
+    userName: string
+  ): Promise<{ status: number; message: string }> {
+    return await this.studyRepo.addStudyMember(studyId, userName);
   }
 }
 

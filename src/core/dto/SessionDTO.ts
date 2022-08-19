@@ -21,7 +21,7 @@ export default class SessionDTO implements ISessionDTO {
   constructor(params: ISessionParams) {
     this.id = params.id;
     this.name = params.name;
-    this.start = params.start;
-    this.end = params.end;
+    this.start = new Date(params.start);
+    this.end = new Date(params.end);
   }
 }

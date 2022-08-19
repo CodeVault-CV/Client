@@ -2,14 +2,13 @@ import styled from "@emotion/styled";
 import { Stack, Button } from "@mui/material";
 import { GitHub } from "@mui/icons-material";
 
-import Header, { HeaderSkeleton } from "../../../blocks/Header";
+import Header from "../../../blocks/Header";
 import Profile from "../../../blocks/Profile";
 import Wrapper from "../../../blocks/Wrapper";
 import StudyName from "./StudyName";
 import StudySetting from "./StudySetting";
-import { useQuery } from "@tanstack/react-query";
-import Study from "../../../../di/Study";
 import useStudyLeader from "../../../../hooks/Study/useStudyLeader";
+import useStudy from "../../../../hooks/Study/useStudy";
 
 const EndBlockWrapper = styled.div`
   display: flex;
@@ -39,26 +38,20 @@ type StudyHeaderProps = {
 };
 
 export default function StudyHeader({ studyId }: StudyHeaderProps) {
-  const { isLoading, data: study } = useQuery(["study", studyId], () =>
-    Study.getStudy(studyId)
-  );
+  const { study } = useStudy(studyId);
 
   return (
     <Wrapper>
-      {isLoading ? (
-        <HeaderSkeleton />
-      ) : (
-        <Header
-          title={<StudyName id={studyId} name={study?.name ?? "unknown"} />}
-          endBlock={<HeaderEndBlock id={studyId} url={study?.url ?? "unknown"} />}
-        >
-          <Stack direction="row" spacing={4} sx={{ marginTop: 1 }}>
-            {study?.members.map(({ id, name, imageUrl, githubUrl }) => (
-              <Profile key={id} name={name} imageUrl={imageUrl} href={githubUrl} />
-            ))}
-          </Stack>
-        </Header>
-      )}
+      <Header
+        title={<StudyName id={studyId} name={study?.name ?? "unknown"} />}
+        endBlock={<HeaderEndBlock id={studyId} url={study?.url ?? "unknown"} />}
+      >
+        <Stack direction="row" spacing={4} sx={{ marginTop: 1 }}>
+          {study?.members.map(({ id, name, imageUrl, githubUrl }) => (
+            <Profile key={id} name={name} imageUrl={imageUrl} href={githubUrl} />
+          ))}
+        </Stack>
+      </Header>
     </Wrapper>
   );
 }

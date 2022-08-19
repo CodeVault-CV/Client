@@ -10,23 +10,23 @@ function formatTime(date: Date) {
   const leftDate = Math.floor(date.getTime() / 3600000 / 24);
   if (leftDate > 0) return "D - " + String(leftDate);
 
-  const hour = String(Math.floor(date.getTime() / 3600000)).padStart(2, '0');
-  const min = String(Math.floor(date.getTime() / 60000) % 60).padStart(2, '0');
-  const sec = String(Math.floor(date.getTime() / 1000) % 60).padStart(2, '0');
+  const hour = String(Math.floor(date.getTime() / 3600000)).padStart(2, "0");
+  const min = String(Math.floor(date.getTime() / 60000) % 60).padStart(2, "0");
+  const sec = String(Math.floor(date.getTime() / 1000) % 60).padStart(2, "0");
 
   return `${hour}:${min}:${sec}`;
 }
 
 function isLessThanDay(time: number) {
-  return (0 <= time && time / 3600000 / 24 < 1);
+  return 0 <= time && time / 3600000 / 24 < 1;
 }
 
 export default function SessionCard({ id, name, start, end }: ISessionEntity) {
   const [time, setTime] = useState(end.getTime() - new Date().getTime());
 
   useEffect(() => {
-    if(!isLessThanDay(time)) return;
-    
+    if (!isLessThanDay(time)) return;
+
     const interval = setInterval(() => {
       setTime(end.getTime() - new Date().getTime());
     }, 1000);
@@ -37,7 +37,7 @@ export default function SessionCard({ id, name, start, end }: ISessionEntity) {
   }, [end, time]);
 
   return (
-    <Grid item md={3} xs={6}>
+    <Grid item md={4} xs={6}>
       <Wrapper>
         <Stack spacing={1}>
           <Typography variant="h4" fontWeight={600}>

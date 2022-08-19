@@ -5,6 +5,7 @@ import StudyHeader from "./StudyHeader";
 import StudyMiddleBar from "./StudyMiddleBar";
 import SessionGrid from "./SessionGrid";
 import SessionGridSkeleton from "./SessionGrid/SessionGridSkeleton";
+import { HeaderSkeleton } from "../../blocks/Header";
 
 interface StudyProps {
   studyId: string;
@@ -13,7 +14,9 @@ interface StudyProps {
 export default function Study({ studyId }: StudyProps) {
   return (
     <Stack spacing={3}>
-      <StudyHeader studyId={studyId} />
+      <Suspense fallback={<HeaderSkeleton />}>
+        <StudyHeader studyId={studyId} />
+      </Suspense>
       <StudyMiddleBar studyId={studyId} />
       <Suspense fallback={<SessionGridSkeleton />}>
         <SessionGrid studyId={studyId} />

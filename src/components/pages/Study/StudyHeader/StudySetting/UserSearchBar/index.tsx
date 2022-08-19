@@ -1,9 +1,9 @@
-import IUserEntity from '../../../../../../core/entities/interfaces/iUser';
+import IMemberEntity from '../../../../../../core/entities/interfaces/iMember';
 import { TextField, Autocomplete, Box } from '@mui/material';
 
 interface UserSearchBarProps {
   userName: string;
-  searched: IUserEntity[];
+  searched: IMemberEntity[];
   handleChange: (value: string) => void;
 }
 
@@ -16,7 +16,7 @@ export default function UserSearchBar({ userName, searched, handleChange }: User
       getOptionLabel={(option) => 
         typeof option === 'string' ? option : option.name
       }
-      onChange={(_, value: IUserEntity | string | null) => {
+      onChange={(_, value: IMemberEntity | string | null) => {
         value 
           ? handleChange(typeof value === 'string' ? value : value.name) 
           : handleChange('');

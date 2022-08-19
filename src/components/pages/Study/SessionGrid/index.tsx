@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import useSessionList from "../../../../hooks/Session/useSessionList";
+import useStudy from "../../../../hooks/Study/useStudy";
 import SessionCard from "./SessionCard";
 import SessionGrid from "./SessionGrid";
 
@@ -8,12 +8,12 @@ type SessionGridProps = {
 };
 
 export default function SessionGridContainer({ studyId }: SessionGridProps) {
-  const { sessionList = [] } = useSessionList(studyId);
+  const { study } = useStudy(studyId);
 
   return (
     <SessionGrid>
-      {sessionList.length ? (
-        sessionList.map(({ id, ...sessionProps }) => (
+      {study?.sessions.length ? (
+        study.sessions.map(({ id, ...sessionProps }) => (
           <SessionCard key={id} id={id} {...sessionProps} />
         ))
       ) : (
