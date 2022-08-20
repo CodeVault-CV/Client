@@ -69,8 +69,14 @@ export default function ProblemEdit({
           handleSubmit={handleSubmit}
         />
       </Grid>
-      {problems.map((problem) => (
-        <ProblemEditCard key={problem.id} {...problem} onClick={handleDelete(problem.id)} />
+      {problems.map(({ id, name, number, platform }) => (
+        <ProblemEditCard
+          key={id}
+          name={name}
+          number={number}
+          platform={platform}
+          onClick={handleDelete(id)}
+        />
       ))}
       <Grid item xs={12}>
         <Box sx={{ display: "flex", justifyContent: "center" }}>

@@ -78,14 +78,14 @@ export default function ProblemCard({ problem }: ProblemCardProps) {
                   sx={{
                     border: 1,
                     borderRadius: 1,
-                    borderColor: user ? "primary.main" : "error.main",
+                    borderColor: user.solve ? "primary.main" : "error.main",
                     p: 1,
                   }}
                 >
                   <Profile
                     name={user.userName || "unknown"}
                     imageUrl={user.imageUrl}
-                    color={user.solve ? "primary" : "warning"}
+                    color={user.solve ? "primary" : "error"}
                     onClick={() =>
                       navigate(!user.solve ? `./solve/${problem.id}` : `./solution/${user.id}`)
                     }
