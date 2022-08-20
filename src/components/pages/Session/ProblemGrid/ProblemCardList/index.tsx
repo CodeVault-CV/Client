@@ -14,7 +14,7 @@ export default function ProblemCardList({ problems = [], toggleMode }: ProblemCa
   return (
     <>
       {problems.length ? (
-        problems.map((problem) => <ProblemCard key={problem.id} {...problem} />)
+        problems.map((problem) => <ProblemCard key={problem.id} problem={problem} />)
       ) : (
         <Box
           display="flex"

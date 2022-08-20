@@ -1,18 +1,19 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import IProblemEntity from "../../core/entities/interfaces/iProblem";
+import { IProblemData } from "../../core/entities/interfaces/iProblem";
 import Session from "../../di/Session";
 
 export default function useProblemEdit(
   sessionId: number,
-  problemList: IProblemEntity[],
+  problemList: Omit<IProblemData, "url">[],
   successCallback?: (...props: any[]) => void
 ) {
   const queryClient = useQueryClient();
   const { isLoading, mutate } = useMutation(
-    (problems: IProblemEntity[]) => Session.updateProblemList(sessionId, problemList, problems),
+    (problems: Omit<IProblemData, "url">[]) =>
+      Session.updateProblemList(sessionId, problemList, problems),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["problemList", sessionId]);
+        queryClient.invalidateQueries(["session", sessionId]);
         successCallback?.();
       },
     }

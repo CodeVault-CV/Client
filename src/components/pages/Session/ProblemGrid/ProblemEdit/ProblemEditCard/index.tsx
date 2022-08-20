@@ -4,14 +4,14 @@ import CancelIcon from "@mui/icons-material/Cancel";
 
 import Wrapper from "../../../../../blocks/Wrapper";
 import ProblemLabel from "../../ProblemLabel";
-import IProblemEntity from "../../../../../../core/entities/interfaces/iProblem";
+import { IProblemData } from "../../../../../../core/entities/interfaces/iProblem";
 
 export default function ProblemEditCard({
   name,
   number,
   platform,
   onClick,
-}: IProblemEntity & {
+}: Omit<IProblemData, "id" | "url"> & {
   onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }) {
   return (

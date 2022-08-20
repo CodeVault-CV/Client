@@ -1,5 +1,5 @@
 import { ISessionParams } from "../../dto/SessionDTO";
-import IProblemEntity from "../../entities/interfaces/iProblem";
+import { IProblemData } from "../../entities/interfaces/iProblem";
 import ISessionEntity from "../../entities/interfaces/iSession";
 
 export default interface ISessionUseCase {
@@ -8,10 +8,9 @@ export default interface ISessionUseCase {
   getSession(sessionId: number): Promise<ISessionEntity>;
   deleteSession(sessionId: number): Promise<boolean>;
 
-  getProblemList(sessionId: number): Promise<IProblemEntity[]>;
   updateProblemList(
     sessionId: number,
-    prev: IProblemEntity[],
-    cur: IProblemEntity[]
+    prev: Omit<IProblemData, "url">[],
+    cur: Omit<IProblemData, "url">[]
   ): Promise<boolean>;
 }

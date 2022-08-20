@@ -8,7 +8,7 @@ export default function useCreateSession(studyId: string) {
       Session.createSession(studyId, name, start, end),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["sessionList", studyId]);
+        queryClient.invalidateQueries(["study", studyId]);
       },
     }
   );

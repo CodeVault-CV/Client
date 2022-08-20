@@ -1,23 +1,23 @@
-import IProblemEntity from "../entities/interfaces/iProblem";
+import { IProblemData } from "../entities/interfaces/iProblem";
 import ISessionEntity from "../entities/interfaces/iSession";
+import Problem from "../entities/Problem";
 import Session, { ISessionData } from "../entities/Session";
 import ISessionUseCase from "./interfaces/iSession";
 import IProblemRepository from "./repository-interfaces/iProblem";
 import ISessionRepository from "./repository-interfaces/iSession";
+import ISolutionRepository from "./repository-interfaces/iSolution";
 
 class SessionUseCase implements ISessionUseCase {
   constructor(
     private readonly sessionRepo: ISessionRepository,
-    private readonly problemRepo: IProblemRepository
+    private readonly problemRepo: IProblemRepository,
+    private readonly solutionRepo: ISolutionRepository
   ) {}
 
-  async getProblemList(sessionId: number): Promise<IProblemEntity[]> {
-    return await this.problemRepo.getProblemList(sessionId);
-  }
   async updateProblemList(
     sessionId: number,
-    prev: IProblemEntity[],
-    cur: IProblemEntity[]
+    prev: Omit<IProblemData, "url">[],
+    cur: Omit<IProblemData, "url">[]
   ): Promise<boolean> {
     const newProblems = cur.filter((problem) => problem.id < 0);
 
@@ -41,14 +41,23 @@ class SessionUseCase implements ISessionUseCase {
     const sessionDTO = await this.sessionRepo.createSession(studyId, name, start, end);
     return new Session(sessionDTO);
   }
-  
+
   async updateSession(session: ISessionData): Promise<ISessionEntity> {
     const [sessionDTO, problemDTOList] = await Promise.all([
       this.sessionRepo.updateSession(session),
       this.problemRepo.getProblemList(session.id),
     ]);
 
-    const sessionEntity = new Session(sessionDTO).pushProblems(problemDTOList);
+    const problemEntities = await Promise.all(
+      problemDTOList.map((problem) =>
+        this.solutionRepo.getSolutionList(problem.id).then((solvedMembers) => {
+          const problemEntity = new Problem(problem).pushSolvedMembers(solvedMembers);
+          return problemEntity;
+        })
+      )
+    );
+
+    const sessionEntity = new Session(sessionDTO).pushProblems(problemEntities);
     return sessionEntity;
   }
 
@@ -58,7 +67,16 @@ class SessionUseCase implements ISessionUseCase {
       this.problemRepo.getProblemList(sessionId),
     ]);
 
-    const sessionEntity = new Session(sessionDTO).pushProblems(problemDTOList);
+    const problemEntities = await Promise.all(
+      problemDTOList.map((problem) =>
+        this.solutionRepo.getSolutionList(problem.id).then((solvedMembers) => {
+          const problemEntity = new Problem(problem).pushSolvedMembers(solvedMembers);
+          return problemEntity;
+        })
+      )
+    );
+
+    const sessionEntity = new Session(sessionDTO).pushProblems(problemEntities);
     return sessionEntity;
   }
 

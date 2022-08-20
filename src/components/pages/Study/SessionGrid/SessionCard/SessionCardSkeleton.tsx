@@ -3,7 +3,7 @@ import Wrapper from "../../../../blocks/Wrapper";
 
 export default function SessionCardSkeleton() {
   return (
-    <Grid item md={3} xs={6}>
+    <Grid item md={4} xs={6}>
       <Wrapper>
         <Stack spacing={1}>
           <Skeleton>

@@ -10,7 +10,7 @@ import IProblemEntity from "../../../../../core/entities/interfaces/iProblem";
 
 type ProblemEditProps = {
   sessionId: number;
-  prevProblems?: IProblemEntity[];
+  prevProblems?: Omit<IProblemEntity, "solvedMembers" | "url">[];
   toggleMode: () => void;
 };
 
@@ -20,7 +20,11 @@ export interface FormState {
   name: string;
 }
 
-export default function ProblemEdit({ sessionId, prevProblems = [], toggleMode }: ProblemEditProps) {
+export default function ProblemEdit({
+  sessionId,
+  prevProblems = [],
+  toggleMode,
+}: ProblemEditProps) {
   const { isLoading, edit } = useProblemEdit(sessionId, prevProblems, () => toggleMode());
   const [problems, setProblems] = useState([...prevProblems]);
   const [problem, setProblem] = useState<FormState>({
