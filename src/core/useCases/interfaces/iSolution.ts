@@ -1,5 +1,5 @@
 import IReviewEntity from "../../entities/interfaces/iReview";
-import { ISolutionEntity, ISolvedEntity } from "../../entities/interfaces/iSolution";
+import ISolutionEntity, { ISolvedEntity } from "../../entities/interfaces/iSolution";
 
 export default interface ISolutionUseCase {
   createSolution(
@@ -18,7 +18,6 @@ export default interface ISolutionUseCase {
   ): Promise<ISolutionEntity>;
   deleteSolution(solutionId: number): Promise<boolean>;
 
-  getReviews(solutionId: number): Promise<IReviewEntity[]>;
   createReview(solutionId: number, content: string): Promise<IReviewEntity>;
   updateReview(reviewId: number, content: string): Promise<IReviewEntity>;
   deleteReview(reviewId: number): Promise<boolean>;

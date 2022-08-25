@@ -1,4 +1,4 @@
-import { ISolutionEntity, ISolvedEntity } from "../../core/entities/interfaces/iSolution";
+import ISolutionEntity, { ISolvedEntity } from "../../core/entities/interfaces/iSolution";
 import ISolutionUseCase from "../../core/useCases/interfaces/iSolution";
 import ISolutionPresenter from "./interfaces/iSolution";
 

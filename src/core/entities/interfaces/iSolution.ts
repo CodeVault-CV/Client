@@ -1,3 +1,5 @@
+import IReviewEntity from "./iReview";
+
 export interface ISolvedEntity {
   solve: boolean;
   id: number;
@@ -7,7 +9,7 @@ export interface ISolvedEntity {
   language: string;
 }
 
-export interface ISolutionEntity {
+export interface ISolutionData {
   id: number;
   code: string;
   readMe: string;
@@ -15,4 +17,15 @@ export interface ISolutionEntity {
   userId: string;
   userName: string;
   language: string;
+}
+
+export default interface ISolutionEntity {
+  id: number;
+  code: string;
+  readMe: string;
+  date: Date;
+  userId: string;
+  userName: string;
+  language: string;
+  reviews: IReviewEntity[];
 }

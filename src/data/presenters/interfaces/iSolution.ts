@@ -1,5 +1,5 @@
 import { ISolvedDTO } from "../../../core/dto/SolvedDTO";
-import { ISolutionEntity } from "../../../core/entities/interfaces/iSolution";
+import ISolutionEntity from "../../../core/entities/interfaces/iSolution";
 
 export default interface ISolutionPresenter {
   createSolution(
