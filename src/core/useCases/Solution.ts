@@ -1,5 +1,5 @@
 import IReviewEntity from "../entities/interfaces/iReview";
-import ISolutionEntity, { ISolvedEntity } from "../entities/interfaces/iSolution";
+import ISolutionEntity from "../entities/interfaces/iSolution";
 import Solution from "../entities/Solution";
 import ISolutionUseCase from "./interfaces/iSolution";
 import IReviewRepository from "./repository-interfaces/iReview";
@@ -20,9 +20,6 @@ export default class SolutionUseCase implements ISolutionUseCase {
     const solutionDTO = await this.solutionRepo.createSolution(problemId, code, readMe, language);
     const solutionEntity = new Solution(solutionDTO);
     return solutionEntity;
-  }
-  async getSolutionList(problemId: number): Promise<ISolvedEntity[]> {
-    return await this.solutionRepo.getSolutionList(problemId);
   }
   async getSolution(problemId: number): Promise<ISolutionEntity> {
     const solutionDTO = await this.solutionRepo.getSolution(problemId);

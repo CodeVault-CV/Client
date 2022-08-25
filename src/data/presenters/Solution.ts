@@ -1,4 +1,5 @@
-import ISolutionEntity, { ISolvedEntity } from "../../core/entities/interfaces/iSolution";
+import IReviewEntity from "../../core/entities/interfaces/iReview";
+import ISolutionEntity from "../../core/entities/interfaces/iSolution";
 import ISolutionUseCase from "../../core/useCases/interfaces/iSolution";
 import ISolutionPresenter from "./interfaces/iSolution";
 
@@ -13,15 +14,9 @@ export default class SolutionPresenter implements ISolutionPresenter {
   ): Promise<ISolutionEntity> {
     return await this.useCase.createSolution(problemId, code, readMe, language);
   }
-
-  async getSolutionList(problemId: number): Promise<ISolvedEntity[]> {
-    return await this.useCase.getSolutionList(problemId);
-  }
-
   async getSolution(problemId: number): Promise<ISolutionEntity> {
     return await this.useCase.getSolution(problemId);
   }
-
   async updateSolution(
     problemId: number,
     code: string,
@@ -30,8 +25,17 @@ export default class SolutionPresenter implements ISolutionPresenter {
   ): Promise<ISolutionEntity> {
     return await this.useCase.updateSolution(problemId, code, readMe, language);
   }
-
   async deleteSolution(solutionId: number): Promise<boolean> {
     return await this.useCase.deleteSolution(solutionId);
+  }
+
+  async createReview(solutionId: number, content: string): Promise<IReviewEntity> {
+    return await this.useCase.createReview(solutionId, content);
+  }
+  async updateReview(reviewId: number, content: string): Promise<IReviewEntity> {
+    return await this.useCase.updateReview(reviewId, content);
+  }
+  async deleteReview(reviewId: number): Promise<boolean> {
+    return await this.useCase.deleteReview(reviewId);
   }
 }

@@ -1,4 +1,4 @@
-import { ISolvedDTO } from "../../../core/dto/SolvedDTO";
+import IReviewEntity from "../../../core/entities/interfaces/iReview";
 import ISolutionEntity from "../../../core/entities/interfaces/iSolution";
 
 export default interface ISolutionPresenter {
@@ -8,16 +8,16 @@ export default interface ISolutionPresenter {
     readMe: string,
     language: string
   ): Promise<ISolutionEntity>;
-
-  getSolutionList(problemId: number): Promise<ISolvedDTO[]>;
   getSolution(problemId: number): Promise<ISolutionEntity>;
-
   updateSolution(
     problemId: number,
     code: string,
     readMe: string,
     language: string
   ): Promise<ISolutionEntity>;
-
   deleteSolution(solutionId: number): Promise<boolean>;
+
+  createReview(solutionId: number, content: string): Promise<IReviewEntity>;
+  updateReview(reviewId: number, content: string): Promise<IReviewEntity>;
+  deleteReview(reviewId: number): Promise<boolean>;
 }
