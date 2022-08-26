@@ -12,7 +12,7 @@ interface StudyDeletionProps {
   id: string;
 }
 
-export default function StudyDeletion({ id }: StudyDeletionProps) {
+export default function StudyDelete({ id }: StudyDeletionProps) {
   const navigate = useNavigate();
   const mutation = useMutation((id: string) => Study.deleteStudy(id), {
     onSuccess: () => navigate('/'),
