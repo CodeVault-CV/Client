@@ -7,5 +7,5 @@ export default function SolveContainer() {
     return <Navigate to="/notfound" replace={true} />;
   }
 
-  return <Solve id={+problemId} />;
+  return <Solve problemId={+problemId} />;
 }

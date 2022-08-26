@@ -1,10 +1,10 @@
 import Wrapper from "../../blocks/Wrapper";
 import SolutionForm from "./SolutionForm";
 
-export default function Solve({ id }: { id: number }) {
+export default function Solve({ problemId }: { problemId: number }) {
   return (
     <Wrapper>
-      <SolutionForm id={id} />
+      <SolutionForm problemId={problemId} />
     </Wrapper>
   );
 }

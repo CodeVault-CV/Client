@@ -32,15 +32,15 @@ export default function SolutionViewerContainer({ solutionId }: SolutionViewerCo
   };
 
   return (
-    <>
+    <Stack spacing={1}>
       <SolutionViewer solution={solution} />
       {solution?.userId === userId && (
         <Stack direction="row-reverse" spacing={1}>
-          <Button onClick={handleDelete}>삭제하기</Button>
+          <Button color="error" onClick={handleDelete}>삭제하기</Button>
           {/* <Button>수정하기</Button> */}
         </Stack>
       )}
       {isLoading && <Loading />}
-    </>
+    </Stack>
   );
 }
