@@ -1,11 +1,5 @@
-import { PropsWithChildren } from "react";
-import { Box, Skeleton, Stack, Typography } from "@mui/material";
+import { Divider, Skeleton, Stack, Typography } from "@mui/material";
 import Wrapper from "../Wrapper";
-
-interface HeaderProps {
-  title: any;
-  endBlock?: React.ReactNode;
-}
 
 export function HeaderSkeleton() {
   return (
@@ -20,24 +14,18 @@ export function HeaderSkeleton() {
   );
 }
 
-export default function Header({ title, children, endBlock }: PropsWithChildren<HeaderProps>) {
+export default function Header({ label, content }: { label: string; content: string }) {
   return (
-    <Stack direction="row" pl={2}>
-      <Stack spacing={2} sx={{ flexGrow: 1 }}>
-        <Typography variant="h3" component="h1" fontWeight={800}>
-          {title}
+    <Stack spacing={2}>
+      <Stack>
+        <Typography variant="caption" color="text.secondary" ml={1} fontSize={18}>
+          {label}
         </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          {children}
-        </Box>
+        <Divider />
       </Stack>
-      {endBlock}
+      <Typography variant="h3" fontWeight={700}>
+        {content}
+      </Typography>
     </Stack>
   );
 }

@@ -37,7 +37,7 @@ export default function SessionCard({ id, name, start, end }: Omit<ISessionEntit
   }, [end, time]);
 
   return (
-    <Grid item md={4} xs={6}>
+    <Grid item md={6} xs={12}>
       <Wrapper>
         <Stack spacing={1}>
           <Typography variant="h4" fontWeight={600}>
