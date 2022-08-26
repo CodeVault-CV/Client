@@ -1,10 +1,10 @@
 import { Stack, Tabs, Tab } from "@mui/material";
-import { Code, Settings } from '@mui/icons-material';
+import { Code, Settings } from "@mui/icons-material";
 
 import ProblemGrid from "./ProblemGrid";
 import SessionSetting from "./SessionSetting";
-import React, { Suspense, useState } from "react";
-import ProblemGridSkeleton from "./ProblemGrid/ProblemGridSkeleton";
+import React, { useState } from "react";
+import SessionHeader from "./SessionHeader";
 
 type SessionProps = {
   sessionId: number;
@@ -20,14 +20,13 @@ export default function Session({ sessionId, isLeader }: SessionProps) {
 
   return (
     <Stack spacing={3}>
-      <Tabs value={tab} onChange={handleChange} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tab icon={<Code />} iconPosition='start' label='Problems' />
-        {isLeader && <Tab icon={<Settings />} iconPosition='start' label='Settings' />}
+      <SessionHeader sessionId={sessionId} />
+      <Tabs value={tab} onChange={handleChange} sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Tab icon={<Code />} iconPosition="start" label="Problems" />
+        {isLeader && <Tab icon={<Settings />} iconPosition="start" label="Settings" />}
       </Tabs>
       {!tab ? (
-        <Suspense fallback={<ProblemGridSkeleton />}>
-          <ProblemGrid sessionId={sessionId} />
-        </Suspense>
+        <ProblemGrid sessionId={sessionId} />
       ) : (
         <SessionSetting sessionId={sessionId} changeTab={() => setTab(0)} />
       )}

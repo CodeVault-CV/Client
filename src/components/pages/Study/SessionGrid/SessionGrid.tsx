@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, Stack } from "@mui/material";
+import { Box, Grid, Stack } from "@mui/material";
 import { PropsWithChildren } from "react";
 
 export default function SessionGrid({ children }: PropsWithChildren) {
