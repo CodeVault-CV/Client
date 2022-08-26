@@ -25,11 +25,7 @@ export default function SessionHeaderContainer({ sessionId }: SessionHeaderProps
 
   return (
     <>
-      <SessionHeader
-        session={session}
-        isLeader={isLeader}
-        handleDelete={handleDelete}
-      />
+      <SessionHeader session={session} isLeader={isLeader} handleDelete={handleDelete} />
       {isLoading && <Loading />}
     </>
   );
