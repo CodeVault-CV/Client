@@ -8,9 +8,10 @@ import ProblemGridSkeleton from "./ProblemGrid/ProblemGridSkeleton";
 
 type SessionProps = {
   sessionId: number;
+  isLeader: boolean;
 };
 
-export default function Session({ sessionId }: SessionProps) {
+export default function Session({ sessionId, isLeader }: SessionProps) {
   const [tab, setTab] = useState(0);
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -21,7 +22,7 @@ export default function Session({ sessionId }: SessionProps) {
     <Stack spacing={3}>
       <Tabs value={tab} onChange={handleChange} sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tab icon={<Code />} iconPosition='start' label='Problems' />
-        <Tab icon={<Settings />} iconPosition='start' label='Settings' />
+        {isLeader && <Tab icon={<Settings />} iconPosition='start' label='Settings' />}
       </Tabs>
       {!tab ? (
         <Suspense fallback={<ProblemGridSkeleton />}>

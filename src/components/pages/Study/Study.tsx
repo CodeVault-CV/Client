@@ -9,9 +9,10 @@ import StudySetting from './StudySetting';
 
 interface StudyProps {
   studyId: string;
+  isLeader: boolean;
 }
 
-export default function Study({ studyId }: StudyProps) {
+export default function Study({ studyId, isLeader }: StudyProps) {
   const [tab, setTab] = useState(0);
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
@@ -22,7 +23,7 @@ export default function Study({ studyId }: StudyProps) {
     <Stack spacing={3}>
       <Tabs value={tab} onChange={handleChange} sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tab icon={<Flag />} iconPosition='start' label='Sessions' />
-        <Tab icon={<Settings />} iconPosition='start' label='Settings' />
+        {isLeader && <Tab icon={<Settings />} iconPosition='start' label='Settings' />}
       </Tabs>
       {!tab ? (
         <Suspense fallback={<SessionGridSkeleton />}>
