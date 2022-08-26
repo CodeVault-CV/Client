@@ -4,7 +4,7 @@ import MDEditor from "@uiw/react-md-editor";
 
 import CodeViewer from "../../../blocks/CodeViewer";
 import Wrapper from "../../../blocks/Wrapper";
-import { ISolutionEntity } from "../../../../core/entities/interfaces/iSolution";
+import ISolutionEntity from "../../../../core/entities/interfaces/iSolution";
 
 interface SolutionViewerProps {
   solution?: ISolutionEntity;

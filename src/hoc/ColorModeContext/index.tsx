@@ -27,7 +27,9 @@ export function ColorModeProvider({ children }: PropsWithChildren) {
 
   const colorMode = useMemo(
     () => ({
-      toggleColorMode: () => setMode(Theme.toggleMode()),
+      toggleColorMode: () => {
+        setMode(Theme.toggleMode());
+      },
     }),
     []
   );

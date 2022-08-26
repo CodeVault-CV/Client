@@ -1,32 +1,12 @@
-import { useMutation } from "@tanstack/react-query";
 import { useState, MouseEvent } from "react";
-import { useNavigate } from "react-router-dom";
-import Solution from "../../../../di/Solution";
+import useCreateSolution from "../../../../hooks/Solution/useCreateSolution";
 
 import useView from "../../../../hooks/useView";
 import Loading from "../../../blocks/Loading";
 import SolutionForm from "./SolutionForm";
 
-export default function SolutionFormContainer({ id }: { id: number }) {
-  const navigate = useNavigate();
-  const { isLoading, mutate } = useMutation(
-    ({
-      id,
-      code,
-      review,
-      language,
-    }: {
-      id: number;
-      code: string;
-      review: string;
-      language: string;
-    }) => Solution.createSolution(id, code, review, language),
-    {
-      onSuccess: (data) => {
-        navigate("./../../", { replace: true });
-      },
-    }
-  );
+export default function SolutionFormContainer({ problemId }: { problemId: number }) {
+  const { isLoading, createSolution } = useCreateSolution(problemId);
 
   const { view, changeView } = useView("code");
   const [code, setCode] = useState("");
@@ -46,7 +26,7 @@ export default function SolutionFormContainer({ id }: { id: number }) {
   };
 
   const handleSubmit = (event: MouseEvent<HTMLButtonElement>) => {
-    mutate({ id, language, code, review });
+    createSolution({ language, code, review });
   };
 
   return (

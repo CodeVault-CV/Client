@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../../../hoc/AuthContext";
@@ -7,6 +7,7 @@ import Solution from "../../../../di/Solution";
 import Button from "../../../atoms/Button";
 import Loading from "../../../blocks/Loading";
 import SolutionViewer from "./SolutionViewer";
+import useSolution from "../../../../hooks/Solution/useSolution";
 
 type SolutionViewerContainerProps = {
   solutionId: number;
@@ -14,7 +15,7 @@ type SolutionViewerContainerProps = {
 
 export default function SolutionViewerContainer({ solutionId }: SolutionViewerContainerProps) {
   const { userId } = useAuth();
-  const { data } = useQuery(["solution", solutionId], () => Solution.getSolution(solutionId));
+  const solution = useSolution(solutionId);
 
   const navigate = useNavigate();
   const { isLoading, mutate } = useMutation(() => Solution.deleteSolution(solutionId), {
@@ -31,15 +32,15 @@ export default function SolutionViewerContainer({ solutionId }: SolutionViewerCo
   };
 
   return (
-    <>
-      <SolutionViewer solution={data} />
-      {data?.userId === userId && (
+    <Stack spacing={1}>
+      <SolutionViewer solution={solution} />
+      {solution?.userId === userId && (
         <Stack direction="row-reverse" spacing={1}>
-          <Button onClick={handleDelete}>삭제하기</Button>
+          <Button color="error" onClick={handleDelete}>삭제하기</Button>
           {/* <Button>수정하기</Button> */}
         </Stack>
       )}
       {isLoading && <Loading />}
-    </>
+    </Stack>
   );
 }

@@ -1,5 +1,6 @@
 import IReviewEntity from "../entities/interfaces/iReview";
-import { ISolutionEntity, ISolvedEntity } from "../entities/interfaces/iSolution";
+import ISolutionEntity from "../entities/interfaces/iSolution";
+import Solution from "../entities/Solution";
 import ISolutionUseCase from "./interfaces/iSolution";
 import IReviewRepository from "./repository-interfaces/iReview";
 import ISolutionRepository from "./repository-interfaces/iSolution";
@@ -16,13 +17,18 @@ export default class SolutionUseCase implements ISolutionUseCase {
     readMe: string,
     language: string
   ): Promise<ISolutionEntity> {
-    return await this.solutionRepo.createSolution(problemId, code, readMe, language);
-  }
-  async getSolutionList(problemId: number): Promise<ISolvedEntity[]> {
-    return await this.solutionRepo.getSolutionList(problemId);
+    const solutionDTO = await this.solutionRepo.createSolution(problemId, code, readMe, language);
+    const solutionEntity = new Solution(solutionDTO);
+    return solutionEntity;
   }
   async getSolution(problemId: number): Promise<ISolutionEntity> {
-    return await this.solutionRepo.getSolution(problemId);
+    const solutionDTO = await this.solutionRepo.getSolution(problemId);
+    const solutionEntity = new Solution(solutionDTO);
+
+    const reviewDTOList = await this.reviewRepo.getReviews(solutionEntity.id);
+    solutionEntity.pushReviews(reviewDTOList);
+
+    return solutionEntity;
   }
   async updateSolution(
     problemId: number,
@@ -30,16 +36,19 @@ export default class SolutionUseCase implements ISolutionUseCase {
     readMe: string,
     language: string
   ): Promise<ISolutionEntity> {
-    return await this.solutionRepo.updateSolution(problemId, code, readMe, language);
+    const solutionDTO = await this.solutionRepo.updateSolution(problemId, code, readMe, language);
+    const solutionEntity = new Solution(solutionDTO);
+
+    const reviewDTOList = await this.reviewRepo.getReviews(solutionEntity.id);
+    solutionEntity.pushReviews(reviewDTOList);
+
+    return solutionEntity;
   }
   async deleteSolution(solutionId: number): Promise<boolean> {
     return await this.solutionRepo.deleteSolution(solutionId);
   }
 
   // Review
-  async getReviews(solutionId: number): Promise<IReviewEntity[]> {
-    return await this.reviewRepo.getReviews(solutionId);
-  }
   async createReview(solutionId: number, content: string): Promise<IReviewEntity> {
     return await this.reviewRepo.createReview(solutionId, content);
   }

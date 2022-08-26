@@ -5,7 +5,6 @@ import { useAuth } from "../../hoc/AuthContext";
 export default function useStudy(studyId: string) {
   const userId = useAuth().userId;
   const { isLoading, data: study } = useQuery(["study", studyId], () => Study.getStudy(studyId), {
-    refetchOnMount: false,
     suspense: true,
   });
   const isLeader = userId === study?.leader;

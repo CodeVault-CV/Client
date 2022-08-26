@@ -1,6 +1,5 @@
-import SolutionDTO from "../../core/dto/SolutionDTO";
+import SolutionDTO, { ISolutionDTO } from "../../core/dto/SolutionDTO";
 import SolvedDTO, { ISolvedDTO, ISolvedParams } from "../../core/dto/SolvedDTO";
-import { ISolutionEntity } from "../../core/entities/interfaces/iSolution";
 import ISolutionRepository from "../../core/useCases/repository-interfaces/iSolution";
 import HTTP from "../infra/http";
 
@@ -10,7 +9,7 @@ export default class SolutionRepository implements ISolutionRepository {
     code: string,
     readMe: string,
     language: string
-  ): Promise<ISolutionEntity> {
+  ): Promise<ISolutionDTO> {
     return await HTTP.post(`/solution`, { problemId, code, readMe, language }).then(
       ({ data }) => new SolutionDTO(data)
     );
@@ -22,7 +21,7 @@ export default class SolutionRepository implements ISolutionRepository {
     );
   }
 
-  async getSolution(problemId: number): Promise<ISolutionEntity> {
+  async getSolution(problemId: number): Promise<ISolutionDTO> {
     return await HTTP.get(`/solution/${problemId}`).then(({ data }) => new SolutionDTO(data));
   }
 
@@ -31,7 +30,7 @@ export default class SolutionRepository implements ISolutionRepository {
     code: string,
     readMe: string,
     language: string
-  ): Promise<ISolutionEntity> {
+  ): Promise<ISolutionDTO> {
     return await HTTP.put(`/solution/${problemId}`, {
       problemId,
       code,
