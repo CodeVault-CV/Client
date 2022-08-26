@@ -17,7 +17,7 @@ interface NavProps {
 function Navbar({ theme, auth, onLogoutClick, onThemeClick }: NavProps) {
   return (
     <Box sx={{ flexGrow: 1, borderBottom: 1, borderColor: "divider" }}>
-      <Container maxWidth="lg" sx={{ px: 0 }}>
+      <Container maxWidth="md" sx={{ px: 0 }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Button component={RouterLink} to="/" color="inherit" sx={{ textTransform: "none" }}>
             <DeviceHubIcon />

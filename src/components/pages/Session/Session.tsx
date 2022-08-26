@@ -21,7 +21,16 @@ export default function Session({ sessionId, isLeader }: SessionProps) {
   return (
     <Stack spacing={3}>
       <SessionHeader sessionId={sessionId} />
-      <Tabs value={tab} onChange={handleChange} sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Tabs 
+        value={tab} 
+        onChange={handleChange} 
+        sx={{
+          borderBottom: 1,
+          borderColor: 'divider',
+          height: 0,
+          alignItems: 'center',
+        }}
+      >
         <Tab icon={<Code />} iconPosition="start" label="Problems" />
         {isLeader && <Tab icon={<Settings />} iconPosition="start" label="Settings" />}
       </Tabs>
