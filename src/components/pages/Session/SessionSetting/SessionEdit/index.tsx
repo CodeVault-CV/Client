@@ -16,7 +16,7 @@ export default function SessionEdit({
   end,
 }: SessionEditProps) {
   const { isLoading, update } = useSessionUpdate(id);
-
+  
   const handleSubmit = (title: string, startDate: Date, endDate: Date) => {
     update({
       id,

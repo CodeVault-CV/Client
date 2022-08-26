@@ -11,6 +11,7 @@ import IProblemEntity from "../../../../../core/entities/interfaces/iProblem";
 type ProblemEditProps = {
   sessionId: number;
   prevProblems?: Omit<IProblemEntity, "solvedMembers" | "url">[];
+  changeTab: () => void;
 };
 
 export interface FormState {
@@ -19,7 +20,7 @@ export interface FormState {
   name: string;
 }
 
-export default function ProblemEdit({ sessionId, prevProblems = [] }: ProblemEditProps) {
+export default function ProblemEdit({ sessionId, prevProblems = [], changeTab }: ProblemEditProps) {
   const { isLoading, edit } = useProblemEdit(sessionId, prevProblems);
   const [problems, setProblems] = useState([...prevProblems]);
   const [problem, setProblem] = useState<FormState>({
@@ -52,6 +53,7 @@ export default function ProblemEdit({ sessionId, prevProblems = [] }: ProblemEdi
 
   const handleCommit = (event: MouseEvent<HTMLButtonElement>) => {
     edit(problems);
+    changeTab();
   };
 
   return (

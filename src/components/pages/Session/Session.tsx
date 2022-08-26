@@ -28,7 +28,7 @@ export default function Session({ sessionId }: SessionProps) {
           <ProblemGrid sessionId={sessionId} />
         </Suspense>
       ) : (
-        <SessionSetting sessionId={sessionId} />
+        <SessionSetting sessionId={sessionId} changeTab={() => setTab(0)} />
       )}
     </Stack>
   );

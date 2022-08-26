@@ -1,6 +1,5 @@
 import { Alert, Stack } from '@mui/material';
 import React from 'react';
-import { useParams } from "react-router-dom";
 import Button from '../../../../atoms/Button';
 import { useSessionDelete } from "../../../../../hooks/Session/useSessionDelete";
 
