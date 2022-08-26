@@ -11,7 +11,7 @@ import IProblemEntity from "../../../../../core/entities/interfaces/iProblem";
 type ProblemEditProps = {
   sessionId: number;
   prevProblems?: Omit<IProblemEntity, "solvedMembers" | "url">[];
-  toggleMode: () => void;
+  changeTab: () => void;
 };
 
 export interface FormState {
@@ -20,12 +20,8 @@ export interface FormState {
   name: string;
 }
 
-export default function ProblemEdit({
-  sessionId,
-  prevProblems = [],
-  toggleMode,
-}: ProblemEditProps) {
-  const { isLoading, edit } = useProblemEdit(sessionId, prevProblems, () => toggleMode());
+export default function ProblemEdit({ sessionId, prevProblems = [], changeTab }: ProblemEditProps) {
+  const { isLoading, edit } = useProblemEdit(sessionId, prevProblems);
   const [problems, setProblems] = useState([...prevProblems]);
   const [problem, setProblem] = useState<FormState>({
     platform: "programmers",
@@ -57,10 +53,11 @@ export default function ProblemEdit({
 
   const handleCommit = (event: MouseEvent<HTMLButtonElement>) => {
     edit(problems);
+    changeTab();
   };
 
   return (
-    <>
+    <Grid container spacing={4}>
       <Grid item xs={12}>
         <ProblemAddForm
           problem={problem}
@@ -83,12 +80,9 @@ export default function ProblemEdit({
           <Button sx={{ mx: 1 }} onClick={handleCommit}>
             적용하기
           </Button>
-          <Button sx={{ mx: 1 }} onClick={toggleMode}>
-            취소하기
-          </Button>
         </Box>
       </Grid>
       {isLoading && <Loading />}
-    </>
+    </Grid>
   );
 }

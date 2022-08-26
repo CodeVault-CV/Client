@@ -5,7 +5,6 @@ import Session from "../../di/Session";
 export default function useProblemEdit(
   sessionId: number,
   problemList: Omit<IProblemData, "url">[],
-  successCallback?: (...props: any[]) => void
 ) {
   const queryClient = useQueryClient();
   const { isLoading, mutate } = useMutation(
@@ -14,7 +13,6 @@ export default function useProblemEdit(
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["session", sessionId]);
-        successCallback?.();
       },
     }
   );

@@ -1,12 +1,9 @@
-import { MouseEvent } from "react";
 import Header from "../../../blocks/Header";
 import Wrapper from "../../../blocks/Wrapper";
 import ISessionEntity from "../../../../core/entities/interfaces/iSession";
 
 type SessionHeaderProps = {
   session?: ISessionEntity;
-  isLeader: boolean;
-  handleDelete(event: MouseEvent<HTMLButtonElement>): void;
 };
 
 const defaultSession = {

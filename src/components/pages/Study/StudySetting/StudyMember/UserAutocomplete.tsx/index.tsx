@@ -1,24 +1,28 @@
+import { Box, TextField, Autocomplete } from '@mui/material';
 import IMemberEntity from '../../../../../../core/entities/interfaces/iMember';
-import { TextField, Autocomplete, Box } from '@mui/material';
 
-interface UserSearchBarProps {
+interface UserAutocompleteProps {
   userName: string;
   searched: IMemberEntity[];
   handleChange: (value: string) => void;
 }
 
-export default function UserSearchBar({ userName, searched, handleChange }: UserSearchBarProps) {
+export default function UserAutocomplete({
+  userName,
+  searched,
+  handleChange,
+}: UserAutocompleteProps) {
   return (
     <Autocomplete
       freeSolo
       autoHighlight
       options={searched}
-      getOptionLabel={(option) => 
+      getOptionLabel={(option) =>
         typeof option === 'string' ? option : option.name
       }
       onChange={(_, value: IMemberEntity | string | null) => {
-        value 
-          ? handleChange(typeof value === 'string' ? value : value.name) 
+        value
+          ? handleChange(typeof value === 'string' ? value : value.name)
           : handleChange('');
       }}
       renderOption={(props, option) => (
@@ -40,10 +44,10 @@ export default function UserSearchBar({ userName, searched, handleChange }: User
       renderInput={(params) => (
         <TextField
           {...params}
-          label='사용자 이름'
-          variant='outlined'
           size='small'
+          label='사용자 이름'
           value={userName}
+          sx={{ width: 200 }}
           onChange={(e) => handleChange(e.target.value)}
         />
       )}
