@@ -16,6 +16,7 @@ function ReviewForm({ handleSubmit }: { handleSubmit(value: string): void }) {
   const handleClick = () => {
     if (!value) return;
     handleSubmit(value);
+    setValue("");
   };
 
   return (
@@ -25,15 +26,17 @@ function ReviewForm({ handleSubmit }: { handleSubmit(value: string): void }) {
       </Avatar>
       <Wrapper width="100%">
         <MDEditor value={value} onChange={setValue} preview="edit" height={120} />
-        <Button
-          color="success"
-          variant="contained"
-          disabled={!value}
-          onClick={handleClick}
-          sx={{ mt: 2, color: "whitesmoke" }}
-        >
-          리뷰 남기기
-        </Button>
+        <Stack direction="row-reverse">
+          <Button
+            color="success"
+            variant="contained"
+            disabled={!value}
+            onClick={handleClick}
+            sx={{ mt: 2, color: "whitesmoke" }}
+          >
+            리뷰 남기기
+          </Button>
+        </Stack>
       </Wrapper>
     </Stack>
   );
@@ -49,6 +52,7 @@ export default function ReviewFormContainer({ solutionId }: ReviewFormContainerP
     (content: string) => Solution.createReview(solutionId, content),
     {
       onSuccess: (data) => {
+        console.log(data);
         const prevSolution = queryClient.getQueryData(["solution", solutionId]) as ISolutionEntity;
 
         const newSolution = new SolutionEntity(prevSolution);
