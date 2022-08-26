@@ -22,7 +22,16 @@ export default function Study({ studyId, isLeader }: StudyProps) {
   return (
     <Stack spacing={3}>
       <StudyHeader studyId={studyId} />
-      <Tabs value={tab} onChange={handleChange} sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Tabs 
+        value={tab} 
+        onChange={handleChange} 
+        sx={{
+          borderBottom: 1,
+          borderColor: 'divider',
+          height: 0,
+          alignItems: 'center',
+        }}
+      >
         <Tab icon={<Flag />} iconPosition="start" label="Sessions" />
         {isLeader && <Tab icon={<Settings />} iconPosition="start" label="Settings" />}
       </Tabs>
