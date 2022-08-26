@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Stack, Tabs, Tab } from "@mui/material";
 import { Flag, Settings } from "@mui/icons-material";
 
-import StudyMiddleBar from "./StudyMiddleBar";
 import SessionGrid from "./SessionGrid";
 import StudySetting from "./StudySetting";
 import StudyHeader from "./StudyHeader";
@@ -28,7 +27,6 @@ export default function Study({ studyId, isLeader }: StudyProps) {
       </Tabs>
       {!tab ? (
         <>
-          <StudyMiddleBar studyId={studyId} />
           <SessionGrid studyId={studyId} />
         </>
       ) : (

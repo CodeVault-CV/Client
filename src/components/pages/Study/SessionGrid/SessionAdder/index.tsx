@@ -1,7 +1,7 @@
 import { Box, Tooltip, IconButton, Popover } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Wrapper from "../../../../blocks/Wrapper";
 import SessionEditor from "../../../../blocks/SessionEditor";
 import useCreateSession from "../../../../../hooks/Session/useCreateSession";
@@ -26,7 +26,9 @@ export default function SessionAdderContainer({ studyId }: SessionAdderContainer
   return (
     <Box display="flex">
       <Tooltip title={"세션 생성하기"} arrow>
-        <IconButton onClick={handleClick}><AddCircleIcon /></IconButton>
+        <IconButton onClick={handleClick}>
+          <AddCircleIcon />
+        </IconButton>
       </Tooltip>
       <Popover
         anchorEl={anchorEl}
