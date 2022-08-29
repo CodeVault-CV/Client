@@ -57,6 +57,7 @@
     ]
   },
   "devDependencies": {
+    "cra-bundle-analyzer": "^0.1.1",
     "eslint": "^8.18.0",
     "eslint-config-react-app": "^7.0.1"
   }
