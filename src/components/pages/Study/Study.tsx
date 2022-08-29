@@ -22,7 +22,7 @@ export default function Study({ studyId, isLeader }: StudyProps) {
     <Stack spacing={3}>
       <StudyHeader studyId={studyId} />
       <Tabs 
-        value={tab} 
+        value={isLeader ? tab : 0} 
         onChange={handleChange} 
         sx={{
           borderBottom: 1,
@@ -34,10 +34,8 @@ export default function Study({ studyId, isLeader }: StudyProps) {
         <Tab icon={<Flag />} iconPosition="start" label="Sessions" />
         {isLeader && <Tab icon={<Settings />} iconPosition="start" label="Settings" />}
       </Tabs>
-      {!tab ? (
-        <>
-          <SessionGrid studyId={studyId} />
-        </>
+      {!tab || !isLeader ? (
+        <SessionGrid studyId={studyId} />
       ) : (
         <StudySetting studyId={studyId} />
       )}
