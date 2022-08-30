@@ -44,7 +44,7 @@ export default function LoginButton() {
         }}
       >
         <Button
-          href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&scope=user,repo,delete_repo`}
+          href={`https://github.com/login/oauth/authorize?client_id=e1f73f73ee1f2865bcd5&scope=user,repo,delete_repo`}
           color="success"
           variant="contained"
           size="large"

@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import Auth from "../../di/Auth";
 
 const API = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_BASE_URL,
+  baseURL: "https://algong.me/api",
 });
 
 API.interceptors.request.use((config: AxiosRequestConfig) => {
