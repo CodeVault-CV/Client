@@ -5,12 +5,14 @@ RUN npm install -g serve
 RUN mkdir /app
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+# COPY package*.json ./
+# RUN npm install
 
-COPY . .
+RUN mkdir ./build
 
-RUN npm run build
+ADD ./build ./build
+
+# RUN npm run build
 
 EXPOSE 3000
 

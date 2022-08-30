@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.js": "/static/js/main.235f97ae.js",
+    "static/js/502.c9a5ed7a.chunk.js": "/static/js/502.c9a5ed7a.chunk.js",
+    "static/js/375.12ea4802.chunk.js": "/static/js/375.12ea4802.chunk.js",
+    "static/css/879.9a4a37fc.chunk.css": "/static/css/879.9a4a37fc.chunk.css",
+    "static/js/879.bd0d8b5e.chunk.js": "/static/js/879.bd0d8b5e.chunk.js",
+    "static/js/787.b0350936.chunk.js": "/static/js/787.b0350936.chunk.js",
+    "static/js/658.373176e1.chunk.js": "/static/js/658.373176e1.chunk.js",
+    "static/css/87.029afbc7.chunk.css": "/static/css/87.029afbc7.chunk.css",
+    "static/media/Lazy_Cat_with_fishes_transparent_by_Icons8.gif": "/static/media/Lazy_Cat_with_fishes_transparent_by_Icons8.6e2c2c4cd34c169f5196.gif",
+    "static/media/Lazy_Cat_Spinning_cat_transparent_by_Icons8.gif": "/static/media/Lazy_Cat_Spinning_cat_transparent_by_Icons8.21f291a5adf4eb2d528e.gif",
+    "index.html": "/index.html",
+    "main.235f97ae.js.map": "/static/js/main.235f97ae.js.map",
+    "502.c9a5ed7a.chunk.js.map": "/static/js/502.c9a5ed7a.chunk.js.map",
+    "375.12ea4802.chunk.js.map": "/static/js/375.12ea4802.chunk.js.map",
+    "879.9a4a37fc.chunk.css.map": "/static/css/879.9a4a37fc.chunk.css.map",
+    "879.bd0d8b5e.chunk.js.map": "/static/js/879.bd0d8b5e.chunk.js.map",
+    "787.b0350936.chunk.js.map": "/static/js/787.b0350936.chunk.js.map",
+    "658.373176e1.chunk.js.map": "/static/js/658.373176e1.chunk.js.map",
+    "87.029afbc7.chunk.css.map": "/static/css/87.029afbc7.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/main.235f97ae.js"
+  ]
+}
