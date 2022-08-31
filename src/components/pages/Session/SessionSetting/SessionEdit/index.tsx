@@ -1,6 +1,6 @@
-import SessionEditor from '../../../../blocks/SessionEditor';
-import useSessionUpdate from '../../../../../hooks/Session/useSessionUpdate';
-import Loading from '../../../../blocks/Loading';
+import SessionEditor from "../../../../blocks/SessionEditor";
+import useSessionUpdate from "../../../../../hooks/Session/useSessionUpdate";
+import Loading from "../../../../blocks/Loading";
 
 interface SessionEditProps {
   id: number;
@@ -9,14 +9,9 @@ interface SessionEditProps {
   end?: Date;
 }
 
-export default function SessionEdit({
-  id,
-  name,
-  start,
-  end,
-}: SessionEditProps) {
+export default function SessionEdit({ id, name, start, end }: SessionEditProps) {
   const { isLoading, update } = useSessionUpdate(id);
-  
+
   const handleSubmit = (title: string, startDate: Date, endDate: Date) => {
     update({
       id,
@@ -28,13 +23,7 @@ export default function SessionEdit({
 
   return (
     <>
-      <SessionEditor
-        name={name}
-        start={start}
-        end={end}
-        direction='row'
-        handleSubmit={handleSubmit}
-      />
+      <SessionEditor name={name} start={start} end={end} handleSubmit={handleSubmit} responsive />
       {isLoading && <Loading />}
     </>
   );

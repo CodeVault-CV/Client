@@ -1,16 +1,15 @@
-import { Stack, TextField } from '@mui/material';
-import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { ResponsiveStyleValue } from '@mui/system';
+import { Stack, TextField } from "@mui/material";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
-import { useState, MouseEvent } from 'react';
-import Button from '../../atoms/Button';
+import { useState, MouseEvent } from "react";
+import Button from "../../atoms/Button";
 
 type SessionEditorProps = {
   name?: string;
   start?: Date;
   end?: Date;
-  direction?: ResponsiveStyleValue<'column' | 'row'>;
+  responsive?: boolean;
   handleSubmit(title: string, startDate: Date, endDate: Date): void;
 };
 
@@ -23,10 +22,10 @@ type ValidationTarget = {
 };
 
 export default function SessionEditor({
-  name = '',
+  name = "",
   start = new Date(),
   end = new Date(),
-  direction = 'column',
+  responsive = false,
   handleSubmit,
 }: SessionEditorProps) {
   const [title, setTitle] = useState<string>(name);
@@ -42,8 +41,8 @@ export default function SessionEditor({
   }: ValidationTarget) => {
     setDisabled(
       dateError ||
-      !Boolean(newTitle && newStart && newEnd) ||
-      (name === newTitle && start === newStart && end === newEnd)
+        !Boolean(newTitle && newStart && newEnd) ||
+        (name === newTitle && start === newStart && end === newEnd)
     );
   };
 
@@ -56,12 +55,12 @@ export default function SessionEditor({
   };
 
   return (
-    <Stack direction={direction} spacing={2}>
+    <Stack direction={responsive ? { md: "row" } : "column"} spacing={{ xs: 1 }}>
       <TextField
         value={title}
-        label='제목'
-        variant='outlined'
-        size='small'
+        label="제목"
+        variant="outlined"
+        size="small"
         onChange={(event) => {
           setTitle(event.target.value);
           handleValidation({ newTitle: event.target.value });
@@ -70,7 +69,7 @@ export default function SessionEditor({
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           disablePast
-          label='시작 날짜'
+          label="시작 날짜"
           value={startDate}
           onChange={(newValue) => {
             setStartDate(newValue);
@@ -82,10 +81,10 @@ export default function SessionEditor({
             setDateError(true);
             handleValidation({});
           }}
-          renderInput={(params) => <TextField size='small' {...params} />}
+          renderInput={(params) => <TextField size="small" {...params} />}
         />
         <DatePicker
-          label='종료 날짜'
+          label="종료 날짜"
           value={endDate}
           minDate={startDate}
           onChange={(newValue) => {
@@ -97,10 +96,10 @@ export default function SessionEditor({
             setDateError(true);
             handleValidation({});
           }}
-          renderInput={(params) => <TextField size='small' {...params} />}
+          renderInput={(params) => <TextField size="small" {...params} />}
         />
       </LocalizationProvider>
-      <Button color='success' onClick={submitWrapper} disabled={disabled}>
+      <Button color="success" onClick={submitWrapper} disabled={disabled}>
         완료
       </Button>
     </Stack>
