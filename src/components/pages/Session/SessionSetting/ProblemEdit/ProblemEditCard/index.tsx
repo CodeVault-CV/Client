@@ -15,7 +15,7 @@ export default function ProblemEditCard({
   onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }) {
   return (
-    <Grid item xs={12} sm={6} md={4}>
+    <Grid item xs={12} md={6}>
       <Wrapper position="relative">
         <Box sx={{ position: "absolute", right: 0, top: 0 }}>
           <IconButton color="error" onClick={onClick}>
