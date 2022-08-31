@@ -4,19 +4,21 @@ import { Container, Stack, CssBaseline } from "@mui/material";
 import { AuthProvider } from "../../hoc/AuthContext";
 import Navbar from "../../components/blocks/Navbar";
 import { ColorModeProvider } from "../ColorModeContext";
+import Footer from "../../components/blocks/Footer";
 
 function Layout() {
   return (
     <ColorModeProvider>
       <CssBaseline />
-      <Stack>
-        <AuthProvider>
+      <AuthProvider>
+        <Stack>
           <Navbar />
           <Container maxWidth="md" sx={{ my: 3 }}>
             <Outlet />
           </Container>
-        </AuthProvider>
-      </Stack>
+          <Footer />
+        </Stack>
+      </AuthProvider>
     </ColorModeProvider>
   );
 }
