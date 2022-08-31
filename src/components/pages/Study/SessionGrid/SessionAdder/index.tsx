@@ -15,8 +15,13 @@ export default function SessionAdderContainer({ studyId }: SessionAdderContainer
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const handleSubmit = (name: string, start: Date, end: Date) => {
     create({ name, start, end });
+    handleClose();
   };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -41,7 +46,7 @@ export default function SessionAdderContainer({ studyId }: SessionAdderContainer
           horizontal: "center",
         }}
         open={open}
-        onClose={() => setAnchorEl(null)}
+        onClose={handleClose}
       >
         <Wrapper>
           <SessionEditor handleSubmit={handleSubmit} />
