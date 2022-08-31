@@ -1,44 +1,25 @@
-import { Stack, Tabs, Tab } from "@mui/material";
-import { Code, Settings } from "@mui/icons-material";
+import { Suspense } from "react";
+import { Stack } from "@mui/material";
 
-import ProblemGrid from "./ProblemGrid";
-import SessionSetting from "./SessionSetting";
-import React, { useState } from "react";
 import SessionHeader from "./SessionHeader";
+import { HeaderSkeleton } from "../../blocks/Header";
+import SessionTabs from "./SessionTabs";
+import SessionTabsSkeleton from "./SessionTabs/SessionTabsSkeleton";
 
 type SessionProps = {
+  studyId: string;
   sessionId: number;
-  isLeader: boolean;
 };
 
-export default function Session({ sessionId, isLeader }: SessionProps) {
-  const [tab, setTab] = useState(0);
-
-  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
-    setTab(newValue);
-  };
-
+export default function Session({ studyId, sessionId }: SessionProps) {
   return (
     <Stack spacing={3}>
-      <SessionHeader sessionId={sessionId} />
-      <Tabs 
-        value={tab} 
-        onChange={handleChange} 
-        sx={{
-          borderBottom: 1,
-          borderColor: 'divider',
-          height: 0,
-          alignItems: 'center',
-        }}
-      >
-        <Tab icon={<Code />} iconPosition="start" label="Problems" />
-        {isLeader && <Tab icon={<Settings />} iconPosition="start" label="Settings" />}
-      </Tabs>
-      {!tab ? (
-        <ProblemGrid sessionId={sessionId} />
-      ) : (
-        <SessionSetting sessionId={sessionId} changeTab={() => setTab(0)} />
-      )}
+      <Suspense fallback={<HeaderSkeleton />}>
+        <SessionHeader sessionId={sessionId} />
+      </Suspense>
+      <Suspense fallback={<SessionTabsSkeleton />}>
+        <SessionTabs studyId={studyId} sessionId={sessionId} />
+      </Suspense>
     </Stack>
   );
 }
