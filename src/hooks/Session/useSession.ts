@@ -5,6 +5,9 @@ export default function useSession(sessionId: number) {
   const { isLoading, data } = useQuery(
     ["session", sessionId],
     () => Session.getSession(sessionId),
+    {
+      suspense: true,
+    }
   );
 
   return {

@@ -4,7 +4,7 @@ import Session from "../../di/Session";
 
 export default function useProblemEdit(
   sessionId: number,
-  problemList: Omit<IProblemData, "url">[],
+  problemList: Omit<IProblemData, "url">[]
 ) {
   const queryClient = useQueryClient();
   const { isLoading, mutate } = useMutation(

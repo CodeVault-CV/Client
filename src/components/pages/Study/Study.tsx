@@ -1,44 +1,24 @@
-import React, { useState } from "react";
-import { Stack, Tabs, Tab } from "@mui/material";
-import { Flag, Settings } from "@mui/icons-material";
+import { Suspense } from "react";
+import { Stack } from "@mui/material";
 
-import SessionGrid from "./SessionGrid";
-import StudySetting from "./StudySetting";
 import StudyHeader from "./StudyHeader";
+import StudyTabs from "./StudyTabs";
+import { HeaderSkeleton } from "../../blocks/Header";
+import StudyTabsSkeleton from "./StudyTabs/StudyTabsSkeleton";
 
 interface StudyProps {
   studyId: string;
-  isLeader: boolean;
 }
 
-export default function Study({ studyId, isLeader }: StudyProps) {
-  const [tab, setTab] = useState(0);
-
-  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
-    setTab(newValue);
-  };
-
+export default function Study({ studyId }: StudyProps) {
   return (
     <Stack spacing={3}>
-      <StudyHeader studyId={studyId} />
-      <Tabs 
-        value={isLeader ? tab : 0} 
-        onChange={handleChange} 
-        sx={{
-          borderBottom: 1,
-          borderColor: 'divider',
-          height: 0,
-          alignItems: 'center',
-        }}
-      >
-        <Tab icon={<Flag />} iconPosition="start" label="Sessions" />
-        {isLeader && <Tab icon={<Settings />} iconPosition="start" label="Settings" />}
-      </Tabs>
-      {!tab || !isLeader ? (
-        <SessionGrid studyId={studyId} />
-      ) : (
-        <StudySetting studyId={studyId} />
-      )}
+      <Suspense fallback={<HeaderSkeleton />}>
+        <StudyHeader studyId={studyId} />
+      </Suspense>
+      <Suspense fallback={<StudyTabsSkeleton />}>
+        <StudyTabs studyId={studyId} />
+      </Suspense>
     </Stack>
   );
 }
