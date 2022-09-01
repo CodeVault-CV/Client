@@ -6,6 +6,7 @@ export default function StudyTabsSkeleton() {
   return (
     <>
       <Tabs
+        value={0}
         sx={{
           borderBottom: 1,
           borderColor: "divider",
