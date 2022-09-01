@@ -36,7 +36,7 @@ export default function SessionTabs({ studyId, sessionId }: SessionTabsProps) {
       {!tab ? (
         <ProblemGrid sessionId={sessionId} />
       ) : (
-        <SessionSetting sessionId={sessionId} changeTab={() => setTab(0)} />
+        <SessionSetting studyId={studyId} sessionId={sessionId} changeTab={() => setTab(0)} />
       )}
     </>
   );

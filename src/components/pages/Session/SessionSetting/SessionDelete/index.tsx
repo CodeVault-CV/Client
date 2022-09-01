@@ -1,7 +1,8 @@
-import { Alert, Stack } from "@mui/material";
 import React from "react";
-import Button from "../../../../atoms/Button";
+import { Alert, Stack } from "@mui/material";
+
 import { useSessionDelete } from "../../../../../hooks/Session/useSessionDelete";
+import Button from "../../../../atoms/Button";
 import Loading from "../../../../blocks/Loading";
 
 interface SessionDeleteProps {
@@ -10,12 +11,12 @@ interface SessionDeleteProps {
 }
 
 export default function SessionDelete({ studyId, sessionId }: SessionDeleteProps) {
-  const { isLoading, deleteRequest } = useSessionDelete(studyId as string, sessionId);
+  const { isLoading, deleteRequest } = useSessionDelete(studyId);
 
   const handleDelete = async (event: React.MouseEvent<HTMLButtonElement>) => {
     const willDelete = window.confirm("세션을 삭제하겠습니까?");
     if (!willDelete) return;
-    deleteRequest();
+    deleteRequest(sessionId);
   };
 
   return (

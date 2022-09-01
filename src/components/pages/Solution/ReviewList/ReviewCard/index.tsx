@@ -154,8 +154,8 @@ export default function ReviewCardContainer({
   review: IReviewEntity;
 }) {
   const { userId } = useAuth();
-  const deleteReview = useDeleteReview(solutionId, review.id);
-  const updateReview = useUpdateReview(solutionId, review.id);
+  const deleteReview = useDeleteReview(solutionId);
+  const updateReview = useUpdateReview(solutionId);
 
   const handleDelete = (reviewId: number) => {
     deleteReview(reviewId);

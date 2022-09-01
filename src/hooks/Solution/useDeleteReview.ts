@@ -3,7 +3,7 @@ import ISolutionEntity from "../../core/entities/interfaces/iSolution";
 import SolutionEntity from "../../core/entities/Solution";
 import Solution from "../../di/Solution";
 
-export default function useDeleteReview(solutionId: number, reviewId: number) {
+export default function useDeleteReview(solutionId: number) {
   const queryClient = useQueryClient();
   const { mutate } = useMutation((reviewId: number) => Solution.deleteReview(reviewId), {
     onSuccess: (_, reviewId) => {

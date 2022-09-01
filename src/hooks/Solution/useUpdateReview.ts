@@ -3,7 +3,7 @@ import ISolutionEntity from "../../core/entities/interfaces/iSolution";
 import SolutionEntity from "../../core/entities/Solution";
 import Solution from "../../di/Solution";
 
-export default function useUpdateReview(solutionId: number, reviewId: number) {
+export default function useUpdateReview(solutionId: number) {
   const queryClient = useQueryClient();
   const { mutate } = useMutation(
     ({ reviewId, content }: { reviewId: number; content: string }) =>
