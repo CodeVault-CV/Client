@@ -1,8 +1,7 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState, ChangeEvent } from "react";
-import { useNavigate } from "react-router-dom";
-import Study from "../../../../../di/Study";
+import useCreateStudy from "../../../../../hooks/Study/useCreateStudy";
 import debounce from "../../../../../utils/debounce";
+import Loading from "../../../Loading";
 import CreateStudyButton from "./CreateStudyButton";
 
 export interface IErrorMessage {
@@ -10,22 +9,8 @@ export interface IErrorMessage {
   repoNameMessage: string;
 }
 
-type CreateStudyProps = {
-  studyName: string;
-  repoName: string;
-};
-
 export default function CreateStudyButtonContainer() {
-  const queryClient = useQueryClient();
-  const mutation = useMutation(
-    ({ studyName, repoName }: CreateStudyProps) => Study.createStudy(studyName, repoName),
-    {
-      onSuccess: (data) => {
-        queryClient.invalidateQueries(["studyList"]);
-        navigate(`/study/${data.id}`);
-      },
-    }
-  );
+  const { isLoading, createStudy } = useCreateStudy();
   const [studyName, setStudyName] = useState<string>("");
   const [repoName, setRepoName] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<IErrorMessage>({
@@ -90,19 +75,20 @@ export default function CreateStudyButtonContainer() {
     checkRepoName(value);
   };
 
-  const navigate = useNavigate();
-
   const handleSubmit = async () => {
-    mutation.mutate({ studyName, repoName });
+    createStudy({ studyName, repoName });
   };
 
   return (
-    <CreateStudyButton
-      studyName={studyName}
-      repoName={repoName}
-      errorMessage={errorMessage}
-      handleSubmit={handleSubmit}
-      handleChange={handleChange}
-    />
+    <>
+      <CreateStudyButton
+        studyName={studyName}
+        repoName={repoName}
+        errorMessage={errorMessage}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+      />
+      {isLoading && <Loading />}
+    </>
   );
 }
