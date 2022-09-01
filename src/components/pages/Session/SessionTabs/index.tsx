@@ -30,8 +30,8 @@ export default function SessionTabs({ studyId, sessionId }: SessionTabsProps) {
           alignItems: "center",
         }}
       >
-        <Tab icon={<Code />} iconPosition="start" label="Problems" />
-        {isLeader && <Tab icon={<Settings />} iconPosition="start" label="Settings" />}
+        <Tab icon={<Code />} iconPosition="start" label="문제" />
+        {isLeader && <Tab icon={<Settings />} iconPosition="start" label="설정" />}
       </Tabs>
       {!tab ? (
         <ProblemGrid sessionId={sessionId} />

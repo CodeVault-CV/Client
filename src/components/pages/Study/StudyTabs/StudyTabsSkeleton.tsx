@@ -14,7 +14,7 @@ export default function StudyTabsSkeleton() {
           alignItems: "center",
         }}
       >
-        <Tab icon={<Flag />} iconPosition="start" label="Sessions" />
+        <Tab icon={<Flag />} iconPosition="start" label="세션" />
       </Tabs>
       <SessionGridSkeleton />
     </>

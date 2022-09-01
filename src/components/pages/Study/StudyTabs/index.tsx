@@ -29,8 +29,8 @@ export default function StudyTabs({ studyId }: StudyTabsProps) {
           alignItems: "center",
         }}
       >
-        <Tab icon={<Flag />} iconPosition="start" label="Sessions" />
-        {isLeader && <Tab icon={<Settings />} iconPosition="start" label="Settings" />}
+        <Tab icon={<Flag />} iconPosition="start" label="세션" />
+        {isLeader && <Tab icon={<Settings />} iconPosition="start" label="설정" />}
       </Tabs>
       {!tab || !isLeader ? <SessionGrid studyId={studyId} /> : <StudySetting studyId={studyId} />}
     </>

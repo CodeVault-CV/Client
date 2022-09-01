@@ -14,7 +14,7 @@ export default function SessionTabsSkeleton() {
           alignItems: "center",
         }}
       >
-        <Tab icon={<Code />} iconPosition="start" label="Problems" />
+        <Tab icon={<Code />} iconPosition="start" label="문제" />
       </Tabs>
       <ProblemGridSkeleton />
     </>
