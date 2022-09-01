@@ -8,17 +8,17 @@ import useDeleteStudy from "../../../../../hooks/Study/useDeleteStudy";
 import Loading from "../../../../blocks/Loading";
 
 interface StudyDeletionProps {
-  id: string;
+  studyId: string;
 }
 
-export default function StudyDelete({ id }: StudyDeletionProps) {
+export default function StudyDelete({ studyId }: StudyDeletionProps) {
   const { isLoading, deleteStudy } = useDeleteStudy();
   const [openModal, setOpenModal] = useState(false);
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
   const handleClick = () => {
-    deleteStudy(id);
+    deleteStudy(studyId);
     handleCloseModal();
   };
 

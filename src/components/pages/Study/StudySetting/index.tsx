@@ -15,11 +15,11 @@ export default function StudySetting({ studyId }: StudySettingProps) {
   return (
     <Wrapper>
       <Stack paddingX={3}>
-        <StudyName id={studyId} name={study?.name ?? 'unknown'} />
+        <StudyName studyId={studyId} name={study?.name ?? 'unknown'} />
         <Divider sx={{ mt: 5, mb: 3 }} />
-        <StudyMember id={studyId} members={study?.members ?? []} />
+        <StudyMember studyId={studyId} members={study?.members ?? []} />
         <Divider sx={{ mt: 5, mb: 3 }} />
-        <StudyDelete id={studyId} />
+        <StudyDelete studyId={studyId} />
       </Stack>
     </Wrapper>
   );

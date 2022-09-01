@@ -7,7 +7,6 @@ export default function debounce(func: any, delay: number = 1000) {
     }
 
     timeout = setTimeout(() => {
-      timeout = null;
       func(...args);
     }, delay);
   };

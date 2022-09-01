@@ -1,5 +1,7 @@
 import { Stack } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+
 import Profile from "../../../../blocks/Profile";
 import Button from "../../../../atoms/Button";
 import UserAutocomplete from "./UserAutocomplete.tsx";
@@ -8,37 +10,59 @@ import Study from "../../../../../di/Study";
 import IMemberEntity from "../../../../../core/entities/interfaces/iMember";
 
 interface StudyMemberProps {
-  id: string;
+  studyId: string;
   members: IMemberEntity[];
 }
 
-export default function StudyMember({ id, members }: StudyMemberProps) {
-  const [userName, setUserName] = useState<string>("");
-  const [searched, setSearched] = useState<IMemberEntity[]>([]);
-
-  const searchUser = debounce((name: string) => {
-    if (!name) {
-      setSearched([]);
-      return;
+export default function StudyMember({ studyId, members }: StudyMemberProps) {
+  const { isLoading, mutate } = useMutation(
+    (name: string) => Study.searchStudyMember(studyId, name),
+    {
+      onSuccess: (members) => {
+        setOptions([...members]);
+      },
     }
-    Study.searchStudyMember(id, name).then((data) => {
-      setSearched(data);
-    });
-  });
+  );
+  const [value, setValue] = useState<IMemberEntity | null>(null);
+  const [, setInputValue] = useState("");
+  const [options, setOptions] = useState<readonly IMemberEntity[]>([]);
+  const [typing, setTyping] = useState(false);
 
-  const handleChange = (value: string) => {
-    setUserName(value);
-    searchUser(value);
+  const loadOptions = useCallback(
+    debounce((name: string) => {
+      if (!name) {
+        setOptions([]);
+        return;
+      }
+
+      mutate(name);
+      setTyping(false);
+    }, 500),
+    []
+  );
+
+  const handleInputChange = (value: string) => {
+    setTyping(value ? true : false);
+    setInputValue(value);
+    loadOptions(value);
+  };
+
+  const handleValueChange = (value: IMemberEntity | null) => {
+    setValue(value);
   };
 
   const handleClick = () => {
-    handleChange("");
-    // Study.addStudyMember(id, userName).then(({ status, message }) => {
-    //   if (status === 200) {
-    //     message = `${userName} 님에게 초대 메일을 전송했습니다.`;
-    //   }
-    //   window.alert(message);
-    // });
+    if (value?.name) {
+      const username = value.name;
+
+      Study.addStudyMember(studyId, username).then(({ status, message }) => {
+        if (status === 200) {
+          message = `${username} 님에게 초대 메일을 전송했습니다.`;
+        }
+        window.alert(message);
+      });
+    }
+    setValue(null);
   };
 
   return (
@@ -50,8 +74,14 @@ export default function StudyMember({ id, members }: StudyMemberProps) {
         ))}
       </Stack>
       <Stack direction="row" spacing={1}>
-        <UserAutocomplete userName={userName} searched={searched} handleChange={handleChange} />
-        <Button color="success" onClick={handleClick}>
+        <UserAutocomplete
+          value={value}
+          options={options}
+          isLoading={isLoading || typing}
+          handleValueChange={handleValueChange}
+          handleInputChange={handleInputChange}
+        />
+        <Button color="success" onClick={handleClick} disabled={!value}>
           초대
         </Button>
       </Stack>
