@@ -5,7 +5,7 @@ import IMemberEntity from "../../../../../../core/entities/interfaces/iMember";
 interface UserAutocompleteProps {
   value: IMemberEntity | null;
   isLoading: boolean;
-  options: readonly IMemberEntity[];
+  options?: readonly IMemberEntity[];
   handleValueChange(value: IMemberEntity | null): void;
   handleInputChange(value: string): void;
 }
@@ -13,7 +13,7 @@ interface UserAutocompleteProps {
 export default function UserAutocomplete({
   value,
   isLoading,
-  options,
+  options = [],
   handleValueChange,
   handleInputChange,
 }: UserAutocompleteProps) {
@@ -27,7 +27,7 @@ export default function UserAutocomplete({
         noOptionsText="결과가 없습니다"
         isOptionEqualToValue={(option, value) => option.id === value.id}
         loading={isLoading}
-        loadingText="로딩중..."
+        loadingText="검색중..."
         value={value}
         defaultValue={null}
         size="small"
@@ -38,7 +38,12 @@ export default function UserAutocomplete({
           handleInputChange(newInputValue);
         }}
         renderOption={(props, option) => (
-          <Box component="li" sx={{ "& > img": { mr: 2, flexShrink: 0 } }} {...props}>
+          <Box
+            key={option.id}
+            component="li"
+            sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+            {...props}
+          >
             <img
               loading="lazy"
               width="30"

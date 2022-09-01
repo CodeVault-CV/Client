@@ -1,6 +1,5 @@
 import { Stack } from "@mui/material";
 import { useCallback, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
 
 import Profile from "../../../../blocks/Profile";
 import Button from "../../../../atoms/Button";
@@ -8,6 +7,7 @@ import UserAutocomplete from "./UserAutocomplete.tsx";
 import debounce from "../../../../../utils/debounce";
 import Study from "../../../../../di/Study";
 import IMemberEntity from "../../../../../core/entities/interfaces/iMember";
+import useSearchUser from "../../../../../hooks/useSearchUser";
 
 interface StudyMemberProps {
   studyId: string;
@@ -15,34 +15,21 @@ interface StudyMemberProps {
 }
 
 export default function StudyMember({ studyId, members }: StudyMemberProps) {
-  const { isLoading, mutate } = useMutation(
-    (name: string) => Study.searchStudyMember(studyId, name),
-    {
-      onSuccess: (members) => {
-        setOptions([...members]);
-      },
-    }
-  );
+  const { isLoading, users, searchUser } = useSearchUser(studyId);
   const [value, setValue] = useState<IMemberEntity | null>(null);
-  const [, setInputValue] = useState("");
-  const [options, setOptions] = useState<readonly IMemberEntity[]>([]);
+  const [inputValue, setInputValue] = useState("");
   const [typing, setTyping] = useState(false);
 
   const loadOptions = useCallback(
     debounce((name: string) => {
-      if (!name) {
-        setOptions([]);
-        return;
-      }
-
-      mutate(name);
+      searchUser(name);
       setTyping(false);
-    }, 500),
+    }, 300),
     []
   );
 
   const handleInputChange = (value: string) => {
-    setTyping(value ? true : false);
+    setTyping(true);
     setInputValue(value);
     loadOptions(value);
   };
@@ -65,6 +52,8 @@ export default function StudyMember({ studyId, members }: StudyMemberProps) {
     setValue(null);
   };
 
+  const loading = isLoading || typing;
+
   return (
     <>
       <h3>스터디원</h3>
@@ -76,8 +65,8 @@ export default function StudyMember({ studyId, members }: StudyMemberProps) {
       <Stack direction="row" spacing={1}>
         <UserAutocomplete
           value={value}
-          options={options}
-          isLoading={isLoading || typing}
+          options={loading || !inputValue ? [] : users}
+          isLoading={loading}
           handleValueChange={handleValueChange}
           handleInputChange={handleInputChange}
         />
