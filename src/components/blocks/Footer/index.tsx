@@ -2,7 +2,7 @@ import { Box, Container, Divider, Link, Stack, Typography } from "@mui/material"
 
 export default function Footer() {
   return (
-    <Box sx={{ flexGrow: 1, color: "text.disabled", mt: 5 }}>
+    <Box sx={{ flexGrow: 1, color: "text.disabled", my: 5 }}>
       <Container maxWidth="md">
         <Typography variant="body2" textAlign="center">
           ©{new Date().getFullYear()} by{" "}
