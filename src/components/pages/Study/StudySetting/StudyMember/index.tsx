@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Box, Stack, Tooltip } from "@mui/material";
 import { useCallback, useState } from "react";
 
 import Profile from "../../../../blocks/Profile";
@@ -59,7 +59,11 @@ export default function StudyMember({ studyId, members }: StudyMemberProps) {
       <h3>스터디원</h3>
       <Stack direction="row" spacing={1} sx={{ mb: 3, overflowX: "auto" }}>
         {members.map(({ id, name, imageUrl, githubUrl }) => (
-          <Profile key={id} name={name} imageUrl={imageUrl} href={githubUrl} />
+          <Tooltip title={name} arrow>
+            <Box>
+              <Profile key={id} name={name} imageUrl={imageUrl} href={githubUrl} />
+            </Box>
+          </Tooltip>
         ))}
       </Stack>
       <Stack direction="row" spacing={1}>
