@@ -13,22 +13,22 @@ export default function Footer() {
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} spacing={1}>
-            <Typography variant="body2">
+            <Typography variant="caption" fontSize={9}>
               <Link href="https://github.com/choi-jaewon" color="inherit">
                 choi-jaewon
               </Link>
             </Typography>
-            <Typography variant="body2">
+            <Typography variant="caption" fontSize={9}>
               <Link href="https://github.com/Johoseong" color="inherit">
                 Johoseong
               </Link>
             </Typography>
-            <Typography variant="body2">
+            <Typography variant="caption" fontSize={9}>
               <Link href="https://github.com/KingDonggyu" color="inherit">
                 KingDonggyu
               </Link>
             </Typography>
-            <Typography variant="body2">
+            <Typography variant="caption" fontSize={9}>
               <Link href="https://github.com/woong-jae" color="inherit">
                 woong-jae
               </Link>

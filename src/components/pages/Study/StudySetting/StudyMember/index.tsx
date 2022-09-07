@@ -57,7 +57,7 @@ export default function StudyMember({ studyId, members }: StudyMemberProps) {
   return (
     <>
       <h3>스터디원</h3>
-      <Stack direction="row" spacing={4} sx={{ mb: 3, overflowX: "auto" }}>
+      <Stack direction="row" spacing={1} sx={{ mb: 3, overflowX: "auto" }}>
         {members.map(({ id, name, imageUrl, githubUrl }) => (
           <Profile key={id} name={name} imageUrl={imageUrl} href={githubUrl} />
         ))}

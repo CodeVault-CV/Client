@@ -1,7 +1,7 @@
+import React, { useState } from "react";
 import { Box, Tooltip, IconButton, Popover } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
-import React, { useState } from "react";
 import Wrapper from "../../../../blocks/Wrapper";
 import SessionEditor from "../../../../blocks/SessionEditor";
 import useCreateSession from "../../../../../hooks/Session/useCreateSession";
@@ -38,12 +38,12 @@ export default function SessionAdderContainer({ studyId }: SessionAdderContainer
       <Popover
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
+          vertical: 'bottom',
+          horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
+          vertical: 'top',
+          horizontal: 'right',
         }}
         open={open}
         onClose={handleClose}
