@@ -79,6 +79,7 @@ export default function ProblemCard({ problem }: ProblemCardProps) {
                     border: 1,
                     borderRadius: 1,
                     borderColor: user.solve ? "primary.main" : "error.main",
+                    bgcolor: user.solve ? "rgba(66, 165, 245, 0.2)" : "rgba(239, 83, 80, 0.2)",
                     p: 1.2,
                   }}
                 >
