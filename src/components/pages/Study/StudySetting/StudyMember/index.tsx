@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Box, Stack, Tooltip } from "@mui/material";
 import { useCallback, useState } from "react";
 
 import Profile from "../../../../blocks/Profile";
@@ -55,14 +55,9 @@ export default function StudyMember({ studyId, members }: StudyMemberProps) {
   const loading = isLoading || typing;
 
   return (
-    <>
+    <Box>
       <h3>스터디원</h3>
-      <Stack direction="row" spacing={4} sx={{ mb: 3, overflowX: "auto" }}>
-        {members.map(({ id, name, imageUrl, githubUrl }) => (
-          <Profile key={id} name={name} imageUrl={imageUrl} href={githubUrl} />
-        ))}
-      </Stack>
-      <Stack direction="row" spacing={1}>
+      <Stack direction="row" spacing={1} mb={3}>
         <UserAutocomplete
           value={value}
           options={loading || !inputValue ? [] : users}
@@ -74,6 +69,15 @@ export default function StudyMember({ studyId, members }: StudyMemberProps) {
           초대
         </Button>
       </Stack>
-    </>
+      <Stack direction="row" spacing={1} sx={{ overflowX: "auto" }}>
+        {members.map(({ id, name, imageUrl, githubUrl }) => (
+          <Tooltip title={name} arrow>
+            <Box>
+              <Profile key={id} name={name} imageUrl={imageUrl} href={githubUrl} />
+            </Box>
+          </Tooltip>
+        ))}
+      </Stack>
+    </Box>
   );
 }

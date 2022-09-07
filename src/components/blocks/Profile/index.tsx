@@ -22,7 +22,7 @@ export default function Profile({
       disabled={disabled}
       {...buttonProps}
       sx={{
-        p: 0.5,
+        p: 0.3,
         borderRadius: "50%",
         boxShadow: 0,
         ":hover": {

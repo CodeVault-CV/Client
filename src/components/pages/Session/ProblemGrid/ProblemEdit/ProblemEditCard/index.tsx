@@ -3,7 +3,7 @@ import { Grid, Box, IconButton, Stack, Typography } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 
 import Wrapper from "../../../../../blocks/Wrapper";
-import ProblemLabel from "../../../ProblemGrid/ProblemLabel";
+import ProblemLabel from "../../ProblemLabel";
 import { IProblemData } from "../../../../../../core/entities/interfaces/iProblem";
 
 export default function ProblemEditCard({

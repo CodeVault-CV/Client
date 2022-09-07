@@ -34,7 +34,7 @@ export default function SessionTabs({ studyId, sessionId }: SessionTabsProps) {
         {isLeader && <Tab icon={<Settings />} iconPosition="start" label="설정" />}
       </Tabs>
       {!tab ? (
-        <ProblemGrid sessionId={sessionId} />
+        <ProblemGrid sessionId={sessionId} editable={isLeader} />
       ) : (
         <SessionSetting studyId={studyId} sessionId={sessionId} changeTab={() => setTab(0)} />
       )}

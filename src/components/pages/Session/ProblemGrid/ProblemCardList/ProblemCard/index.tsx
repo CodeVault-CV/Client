@@ -79,22 +79,31 @@ export default function ProblemCard({ problem }: ProblemCardProps) {
                     border: 1,
                     borderRadius: 1,
                     borderColor: user.solve ? "primary.main" : "error.main",
-                    p: 1,
+                    bgcolor: user.solve ? "rgba(66, 165, 245, 0.2)" : "rgba(239, 83, 80, 0.2)",
+                    p: 1.2,
                   }}
                 >
-                  <Profile
-                    name={user.userName || "unknown"}
-                    imageUrl={user.imageUrl}
-                    color={user.solve ? "primary" : "error"}
-                    onClick={() =>
-                      navigate(!user.solve ? `./solve/${problem.id}` : `./solution/${user.id}`)
-                    }
-                  />
+                  <Tooltip
+                    title={user.solve ? "풀었습니다!" : "풀이를 등록하세요!"}
+                    placement="top"
+                    arrow
+                  >
+                    <Box>
+                      <Profile
+                        name={user.userName || "unknown"}
+                        imageUrl={user.imageUrl}
+                        color={user.solve ? "primary" : "error"}
+                        onClick={() =>
+                          navigate(!user.solve ? `./solve/${problem.id}` : `./solution/${user.id}`)
+                        }
+                      />
+                    </Box>
+                  </Tooltip>
                 </Box>
                 {members.map(({ userName, imageUrl, solve, id }) => {
                   return (
                     <Box key={userName} sx={{ p: 1 }}>
-                      <Tooltip title={userName} arrow>
+                      <Tooltip title={userName} placement="top" arrow>
                         <Box>
                           <Profile
                             name={userName}
