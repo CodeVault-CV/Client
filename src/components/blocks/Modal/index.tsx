@@ -14,7 +14,7 @@ const ModalStyle = {
 
 export default function Modal({ children, ...props }: PropsWithChildren<ModalProps>) {
   return (
-    <MaterialModal {...props}>
+    <MaterialModal disableAutoFocus {...props}>
       <Box sx={ModalStyle}>
         {children}
       </Box>
