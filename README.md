@@ -10,3 +10,4 @@
 - Typesript
 - Material UI
 ## Structure
+<img src="https://user-images.githubusercontent.com/33976823/196031707-be47097c-3209-4530-a44c-2355f670ece6.png" width="500px">
