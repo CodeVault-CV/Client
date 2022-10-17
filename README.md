@@ -16,5 +16,4 @@
 ![typescript](https://img.shields.io/badge/TypeScript-3178C6?&logo=typescript&logoColor=white)
 ![material-ui](https://img.shields.io/badge/Material%20UI-007FFF?&logo=mui&logoColor=white)
 ## Structure
-<img src="https://user-images.githubusercontent.com/33976823/196091374-25e39cf9-4868-407a-8c64-135f3ce814ab.png" width="500px">
-
+<img src="https://user-images.githubusercontent.com/33976823/196091627-410f80f4-10ce-4de9-9509-fd6a3f160049.png" width="500px">
