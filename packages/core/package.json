@@ -1,0 +1,10 @@
+{
+  "name": "@algong/core",
+  "packageManager": "yarn@3.2.1",
+  "devDependencies": {
+    "typescript": "4.4.4"
+  },
+  "dependencies": {
+    "axios": "^1.1.3"
+  }
+}
