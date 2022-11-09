@@ -2,6 +2,9 @@
   "name": "algong",
   "packageManager": "yarn@3.2.1",
   "private": true,
+  "scripts": {
+    "app": "yarn workspace @algong/app"
+  },
   "workspaces": [
     "packages/*"
   ],
