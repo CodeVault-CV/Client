@@ -5,36 +5,6 @@ __metadata:
   version: 6
   cacheKey: 8
 
-"@algong/app@workspace:packages/app":
-  version: 0.0.0-use.local
-  resolution: "@algong/app@workspace:packages/app"
-  dependencies:
-    "@algong/core": "workspace:*"
-    "@babel/core": ^7.20.2
-    "@babel/preset-env": ^7.20.2
-    "@babel/preset-typescript": ^7.18.6
-    babel-loader: ^9.1.0
-    css-loader: ^6.7.2
-    html-webpack-plugin: ^5.5.0
-    style-loader: ^3.3.1
-    ts-loader: ^9.4.1
-    typescript: 4.4.4
-    webpack: ^5.74.0
-    webpack-cli: ^4.10.0
-    webpack-dev-server: ^4.11.1
-    webpack-merge: ^5.8.0
-  languageName: unknown
-  linkType: soft
-
-"@algong/core@workspace:*, @algong/core@workspace:packages/core":
-  version: 0.0.0-use.local
-  resolution: "@algong/core@workspace:packages/core"
-  dependencies:
-    axios: ^1.1.3
-    typescript: 4.4.4
-  languageName: unknown
-  linkType: soft
-
 "@ampproject/remapping@npm:^2.1.0":
   version: 2.2.0
   resolution: "@ampproject/remapping@npm:2.2.0"
@@ -1318,6 +1288,50 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@codevault/app@workspace:packages/app":
+  version: 0.0.0-use.local
+  resolution: "@codevault/app@workspace:packages/app"
+  dependencies:
+    "@babel/core": ^7.20.2
+    "@babel/preset-env": ^7.20.2
+    "@babel/preset-typescript": ^7.18.6
+    "@codevault/core": "workspace:*"
+    babel-loader: ^9.1.0
+    css-loader: ^6.7.2
+    html-webpack-plugin: ^5.5.0
+    style-loader: ^3.3.1
+    ts-loader: ^9.4.1
+    typescript: 4.4.4
+    webpack: ^5.74.0
+    webpack-cli: ^4.10.0
+    webpack-dev-server: ^4.11.1
+    webpack-merge: ^5.8.0
+  languageName: unknown
+  linkType: soft
+
+"@codevault/core@workspace:*, @codevault/core@workspace:packages/core":
+  version: 0.0.0-use.local
+  resolution: "@codevault/core@workspace:packages/core"
+  dependencies:
+    axios: ^1.1.3
+    typescript: 4.4.4
+  languageName: unknown
+  linkType: soft
+
+"@codevault/extension@workspace:packages/extension":
+  version: 0.0.0-use.local
+  resolution: "@codevault/extension@workspace:packages/extension"
+  dependencies:
+    "@types/chrome": ^0.0.203
+    copy-webpack-plugin: ^11.0.0
+    ts-loader: ^9.4.1
+    typescript: 4.4.4
+    webpack: ^5.75.0
+    webpack-cli: ^5.0.0
+    webpack-merge: ^5.8.0
+  languageName: unknown
+  linkType: soft
+
 "@discoveryjs/json-ext@npm:^0.5.0":
   version: 0.5.7
   resolution: "@discoveryjs/json-ext@npm:0.5.7"
@@ -2032,14 +2046,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"algong@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "algong@workspace:."
-  dependencies:
-    typescript: 4.4.4
-  languageName: unknown
-  linkType: soft
-
 "ansi-html-community@npm:^0.0.8":
   version: 0.0.8
   resolution: "ansi-html-community@npm:0.0.8"
@@ -2438,6 +2444,14 @@ __metadata:
   checksum: 770f912fe4e6f21873c8e8fbb1e99134db3b93da32df271d00589ea4a29dbe83a9808a322c93f3bcaf8584b8b4fa6fc269fc8032efbaa6728e0c9886c74467d2
   languageName: node
   linkType: hard
+
+"code_vault@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "code_vault@workspace:."
+  dependencies:
+    typescript: 4.4.4
+  languageName: unknown
+  linkType: soft
 
 "color-convert@npm:^1.9.0":
   version: 1.9.3
@@ -3085,20 +3099,6 @@ __metadata:
   checksum: 3c4b9b076879442f6b968fe53d85d9f1eeacbb4f4c41e5f16cc36d77ce39a2b0d81b3f250514982110d815b2f7173f5561367f9110fcc541f9371948e8c8b037
   languageName: node
   linkType: hard
-
-"extension@workspace:packages/extension":
-  version: 0.0.0-use.local
-  resolution: "extension@workspace:packages/extension"
-  dependencies:
-    "@types/chrome": ^0.0.203
-    copy-webpack-plugin: ^11.0.0
-    ts-loader: ^9.4.1
-    typescript: 4.4.4
-    webpack: ^5.75.0
-    webpack-cli: ^5.0.0
-    webpack-merge: ^5.8.0
-  languageName: unknown
-  linkType: soft
 
 "fast-deep-equal@npm:^3.1.1, fast-deep-equal@npm:^3.1.3":
   version: 3.1.3
