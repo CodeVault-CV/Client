@@ -1,0 +1,27 @@
+.UserBadge {
+  display: flex;
+  align-items: center;
+
+  height: fit-content;
+
+  user-select: none;
+
+  border-radius: 0.5rem;
+
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+.UserBadge__profile {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+
+  margin-right: 0.5rem;
+}
+
+.UserBadge__name {
+  font-weight: 600;
+}

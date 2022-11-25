@@ -1,5 +1,5 @@
 {
-  "name": "@algong/app",
+  "name": "@codevault/app",
   "packageManager": "yarn@3.2.1",
   "main": "src/index.ts",
   "scripts": {
@@ -8,7 +8,7 @@
     "start": "webpack --config webpack.dev.js"
   },
   "dependencies": {
-    "@algong/core": "workspace:*"
+    "@codevault/core": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",

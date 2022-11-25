@@ -1,5 +1,5 @@
 {
-  "name": "extension",
+  "name": "@codevault/extension",
   "packageManager": "yarn@3.2.1",
   "scripts": {
     "build": "webpack --config webpack/webpack.prod.js",

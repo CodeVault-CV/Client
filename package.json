@@ -1,9 +1,10 @@
 {
-  "name": "algong",
+  "name": "code_vault",
   "packageManager": "yarn@3.2.1",
   "private": true,
   "scripts": {
-    "app": "yarn workspace @algong/app"
+    "app": "yarn workspace @codevault/app",
+    "extension": "yarn workspace @codevault/extension"
   },
   "workspaces": [
     "packages/*"

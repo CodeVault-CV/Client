@@ -1,5 +1,5 @@
 {
-  "name": "@algong/core",
+  "name": "@codevault/core",
   "packageManager": "yarn@3.2.1",
   "devDependencies": {
     "typescript": "4.4.4"

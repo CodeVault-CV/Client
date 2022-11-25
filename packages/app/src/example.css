@@ -1,0 +1,10 @@
+.Example {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: fit-content;
+  background-color: whitesmoke;
+}
+.Example > * {
+  margin: 1rem;
+}
