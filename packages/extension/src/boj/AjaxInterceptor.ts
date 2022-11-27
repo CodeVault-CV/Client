@@ -1,15 +1,15 @@
+/* Response Interceptors */
 type ResInterceptorParam = (data: any) => void;
-
 // jQuery AJAX response interceptor
 declare global {
   interface Window {
-    $: JQueryStatic;
+    $: any;
   }
 }
 function interceptJqueryRes(cb: ResInterceptorParam) {
   if (window?.$) {
     window.$.ajaxSetup({
-      dataFilter: function (data) {
+      dataFilter: function (data: string) {
         cb(data);
         return data;
       }
@@ -47,31 +47,40 @@ function interceptFetchRes(cb: ResInterceptorParam) {
   })(window.fetch);
 }
 
+/* Ajax Interceptor */
 interface iAjaxInterceptor {
-  subscribeResponse(cb: (data: any) => void): this;
-  subscribeRequest(cb: (data: any) => void): this;
+  subscribeResponse(cb: (data: any) => void): iAjaxInterceptor;
+  subscribeRequest(cb: (data: any) => void): iAjaxInterceptor;
+  start: () => void;
 }
-export default class AjaxInterceptor implements iAjaxInterceptor {
-  private readonly subscribers: ((data: any) => void)[] = [];
-  constructor() {
-    console.log("ajax interceptor loaded");
-    const notify = (data: any) => {
-      console.log("res detected");
-      this.subscribers.forEach(cb => cb(data));
-    }
 
-    interceptFetchRes(notify);
-    interceptJqueryRes(notify);
-    // interceptXhrRes(notify);
+export default function createAjaxInterceptor(): iAjaxInterceptor {
+  const resSubscribers: ((data: any) => void)[] = [];
 
-    return this;
+  const notifyRes = (data: any) => {
+    resSubscribers.forEach(cb => cb(data));
   }
 
-  subscribeResponse(cb: (data: any) => void): this {
-    this.subscribers.push(cb);
-    return this;
+  function start() {
+    interceptFetchRes(notifyRes);
+    interceptJqueryRes(notifyRes);
   }
-  subscribeRequest(cb: (data: any) => void): this {
-    return this;
+
+  function subscribeResponse(cb: (data: any) => void): iAjaxInterceptor {
+    resSubscribers.push(cb);
+    return ret;
   }
+
+  function subscribeRequest(cb: (data: any) => void): iAjaxInterceptor {
+    new Error("not implemented");
+    return ret;
+  }
+
+  const ret = {
+    subscribeRequest,
+    subscribeResponse,
+    start
+  }
+
+  return ret
 }

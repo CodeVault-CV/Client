@@ -1,8 +1,10 @@
-import AjaxInterceptor from "./AjaxInterceptor";
+import createAjaxInterceptor from "./ajaxInterceptor";
 
 function onIntercept(data: any) {
   console.log(data);
 }
 
-new AjaxInterceptor()
-  .subscribeRequest(onIntercept);
+const ajaxInterceptor = createAjaxInterceptor();
+ajaxInterceptor
+  .subscribeResponse(onIntercept)
+  .start(); 
