@@ -2,16 +2,15 @@
   "name": "@codevault/extension",
   "packageManager": "yarn@3.2.1",
   "scripts": {
-    "build": "webpack --config webpack/webpack.prod.js",
-    "clean": "rimraf dist"
+    "build": "cp -a ./public/. ./dist && tsc --outDir dist",
+    "clean": "rm -r dist"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.203",
-    "copy-webpack-plugin": "^11.0.0",
-    "ts-loader": "^9.4.1",
-    "typescript": "4.4.4",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.0",
-    "webpack-merge": "^5.8.0"
+    "@types/jquery": "^3.5.14",
+    "typescript": "4.4.4"
+  },
+  "dependencies": {
+    "jquery": "^3.6.1"
   }
 }

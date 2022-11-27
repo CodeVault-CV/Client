@@ -5,9 +5,8 @@
     "esModuleInterop": true,
     "strict": true,
     "target": "es6",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["DOM", "DOM.Iterable", "ES5", "ES6", "ESNext"],
     "skipLibCheck": true,
-    "baseUrl": ".",
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "isolatedModules": true
