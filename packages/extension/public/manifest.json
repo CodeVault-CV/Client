@@ -5,13 +5,13 @@
   "version": "0.1",
   "action": {},
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "js/background.js"
   },
   "permissions": [
     "tabs", 
     "activeTab", 
     "scripting",
-    "webNavigation"
+    "nativeMessaging"
   ],
   "host_permissions": ["https://*/*"]
 }

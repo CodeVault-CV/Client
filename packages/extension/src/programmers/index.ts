@@ -1,3 +1,7 @@
+import { doSomething } from "./doSomething";
+
+doSomething();
+
 // Intercept request
 ((send) => {
   window.WebSocket.prototype.send = function (data: string | ArrayBufferLike | Blob | ArrayBufferView) {
