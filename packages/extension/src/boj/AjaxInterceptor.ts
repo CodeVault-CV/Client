@@ -1,12 +1,43 @@
 /* Response Interceptors */
 type ResInterceptorParam = (data: any) => void;
+
+type interceptListener = (data: any) => void;
+interface iInterceptor {
+  addListener: (data: any) => void;
+}
+
 // jQuery AJAX response interceptor
 declare global {
   interface Window {
     $: any;
   }
 }
-function interceptJqueryRes(cb: ResInterceptorParam) {
+const interceptJqueryResponseBody: iInterceptor = (() => {
+  const listeners: interceptListener[] = [];
+
+  const notify = (data: any) => {
+    listeners.forEach(listener => listener(data));
+  }
+
+  const addListener = (listener: interceptListener) => {
+    listeners.push(listener);
+  }
+
+  if (window?.$) {
+    window.$.ajaxSetup({
+      dataFilter: function (data: string) {
+        notify(data);
+        return data;
+      }
+    });
+  }
+
+  return {
+    addListener
+  }
+})();
+
+function interceptJqueryRes(cb: ResInterceptorParam) { // Inject and add listener
   if (window?.$) {
     window.$.ajaxSetup({
       dataFilter: function (data: string) {
@@ -63,7 +94,7 @@ export default function createAjaxInterceptor(): iAjaxInterceptor {
 
   function start() {
     interceptFetchRes(notifyRes);
-    interceptJqueryRes(notifyRes);
+    interceptJqueryResponseBody.addListener(notifyRes);
   }
 
   function subscribeResponse(cb: (data: any) => void): iAjaxInterceptor {
