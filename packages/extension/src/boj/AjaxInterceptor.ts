@@ -1,52 +1,8 @@
+import interceptFetchResponseBody from "../common/interceptor/interceptFetchResponseBody";
+import interceptJqueryResponseBody from "../common/interceptor/interceptJqueryResponseBody";
+
 /* Response Interceptors */
 type ResInterceptorParam = (data: any) => void;
-
-type interceptListener = (data: any) => void;
-interface iInterceptor {
-  addListener: (data: any) => void;
-}
-
-// jQuery AJAX response interceptor
-declare global {
-  interface Window {
-    $: any;
-  }
-}
-const interceptJqueryResponseBody: iInterceptor = (() => {
-  const listeners: interceptListener[] = [];
-
-  const notify = (data: any) => {
-    listeners.forEach(listener => listener(data));
-  }
-
-  const addListener = (listener: interceptListener) => {
-    listeners.push(listener);
-  }
-
-  if (window?.$) {
-    window.$.ajaxSetup({
-      dataFilter: function (data: string) {
-        notify(data);
-        return data;
-      }
-    });
-  }
-
-  return {
-    addListener
-  }
-})();
-
-function interceptJqueryRes(cb: ResInterceptorParam) { // Inject and add listener
-  if (window?.$) {
-    window.$.ajaxSetup({
-      dataFilter: function (data: string) {
-        cb(data);
-        return data;
-      }
-    });
-  }
-}
 
 // XMLHTTPRequest response interceptor
 function interceptXhrRes(cb: ResInterceptorParam) {
@@ -60,22 +16,6 @@ function interceptXhrRes(cb: ResInterceptorParam) {
       return open.apply(this, [method, url, async, username, password]);
     };
   })(XMLHttpRequest.prototype.open);
-}
-
-// Fetch response interceptor
-function interceptFetchRes(cb: ResInterceptorParam) {
-  ((fetch) => {
-    window.fetch = async (...args) => {
-      const res = await fetch(...args);
-
-      res
-        .clone()
-        .json()
-        .then(data => cb(data));
-
-      return res;
-    }
-  })(window.fetch);
 }
 
 /* Ajax Interceptor */
@@ -93,7 +33,7 @@ export default function createAjaxInterceptor(): iAjaxInterceptor {
   }
 
   function start() {
-    interceptFetchRes(notifyRes);
+    interceptFetchResponseBody.addListener(notifyRes);
     interceptJqueryResponseBody.addListener(notifyRes);
   }
 
