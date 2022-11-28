@@ -1,23 +1,6 @@
 import interceptFetchResponseBody from "../common/interceptor/interceptFetchResponseBody";
 import interceptJqueryResponseBody from "../common/interceptor/interceptJqueryResponseBody";
 
-/* Response Interceptors */
-type ResInterceptorParam = (data: any) => void;
-
-// XMLHTTPRequest response interceptor
-function interceptXhrRes(cb: ResInterceptorParam) {
-  (function (open) {
-    console.log("injecting to XMLHTTPRequest");
-    XMLHttpRequest.prototype.open = function (method: string, url: any, async?: any, username?: string, password?: string) {
-      console.log("XMLHTTPRequest called");
-      this.addEventListener("load", () => {
-        cb(JSON.parse(this.responseText));
-      });
-      return open.apply(this, [method, url, async, username, password]);
-    };
-  })(XMLHttpRequest.prototype.open);
-}
-
 /* Ajax Interceptor */
 interface iAjaxInterceptor {
   subscribeResponse(cb: (data: any) => void): iAjaxInterceptor;

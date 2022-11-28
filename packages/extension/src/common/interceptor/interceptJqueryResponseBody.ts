@@ -1,33 +1,22 @@
-import iInterceptor, { interceptListener } from "./interface";
+import createInterceptor, { interceptorParam } from "./createInterceptor";
 
 declare global {
   interface Window {
     $: any;
   }
 }
-const interceptJqueryResponseBody: iInterceptor = (() => {
-  const listeners: interceptListener[] = [];
 
-  const notify = (data: any) => {
-    listeners.forEach(listener => listener(data));
-  }
+const injectJqueryResponseBodyInterceptor = (notify: interceptorParam) => {
+  if (!window?.$) new Error("jQuery가 window에 존재하지 않음");
 
-  const addListener = (listener: interceptListener) => {
-    listeners.push(listener);
-  }
+  window.$.ajaxSetup({
+    dataFilter: function (data: any) {
+      notify(data);
+      return data;
+    }
+  });
+}
 
-  if (window?.$) {
-    window.$.ajaxSetup({
-      dataFilter: function (data: string) {
-        notify(data);
-        return data;
-      }
-    });
-  }
-
-  return {
-    addListener
-  }
-})();
+const interceptJqueryResponseBody = createInterceptor(injectJqueryResponseBodyInterceptor);
 
 export default interceptJqueryResponseBody;

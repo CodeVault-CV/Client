@@ -1,19 +1,10 @@
-import iInterceptor, { interceptListener } from "./interface";
+import createInterceptor, { interceptorParam } from "./createInterceptor";
 
-const interceptFetchResponseBody: iInterceptor = ((fetch) => {
-  const listeners: interceptListener[] = [];
-
-  const notify = (data: any) => {
-    listeners.forEach(listener => listener(data));
-  }
-
-  const addListener = (listener: interceptListener) => {
-    listeners.push(listener);
-  }
-
-  ((fetch) => {
+const injectFetchResponseBodyInterceptor = (notify: interceptorParam) => {
+  (() => {
+    const origFetch = window.fetch;
     window.fetch = async (...args) => {
-      const res = await fetch(...args);
+      const res = await origFetch(...args);
 
       res
         .clone()
@@ -22,11 +13,9 @@ const interceptFetchResponseBody: iInterceptor = ((fetch) => {
 
       return res;
     }
-  })(window.fetch);
+  })();
+}
 
-  return {
-    addListener
-  }
-})(window.fetch);
+const fetchResponseBodyInterceptor = createInterceptor(injectFetchResponseBodyInterceptor);
 
-export default interceptFetchResponseBody;
+export default fetchResponseBodyInterceptor;
