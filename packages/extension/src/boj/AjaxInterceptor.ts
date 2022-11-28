@@ -1,5 +1,5 @@
-import interceptFetchResponseBody from "../common/interceptor/interceptFetchResponseBody";
-import interceptJqueryResponseBody from "../common/interceptor/interceptJqueryResponseBody";
+import interceptFetchResponseBody from "./interceptor/fetchResponseBodyInterceptor";
+import interceptJqueryResponseBody from "./interceptor/jqueryResponseBodyInterceptor";
 
 /* Ajax Interceptor */
 interface iAjaxInterceptor {

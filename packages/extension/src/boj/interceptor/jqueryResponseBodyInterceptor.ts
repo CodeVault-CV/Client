@@ -1,4 +1,4 @@
-import createInterceptor, { interceptorParam } from "./createInterceptor";
+import createInterceptor, { interceptorParam } from "../../common/interceptor";
 
 declare global {
   interface Window {
