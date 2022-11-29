@@ -2303,7 +2303,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/chrome", "npm:0.0.203"],\
             ["@types/jquery", "npm:3.5.14"],\
             ["copy-webpack-plugin", "virtual:f209d96ea2a77572e5612cbf1cd8965e9546f623d2ca5114b6bc47662a53e6cb571d1f30efbd14db3cb0921a390358c0c7ce3eaaad1ca446bc5878fab9832c35#npm:11.0.0"],\
-            ["jquery", "npm:3.6.1"],\
             ["ts-loader", "virtual:f209d96ea2a77572e5612cbf1cd8965e9546f623d2ca5114b6bc47662a53e6cb571d1f30efbd14db3cb0921a390358c0c7ce3eaaad1ca446bc5878fab9832c35#npm:9.4.1"],\
             ["typescript", "patch:typescript@npm%3A4.4.4#~builtin<compat/typescript>::version=4.4.4&hash=7ad353"],\
             ["webpack", "virtual:f209d96ea2a77572e5612cbf1cd8965e9546f623d2ca5114b6bc47662a53e6cb571d1f30efbd14db3cb0921a390358c0c7ce3eaaad1ca446bc5878fab9832c35#npm:5.75.0"],\
@@ -5463,15 +5462,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:18.11.9"],\
             ["merge-stream", "npm:2.0.0"],\
             ["supports-color", "npm:8.1.1"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["jquery", [\
-        ["npm:3.6.1", {\
-          "packageLocation": "./.yarn/cache/jquery-npm-3.6.1-6f29087f48-6177d866a7.zip/node_modules/jquery/",\
-          "packageDependencies": [\
-            ["jquery", "npm:3.6.1"]\
           ],\
           "linkType": "HARD"\
         }]\

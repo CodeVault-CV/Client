@@ -6,8 +6,9 @@ const src = path.join(__dirname, "src");
 module.exports = {
   entry: {
     background: path.join(src, 'background/index.ts'),
-    programmers: path.join(src, 'programmers/index.ts'),
-    boj: path.join(src, "boj/index.ts")
+    "programmers-world": path.join(src, 'programmers-world/index.ts'),
+    "boj-world": path.join(src, "boj-world/index.ts"),
+    "boj-isolated": path.join(src, "boj-isolated/index.ts")
   },
   output: {
     path: path.join(__dirname, "dist/js"),

@@ -5,17 +5,24 @@
  */
 export default function registerContentScripts() {
   chrome.scripting.registerContentScripts([
+    // Programmers scripts
     {
-      id: "programmersScripts",
+      id: "programmers-world",
       matches: ["https://school.programmers.co.kr/learn/courses/30/lessons/*"],
-      js: ["js/programmers.js"],
+      js: ["js/programmers-world.js"],
+      world: "MAIN"
+    },
+    // Boj scripts
+    {
+      id: "boj-world",
+      matches: ["https://www.acmicpc.net/status*", "https://www.acmicpc.net/submit/*"],
+      js: ["js/boj-world.js"],
       world: "MAIN"
     },
     {
-      id: "bojScripts",
-      matches: ["https://www.acmicpc.net/status*"],
-      js: ["js/boj.js"],
-      world: "MAIN"
+      id: "boj-isolated",
+      matches: ["https://www.acmicpc.net/submit/*"],
+      js: ["js/boj-isolated.js"]
     }
-  ], () => console.log("registered"));
+  ]);
 }

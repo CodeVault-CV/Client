@@ -1325,7 +1325,6 @@ __metadata:
     "@types/chrome": ^0.0.203
     "@types/jquery": ^3.5.14
     copy-webpack-plugin: ^11.0.0
-    jquery: ^3.6.1
     ts-loader: ^9.4.1
     typescript: 4.4.4
     webpack: ^5.75.0
@@ -3898,13 +3897,6 @@ __metadata:
     merge-stream: ^2.0.0
     supports-color: ^8.0.0
   checksum: 98cd68b696781caed61c983a3ee30bf880b5bd021c01d98f47b143d4362b85d0737f8523761e2713d45e18b4f9a2b98af1eaee77afade4111bb65c77d6f7c980
-  languageName: node
-  linkType: hard
-
-"jquery@npm:^3.6.1":
-  version: 3.6.1
-  resolution: "jquery@npm:3.6.1"
-  checksum: 6177d866a74f1137cad800f142c7cdbd5ab19cd4282546f8bdb4890c9f933b1d542ab96f2aa15d007e43c98de7315b0513e849ec5359d3ac5640f720892fe547
   languageName: node
   linkType: hard
 

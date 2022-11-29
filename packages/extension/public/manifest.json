@@ -11,7 +11,7 @@
     "tabs", 
     "activeTab", 
     "scripting",
-    "nativeMessaging"
+    "webRequest"
   ],
   "host_permissions": ["https://*/*"]
 }
