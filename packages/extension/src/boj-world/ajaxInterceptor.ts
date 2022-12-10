@@ -3,13 +3,14 @@ import interceptJqueryResponseBody from "./interceptor/jqueryResponseBodyInterce
 
 /* Ajax Interceptor */
 interface iAjaxInterceptor {
-  subscribeResponse(cb: (data: any) => void): iAjaxInterceptor;
-  subscribeRequest(cb: (data: any) => void): iAjaxInterceptor;
+  onResponse(cb: (data: any) => void): iAjaxInterceptor;
+  onRequest(cb: (data: any) => void): iAjaxInterceptor;
   start: () => void;
 }
 
 export default function createAjaxInterceptor(): iAjaxInterceptor {
   const resSubscribers: ((data: any) => void)[] = [];
+  const reqSubscribers: ((data: any) => void)[] = [];
 
   const notifyRes = (data: any) => {
     resSubscribers.forEach(cb => cb(data));
@@ -20,19 +21,19 @@ export default function createAjaxInterceptor(): iAjaxInterceptor {
     interceptJqueryResponseBody.addListener(notifyRes);
   }
 
-  function subscribeResponse(cb: (data: any) => void): iAjaxInterceptor {
+  function onResponse(cb: (data: any) => void): iAjaxInterceptor {
     resSubscribers.push(cb);
     return ret;
   }
 
-  function subscribeRequest(cb: (data: any) => void): iAjaxInterceptor {
-    new Error("not implemented");
+  function onRequest(cb: (data: any) => void): iAjaxInterceptor {
+    reqSubscribers.push(cb);
     return ret;
   }
 
   const ret = {
-    subscribeRequest,
-    subscribeResponse,
+    onResponse,
+    onRequest,
     start
   }
 

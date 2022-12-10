@@ -9,5 +9,6 @@ function onIntercept(data: any) {
 
 const ajaxInterceptor = createAjaxInterceptor();
 ajaxInterceptor
-  .subscribeResponse(onIntercept)
+  .onResponse(onIntercept)
+  .onRequest(onIntercept)
   .start();

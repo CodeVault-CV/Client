@@ -1,5 +1,6 @@
 import registerContentScripts from "./registerContentScripts";
 
+console.log('background loaded');
 registerContentScripts();
 
 function handleClick() {
@@ -9,8 +10,9 @@ function handleClick() {
 
 chrome.webRequest.onBeforeRequest.addListener(
   ({ requestBody, tabId }) => {
-    chrome.tabs.sendMessage(tabId, "request intercepted");
-    chrome.tabs.sendMessage(tabId, JSON.stringify(requestBody?.formData));
+    console.log(requestBody?.formData);
+    // chrome.tabs.sendMessage(tabId, "request intercepted");
+    // chrome.tabs.sendMessage(tabId, JSON.stringify(requestBody?.formData));
   },
   {
     urls: ["https://www.acmicpc.net/submit/*"]

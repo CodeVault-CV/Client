@@ -4,7 +4,7 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "clean": "rm -r dist",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
