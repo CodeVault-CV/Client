@@ -9,7 +9,7 @@ const injectFetchResponseBodyInterceptor = (notify: interceptorParam) => {
       res
         .clone()
         .json()
-        .then(data => notify(data));
+        .then(data => notify(JSON.stringify(data) as any));
 
       return res;
     }
