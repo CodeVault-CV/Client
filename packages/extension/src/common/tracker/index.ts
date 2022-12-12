@@ -12,14 +12,14 @@ const createTracker = () => {
   const eventHandlers = {
     start: (payload: any) => {
       if (state !== "PENDING") return;
-
       state = "GRADING.PROCESSING";
+
       startGradingTimer();
     },
     score: () => {
       if (!state.includes("GRADING")) return;
-
       state = "GRADING.PROCESSING";
+
       startGradingTimer();
     },
     fail: () => {
@@ -28,8 +28,8 @@ const createTracker = () => {
     },
     success: () => {
       if (!state.includes("GRADING")) return;
-
       state = "DONE";
+      
       setTimeout(() => {
         state = "PENDING";
       }, 1000);

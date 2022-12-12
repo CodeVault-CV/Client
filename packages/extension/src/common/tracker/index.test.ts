@@ -1,10 +1,5 @@
 import createTracker from ".";
-
-async function timer(time: number) {
-  return await new Promise<void>((resolve) => {
-    setTimeout(() => resolve(), time);
-  });
-}
+import timer from "../../utils/timer";
 
 describe("Tracker 상태", () => {
   it("초기 상태로 PENDING을 가진다.", () => {
