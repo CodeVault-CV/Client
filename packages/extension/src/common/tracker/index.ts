@@ -1,16 +1,4 @@
-type trackerState = "PENDING" | "GRADING.PROCESSING" | "GRADING.IDLE" | "DONE";
-type trackerEventType = "start" | "fail" | "success" | "score";
-type trackerContext = {
-  platform: string,
-  problemId: string,
-  code: string,
-  memory: number,
-  time: number
-}
-type trackerEvent = {
-  type: trackerEventType,
-  payload?: any
-}
+import iTracker, { trackerContext, trackerEvent, trackerState } from "./interface";
 
 const initialContext = {
   platform: "",
@@ -20,7 +8,7 @@ const initialContext = {
   time: -Infinity
 }
 
-const createTracker = (handleDone?: (context: trackerContext) => void) => {
+const createTracker = (handleDone?: (context: trackerContext) => void): iTracker => {
   let state: trackerState = "PENDING";
   let context: trackerContext = {
     ...initialContext
