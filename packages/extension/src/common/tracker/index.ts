@@ -1,4 +1,4 @@
-type trackerState = "IDLE" | "GRADING" | "DONE";
+type trackerState = "PENDING" | "GRADING.PROCESSING" | "GRADING.IDLE" | "DONE";
 type trackerEventType = "start" | "fail" | "success" | "score";
 type trackerEvent = {
   type: trackerEventType,
@@ -6,35 +6,57 @@ type trackerEvent = {
 }
 
 const createTracker = () => {
-  let state: trackerState = "IDLE";
+  let state: trackerState = "PENDING";
+  const timers: number[] = [];
+
+  const eventHandlers = {
+    start: (payload: any) => {
+      if (state !== "PENDING") return;
+
+      state = "GRADING.PROCESSING";
+      startGradingTimer();
+    },
+    score: () => {
+      if (!state.includes("GRADING")) return;
+
+      state = "GRADING.PROCESSING";
+      startGradingTimer();
+    },
+    fail: () => {
+      if (!state.includes("GRADING")) return;
+      state = "PENDING";
+    },
+    success: () => {
+      if (!state.includes("GRADING")) return;
+
+      state = "DONE";
+      setTimeout(() => {
+        state = "PENDING";
+      }, 1000);
+    }
+  }
+
+  const startGradingTimer = () => {
+    const idleTimer = setTimeout(() => {
+      state = "GRADING.IDLE";
+
+      const pendingTimer = setTimeout(() => {
+        state = "PENDING";
+      }, 2000);
+      timers.push(pendingTimer);
+
+    }, 2000);
+
+    timers.push(idleTimer);
+  }
 
   const transition = (event: trackerEvent) => {
     const { type, payload } = event;
-    switch (type) {
-      case "start":
-        if (state === "IDLE") {
-          state = "GRADING";
-        }
-        break;
-      case "score":
-        if (state === "GRADING") {
-          state = "GRADING";
-        }
-        break;
-      case "fail":
-        if (state === "GRADING") {
-          state = "IDLE";
-        }
-        break;
-      case "success":
-        if(state === "GRADING") {
-          state = "DONE";
-          setTimeout(() => {
-            state = "IDLE";
-          }, 1000);
-        }
-        break;
-    }
+
+    if (!eventHandlers.hasOwnProperty(type)) return;
+    timers.forEach((timer) => clearTimeout(timer));
+
+    eventHandlers[type](payload);
   }
 
   return {

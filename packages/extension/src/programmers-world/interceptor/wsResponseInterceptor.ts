@@ -5,9 +5,10 @@ const injectWsResponseInterceptor = (notify: interceptorParam) => {
   const data = property.get as () => any;
 
   function lookAtMessage(this: MessageEvent) { //to replace get function
-    let socket = this.currentTarget instanceof WebSocket
+    const socket = this.currentTarget instanceof WebSocket
     if (!socket) { return data.call(this) }
-    let msg = data.call(this);
+
+    const msg = data.call(this);
     Object.defineProperty(this, "data", { value: msg }); //anti-loop
     notify(msg);
     return msg;
