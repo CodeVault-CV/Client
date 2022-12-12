@@ -33,13 +33,19 @@ describe("Tracker 상태", () => {
 
     expect(gradeTracker.state).toBe("PENDING");
   });
-  
+
   it("GRADING.PROCESSING 상태에서 score 이벤트를 받으면 GRADING.PROCESSING 상태를 유지한다.", () => {
     const gradeTracker = createTracker();
-    
+
     gradeTracker.transition({ type: "start" });
-    gradeTracker.transition({ type: "score" });
-    
+    gradeTracker.transition({
+      type: "score",
+      payload: {
+        memory: 16.3,
+        time: 120
+      }
+    });
+
     expect(gradeTracker.state).toBe("GRADING.PROCESSING");
   });
 
@@ -71,5 +77,100 @@ describe("Tracker 상태", () => {
 
     expect(gradeTracker.state).toBe("PENDING");
   });
-})
+});
+
+describe("Tracker 이벤트", () => {
+  const startContext = {
+    platform: "programmers", problemId: "1234", code: "function solution() {}"
+  }
+
+  it("start 이벤트와 함께 platform, problemId, code를 받아 context에 저장한다.", () => {
+    const gradeTracker = createTracker();
+
+    gradeTracker.transition({
+      type: "start",
+      payload: { ...startContext }
+    });
+
+    const { platform, problemId, code } = gradeTracker.context;
+    expect(platform).toBe(startContext.platform);
+    expect(problemId).toBe(startContext.problemId);
+    expect(code).toBe(startContext.code);
+  });
+
+  it("score 이벤트와 함께 memory와 time의 최댓값을 갱신한다.", () => {
+    const gradeTracker = createTracker();
+
+    gradeTracker.transition({
+      type: "start",
+      payload: { ...startContext }
+    });
+
+    gradeTracker.transition({
+      type: "score",
+      payload: {
+        memory: 14.3,
+        time: 130
+      }
+    })
+    expect(gradeTracker.context.memory).toBe(14.3);
+    expect(gradeTracker.context.time).toBe(130);
+
+    gradeTracker.transition({
+      type: "score",
+      payload: {
+        memory: 16.3,
+        time: 120
+      }
+    });
+    expect(gradeTracker.context.memory).toBe(16.3);
+    expect(gradeTracker.context.time).toBe(130);
+  });
+
+  it("fail 이벤트와 함께 context를 초기화한다.", () => {
+    const gradeTracker = createTracker();
+
+    gradeTracker.transition({
+      type: "start",
+      payload: { ...startContext }
+    });
+    gradeTracker.transition({
+      type: "score",
+      payload: {
+        memory: 14.3,
+        time: 130
+      }
+    })
+
+    gradeTracker.transition({
+      type: "fail",
+    });
+    const { platform, problemId, code, memory, time } = gradeTracker.context;
+    expect(platform).toBe("");
+    expect(problemId).toBe("");
+    expect(code).toBe("");
+    expect(memory).toBe(-Infinity);
+    expect(time).toBe(-Infinity);
+  });
+
+  it("success 이벤트와 함께 handleDone을 호출한다.", () => {
+    const handleDone = jest.fn();
+    const gradeTracker = createTracker(handleDone);
+
+    gradeTracker.transition({
+      type: "start",
+      payload: { ...startContext }
+    });
+    gradeTracker.transition({
+      type: "score",
+      payload: {
+        memory: 14.3,
+        time: 130
+      }
+    });
+    gradeTracker.transition({ type: "success" });
+
+    expect(handleDone).toHaveBeenCalled();
+  });
+});
 
