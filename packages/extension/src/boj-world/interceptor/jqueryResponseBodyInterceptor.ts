@@ -1,4 +1,4 @@
-import createInterceptor from "../../common/interceptor";
+import createInterceptor from "../../core/interceptor";
 
 declare global {
   interface Window {

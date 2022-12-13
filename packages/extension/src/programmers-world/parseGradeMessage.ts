@@ -1,17 +1,17 @@
 const getMessageType = (message: any) => {
-  if (message?.command) return "start";
+  if (message?.command) return "START";
   if (message?.message) {
     const { type } = message.message;
-    if (type === "testcase") return "score";
-    if (type === "result_lesson_challenge") return "result";
+    if (type === "testcase") return "SCORE";
+    if (type === "result_lesson_challenge") return "RESULT";
   }
-  return "irrelevant";
+  return "IRRELEVANT";
 }
 
 const messageRegex = /\d+\.?\d+/g;
 
 const parseData = (json: any, messageType: ReturnType<typeof getMessageType>) => {
-  if (messageType === "start") {
+  if (messageType === "START") {
     const identifier = JSON.parse(json.identifier);
     const { lesson_id: problemId, language } = identifier;
 
@@ -27,7 +27,7 @@ const parseData = (json: any, messageType: ReturnType<typeof getMessageType>) =>
     }
   }
 
-  if (messageType === "score") {
+  if (messageType === "SCORE") {
     const { passed, msg } = json.message;
     if (passed) {
       const [timeMatch, memoryMatch] = msg.matchAll(messageRegex);
@@ -44,7 +44,7 @@ const parseData = (json: any, messageType: ReturnType<typeof getMessageType>) =>
     }
   }
 
-  if (messageType === "result") {
+  if (messageType === "RESULT") {
     // passed 값을 전달한다.
     const { passed } = json.message;
     return {

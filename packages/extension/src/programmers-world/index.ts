@@ -1,21 +1,28 @@
 import wsResponseBodyInterceptor from "./interceptor/wsResponseInterceptor";
 import wsRequestBodyInterceptor from "./interceptor/wsRequestInterceptor";
-import { trackerEvent } from "../common/tracker/interface";
+import { trackerEvent, trackerEventType } from "../core/tracker/interface";
 import { getMessageType, parseData } from "./parseGradeMessage";
 
 console.log("CodeVault running...");
 
 const createEvent = (
-  messageType: Exclude<ReturnType<typeof getMessageType>, "irrelevant">,
+  messageType: Exclude<ReturnType<typeof getMessageType>, "IRRELEVANT">,
   parsedData: ReturnType<typeof parseData>
 ): trackerEvent => {
-  if (messageType === "result") {
-    return {
-      type: parsedData?.passed ? "success" : "fail"
-    };
+
+  let eventType;
+  switch (messageType) {
+    case "RESULT":
+      eventType = parsedData?.passed ? trackerEventType.SUCCESS : trackerEventType.FAIL;
+      break;
+    case "SCORE":
+      eventType = trackerEventType.SCORE;
+    case "START":
+      eventType = trackerEventType.START;
   }
+
   return {
-    type: messageType,
+    type: eventType,
     payload: parsedData
   }
 }
@@ -25,7 +32,7 @@ const postToIsolated = (data: string) => {
     const json = JSON.parse(data);
 
     const messageType = getMessageType(json);
-    if (messageType === "irrelevant") return;
+    if (messageType === "IRRELEVANT") return;
 
     const parsedData = parseData(json, messageType);
 

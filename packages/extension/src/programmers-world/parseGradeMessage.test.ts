@@ -64,38 +64,38 @@ const finish = {
 
 
 describe("프로그래머스 채점 메시지 타입 (getMessageType)", () => {
-  it("code가 담긴 메시지는 start 타입이다.", () => {
+  it("code가 담긴 메시지는 START 타입이다.", () => {
     const type = getMessageType(start);
-    expect(type).toBe("start");
+    expect(type).toBe("START");
   });
 
-  it("testcase의 채점 정보가 담긴 메시지는 score 타입이다.", () => {
+  it("testcase의 채점 정보가 담긴 메시지는 SCORE 타입이다.", () => {
     const type = getMessageType(score_pass);
-    expect(type).toBe("score");
+    expect(type).toBe("SCORE");
   });
 
-  it("testcase의 채점 정보가 담긴 메시지는 fail이여도 score 타입이다.", () => {
+  it("testcase의 채점 정보가 담긴 메시지는 fail이여도 SCORE 타입이다.", () => {
     const type = getMessageType(score_fail);
-    expect(type).toBe("score");
+    expect(type).toBe("SCORE");
   });
 
   it("채점 결과가 담긴 메시지는 result 타입이다.", () => {
     const type = getMessageType(result);
-    expect(type).toBe("result");
+    expect(type).toBe("RESULT");
   })
 
-  it("이외의 메시지들은 모두 irrelevant 타입이다.", () => {
+  it("이외의 메시지들은 모두 IRRELEVANT 타입이다.", () => {
     const emptyType = getMessageType({});
     const finishType = getMessageType(finish);
 
-    expect(emptyType).toBe("irrelevant");
-    expect(finishType).toBe("irrelevant");
+    expect(emptyType).toBe("IRRELEVANT");
+    expect(finishType).toBe("IRRELEVANT");
   })
 });
 
 describe("프로그래머스 채점 메시지 데이터 추출 (parseData)", () => {
   it("start 타입의 메시지면 platform, problemId, code, language 정보를 추출한다.", () => {
-    const data = parseData(start, "start");
+    const data = parseData(start, "START");
     
     expect(data).toHaveProperty("platform", "programmers");
     expect(data).toHaveProperty("problemId", "92343");
@@ -104,21 +104,21 @@ describe("프로그래머스 채점 메시지 데이터 추출 (parseData)", () 
   });
 
   it("score 타입의 메시지면 memory, time 정보를 추출한다.", () => {
-    const data = parseData(score_pass , "score");
+    const data = parseData(score_pass , "SCORE");
 
     expect(data?.time).toBeCloseTo(0.61);
     expect(data?.memory).toBeCloseTo(33.6);
   });
 
   it("score 타입의 메시지이지만 passed의 값이 fail이면 memory, time이 0으로 온다.", () => {
-    const data = parseData(score_fail , "score");
+    const data = parseData(score_fail , "SCORE");
 
     expect(data?.time).toBeCloseTo(0);
     expect(data?.memory).toBeCloseTo(0);
   });
 
   it("result 타입의 메시지면 성공 여부(passed)를 추출한다.", () => {
-    const data = parseData(result , "result");
+    const data = parseData(result , "RESULT");
 
     expect(data).toHaveProperty("passed", false);
   });
