@@ -5,17 +5,21 @@ import { getMessageType, parseData } from "./parseGradeMessage";
 console.log("CodeVault running...");
 
 const postToIsolated = (data: string) => {
-  const json = JSON.parse(data);
+  try {
+    const json = JSON.parse(data);
 
-  const messageType = getMessageType(json);
-  if(messageType === "irrelevant") return;
+    const messageType = getMessageType(json);
+    if (messageType === "irrelevant") return;
 
-  const parsedData = parseData(json, messageType);
+    const parsedData = parseData(json, messageType);
 
-  postMessage({
-    type: "CodeVault",
-    payload: parsedData
-  });
+    postMessage({
+      type: "CodeVault",
+      payload: parsedData
+    });
+  } catch(e) {
+    console.error(e);
+  }
 };
 
 wsResponseBodyInterceptor.addListener(postToIsolated);

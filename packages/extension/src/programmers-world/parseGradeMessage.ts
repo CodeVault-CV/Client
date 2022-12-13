@@ -15,11 +15,10 @@ const parseData = (json: any, messageType: ReturnType<typeof getMessageType>) =>
     const identifier = JSON.parse(json.identifier);
     const { lesson_id: problemId, language } = identifier;
 
-    const codes = JSON.parse(json.data);
+    const { codes } = JSON.parse(json.data);
     const key = Object.keys(codes)[0];
 
     const code = codes[key];
-
     return {
       platform: "programmers",
       problemId: problemId.toString(),
