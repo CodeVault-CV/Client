@@ -1,9 +1,11 @@
-import createInterceptor, { interceptorParam } from "../../common/interceptor";
+import createInterceptor from "../../common/interceptor";
 
-const injectWsRequestInterceptor = (notify: interceptorParam) => {
+const injectWsRequestInterceptor = (notify: (data: string) => void) => {
   ((send) => {
     window.WebSocket.prototype.send = function (data: string | ArrayBufferLike | Blob | ArrayBufferView) {
-      notify(data as any);
+      if(typeof data === "string") {
+        notify(data);
+      }
       return send.apply(this, [data]);
     }
   })(window.WebSocket.prototype.send);

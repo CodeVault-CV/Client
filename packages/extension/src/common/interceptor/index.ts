@@ -1,11 +1,11 @@
 import iInterceptor, { interceptListener } from "./interface"
 
-export type interceptorParam = (notify: (data: any) => void) => void;
+export type interceptorParam = (notify: (data: string) => void) => void;
 
 const createInterceptor = (inject: interceptorParam): iInterceptor => {
   const listeners: interceptListener[] = [];
 
-  const notify = (data: any) => {
+  const notify = (data: string) => {
     listeners.forEach(listener => listener(data));
   }
 

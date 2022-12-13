@@ -3,8 +3,7 @@ import createAjaxInterceptor from "./ajaxInterceptor";
 console.log("CodeVault running...");
 
 function onIntercept(data: any) {
-  console.log(data);
-  postMessage("")
+  postMessage(data);
 }
 
 const ajaxInterceptor = createAjaxInterceptor();

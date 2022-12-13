@@ -1,6 +1,6 @@
-import createInterceptor, { interceptorParam } from "../../common/interceptor";
+import createInterceptor from "../../common/interceptor";
 
-const injectFetchResponseBodyInterceptor = (notify: interceptorParam) => {
+const injectFetchResponseBodyInterceptor = (notify: (data: string) => void) => {
   (() => {
     const origFetch = window.fetch;
     window.fetch = async (...args) => {

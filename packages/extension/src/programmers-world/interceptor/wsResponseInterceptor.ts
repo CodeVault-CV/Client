@@ -1,6 +1,6 @@
-import createInterceptor, { interceptorParam } from "../../common/interceptor";
+import createInterceptor from "../../common/interceptor";
 
-const injectWsResponseInterceptor = (notify: interceptorParam) => {
+const injectWsResponseInterceptor = (notify: (data: string) => void) => {
   let property = Object.getOwnPropertyDescriptor(MessageEvent.prototype, "data") as PropertyDescriptor;
   const data = property.get as () => any;
 

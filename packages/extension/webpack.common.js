@@ -7,6 +7,7 @@ module.exports = {
   entry: {
     background: path.join(src, 'background/index.ts'),
     "programmers-world": path.join(src, 'programmers-world/index.ts'),
+    "programmers-isolated": path.join(src, 'programmers-isolated/index.ts'),
     "boj-world": path.join(src, "boj-world/index.ts"),
     "boj-isolated": path.join(src, "boj-isolated/index.ts")
   },

@@ -1,4 +1,5 @@
-export type interceptListener = (data: any) => void;
+export type interceptListener = (data: string) => void;
+
 export default interface iInterceptor {
-  addListener: (data: any) => void;
+  addListener: (listener: interceptListener) => void;
 }

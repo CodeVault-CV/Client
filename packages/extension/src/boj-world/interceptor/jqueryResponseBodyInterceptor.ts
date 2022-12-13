@@ -1,4 +1,4 @@
-import createInterceptor, { interceptorParam } from "../../common/interceptor";
+import createInterceptor from "../../common/interceptor";
 
 declare global {
   interface Window {
@@ -6,7 +6,7 @@ declare global {
   }
 }
 
-const injectJqueryResponseBodyInterceptor = (notify: interceptorParam) => {
+const injectJqueryResponseBodyInterceptor = (notify: (data: string) => void) => {
   if (!window?.$) new Error("jQuery가 window에 존재하지 않음");
 
   window.$.ajaxSetup({

@@ -8,6 +8,10 @@ function handleClick() {
   // UI 열고 닫기
 }
 
+chrome.runtime.onMessage.addListener((message) => {
+  console.log(message);
+});
+
 chrome.webRequest.onBeforeRequest.addListener(
   ({ requestBody, tabId }) => {
     console.log(requestBody?.formData);

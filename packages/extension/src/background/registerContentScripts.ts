@@ -12,6 +12,11 @@ export default function registerContentScripts() {
       js: ["js/programmers-world.js"],
       world: "MAIN"
     },
+    {
+      id: "programmers-isolated",
+      matches: ["https://school.programmers.co.kr/learn/courses/30/lessons/*"],
+      js: ["js/programmers-isolated.js"],
+    },
     // Boj scripts
     {
       id: "boj-world",

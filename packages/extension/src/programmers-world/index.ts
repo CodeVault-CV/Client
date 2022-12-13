@@ -1,9 +1,22 @@
 import wsRequestBodyInterceptor from "./interceptor/wsRequestInterceptor";
 import wsResponseBodyInterceptor from "./interceptor/wsResponseInterceptor";
+import { getMessageType, parseData } from "./parseGradeMessage";
 
 console.log("CodeVault running...");
 
-const logBody = (data: any) => console.log(data);
+const postToIsolated = (data: string) => {
+  const json = JSON.parse(data);
 
-wsResponseBodyInterceptor.addListener(logBody);
-wsRequestBodyInterceptor.addListener(logBody);
+  const messageType = getMessageType(json);
+  if(messageType === "irrelevant") return;
+
+  const parsedData = parseData(json, messageType);
+
+  postMessage({
+    type: "CodeVault",
+    payload: parsedData
+  });
+};
+
+wsResponseBodyInterceptor.addListener(postToIsolated);
+wsRequestBodyInterceptor.addListener(postToIsolated);
