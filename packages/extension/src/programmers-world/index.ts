@@ -1,8 +1,24 @@
-import wsRequestBodyInterceptor from "./interceptor/wsRequestInterceptor";
 import wsResponseBodyInterceptor from "./interceptor/wsResponseInterceptor";
+import wsRequestBodyInterceptor from "./interceptor/wsRequestInterceptor";
+import { trackerEvent } from "../common/tracker/interface";
 import { getMessageType, parseData } from "./parseGradeMessage";
 
 console.log("CodeVault running...");
+
+const createEvent = (
+  messageType: Exclude<ReturnType<typeof getMessageType>, "irrelevant">,
+  parsedData: ReturnType<typeof parseData>
+): trackerEvent => {
+  if (messageType === "result") {
+    return {
+      type: parsedData?.passed ? "success" : "fail"
+    };
+  }
+  return {
+    type: messageType,
+    payload: parsedData
+  }
+}
 
 const postToIsolated = (data: string) => {
   try {
@@ -15,9 +31,9 @@ const postToIsolated = (data: string) => {
 
     postMessage({
       type: "CodeVault",
-      payload: parsedData
+      payload: createEvent(messageType, parsedData)
     });
-  } catch(e) {
+  } catch (e) {
     console.error(e);
   }
 };
