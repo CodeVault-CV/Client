@@ -11,7 +11,7 @@ describe("Tracker 상태", () => {
   it("PENDING 상태에서 start 이벤트를 받으면 GRADING.PROCESSING 상태로 전이한다.", () => {
     const gradeTracker = createTracker();
 
-    gradeTracker.transition({ type: "start" });
+    gradeTracker.send({ type: "start" });
 
     expect(gradeTracker.state).toBe("GRADING.PROCESSING");
   })
@@ -19,7 +19,7 @@ describe("Tracker 상태", () => {
   it("GRADING.PROCESSING 상태에서 2초를 초과하면 GRADING.IDLE 상태로 전이한다.", async () => {
     const gradeTracker = createTracker();
 
-    gradeTracker.transition({ type: "start" });
+    gradeTracker.send({ type: "start" });
     await timer(2200);
 
     expect(gradeTracker.state).toBe("GRADING.IDLE");
@@ -28,7 +28,7 @@ describe("Tracker 상태", () => {
   it("GRADING.IDLE 상태에서 2초를 초과하면 PENDING 상태로 전이한다.", async () => {
     const gradeTracker = createTracker();
 
-    gradeTracker.transition({ type: "start" });
+    gradeTracker.send({ type: "start" });
     await timer(4200);
 
     expect(gradeTracker.state).toBe("PENDING");
@@ -37,8 +37,8 @@ describe("Tracker 상태", () => {
   it("GRADING.PROCESSING 상태에서 score 이벤트를 받으면 GRADING.PROCESSING 상태를 유지한다.", () => {
     const gradeTracker = createTracker();
 
-    gradeTracker.transition({ type: "start" });
-    gradeTracker.transition({
+    gradeTracker.send({ type: "start" });
+    gradeTracker.send({
       type: "score",
       payload: {
         memory: 16.3,
@@ -52,8 +52,8 @@ describe("Tracker 상태", () => {
   it("GRADING.* 상태에서 fail 이벤트를 받으면 PENDING 상태로 전이한다.", () => {
     const gradeTracker = createTracker();
 
-    gradeTracker.transition({ type: "start" });
-    gradeTracker.transition({ type: "fail" });
+    gradeTracker.send({ type: "start" });
+    gradeTracker.send({ type: "fail" });
 
     expect(gradeTracker.state).toBe("PENDING");
   });
@@ -61,8 +61,8 @@ describe("Tracker 상태", () => {
   it("GRADING 상태에서 success 이벤트를 받으면 DONE 상태로 전이한다.", () => {
     const gradeTracker = createTracker();
 
-    gradeTracker.transition({ type: "start" });
-    gradeTracker.transition({ type: "success" });
+    gradeTracker.send({ type: "start" });
+    gradeTracker.send({ type: "success" });
 
     expect(gradeTracker.state).toBe("DONE");
   });
@@ -70,8 +70,8 @@ describe("Tracker 상태", () => {
   it("DONE 상태에서 1초후 PENDING 상태로 전이한다.", async () => {
     const gradeTracker = createTracker();
 
-    gradeTracker.transition({ type: "start" });
-    gradeTracker.transition({ type: "success" });
+    gradeTracker.send({ type: "start" });
+    gradeTracker.send({ type: "success" });
 
     await timer(1100);
 
@@ -87,7 +87,7 @@ describe("Tracker 이벤트", () => {
   it("start 이벤트와 함께 platform, problemId, code를 받아 context에 저장한다.", () => {
     const gradeTracker = createTracker();
 
-    gradeTracker.transition({
+    gradeTracker.send({
       type: "start",
       payload: { ...startContext }
     });
@@ -101,12 +101,12 @@ describe("Tracker 이벤트", () => {
   it("score 이벤트와 함께 memory와 time의 최댓값을 갱신한다.", () => {
     const gradeTracker = createTracker();
 
-    gradeTracker.transition({
+    gradeTracker.send({
       type: "start",
       payload: { ...startContext }
     });
 
-    gradeTracker.transition({
+    gradeTracker.send({
       type: "score",
       payload: {
         memory: 14.3,
@@ -116,7 +116,7 @@ describe("Tracker 이벤트", () => {
     expect(gradeTracker.context.memory).toBe(14.3);
     expect(gradeTracker.context.time).toBe(130);
 
-    gradeTracker.transition({
+    gradeTracker.send({
       type: "score",
       payload: {
         memory: 16.3,
@@ -130,11 +130,11 @@ describe("Tracker 이벤트", () => {
   it("fail 이벤트와 함께 context를 초기화한다.", () => {
     const gradeTracker = createTracker();
 
-    gradeTracker.transition({
+    gradeTracker.send({
       type: "start",
       payload: { ...startContext }
     });
-    gradeTracker.transition({
+    gradeTracker.send({
       type: "score",
       payload: {
         memory: 14.3,
@@ -142,7 +142,7 @@ describe("Tracker 이벤트", () => {
       }
     })
 
-    gradeTracker.transition({
+    gradeTracker.send({
       type: "fail",
     });
     const { platform, problemId, code, memory, time } = gradeTracker.context;
@@ -157,20 +157,19 @@ describe("Tracker 이벤트", () => {
     const handleDone = jest.fn();
     const gradeTracker = createTracker(handleDone);
 
-    gradeTracker.transition({
+    gradeTracker.send({
       type: "start",
       payload: { ...startContext }
     });
-    gradeTracker.transition({
+    gradeTracker.send({
       type: "score",
       payload: {
         memory: 14.3,
         time: 130
       }
     });
-    gradeTracker.transition({ type: "success" });
+    gradeTracker.send({ type: "success" });
 
     expect(handleDone).toHaveBeenCalled();
   });
 });
-

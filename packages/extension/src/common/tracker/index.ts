@@ -36,7 +36,8 @@ const createTracker = (handleDone?: (context: trackerContext) => void): iTracker
     }) => {
       if (!state.includes("GRADING")) return;
       state = "GRADING.PROCESSING";
-
+      timers.forEach((timer) => clearTimeout(timer));
+      
       startGradingTimer();
 
       context = {
@@ -48,6 +49,7 @@ const createTracker = (handleDone?: (context: trackerContext) => void): iTracker
     fail: () => {
       if (!state.includes("GRADING")) return;
       state = "PENDING";
+      timers.forEach((timer) => clearTimeout(timer));
 
       context = {
         ...initialContext
@@ -56,6 +58,7 @@ const createTracker = (handleDone?: (context: trackerContext) => void): iTracker
     success: () => {
       if (!state.includes("GRADING")) return;
       state = "DONE";
+      timers.forEach((timer) => clearTimeout(timer));
 
       if (handleDone) {
         handleDone(context);
@@ -84,11 +87,10 @@ const createTracker = (handleDone?: (context: trackerContext) => void): iTracker
     timers.push(idleTimer);
   }
 
-  const transition = (event: trackerEvent) => {
+  const send = (event: trackerEvent) => {
     const { type, payload } = event;
 
     if (!eventHandlers.hasOwnProperty(type)) return;
-    timers.forEach((timer) => clearTimeout(timer));
 
     eventHandlers[type](payload);
   }
@@ -102,7 +104,7 @@ const createTracker = (handleDone?: (context: trackerContext) => void): iTracker
         ...context
       }
     },
-    transition
+    send
   }
 }
 

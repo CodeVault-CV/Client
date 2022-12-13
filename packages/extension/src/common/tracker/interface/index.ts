@@ -21,5 +21,5 @@ export type {
 export default interface iTracker {
   readonly state: trackerState;
   readonly context: trackerContext;
-  transition: (event: trackerEvent) => void;
+  send: (event: trackerEvent) => void;
 }
