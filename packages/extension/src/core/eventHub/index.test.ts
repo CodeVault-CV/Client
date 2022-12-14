@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import createEventHub from ".";
+import createEventHub, { eventEmitter } from ".";
 
 function flushMessageQueue(ms = 10) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -17,10 +17,10 @@ describe("EventHub", () => {
       .addHandler("receiver", handler)
       .start();
 
-    window.postMessage({
-      to: "receiver",
+    eventEmitter.fromWorld({
+      target: "receiver",
       type: "test"
-    }, "*");
+    });
     await flushMessageQueue();
 
     expect(handler).toBeCalled();

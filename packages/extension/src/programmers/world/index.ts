@@ -2,6 +2,7 @@ import wsResponseBodyInterceptor from "./interceptor/wsResponseInterceptor";
 import wsRequestBodyInterceptor from "./interceptor/wsRequestInterceptor";
 import { trackerEvent, trackerEventType } from "../../core/tracker/interface";
 import { getMessageType, parseData } from "./parseGradeMessage";
+import { eventEmitter } from "../../core/eventHub";
 
 console.log("CodeVault running...");
 
@@ -29,7 +30,7 @@ const createEvent = (
   }
 }
 
-const postToIsolated = (data: string) => {
+const emitEvent = (data: string) => {
   try {
     const json = JSON.parse(data);
 
@@ -38,8 +39,9 @@ const postToIsolated = (data: string) => {
 
     const parsedData = parseData(json, messageType);
 
-    postMessage({
-      type: "CodeVault",
+    eventEmitter.fromWorld({
+      target: "GradeTracker",
+      type: "Programmers",
       payload: createEvent(messageType, parsedData)
     });
   } catch (e) {
@@ -47,5 +49,5 @@ const postToIsolated = (data: string) => {
   }
 };
 
-wsResponseBodyInterceptor.addListener(postToIsolated);
-wsRequestBodyInterceptor.addListener(postToIsolated);
+wsResponseBodyInterceptor.addListener(emitEvent);
+wsRequestBodyInterceptor.addListener(emitEvent);

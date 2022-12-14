@@ -1,8 +1,21 @@
 import iEventHub, { eventContext, eventSender } from "./interface";
 
+const eventEmitter = {
+  fromIsolated: (eventContext: eventContext) => {
+    chrome.runtime.sendMessage(eventContext);
+    window.postMessage(eventContext);
+  },
+  fromWorld: (eventContext: eventContext) => {
+    window.postMessage(eventContext, "*");
+  },
+  fromBackground: (tabId: number, eventContext: eventContext) => {
+    chrome.tabs.sendMessage(tabId, eventContext);
+  },
+}
+
 const createEventHub = (): iEventHub => {
   const handlers = new Map<string, eventSender>([
-    ["background", ({ type, payload }) => {
+    ["GradeTracker", ({ type, payload }) => {
       chrome.runtime.sendMessage({
         type,
         payload
@@ -21,18 +34,18 @@ const createEventHub = (): iEventHub => {
     });
   }
 
-  function handleEvent({ to, type, payload }: eventContext) {
-    const handler = handlers.get(to);
+  function handleEvent({ target, type, payload }: eventContext) {
+    const handler = handlers.get(target);
     if (handler) {
       handler({ type, payload });
     }
   }
 
-  function addHandler(to: string, sendEvent: eventSender) {
-    if (handlers.has(to)) {
-      throw new Error(`'${to}'에 해당하는 이벤트 헨들러가 이미 존재합니다`);
+  function addHandler(target: string, sendEvent: eventSender) {
+    if (handlers.has(target)) {
+      throw new Error(`'${target}'에 해당하는 이벤트 헨들러가 이미 존재합니다`);
     }
-    handlers.set(to, sendEvent);
+    handlers.set(target, sendEvent);
 
     return eventHub;
   }
@@ -45,4 +58,7 @@ const createEventHub = (): iEventHub => {
   return eventHub
 }
 
+export {
+  eventEmitter
+}
 export default createEventHub;

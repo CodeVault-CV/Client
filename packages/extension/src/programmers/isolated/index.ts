@@ -1,11 +1,4 @@
-import doSomething from "./doSomething";
+import createEventHub from "../../core/eventHub";
 
-window.addEventListener("message", (event) => {
-  const { type, payload } = event.data;
-  if (type === "CodeVault") {
-    chrome.runtime.sendMessage({
-      type: "programmers",
-      payload
-    });
-  }
-});
+const eventHub = createEventHub();
+eventHub.start();

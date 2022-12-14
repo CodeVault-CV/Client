@@ -1,16 +1,16 @@
 type eventContext = {
-  to: string,
+  target: string,
   type: string
   payload?: any
 }
-type eventSender = (eventContext: Omit<eventContext, "to">) => void; 
+type eventSender = (event: Omit<eventContext, "target">) => void; 
 
 export type {
   eventContext,
-  eventSender
+  eventSender,
 }
 
 export default interface iEventHub {
-  addHandler: (to: string, sendEvent: eventSender) => this;
+  addHandler: (target: string, sendEvent: eventSender) => this;
   start: () => void;
 }

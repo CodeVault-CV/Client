@@ -8,21 +8,15 @@ console.log('background loaded');
 registerContentScripts();
 
 // 채점 트래커
-const trackers = new Map<"programmers" | "boj", iTracker>([
-  ["programmers", createTrackerFSM(new Map([
+const trackers = new Map<"Programmers" | "Boj", iTracker>([
+  ["Programmers", createTrackerFSM(new Map([
     [
       trackerState.DONE,
       [(context: trackerContext) => console.log(context)]
     ]
   ]))],
-  ["boj", createTrackerFSM()],
+  ["Boj", createTrackerFSM()],
 ])
-
-function handleClick() {
-  console.log("clicked");
-  // UI 열고 닫기
-}
-
 
 chrome.runtime.onMessage.addListener((message) => {
   const { type, payload } = message;
@@ -32,6 +26,11 @@ chrome.runtime.onMessage.addListener((message) => {
 
   trackers.get(type)?.send(payload);
 });
+
+function handleClick() {
+  console.log("clicked");
+  // UI 열고 닫기
+}
 
 chrome.webRequest.onBeforeRequest.addListener(
   ({ requestBody, tabId }) => {
