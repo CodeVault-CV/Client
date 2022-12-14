@@ -17,8 +17,10 @@ const createEvent = (
       break;
     case "SCORE":
       eventType = trackerEventType.SCORE;
+      break;
     case "START":
       eventType = trackerEventType.START;
+      break;
   }
 
   return {
