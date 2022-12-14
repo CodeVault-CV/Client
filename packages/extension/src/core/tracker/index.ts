@@ -6,12 +6,14 @@ const stateChart = new Map<trackerState, Map<trackerEventType, trackerState>>([
   ])],
   [trackerState["GRADING.PROCESSING"], new Map<trackerEventType, trackerState>([
     [trackerEventType.AFTER, trackerState["GRADING.IDLE"]],
+    [trackerEventType.START, trackerState["GRADING.PROCESSING"]],
     [trackerEventType.SCORE, trackerState["GRADING.PROCESSING"]],
     [trackerEventType.FAIL, trackerState.PENDING],
     [trackerEventType.SUCCESS, trackerState.DONE],
   ])],
   [trackerState["GRADING.IDLE"], new Map<trackerEventType, trackerState>([
     [trackerEventType.AFTER, trackerState.PENDING],
+    [trackerEventType.START, trackerState["GRADING.PROCESSING"]],
     [trackerEventType.SCORE, trackerState["GRADING.PROCESSING"]],
     [trackerEventType.FAIL, trackerState.PENDING],
     [trackerEventType.SUCCESS, trackerState.DONE],
@@ -50,6 +52,7 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
    */
   function transition(event: trackerEvent) {
     const nextState = stateChart.get(state)?.get(event.type);
+    // 에러 발생시 Tracker 초기화
     if (nextState === undefined) {
       throw new Error(`Invalid event type '${event.type}' emitted on state '${state}'`);
     }
@@ -73,7 +76,13 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
   }
 
   function updateContext({ type, payload }: trackerEvent) {
-    if (
+    if(type === trackerEventType.START) {
+      context = {
+        ...initialContext,
+        ...payload
+      }
+    }
+    else if (
       type === trackerEventType.FAIL ||
       (type === trackerEventType.AFTER && state === trackerState.PENDING)
     ) {
