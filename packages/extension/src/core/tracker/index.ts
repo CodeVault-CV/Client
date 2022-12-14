@@ -35,7 +35,7 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
   let state: trackerState = trackerState.PENDING;
   let context: trackerContext = { ...initialContext };
   let afterTimer: null | number = null;
-  
+
   function clearTimer() {
     if (afterTimer) {
       clearTimeout(afterTimer);
@@ -57,8 +57,6 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
       throw new Error(`Invalid event type '${event.type}' emitted on state '${state}'`);
     }
 
-    // 상태를 다음 상태로 전이한다.
-    state = nextState;
 
     // 이전에 등록된 after를 초기화한다.
     // 다음 상태에 after 이벤트가 존재하면 after Timer를 실행한다.
@@ -72,35 +70,39 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
       actions.get(nextState)?.forEach(action => action(context));
     }
 
+    // 현재 상테와 이벤트에 따라 context를 업데이트한다.
     updateContext(event);
+
+    // 상태를 다음 상태로 전이한다.
+    state = nextState;
   }
 
   function updateContext({ type, payload }: trackerEvent) {
-    if(type === trackerEventType.START) {
-      context = {
-        ...initialContext,
-        ...payload
-      }
-    }
-    else if (
-      type === trackerEventType.FAIL ||
-      (type === trackerEventType.AFTER && state === trackerState.PENDING)
-    ) {
-      context = {
-        ...initialContext
-      }
-    }
-    else {
-      let { time, memory } = context;
-      time = Math.max(time, payload?.time ?? 0);
-      memory = Math.max(memory, payload?.memory ?? 0);
+    switch (type) {
+      case trackerEventType.START:
+        context = {
+          ...initialContext,
+          ...payload
+        }
+        break;
+      case trackerEventType.AFTER:
+        if (state !== trackerState.DONE) return;
+      case trackerEventType.FAIL:
+        context = {
+          ...initialContext
+        }
+        break;
+      default:
+        let { time, memory } = context;
+        time = Math.max(time, payload?.time ?? 0);
+        memory = Math.max(memory, payload?.memory ?? 0);
 
-      context = {
-        ...context,
-        ...payload,
-        time,
-        memory,
-      }
+        context = {
+          ...context,
+          ...payload,
+          time,
+          memory,
+        }
     }
   }
 
