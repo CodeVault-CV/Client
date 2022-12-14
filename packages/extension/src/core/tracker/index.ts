@@ -33,11 +33,6 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
   let state: trackerState = trackerState.PENDING;
   let context: trackerContext = { ...initialContext };
   let afterTimer: null | number = null;
-  const afterTime = new Map<trackerState, number>([
-    [trackerState["GRADING.PROCESSING"], 2000],
-    [trackerState["GRADING.IDLE"], 2000],
-    [trackerState.DONE, 1000],
-  ]);
   
   function clearTimer() {
     if (afterTimer) {
@@ -65,8 +60,8 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
     // 이전에 등록된 after를 초기화한다.
     // 다음 상태에 after 이벤트가 존재하면 after Timer를 실행한다.
     clearTimer();
-    if (afterTime.has(nextState)) {
-      afterTimer = setTimeout(() => transition({ type: trackerEventType.AFTER }), afterTime.get(nextState));
+    if (stateChart.get(nextState)?.has(trackerEventType.AFTER)) {
+      afterTimer = setTimeout(() => transition({ type: trackerEventType.AFTER }), 2000);
     }
 
     // 다음 상태에 등록된 action들을 실행한다.

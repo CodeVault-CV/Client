@@ -63,22 +63,23 @@ describe("Tracker 상태", () => {
     expect(gradeTracker.state).toBe("PENDING");
   });
 
-  it("GRADING 상태에서 SUCCESS 이벤트를 받으면 DONE 상태로 전이한다.", () => {
+  it("GRADING.* 상태에서 SUCCESS 이벤트를 받으면 DONE 상태로 전이한다.", async () => {
     const gradeTracker = getTracker();
 
     gradeTracker.send({ type: trackerEventType.START });
+    await timer(2200);
     gradeTracker.send({ type: trackerEventType.SUCCESS });
 
     expect(gradeTracker.state).toBe("DONE");
   });
 
-  it("DONE 상태에서 1초후 PENDING 상태로 전이한다.", async () => {
+  it("DONE 상태에서 2초 후 PENDING 상태로 전이한다.", async () => {
     const gradeTracker = getTracker();
 
     gradeTracker.send({ type: trackerEventType.START });
     gradeTracker.send({ type: trackerEventType.SUCCESS });
 
-    await timer(1100);
+    await timer(2100);
 
     expect(gradeTracker.state).toBe("PENDING");
   });
