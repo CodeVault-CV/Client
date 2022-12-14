@@ -39,5 +39,4 @@ export default interface iTracker {
   readonly state: trackerState;
   readonly context: trackerContext;
   send: (event: trackerEvent) => void;
-  reset: () => void;
 }

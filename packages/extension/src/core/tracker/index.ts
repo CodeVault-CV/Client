@@ -52,11 +52,9 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
    */
   function transition(event: trackerEvent) {
     const nextState = stateChart.get(state)?.get(event.type);
-    // 에러 발생시 Tracker 초기화
     if (nextState === undefined) {
       throw new Error(`Invalid event type '${event.type}' emitted on state '${state}'`);
     }
-
 
     // 이전에 등록된 after를 초기화한다.
     // 다음 상태에 after 이벤트가 존재하면 after Timer를 실행한다.
@@ -65,16 +63,16 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
       afterTimer = setTimeout(() => transition({ type: trackerEventType.AFTER }), 2000);
     }
 
+    // 현재 상테와 이벤트에 따라 context를 업데이트한다.
+    updateContext(event);
+    
+    // 상태를 다음 상태로 전이한다.
+    state = nextState;
+    
     // 다음 상태에 등록된 action들을 실행한다.
     if (actions) {
       actions.get(nextState)?.forEach(action => action(context));
     }
-
-    // 현재 상테와 이벤트에 따라 context를 업데이트한다.
-    updateContext(event);
-
-    // 상태를 다음 상태로 전이한다.
-    state = nextState;
   }
 
   function updateContext({ type, payload }: trackerEvent) {
@@ -106,12 +104,6 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
     }
   }
 
-  function reset() {
-    state = trackerState.PENDING;
-    context = { ...initialContext };
-    clearTimer();
-  }
-
   return {
     get state() {
       return state;
@@ -120,7 +112,6 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
       return { ...context };
     },
     send: transition,
-    reset
   }
 }
 
