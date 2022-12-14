@@ -1,6 +1,6 @@
 import wsResponseBodyInterceptor from "./interceptor/wsResponseInterceptor";
 import wsRequestBodyInterceptor from "./interceptor/wsRequestInterceptor";
-import { trackerEvent, trackerEventType } from "../core/tracker/interface";
+import { trackerEvent, trackerEventType } from "../../core/tracker/interface";
 import { getMessageType, parseData } from "./parseGradeMessage";
 
 console.log("CodeVault running...");

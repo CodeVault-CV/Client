@@ -1,4 +1,4 @@
-import createInterceptor from "../../core/interceptor";
+import createInterceptor from "../../../core/interceptor";
 
 const injectWsRequestInterceptor = (notify: (data: string) => void) => {
   ((send) => {

@@ -45,10 +45,10 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
 
   /**
    * 현재 상태와 이벤트 타입에 따라 Tracker의 상태를 변경한다.
-   * 1. 상태를 다음 상태로 전이한다.
-   * 2. 이전에 등록된 after를 제거한다.
-   * 3. 전이된 상태가 after 이벤트를 처리한다면 after 타이머를 시작한다.
-   * 4. 전이된 상태가 가지는 action들을 실행한다.
+   * 1. 이전에 등록된 after를 제거한다.
+   * 2. 다음 상태가 after 이벤트를 처리한다면 after 타이머를 시작한다.
+   * 3. 상태를 다음 상태로 전이한다.
+   * 4. 다음 상태가 가지는 action들을 실행한다.
    */
   function transition(event: trackerEvent) {
     const nextState = stateChart.get(state)?.get(event.type);
@@ -65,10 +65,10 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
 
     // 현재 상테와 이벤트에 따라 context를 업데이트한다.
     updateContext(event);
-    
+
     // 상태를 다음 상태로 전이한다.
     state = nextState;
-    
+
     // 다음 상태에 등록된 action들을 실행한다.
     if (actions) {
       actions.get(nextState)?.forEach(action => action(context));

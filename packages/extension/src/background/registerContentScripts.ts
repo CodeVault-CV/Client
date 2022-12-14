@@ -7,25 +7,25 @@ export default function registerContentScripts() {
   chrome.scripting.registerContentScripts([
     // Programmers scripts
     {
-      id: "programmers-world",
+      id: "CodeVault-programmers-world",
       matches: ["https://school.programmers.co.kr/learn/courses/30/lessons/*"],
       js: ["js/programmers-world.js"],
       world: "MAIN"
     },
     {
-      id: "programmers-isolated",
+      id: "CodeVault-programmers-isolated",
       matches: ["https://school.programmers.co.kr/learn/courses/30/lessons/*"],
       js: ["js/programmers-isolated.js"],
     },
     // Boj scripts
     {
-      id: "boj-world",
+      id: "CodeVault-boj-world",
       matches: ["https://www.acmicpc.net/status*", "https://www.acmicpc.net/submit/*"],
       js: ["js/boj-world.js"],
       world: "MAIN"
     },
     {
-      id: "boj-isolated",
+      id: "CodeVault-boj-isolated",
       matches: ["https://www.acmicpc.net/submit/*"],
       js: ["js/boj-isolated.js"]
     }
