@@ -1,3 +1,7 @@
+/**
+ * Background에서 동작하는 채점 추적기인 Tracker
+ */
+
 import iTracker, { trackerEventType, trackerAction, trackerState, trackerContext, trackerEvent } from "./interface/index";
 
 const stateChart = new Map<trackerState, Map<trackerEventType, trackerState>>([
