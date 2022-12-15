@@ -58,7 +58,8 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
   function transition(event: trackerEvent) {
     const nextState = stateChart.get(state)?.get(event.type);
     if (nextState === undefined) {
-      throw new Error(`Invalid event type '${event.type}' emitted on state '${state}'`);
+      console.error(`Invalid event type '${event.type}' emitted on state '${state}'`);
+      return;
     }
 
     // 이전에 등록된 after를 초기화한다.

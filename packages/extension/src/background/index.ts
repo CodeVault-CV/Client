@@ -16,12 +16,17 @@ const trackers = new Map<"Programmers" | "Boj", iTracker>([
       [(context: trackerContext) => console.log(context)]
     ]
   ]))],
-  ["Boj", createTrackerFSM()],
+  ["Boj", createTrackerFSM(new Map([
+    [
+      trackerState.DONE,
+      [(context: trackerContext) => console.log(context)]
+    ]
+  ]))],
 ])
 
+// 백그라운드 이벤트 헨들러
 chrome.runtime.onMessage.addListener((message) => {
   const { type, payload } = message;
-  console.log(type, payload);
   if (type === undefined) {
     throw new Error("Background로 유효하지 않은 이벤트가 전송됨");
   }
@@ -29,11 +34,7 @@ chrome.runtime.onMessage.addListener((message) => {
   trackers.get(type)?.send(payload);
 });
 
-function handleClick() {
-  console.log("clicked");
-  // UI 열고 닫기
-}
-
+// 백준 문제 제출 감지
 chrome.webRequest.onBeforeRequest.addListener(
   ({ method, requestBody, tabId }) => {
     if (method === "GET" || requestBody?.formData === undefined) return;
@@ -62,6 +63,13 @@ chrome.webRequest.onBeforeRequest.addListener(
   },
   ["requestBody"]
 )
+
+
+// 익스텐션 아이콘 클릭시 동작
+function handleClick() {
+  console.log("clicked");
+  // UI 토글 실행
+}
 
 chrome.action.onClicked.addListener((tab) => {
   if (tab.id === undefined) return;
