@@ -1,6 +1,7 @@
 import registerContentScripts from "./registerContentScripts";
 import createTrackerFSM from "../core/tracker";
-import iTracker, { trackerContext, trackerState } from "../core/tracker/interface";
+import iTracker, { trackerContext, trackerEventType, trackerState } from "../core/tracker/interface";
+import { eventEmitter } from "../core/eventHub";
 
 console.log('background loaded');
 
@@ -20,6 +21,7 @@ const trackers = new Map<"Programmers" | "Boj", iTracker>([
 
 chrome.runtime.onMessage.addListener((message) => {
   const { type, payload } = message;
+  console.log(type, payload);
   if (type === undefined) {
     throw new Error("Background로 유효하지 않은 이벤트가 전송됨");
   }
@@ -33,10 +35,27 @@ function handleClick() {
 }
 
 chrome.webRequest.onBeforeRequest.addListener(
-  ({ requestBody, tabId }) => {
-    console.log(requestBody?.formData);
-    // chrome.tabs.sendMessage(tabId, "request intercepted");
-    // chrome.tabs.sendMessage(tabId, JSON.stringify(requestBody?.formData));
+  ({ method, requestBody, tabId }) => {
+    if (method === "GET" || requestBody?.formData === undefined) return;
+    const { formData } = requestBody;
+
+    const code = formData.source[0];
+    const problemId = formData.problem_id[0];
+    const language = formData.language[0];
+
+    eventEmitter.fromBackground(tabId, {
+      target: "GradeTracker",
+      type: "Boj",
+      payload: {
+        type: trackerEventType.START,
+        payload: {
+          platform: "boj",
+          code,
+          problemId,
+          language
+        }
+      }
+    });
   },
   {
     urls: ["https://www.acmicpc.net/submit/*"]

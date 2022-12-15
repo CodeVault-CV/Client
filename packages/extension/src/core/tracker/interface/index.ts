@@ -14,9 +14,10 @@ enum trackerEventType {
 type trackerContext = {
   platform: string,
   problemId: string,
+  language: string,
   code: string,
   memory: number,
-  time: number
+  time: number,
 }
 type trackerAction = ((context: trackerContext) => void)[];
 type trackerEvent = {

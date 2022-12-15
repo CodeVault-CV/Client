@@ -1,5 +1,4 @@
-import doSomething from "./doSomething";
+import createEventHub from "../../core/eventHub";
 
-chrome.runtime.onMessage.addListener((message) => {
-  console.log(message);
-});
+const eventHub = createEventHub();
+eventHub.start();

@@ -21,7 +21,7 @@ describe("EventHub", () => {
       target: "receiver",
       type: "test"
     });
-    await flushMessageQueue();
+    await flushMessageQueue(); // Task queue를 비워질 때까지 기다려 이벤트가 실행되게 한다.
 
     expect(handler).toBeCalled();
   });

@@ -96,10 +96,10 @@ describe("Tracker 상태", () => {
 
 describe("Tracker 이벤트", () => {
   const startContext = {
-    platform: "programmers", problemId: "1234", code: "function solution() {}"
+    platform: "programmers", problemId: "1234", code: "function solution() {}", language: "javascript"
   }
 
-  it("START 이벤트와 함께 platform, problemId, code를 받아 context에 저장한다.", () => {
+  it("START 이벤트와 함께 platform, problemId, code, language를 받아 context에 저장한다.", () => {
     const gradeTracker = getTracker();
 
     gradeTracker.send({
@@ -107,10 +107,11 @@ describe("Tracker 이벤트", () => {
       payload: { ...startContext }
     });
 
-    const { platform, problemId, code } = gradeTracker.context;
+    const { platform, problemId, code, language } = gradeTracker.context;
     expect(platform).toBe(startContext.platform);
     expect(problemId).toBe(startContext.problemId);
     expect(code).toBe(startContext.code);
+    expect(language).toBe(startContext.language);
   });
 
   it("SCORE 이벤트와 함께 memory와 time의 최댓값을 갱신한다.", () => {

@@ -20,13 +20,13 @@ export default function registerContentScripts() {
     // Boj scripts
     {
       id: "CodeVault-boj-world",
-      matches: ["https://www.acmicpc.net/status*", "https://www.acmicpc.net/submit/*"],
+      matches: ["https://www.acmicpc.net/status*"],
       js: ["js/boj-world.js"],
       world: "MAIN"
     },
     {
       id: "CodeVault-boj-isolated",
-      matches: ["https://www.acmicpc.net/submit/*"],
+      matches: ["https://www.acmicpc.net/submit/*", "https://www.acmicpc.net/status*"],
       js: ["js/boj-isolated.js"]
     }
   ]);
