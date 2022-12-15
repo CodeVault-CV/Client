@@ -16,12 +16,16 @@ const trackers = new Map<"Programmers" | "Boj", iTracker>([
       [(context: trackerContext) => console.log(context)]
     ]
   ]))],
-  ["Boj", createTrackerFSM()],
+  ["Boj", createTrackerFSM(new Map([
+    [
+      trackerState.DONE,
+      [(context: trackerContext) => console.log(context)]
+    ]
+  ]))],
 ])
 
 chrome.runtime.onMessage.addListener((message) => {
   const { type, payload } = message;
-  console.log(type, payload);
   if (type === undefined) {
     throw new Error("Background로 유효하지 않은 이벤트가 전송됨");
   }
