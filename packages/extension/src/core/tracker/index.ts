@@ -31,6 +31,7 @@ const initialContext = {
   platform: "",
   problemId: "",
   code: "",
+  language: "",
   memory: -Infinity,
   time: -Infinity
 }
