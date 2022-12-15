@@ -2,6 +2,7 @@ import registerContentScripts from "./registerContentScripts";
 import createTrackerFSM from "../core/tracker";
 import iTracker, { trackerContext, trackerEventType, trackerState } from "../core/tracker/interface";
 import { eventEmitter } from "../core/eventHub";
+import parseLanguage from "../boj/parseLanguage";
 
 console.log('background loaded');
 
@@ -53,7 +54,7 @@ chrome.webRequest.onBeforeRequest.addListener(
           platform: "boj",
           code,
           problemId,
-          language
+          language: parseLanguage(language)
         }
       }
     });
