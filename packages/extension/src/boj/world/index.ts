@@ -28,7 +28,6 @@ const createBojTrackerEvent = (data: string) => {
 }
 
 pusherInterceptor.addListener((data) => {
-  // console.log(JSON.parse(data));
   eventEmitter.fromWorld({
     target: "GradeTracker",
     type: "Boj",

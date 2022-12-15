@@ -8,11 +8,11 @@ declare global {
 
 const injectPusherMessageInterceptor = (notify: (data: string) => void) => {
   (() => {
-    if (window?.pusher === undefined) new Error("pusher가 window에 존재하지 않음");
+    if (window?.pusher === undefined) throw new Error("pusher가 window에 존재하지 않음");
 
     const channels = window.pusher.channels.channels;
     Object.keys(channels).forEach(channelName => {
-      console.log(`listening on channel '${channelName}'`);
+      // Channel에서 listen할 이벤트 타입에 대한 콜백을 bind 한다.
       channels[channelName].bind("update", (data: any) => {
         notify(JSON.stringify(data));
       });
