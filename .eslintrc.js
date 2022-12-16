@@ -68,6 +68,18 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
       ],
+      rules: {
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        '@typescript-eslint/no-unsafe-call': 'off',
+        'no-shadow': 'off',
+        '@typescript-eslint/no-shadow': ['error'],
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        'no-use-before-define': 'off',
+        '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
+        'no-useless-constructor': 'off',
+        '@typescript-eslint/no-useless-constructor': 'error',
+        '@typescript-eslint/no-floating-promises': 'off',
+      },
       parserOptions: {
         project: ['./tsconfig.json', './packages/**/tsconfig.json'],
       },
@@ -80,8 +92,6 @@ module.exports = {
       },
       extends: ['plugin:jest/recommended', 'plugin:jest-dom/recommended'],
       rules: {
-        '@typescript-eslint/no-unsafe-member-access': 'off',
-        '@typescript-eslint/no-unsafe-call': 'off',
         '@typescript-eslint/unbound-method': 'off',
         'jest/unbound-method': 'error',
       },

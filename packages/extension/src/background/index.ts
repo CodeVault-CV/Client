@@ -59,18 +59,18 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 
 // 익스텐션 아이콘 클릭시 동작
-function handleClick() {
-  console.log('clicked');
-  // UI 토글 실행
-}
+// function handleClick() {
+//   console.log('clicked');
+//   // UI 토글 실행
+// }
 
-chrome.action.onClicked.addListener(tab => {
-  if (tab.id === undefined) return;
+// chrome.action.onClicked.addListener(({ id }) => {
+//   if (id === undefined) return;
 
-  chrome.scripting.executeScript({
-    target: {
-      tabId: tab.id,
-    },
-    func: handleClick,
-  });
-});
+//   chrome.scripting.executeScript({
+//     target: {
+//       tabId: id,
+//     },
+//     func: handleClick,
+//   });
+// });

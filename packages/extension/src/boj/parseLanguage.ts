@@ -23,8 +23,9 @@ const parseLanguage = (langNum: string) => {
       return 'swift';
     case '94':
       return 'rust';
+    default:
+      return 'undefined';
   }
-  return 'undefined';
 };
 
 export default parseLanguage;

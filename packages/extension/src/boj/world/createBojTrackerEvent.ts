@@ -1,7 +1,17 @@
 import { trackerEventType } from '../../core/tracker/interface';
 
+type bojData = {
+  result: number;
+  memory: number;
+  time: number;
+};
+
+const parseBojData = (data: string) => {
+  return JSON.parse(data) as Partial<bojData>;
+};
+
 const createBojTrackerEvent = (data: string) => {
-  const { result, memory, time } = JSON.parse(data);
+  const { result, memory, time } = parseBojData(data);
 
   switch (result) {
     case 3: // 채점 진행중
