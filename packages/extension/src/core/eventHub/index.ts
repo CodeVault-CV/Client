@@ -1,4 +1,4 @@
-import iEventHub, { eventContext, eventSender } from "./interface";
+import iEventHub, { eventContext, eventSender } from './interface';
 
 const eventEmitter = {
   fromIsolated: (eventContext: eventContext) => {
@@ -6,22 +6,25 @@ const eventEmitter = {
     window.postMessage(eventContext);
   },
   fromWorld: (eventContext: eventContext) => {
-    window.postMessage(eventContext, "*");
+    window.postMessage(eventContext, '*');
   },
   fromBackground: (tabId: number, eventContext: eventContext) => {
     chrome.tabs.sendMessage(tabId, eventContext);
   },
-}
+};
 
 const createEventHub = (): iEventHub => {
   const handlers = new Map<string, eventSender>([
-    ["GradeTracker", ({ type, payload }) => {
-      chrome.runtime.sendMessage({
-        type,
-        payload
-      });
-    }],
-  ])
+    [
+      'GradeTracker',
+      ({ type, payload }) => {
+        chrome.runtime.sendMessage({
+          type,
+          payload,
+        });
+      },
+    ],
+  ]);
 
   function listen() {
     if (window?.chrome) {
@@ -29,7 +32,7 @@ const createEventHub = (): iEventHub => {
         handleEvent(message);
       });
     }
-    window.addEventListener("message", (event) => {
+    window.addEventListener('message', event => {
       handleEvent(event.data);
     });
   }
@@ -52,13 +55,11 @@ const createEventHub = (): iEventHub => {
 
   const eventHub = {
     addHandler,
-    start: listen
-  }
+    start: listen,
+  };
 
-  return eventHub
-}
+  return eventHub;
+};
 
-export {
-  eventEmitter
-}
+export { eventEmitter };
 export default createEventHub;

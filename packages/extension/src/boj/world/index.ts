@@ -1,13 +1,13 @@
-import { eventEmitter } from "../../core/eventHub";
-import createBojTrackerEvent from "./createBojTrackerEvent";
-import pusherInterceptor from "./interceptor/pusherInterceptor";
+import { eventEmitter } from '../../core/eventHub';
+import createBojTrackerEvent from './createBojTrackerEvent';
+import pusherInterceptor from './interceptor/pusherInterceptor';
 
-console.log("CodeVault running...");
+console.log('CodeVault running...');
 
-pusherInterceptor.addListener((data) => {
+pusherInterceptor.addListener(data => {
   eventEmitter.fromWorld({
-    target: "GradeTracker",
-    type: "Boj",
-    payload: createBojTrackerEvent(data)
+    target: 'GradeTracker',
+    type: 'Boj',
+    payload: createBojTrackerEvent(data),
   });
 });

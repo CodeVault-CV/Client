@@ -3,13 +3,34 @@
   "packageManager": "yarn@3.2.1",
   "private": true,
   "scripts": {
-    "app": "yarn workspace @codevault/app",
-    "extension": "yarn workspace @codevault/extension"
+    "lint": "eslint ./packages --ext .ts,.tsx,.js,.jsx --cache",
+    "lint:fix": "eslint ./packages --ext .ts,.tsx,.js,.jsx --fix --cache",
+    "app": "yarn workspace app",
+    "extension": "yarn workspace extension"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
+    "@types/react": "^18.0.26",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "eslint": "^8.29.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.5.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^27.1.6",
+    "eslint-plugin-jest-dom": "^4.0.3",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.8.1",
     "typescript": "4.4.4"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

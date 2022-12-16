@@ -2,39 +2,50 @@
  * Background에서 동작하는 채점 추적기인 Tracker
  */
 
-import iTracker, { trackerEventType, trackerAction, trackerState, trackerContext, trackerEvent } from "./interface/index";
+import iTracker, {
+  trackerEventType,
+  trackerAction,
+  trackerState,
+  trackerContext,
+  trackerEvent,
+} from './interface/index';
 
 const stateChart = new Map<trackerState, Map<trackerEventType, trackerState>>([
-  [trackerState.PENDING, new Map<trackerEventType, trackerState>([
-    [trackerEventType.START, trackerState["GRADING.PROCESSING"]]
-  ])],
-  [trackerState["GRADING.PROCESSING"], new Map<trackerEventType, trackerState>([
-    [trackerEventType.AFTER, trackerState["GRADING.IDLE"]],
-    [trackerEventType.START, trackerState["GRADING.PROCESSING"]],
-    [trackerEventType.SCORE, trackerState["GRADING.PROCESSING"]],
-    [trackerEventType.FAIL, trackerState.PENDING],
-    [trackerEventType.SUCCESS, trackerState.DONE],
-  ])],
-  [trackerState["GRADING.IDLE"], new Map<trackerEventType, trackerState>([
-    [trackerEventType.AFTER, trackerState.PENDING],
-    [trackerEventType.START, trackerState["GRADING.PROCESSING"]],
-    [trackerEventType.SCORE, trackerState["GRADING.PROCESSING"]],
-    [trackerEventType.FAIL, trackerState.PENDING],
-    [trackerEventType.SUCCESS, trackerState.DONE],
-  ])],
-  [trackerState.DONE, new Map<trackerEventType, trackerState>([
-    [trackerEventType.AFTER, trackerState.PENDING]
-  ])],
+  [
+    trackerState.PENDING,
+    new Map<trackerEventType, trackerState>([[trackerEventType.START, trackerState['GRADING.PROCESSING']]]),
+  ],
+  [
+    trackerState['GRADING.PROCESSING'],
+    new Map<trackerEventType, trackerState>([
+      [trackerEventType.AFTER, trackerState['GRADING.IDLE']],
+      [trackerEventType.START, trackerState['GRADING.PROCESSING']],
+      [trackerEventType.SCORE, trackerState['GRADING.PROCESSING']],
+      [trackerEventType.FAIL, trackerState.PENDING],
+      [trackerEventType.SUCCESS, trackerState.DONE],
+    ]),
+  ],
+  [
+    trackerState['GRADING.IDLE'],
+    new Map<trackerEventType, trackerState>([
+      [trackerEventType.AFTER, trackerState.PENDING],
+      [trackerEventType.START, trackerState['GRADING.PROCESSING']],
+      [trackerEventType.SCORE, trackerState['GRADING.PROCESSING']],
+      [trackerEventType.FAIL, trackerState.PENDING],
+      [trackerEventType.SUCCESS, trackerState.DONE],
+    ]),
+  ],
+  [trackerState.DONE, new Map<trackerEventType, trackerState>([[trackerEventType.AFTER, trackerState.PENDING]])],
 ]);
 
 const initialContext = {
-  platform: "",
-  problemId: "",
-  code: "",
-  language: "",
+  platform: '',
+  problemId: '',
+  code: '',
+  language: '',
   memory: -Infinity,
-  time: -Infinity
-}
+  time: -Infinity,
+};
 
 const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker => {
   let state: trackerState = trackerState.PENDING;
@@ -45,6 +56,40 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
     if (afterTimer) {
       clearTimeout(afterTimer);
       afterTimer = null;
+    }
+  }
+
+  function updateContext({ type, payload }: trackerEvent) {
+    let { time, memory } = context;
+    time = Math.max(time, payload?.time ?? 0);
+    memory = Math.max(memory, payload?.memory ?? 0);
+
+    switch (type) {
+      case trackerEventType.START:
+        context = {
+          ...initialContext,
+          ...payload,
+        };
+        break;
+      case trackerEventType.AFTER:
+        if (state === trackerState.DONE) {
+          context = {
+            ...initialContext,
+          };
+        }
+        break;
+      case trackerEventType.FAIL:
+        context = {
+          ...initialContext,
+        };
+        break;
+      default:
+        context = {
+          ...context,
+          ...payload,
+          time,
+          memory,
+        };
     }
   }
 
@@ -81,35 +126,6 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
     }
   }
 
-  function updateContext({ type, payload }: trackerEvent) {
-    switch (type) {
-      case trackerEventType.START:
-        context = {
-          ...initialContext,
-          ...payload
-        }
-        break;
-      case trackerEventType.AFTER:
-        if (state !== trackerState.DONE) return;
-      case trackerEventType.FAIL:
-        context = {
-          ...initialContext
-        }
-        break;
-      default:
-        let { time, memory } = context;
-        time = Math.max(time, payload?.time ?? 0);
-        memory = Math.max(memory, payload?.memory ?? 0);
-
-        context = {
-          ...context,
-          ...payload,
-          time,
-          memory,
-        }
-    }
-  }
-
   return {
     get state() {
       return state;
@@ -118,7 +134,7 @@ const createTrackerFSM = (actions?: Map<trackerState, trackerAction>): iTracker 
       return { ...context };
     },
     send: transition,
-  }
-}
+  };
+};
 
 export default createTrackerFSM;

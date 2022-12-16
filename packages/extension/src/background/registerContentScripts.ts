@@ -7,27 +7,27 @@ export default function registerContentScripts() {
   chrome.scripting.registerContentScripts([
     // Programmers scripts
     {
-      id: "CodeVault-programmers-world",
-      matches: ["https://school.programmers.co.kr/learn/courses/30/lessons/*"],
-      js: ["js/programmers-world.js"],
-      world: "MAIN"
+      id: 'CodeVault-programmers-world',
+      matches: ['https://school.programmers.co.kr/learn/courses/30/lessons/*'],
+      js: ['js/programmers-world.js'],
+      world: 'MAIN',
     },
     {
-      id: "CodeVault-programmers-isolated",
-      matches: ["https://school.programmers.co.kr/learn/courses/30/lessons/*"],
-      js: ["js/programmers-isolated.js"],
+      id: 'CodeVault-programmers-isolated',
+      matches: ['https://school.programmers.co.kr/learn/courses/30/lessons/*'],
+      js: ['js/programmers-isolated.js'],
     },
     // Boj scripts
     {
-      id: "CodeVault-boj-world",
-      matches: ["https://www.acmicpc.net/status*"],
-      js: ["js/boj-world.js"],
-      world: "MAIN"
+      id: 'CodeVault-boj-world',
+      matches: ['https://www.acmicpc.net/status*'],
+      js: ['js/boj-world.js'],
+      world: 'MAIN',
     },
     {
-      id: "CodeVault-boj-isolated",
-      matches: ["https://www.acmicpc.net/submit/*", "https://www.acmicpc.net/status*"],
-      js: ["js/boj-isolated.js"]
-    }
+      id: 'CodeVault-boj-isolated',
+      matches: ['https://www.acmicpc.net/submit/*', 'https://www.acmicpc.net/status*'],
+      js: ['js/boj-isolated.js'],
+    },
   ]);
 }

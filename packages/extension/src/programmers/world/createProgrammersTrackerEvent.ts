@@ -1,16 +1,16 @@
-import { trackerEvent, trackerEventType } from "../../core/tracker/interface";
+import { trackerEvent, trackerEventType } from '../../core/tracker/interface';
 
 const getEventType = (json: any) => {
   if (json?.command) return trackerEventType.START;
   if (json?.message) {
     const { type, passed } = json.message;
-    if (type === "testcase") return trackerEventType.SCORE;
-    if (type === "result_lesson_challenge") {
+    if (type === 'testcase') return trackerEventType.SCORE;
+    if (type === 'result_lesson_challenge') {
       return passed ? trackerEventType.SUCCESS : trackerEventType.FAIL;
-    };
+    }
   }
   return null;
-}
+};
 
 const messageRegex = /\d+\.?\d+/g;
 
@@ -24,11 +24,11 @@ const parseData = (json: any, eventType: trackerEventType) => {
 
     const code = codes[key];
     return {
-      platform: "programmers",
+      platform: 'programmers',
       problemId: problemId.toString(),
       code,
       language,
-    }
+    };
   }
 
   if (eventType === trackerEventType.SCORE) {
@@ -38,18 +38,18 @@ const parseData = (json: any, eventType: trackerEventType) => {
 
       return {
         time: parseFloat(timeMatch[0]),
-        memory: parseFloat(memoryMatch[0])
-      }
+        memory: parseFloat(memoryMatch[0]),
+      };
     }
 
     return {
       time: 0,
-      memory: 0
-    }
+      memory: 0,
+    };
   }
 
   return {};
-}
+};
 
 const createProgrammersTrackerEvent = (data: string): trackerEvent | null => {
   const json = JSON.parse(data);
@@ -59,8 +59,8 @@ const createProgrammersTrackerEvent = (data: string): trackerEvent | null => {
 
   return {
     type,
-    payload: parseData(json, type)
-  }
-}
+    payload: parseData(json, type),
+  };
+};
 
 export default createProgrammersTrackerEvent;
