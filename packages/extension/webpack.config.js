@@ -4,6 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const src = path.join(__dirname, 'src');
 
 module.exports = {
+  mode: 'production',
   entry: {
     background: path.join(src, 'background/index.ts'),
     'programmers-world': path.join(src, 'programmers/world/index.ts'),
