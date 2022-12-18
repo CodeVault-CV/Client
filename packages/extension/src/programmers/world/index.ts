@@ -1,7 +1,7 @@
 import wsResponseBodyInterceptor from './interceptor/wsResponseInterceptor';
 import wsRequestBodyInterceptor from './interceptor/wsRequestInterceptor';
 import createProgrammersTrackerEvent from './createProgrammersTrackerEvent';
-import { eventEmitter } from '../../core/eventHub';
+import { eventEmitter } from '../../../core/EventHub';
 
 console.log('CodeVault running...');
 

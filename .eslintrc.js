@@ -14,11 +14,15 @@ module.exports = {
     'plugin:jsx-a11y/strict',
     'plugin:prettier/recommended',
   ],
-  plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y', '@typescript-eslint', 'import', 'jest', 'jest-dom'],
+  plugins: ['prettier', 'react', 'react-hooks', 'jsx-a11y', '@typescript-eslint', 'import'],
   rules: {
+    //
     // eslint 규칙
+    //
     'no-use-before-define': 'off',
-    // import resolver typescript 규착
+    //
+    // import resolver 규착
+    //
     'import/no-unresolved': 'error',
     'import/prefer-default-export': 'off',
     'import/extensions': [
@@ -55,12 +59,11 @@ module.exports = {
         alwaysTryTypes: true,
       },
     },
-    jest: {
-      version: 'latest',
-    },
   },
   overrides: [
+    //
     // Typescript 파일들에 규칙 적용
+    //
     {
       files: ['**/*.ts?(x)'],
       parser: '@typescript-eslint/parser',
@@ -69,55 +72,53 @@ module.exports = {
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
       ],
       rules: {
-        'no-shadow': 'off',
-        'no-useless-constructor': 'off',
-        '@typescript-eslint/no-unsafe-member-access': 'off',
-        '@typescript-eslint/no-unsafe-call': 'off',
-        '@typescript-eslint/no-shadow': ['error'],
+        'react/prop-types': 'off',
+        'react/require-default-props': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
+        'no-use-before-define': 'off',
         '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
+        'no-useless-constructor': 'off',
         '@typescript-eslint/no-useless-constructor': 'error',
         '@typescript-eslint/no-floating-promises': 'off',
       },
       parserOptions: {
-        project: ['./tsconfig.json', './packages/**/tsconfig.json'],
+        project: ['./packages/**/tsconfig.json'],
       },
     },
+    //
     // 테스트 파일들에 규칙 적용
+    //
     {
-      files: ['**/*.{spec,test}.ts?(x)'],
+      files: ['**/*.@(spec|test).@(js|ts)?(x)'],
+      plugins: ['jest', 'jest-dom'],
+      extends: ['plugin:jest/recommended', 'plugin:jest-dom/recommended'],
       env: {
         'jest/globals': true,
+        node: true,
       },
-      extends: ['plugin:jest/recommended', 'plugin:jest-dom/recommended'],
       rules: {
         '@typescript-eslint/unbound-method': 'off',
         'jest/unbound-method': 'error',
       },
     },
+    //
     // 각 Package에서 tsconfig 규칙 적용
+    //
     {
-      files: ['packages/app/**/*.ts?(x)', 'packages/app/**/*.js?(x)'],
+      files: ['packages/common-domains/**/*.ts?(x)', 'packages/common-domains/**/*.js?(x)'],
       settings: {
         'import/resolver': {
           typescript: {
-            project: path.resolve(`${__dirname}/packages/app/tsconfig.json`),
-          },
-        },
-      },
-    },
-    {
-      files: ['packages/domains/**/*.ts?(x)', 'packages/domains/**/*.js?(x)'],
-      settings: {
-        'import/resolver': {
-          typescript: {
-            project: path.resolve(`${__dirname}/packages/domains/tsconfig.json`),
+            project: path.resolve(`${__dirname}/packages/common-domains/tsconfig.json`),
           },
         },
       },
     },
     {
       files: ['packages/extension/**/*.ts?(x)', 'packages/extension/**/*.js?(x)'],
+      env: {
+        webextensions: true,
+      },
       settings: {
         'import/resolver': {
           typescript: {

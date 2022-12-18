@@ -1,8 +1,18 @@
-import createInterceptor from '../../../core/interceptor';
+import createInterceptor from '../../../../core/Interceptor';
+
+interface iPusherChannel {
+  [channelName: string]: {
+    bind: (eventName: string, cb: (data: unknown) => void) => void;
+  };
+}
 
 declare global {
   interface Window {
-    pusher?: any;
+    pusher?: {
+      channels: {
+        channels: iPusherChannel;
+      };
+    };
   }
 }
 
@@ -13,7 +23,7 @@ const injectPusherMessageInterceptor = (notify: (data: string) => void) => {
     const { channels } = window.pusher.channels;
     Object.keys(channels).forEach(channelName => {
       // Channel에서 listen할 이벤트 타입에 대한 콜백을 bind 한다.
-      channels[channelName].bind('update', (data: any) => {
+      channels[channelName].bind('update', data => {
         notify(JSON.stringify(data));
       });
     });

@@ -1,8 +1,9 @@
-import createInterceptor from '../../../core/interceptor';
+import createInterceptor from '../../../../core/Interceptor';
 
 const injectWsResponseInterceptor = (notify: (data: string) => void) => {
   const property = Object.getOwnPropertyDescriptor(MessageEvent.prototype, 'data') as PropertyDescriptor;
-  const data = property.get as () => any;
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const data = property.get as () => string;
 
   function lookAtMessage(this: MessageEvent) {
     // to replace get function

@@ -1,7 +1,7 @@
 import registerContentScripts from './registerContentScripts';
-import createTrackerFSM from '../core/tracker';
-import iTracker, { trackerContext, trackerEventType, trackerState } from '../core/tracker/interface';
-import { eventEmitter } from '../core/eventHub';
+import createTrackerFSM from '../../core/Tracker';
+import iTracker, { TrackerContext, TrackerEvent, TrackerEventType, TrackerState } from '../../core/Tracker/interface';
+import { eventEmitter } from '../../core/EventHub';
 import parseLanguage from '../boj/parseLanguage';
 
 console.log('background loaded');
@@ -10,22 +10,22 @@ console.log('background loaded');
 registerContentScripts();
 
 // 채점 트래커
-const trackers = new Map<'Programmers' | 'Boj', iTracker>([
+const Trackers = new Map<'Programmers' | 'Boj', iTracker>([
   [
     'Programmers',
-    createTrackerFSM(new Map([[trackerState.DONE, [(context: trackerContext) => console.log(context)]]])),
+    createTrackerFSM(new Map([[TrackerState.DONE, [(context: TrackerContext) => console.log(context)]]])),
   ],
-  ['Boj', createTrackerFSM(new Map([[trackerState.DONE, [(context: trackerContext) => console.log(context)]]]))],
+  ['Boj', createTrackerFSM(new Map([[TrackerState.DONE, [(context: TrackerContext) => console.log(context)]]]))],
 ]);
 
 // 백그라운드 이벤트 헨들러
 chrome.runtime.onMessage.addListener(message => {
-  const { type, payload } = message;
+  const { type, payload } = message as { type: 'Programmers' | 'Boj'; payload: TrackerEvent };
   if (type === undefined) {
     throw new Error('Background로 유효하지 않은 이벤트가 전송됨');
   }
 
-  trackers.get(type)?.send(payload);
+  Trackers.get(type)?.send(payload);
 });
 
 // 백준 문제 제출 감지
@@ -42,7 +42,7 @@ chrome.webRequest.onBeforeRequest.addListener(
       target: 'GradeTracker',
       type: 'Boj',
       payload: {
-        type: trackerEventType.START,
+        type: TrackerEventType.START,
         payload: {
           platform: 'boj',
           code,

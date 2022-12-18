@@ -1,7 +1,8 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src/**/*"],
   "compilerOptions": {
-    "types": ["jest", "chrome"],
-  }
+    "baseUrl": ".",
+    "types": ["jest", "chrome"]
+  },
+  "include": ["src/**/*", "**/*.spec.ts", "**/*.test.ts", "utils/**/*", "core/**/*"]
 }

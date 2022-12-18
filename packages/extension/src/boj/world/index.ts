@@ -1,4 +1,4 @@
-import { eventEmitter } from '../../core/eventHub';
+import { eventEmitter } from '../../../core/EventHub';
 import createBojTrackerEvent from './createBojTrackerEvent';
 import pusherInterceptor from './interceptor/pusherInterceptor';
 
