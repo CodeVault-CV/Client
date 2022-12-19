@@ -8,21 +8,16 @@ const problemParams: iProblemParams = {
 };
 
 describe('Problem', () => {
+  const problem = new Problem(problemParams);
   it('Platform 정보를 가진다.', () => {
-    const problem = new Problem(problemParams);
-
     expect(problem.platform).toBe(problemParams.platform);
   });
 
   it('Problem Id 정보를 가진다.', () => {
-    const problem = new Problem(problemParams);
-
     expect(problem.problemId).toBe(problemParams.problemId);
   });
 
   it('Name 정보를 가진다.', () => {
-    const problem = new Problem(problemParams);
-
     expect(problem.name).toBe(problemParams.name);
   });
 });
