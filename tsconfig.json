@@ -10,7 +10,12 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
-    "isolatedModules": true,
+    "isolatedModules": true
   },
-  "exclude": ["packages/**/dist/**"],
+  "references": [
+    {
+      "path": "packages/common-domains"
+    }
+  ],
+  "exclude": ["packages/**/dist/**"]
 }

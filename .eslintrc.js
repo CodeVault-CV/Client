@@ -20,6 +20,7 @@ module.exports = {
     // eslint 규칙
     //
     'no-use-before-define': 'off',
+    'no-underscore-dangle': 'off',
     //
     // import resolver 규착
     //

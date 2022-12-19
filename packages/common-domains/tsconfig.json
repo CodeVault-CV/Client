@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "composite": true,
-    "declaration": true
+    "declaration": true,
+    "types": ["jest"]
   },
-  "include": ["**/*"]
+  "include": ["**/*", "**/*.spec.ts"]
 }

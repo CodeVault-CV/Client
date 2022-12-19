@@ -1,0 +1,6 @@
+{
+  "presets": [
+    ["@babel/env", { "shippedProposals": true }],
+    ["@babel/typescript", { "onlyRemoveTypeImports": true }]
+  ]
+}
